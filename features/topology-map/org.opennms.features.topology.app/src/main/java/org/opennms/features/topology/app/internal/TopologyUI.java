@@ -71,7 +71,7 @@ import java.util.*;
 @SuppressWarnings("serial")
 @Theme("topo_default")
 @JavaScript({
-	"http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js",
+	"https://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js",
 	"chromeFrameCheck.js",
 	"handleTimeoutInTopology.js"
 })

@@ -282,7 +282,7 @@
 
         <!-- chrome frame -->
         <!--[if IE]>
-            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
             <div id="prompt"></div>
             <script>
                 // The conditional ensures that this code will only execute in IE,
