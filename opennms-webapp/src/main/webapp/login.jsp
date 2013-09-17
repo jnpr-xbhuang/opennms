@@ -50,8 +50,31 @@
 %>
 <script type="text/javascript">
   if (window.top != window.self) {
-    window.top.location = '../mainui/unsecured/logout?appName=CMP';
-  }
+    //window.top.location = '../mainui/unsecured/logout?appName=CMP';
+
+    var user = parent.window.sessionStorage.getItem('opennmsuser');
+    var password = parent.window.sessionStorage.getItem('opennmspw');
+
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "j_spring_security_check");
+
+    var hiddenFieldName = document.createElement("input");
+    hiddenFieldName.setAttribute("type", "hidden");
+    hiddenFieldName.setAttribute("name", "j_username");
+    hiddenFieldName.setAttribute("value", user);
+    form.appendChild(hiddenFieldName);
+
+    var hiddenFieldPassword = document.createElement("input");
+    hiddenFieldPassword.setAttribute("type", "hidden");
+    hiddenFieldPassword.setAttribute("name", "j_password");
+    hiddenFieldPassword.setAttribute("value", password);
+    form.appendChild(hiddenFieldPassword);
+
+    document.body.appendChild(form);
+    form.submit();
+  
+   }
 </script>
 <%
      }
