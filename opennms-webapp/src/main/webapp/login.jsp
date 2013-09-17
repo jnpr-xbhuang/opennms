@@ -74,6 +74,8 @@
     document.body.appendChild(form);
     form.submit();
   
+   } else {
+    window.top.location = '../mainui/unsecured/logout?appName=CMP';
    }
 </script>
 <%
