@@ -1,0 +1,20 @@
+<datacollection-group name="JNX-Util">
+      <resourceType name="jnxUtilIntegerTable-index" label="jnxUtilIntegerTable-index" resourceLabel="${string(index)}">
+        <persistenceSelectorStrategy class="org.opennms.netmgt.collectd.PersistAllSelectorStrategy"/>
+        <storageStrategy class="org.opennms.netmgt.dao.support.IndexStorageStrategy"/>
+      </resourceType>
+      <group name="jnxUtilIntegerTable" ifType="ignore">
+         <mibObj oid=".1.3.6.1.4.1.2636.3.47.1.1.3.1.1" instance="jnxUtilIntegerTable-index" alias="lCounter32Name" type="String" /> 
+         <mibObj oid=".1.3.6.1.4.1.2636.3.47.1.1.3.1.2" instance="jnxUtilIntegerTable-index" alias="lCounter32Value" type="integer" />
+         <mibObj oid=".1.3.6.1.4.1.2636.3.47.1.1.3.1.3" instance="jnxUtilIntegerTable-index" alias="lCounter32Time" type="String" /> 
+      </group>
+
+
+      <systemDef name="JnxUtil">
+        <sysoidMask>.1.3.6.1.4.1.2636.1.</sysoidMask>
+        <collect>
+          <includeGroup>jnxUtilIntegerTable</includeGroup>
+        </collect>
+      </systemDef>
+
+</datacollection-group>
