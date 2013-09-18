@@ -83,4 +83,13 @@
 
         <include-collection dataCollectionGroup="ejn"/>
     </snmp-collection>
+
+    <snmp-collection name="JNX-Util" snmpStorageFlag="select">
+        <rrd step="300">
+            <rra>RRA:LAST:0.1:1:3365</rra>
+        </rrd>
+        <include-collection dataCollectionGroup="JNX-Util"/>
+    </snmp-collection>
+
+
 </datacollection-config>

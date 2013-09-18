@@ -54,6 +54,16 @@
             <parameter key="thresholding-enabled" value="true"/>
         </service>
     </package>
+
+    <package name="JNX-Util">
+        <filter>IPADDR != '0.0.0.0'</filter>
+        <include-range begin="1.1.1.1" end="254.254.254.254"/>
+
+        <service name="SNMP" interval="300000" user-defined="false" status="on">
+            <parameter key="collection" value="JNX-Util"/>
+            <parameter key="thresholding-enabled" value="true"/>
+        </service>
+    </package>
     
 	<collector service="SNMP" class-name="org.opennms.netmgt.collectd.SnmpCollector"/>
 	<collector service="WMI"  class-name="org.opennms.netmgt.collectd.WmiCollector"/>
