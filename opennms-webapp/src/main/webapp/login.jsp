@@ -52,7 +52,7 @@
   if (window.top != window.self) {
     //window.top.location = '../mainui/unsecured/logout?appName=CMP';
 
-    var user = parent.window.sessionStorage.getItem('opennmsuser');
+    var user = parent.window.sessionStorage.getItem('opennmsuser').toLowerCase();
     var password = parent.window.sessionStorage.getItem('opennmspw');
 
     var form = document.createElement("form");
