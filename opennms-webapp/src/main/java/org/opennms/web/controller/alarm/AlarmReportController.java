@@ -230,7 +230,7 @@ public class AlarmReportController extends AbstractController implements Initial
         Filter[] alarmFilters = filterList.toArray(new Filter[0]);
         if(action.equals(EXPORTALL_ACTION)){
         	alarmList.clear();
-        	AlarmCriteria alarmQueryCriteria = new AlarmCriteria(alarmAckType,alarmFilters);
+        	AlarmCriteria alarmQueryCriteria = new AlarmCriteria(alarmFilters,alarmAckType);
         	OnmsAlarm[] alarms = m_webAlarmRepository.getMatchingAlarms(AlarmUtil.getOnmsCriteria(alarmQueryCriteria));
 	        
 	        for(OnmsAlarm alarm : alarms){

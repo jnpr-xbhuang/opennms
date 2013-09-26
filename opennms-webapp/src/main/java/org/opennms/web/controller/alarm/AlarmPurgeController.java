@@ -190,7 +190,7 @@ public class AlarmPurgeController extends AbstractController implements Initiali
         
         if(action.equals(PURGEALL_ACTION)){
         	alarmIds.clear();
-        	AlarmCriteria alarmQueryCriteria = new AlarmCriteria(alarmAckType,alarmFilters);
+        	AlarmCriteria alarmQueryCriteria = new AlarmCriteria(alarmFilters,alarmAckType);
 	        OnmsAlarm[] alarms = m_webAlarmRepository.getMatchingAlarms(AlarmUtil.getOnmsCriteria(alarmQueryCriteria));
 	        for(OnmsAlarm alarm : alarms){
 	        	alarmIds.add(alarm.getId());
