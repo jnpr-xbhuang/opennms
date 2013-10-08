@@ -310,11 +310,6 @@
 	<property name="reportWrapperService" ref="reportWrapperService"/>
     </bean>
     
-    <bean name="/event/acknowledgeByFilter" class="org.opennms.web.controller.event.AcknowledgeEventByFilterController">
-        <property name="webEventRepository" ref="webEventRepository"/>
-        <property name="redirectView" value="/event/list.htm"/>
-    </bean>
-    
     <alias name="/alarm/index.htm" alias="/alarm/index"/>
     <bean name="/alarm/index.htm" class="org.opennms.web.controller.alarm.AlarmFilterController"/>
 
