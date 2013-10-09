@@ -53,6 +53,15 @@
             <parameter key="collection" value="ejn"/>
             <parameter key="thresholding-enabled" value="true"/>
         </service>
+
+        <service name="PostgreSQL" interval="300000" user-defined="false" status="on">
+            <parameter key="collection" value="PostgreSQL"/>
+            <parameter key="thresholding-enabled" value="true"/>
+            <parameter key="driver" value="org.postgresql.Driver"/>
+            <parameter key="user" value="postgres"/>
+            <parameter key="password" value="postgres"/>
+            <parameter key="url" value="jdbc:postgresql://OPENNMS_JDBC_HOSTNAME:5432/opennms"/>
+        </service>
     </package>
 
     <package name="JNX-Util">

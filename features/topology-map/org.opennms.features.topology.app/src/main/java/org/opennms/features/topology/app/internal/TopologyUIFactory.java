@@ -28,6 +28,7 @@
 
 package org.opennms.features.topology.app.internal;
 
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -39,21 +40,21 @@ import org.osgi.service.blueprint.container.BlueprintContainer;
 import org.ops4j.pax.vaadin.ScriptTag;
 
 import com.vaadin.ui.UI;
+=======
+import org.opennms.osgi.OnmsVaadinUIFactory;
+import org.osgi.service.blueprint.container.BlueprintContainer;
 
-public class TopologyUIFactory extends AbstractApplicationFactory {
+import java.util.HashMap;
+import java.util.Map;
+>>>>>>> 2825b731d6e5f63c2b5573e69bd0007303fa521d
+
+public class TopologyUIFactory extends OnmsVaadinUIFactory {
     
-	private final BlueprintContainer m_blueprintContainer;
-	private final String m_beanName;
-	
-	public TopologyUIFactory(BlueprintContainer container, String beanName) {
-		m_blueprintContainer = container;
-		m_beanName = beanName;
-	}
 
-    @Override
-    public Class<? extends UI> getUIClass() {
-        return TopologyUI.class;
-    }
+	
+	public TopologyUIFactory(BlueprintContainer container, String uiBeanName) {
+        super(TopologyUI.class, container, uiBeanName);
+	}
 
     @Override
     public Map<String, String> getAdditionalHeaders() {
@@ -62,12 +63,6 @@ public class TopologyUIFactory extends AbstractApplicationFactory {
         //headers.put("X-Frame-Options", "ALLOW-FROM http://cdn.leafletjs.com/");
         //headers.put("X-Frame-Options", "ALLOW-FROM http://maps.google.com/");
         return headers;
-    }
-
-    @Override 
-    public UI getUI() {
-        TopologyUI application = (TopologyUI) m_blueprintContainer.getComponentInstance(m_beanName);
-        return application;
     }
 
 }

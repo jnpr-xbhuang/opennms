@@ -55,9 +55,9 @@ import org.springframework.core.io.Resource;
 @Ignore // ignore in the SPACE branch
 public class DataCollectionConfigParserTest {
 
-    private static final int resourceTypesCount = 141;
-    private static final int systemDefCount = 149;
-    private static final int groupsCount = 228;
+    private static final int resourceTypesCount = 159;
+    private static final int systemDefCount = 150;
+    private static final int groupsCount = 256;
 
     @Before
     public void setUp() {

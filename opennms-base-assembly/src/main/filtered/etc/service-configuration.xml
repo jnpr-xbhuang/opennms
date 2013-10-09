@@ -139,6 +139,7 @@ maintained
     <invoke at="status" pass="0" method="status"/>
     <invoke at="stop" pass="0" method="stop"/>
   </service>
+  <!--
   <service>
     <name>OpenNMS:Name=Threshd</name>
     <class-name>org.opennms.netmgt.threshd.jmx.Threshd</class-name>
@@ -147,6 +148,7 @@ maintained
     <invoke at="status" pass="0" method="status"/>
     <invoke at="stop" pass="0" method="stop"/>
   </service>
+  -->
   <service>
     <name>OpenNMS:Name=Vacuumd</name>
     <class-name>org.opennms.netmgt.vacuumd.jmx.Vacuumd</class-name>

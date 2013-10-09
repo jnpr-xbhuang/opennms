@@ -31,7 +31,9 @@ package org.opennms.netmgt.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -139,5 +141,12 @@ public class EventDaoTest implements InitializingBean {
 	    
     	int deleteEventStatus = m_eventDao.deleteEventById(event.getId());
     	assertEquals(1, deleteEventStatus);
+
+    @Test
+    public void testGetEventsAfterDate() {
+        List<String> ueiList = new ArrayList<String>();
+        ueiList.add("uei/1"); // dummy
+        ueiList.add("uei/2"); // dummy
+        m_eventDao.getEventsAfterDate(ueiList, new Date()); // we just want to ensure that no exception is thrown :)
     }
 }
