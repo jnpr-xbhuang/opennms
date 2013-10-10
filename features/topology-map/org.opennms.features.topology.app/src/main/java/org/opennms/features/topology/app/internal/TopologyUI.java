@@ -109,6 +109,8 @@ import com.vaadin.ui.TabSheet.SelectedTabChangeEvent;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.VerticalSplitPanel;
+import com.vaadin.ui.TabSheet.SelectedTabChangeListener;
+import org.opennms.features.topology.app.internal.jung.CircleLayoutAlgorithm;
 
 @SuppressWarnings("serial")
 @Theme("topo_default")

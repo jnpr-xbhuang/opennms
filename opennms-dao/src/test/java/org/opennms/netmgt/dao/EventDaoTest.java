@@ -141,7 +141,7 @@ public class EventDaoTest implements InitializingBean {
 	    
     	int deleteEventStatus = m_eventDao.deleteEventById(event.getId());
     	assertEquals(1, deleteEventStatus);
-
+     }
     @Test
     public void testGetEventsAfterDate() {
         List<String> ueiList = new ArrayList<String>();

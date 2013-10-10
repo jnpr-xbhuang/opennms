@@ -28,25 +28,11 @@
 
 package org.opennms.features.topology.app.internal;
 
-<<<<<<< HEAD
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.ops4j.pax.vaadin.AbstractApplicationFactory;
-import org.osgi.service.blueprint.container.BlueprintContainer;
-
-import org.ops4j.pax.vaadin.ScriptTag;
-
-import com.vaadin.ui.UI;
-=======
 import org.opennms.osgi.OnmsVaadinUIFactory;
 import org.osgi.service.blueprint.container.BlueprintContainer;
 
 import java.util.HashMap;
 import java.util.Map;
->>>>>>> 2825b731d6e5f63c2b5573e69bd0007303fa521d
 
 public class TopologyUIFactory extends OnmsVaadinUIFactory {
     

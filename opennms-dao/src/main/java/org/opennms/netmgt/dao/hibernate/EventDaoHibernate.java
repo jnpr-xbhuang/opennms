@@ -42,7 +42,7 @@ import java.util.Date;
 import java.util.List;
 
 public class EventDaoHibernate extends AbstractDaoHibernate<OnmsEvent, Integer> implements EventDao {
-
+        private static final Logger LOG = LoggerFactory.getLogger(EventDaoHibernate.class);
 	public EventDaoHibernate() {
 		super(OnmsEvent.class);
 	}
