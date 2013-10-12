@@ -29,6 +29,7 @@
 package org.opennms.features.topology.api.topo;
 
 import org.junit.Test;
+import org.opennms.features.topology.api.OperationContext;
 import org.opennms.features.topology.api.support.AbstractSearchSelectionOperation;
 
 import java.util.ArrayList;
@@ -76,8 +77,8 @@ public class AbstractSearchProviderTest {
         }
 
         @Override
-        public boolean matches(VertexRef vertexRef) {
-            return vertexRef.getLabel().contains(getQueryString());
+        public boolean matches(String provided) {
+            return provided.toLowerCase().contains(getQueryString().toLowerCase());
         }
     }
 
@@ -88,8 +89,8 @@ public class AbstractSearchProviderTest {
         }
 
         @Override
-        public boolean matches(VertexRef vertexRef) {
-            return vertexRef.getLabel().matches(getQueryString());
+        public boolean matches(String provided) {
+            return provided.toLowerCase().matches(getQueryString().toLowerCase());
         }
     }
 
@@ -110,24 +111,33 @@ public class AbstractSearchProviderTest {
             List<VertexRef> m_vertexRefs = getVertexRefs();
 
             @Override
-            public List<VertexRef> query(SearchQuery searchQuery) {
-                List<VertexRef> verts = new ArrayList<VertexRef>();
+            public List<SearchResult> query(SearchQuery searchQuery) {
+                List<SearchResult> verts = new ArrayList<SearchResult>();
                 for (VertexRef vertexRef : m_vertexRefs) {
-                    if (searchQuery.matches(vertexRef)) {
-                        verts.add(vertexRef);
+                    if (searchQuery.matches(vertexRef.getLabel())) {
+                        verts.add(new SearchResult(vertexRef.getId(), vertexRef.getNamespace(), vertexRef.getLabel()));
                     }
                 }
                 return verts;
             }
 
             @Override
-            public AbstractSearchSelectionOperation getSelectionOperation() {
-                return null;
+            public void onSelectSearchResult(SearchResult searchResult, OperationContext operationContext) {
+            }
+
+            @Override
+            public void onDeselectSearchResult(SearchResult searchResult, OperationContext operationContext) {
+                //To change body of implemented methods use File | Settings | File Templates.
             }
 
             @Override
             public boolean supportsPrefix(String searchPrefix) {
                 return false;
+            }
+
+            @Override
+            public List<VertexRef> getVertexRefsBy(SearchResult suggestionId) {
+                return null;  //To change body of implemented methods use File | Settings | File Templates.
             }
 
         };

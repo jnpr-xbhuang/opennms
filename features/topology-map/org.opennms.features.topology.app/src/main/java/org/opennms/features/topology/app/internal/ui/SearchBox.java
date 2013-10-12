@@ -34,11 +34,13 @@ import com.google.common.collect.*;
 import com.vaadin.ui.AbstractComponent;
 import org.opennms.features.topology.api.*;
 import org.opennms.features.topology.api.support.VertexHopGraphProvider;
+import org.opennms.features.topology.api.support.VertexHopGraphProvider.FocusNodeHopCriteria;
 import org.opennms.features.topology.api.support.VertexHopGraphProvider.VertexHopCriteria;
 import org.opennms.features.topology.api.topo.*;
 import org.opennms.features.topology.app.internal.gwt.client.SearchBoxServerRpc;
 import org.opennms.features.topology.app.internal.gwt.client.SearchBoxState;
 import org.opennms.features.topology.app.internal.gwt.client.SearchSuggestion;
+import org.opennms.features.topology.app.internal.support.CategoryHopCriteria;
 import org.opennms.osgi.OnmsServiceManager;
 
 import java.util.*;
@@ -46,7 +48,7 @@ import java.util.*;
 
 public class SearchBox extends AbstractComponent implements SelectionListener, GraphContainer.ChangeListener {
 
-    Multimap<SearchProvider, SearchSuggestion> m_suggestionMap;
+    Multimap<SearchProvider, SearchResult> m_suggestionMap;
     private OperationContext m_operationContext;
     private OnmsServiceManager m_serviceManager;
     SearchBoxServerRpc m_rpc = new SearchBoxServerRpc(){
@@ -61,45 +63,107 @@ public class SearchBox extends AbstractComponent implements SelectionListener, G
         }
 
         @Override
-        public void selectSuggestion(List<SearchSuggestion> selectedSuggestion) {
+        public void selectSuggestion(SearchSuggestion searchSuggestion) {
+            SearchResult searchResult = new SearchResult(searchSuggestion.getId(), searchSuggestion.getNamespace(), searchSuggestion.getLabel());
 
             Multiset<SearchProvider> keys = m_suggestionMap.keys();
             for(SearchProvider key : keys){
-                if(m_suggestionMap.get(key).contains(selectedSuggestion.get(0))){
-                    key.getSelectionOperation().execute(mapToVertexRefs(selectedSuggestion), m_operationContext);
+                if(m_suggestionMap.get(key).contains(searchResult)){
+                    key.onSelectSearchResult(searchResult, m_operationContext);
 
                     break;
                 }
             }
 
-            //VertexHopCriteria criteria = VertexHopGraphProvider.getVertexHopCriteriaForContainer(m_operationContext.getGraphContainer());
-            //criteria.addAll(mapToVertexRefs(selectedSuggestion));
-            //m_operationContext.getGraphContainer().redoLayout();
+            /*FocusNodeHopCriteria criteria = VertexHopGraphProvider.getFocusNodeHopCriteriaForContainer(m_operationContext.getGraphContainer());
+            criteria.add(mapToVertexRef(searchSuggestion));
+            m_operationContext.getGraphContainer().redoLayout();*/
         }
 
         @Override
         public void removeSelected(SearchSuggestion searchSuggestion) {
+            SearchResult searchResult = new SearchResult(searchSuggestion.getId(), searchSuggestion.getNamespace(), searchSuggestion.getLabel());
+
+            Multiset<SearchProvider> keys = m_suggestionMap.keys();
+            for(SearchProvider key : keys){
+                if(m_suggestionMap.get(key).contains(searchResult)){
+                    key.onDeselectSearchResult(searchResult, m_operationContext);
+
+                    break;
+                }
+            }
+
             SelectionManager selectionManager = m_operationContext.getGraphContainer().getSelectionManager();
             selectionManager.deselectVertexRefs(Lists.newArrayList(mapToVertexRef(searchSuggestion)));
         }
 
         @Override
-        public void removeFocused(SearchSuggestion searchSuggestion) {
+        public void addToFocus(SearchSuggestion searchSuggestion) {
+            SearchResult searchResult = new SearchResult(searchSuggestion.getId(), searchSuggestion.getNamespace(), searchSuggestion.getLabel());
+            FocusNodeHopCriteria criteria = VertexHopGraphProvider.getFocusNodeHopCriteriaForContainer(m_operationContext.getGraphContainer());
 
-            for (Criteria criteria : m_operationContext.getGraphContainer().getCriteria()) {
-                try {
-                    VertexHopCriteria hopCriteria = (VertexHopCriteria)criteria;
-                    hopCriteria.remove(mapToVertexRef(searchSuggestion));
-
-                    // If there are no remaining focus vertices in the criteria, then
-                    // just remove it completely.
-                    if (hopCriteria.size() == 0) {
-                        m_operationContext.getGraphContainer().removeCriteria(criteria);
-                    }
-                } catch (ClassCastException e) {}
+            Multiset<SearchProvider> keys = m_suggestionMap.keys();
+            for(SearchProvider key : keys){
+                Collection<SearchResult> searchResults = m_suggestionMap.get(key);
+                if(searchResults.contains(searchResult)){
+                    //maybe add or change this method to onfocus
+                    key.onSelectSearchResult(searchResult, m_operationContext);
+                    List<VertexRef> vertexRefsBy = key.getVertexRefsBy(searchResult);
+                    criteria.addAll(vertexRefsBy);
+                    break;
+                }
             }
 
+            getState().getFocused().add(mapToSearchSuggestion(searchResult));
             m_operationContext.getGraphContainer().redoLayout();
+        }
+
+        @Override
+        public void removeFocused(SearchSuggestion searchSuggestion) {
+            SearchResult searchResult = new SearchResult(searchSuggestion.getId(), searchSuggestion.getNamespace(), searchSuggestion.getLabel());
+            FocusNodeHopCriteria criteria = VertexHopGraphProvider.getFocusNodeHopCriteriaForContainer(m_operationContext.getGraphContainer());
+
+            Multiset<SearchProvider> keys = m_suggestionMap.keys();
+            for(SearchProvider key : keys){
+                Collection<SearchResult> searchResults = m_suggestionMap.get(key);
+                if(searchResults.contains(searchResult)) {
+                    //maybe change method call to on defocus
+                    key.onDeselectSearchResult(searchResult, m_operationContext);
+                    List<VertexRef> vRefs = key.getVertexRefsBy(searchResult);
+                    for (VertexRef vRef : vRefs) {
+                        criteria.remove(vRef);
+                    }
+                    break;
+                }
+            }
+
+            if (criteria.size() == 0) {
+                m_operationContext.getGraphContainer().removeCriteria(criteria);
+            }
+
+            getState().getFocused().remove(searchSuggestion);
+            m_operationContext.getGraphContainer().redoLayout();
+
+        }
+
+        @Override
+        public void centerAndSelectSearchSuggestion(SearchSuggestion searchSuggestion){
+            SearchResult searchResult = new SearchResult(searchSuggestion.getId(), searchSuggestion.getNamespace(), searchSuggestion.getLabel());
+
+            List<VertexRef> vRefs = null;
+            Multiset<SearchProvider> keys = m_suggestionMap.keys();
+            for(SearchProvider key : keys){
+                Collection<SearchResult> searchResults = m_suggestionMap.get(key);
+                if(searchResults.contains(searchResult)) {
+                    key.onSelectSearchResult(searchResult, m_operationContext);
+                    vRefs = key.getVertexRefsBy(searchResult);
+                    break;
+                }
+            }
+
+            GraphContainer graphContainer = m_operationContext.getGraphContainer();
+            MapViewManager mapViewManager = graphContainer.getMapViewManager();
+            mapViewManager.setBoundingBox(graphContainer.getGraph().getLayout().computeBoundingBox(vRefs));
         }
 
     };
@@ -111,28 +175,25 @@ public class SearchBox extends AbstractComponent implements SelectionListener, G
     }
 
     private List<SearchSuggestion> getQueryResults(final String query) {
-        m_suggestionMap.clear();
+        //m_suggestionMap.clear();
 
         String searchPrefix = getQueryPrefix(query);
 
         List<SearchProvider> providers = m_serviceManager.getServices(SearchProvider.class, null, new Properties());
 
-
-
-
         for(SearchProvider provider : providers) {
             if(searchPrefix != null && provider.supportsPrefix(searchPrefix)) {
                 String queryOnly = query.replace(searchPrefix, "");
-                m_suggestionMap.putAll(provider, mapToSuggestions(provider.query( getSearchQuery(queryOnly) )));
+                m_suggestionMap.putAll(provider, provider.query( getSearchQuery(queryOnly) ));
             } else{
-                m_suggestionMap.putAll(provider, mapToSuggestions(provider.query( getSearchQuery(query) )));
+                m_suggestionMap.putAll(provider, provider.query(getSearchQuery(query)));
             }
 
         }
 
-        Collection<SearchSuggestion> values = m_suggestionMap.values();
-        return Lists.newArrayList(values);
+        return mapToSuggestions(Lists.newArrayList(m_suggestionMap.values()));
     }
+
 
     private SearchQuery getSearchQuery(String query) {
         SearchQuery searchQuery;
@@ -152,11 +213,11 @@ public class SearchBox extends AbstractComponent implements SelectionListener, G
         return prefix;
     }
 
-    private List<SearchSuggestion> mapToSuggestions(List<VertexRef> vertexRefs) {
-        return Lists.transform(vertexRefs, new Function<VertexRef, SearchSuggestion>(){
+    private List<SearchSuggestion> mapToSuggestions(List<SearchResult> searchResults) {
+        return Lists.transform(searchResults, new Function<SearchResult, SearchSuggestion>(){
             @Override
-            public SearchSuggestion apply(VertexRef vertexRef) {
-                return mapToSearchSuggestion(vertexRef);
+            public SearchSuggestion apply(SearchResult searchResult) {
+                return mapToSearchSuggestion(searchResult);
             }
         });
 
@@ -172,15 +233,21 @@ public class SearchBox extends AbstractComponent implements SelectionListener, G
     }
 
     private VertexRef mapToVertexRef(SearchSuggestion suggestion) {
-        return new AbstractVertexRef(suggestion.getNamespace(), suggestion.getVertexKey(), suggestion.getLabel());
+        return new AbstractVertexRef(suggestion.getNamespace(), suggestion.getId(), suggestion.getLabel());
     }
 
-    private SearchSuggestion mapToSearchSuggestion(VertexRef vertexRef) {
+    private SearchSuggestion mapToSearchSuggestion(SearchResult searchResult) {
         SearchSuggestion suggestion = new SearchSuggestion();
-        suggestion.setNamespace(vertexRef.getNamespace());
-        suggestion.setVertexKey(vertexRef.getId());
-        suggestion.setLabel(vertexRef.getLabel());
+        suggestion.setNamespace(searchResult.getNamespace());
+        suggestion.setId(searchResult.getId());
+        suggestion.setLabel(searchResult.getLabel());
+
         return suggestion;
+    }
+
+    private boolean checkIfFocused(VertexRef vertexRef) {
+        FocusNodeHopCriteria criteria = VertexHopGraphProvider.getFocusNodeHopCriteriaForContainer(m_operationContext.getGraphContainer());
+        return criteria.contains(vertexRef);
     }
 
     @Override
@@ -201,17 +268,34 @@ public class SearchBox extends AbstractComponent implements SelectionListener, G
     public void selectionChanged(SelectionContext selectionContext) {
         List<SearchSuggestion> selected = Lists.newArrayList();
 
-        List<VertexRef> vertexRefs = Lists.newArrayList(selectionContext.getSelectedVertexRefs());
-        getState().setSelected(mapToSuggestions(vertexRefs));
+        //List<VertexRef> vertexRefs = Lists.newArrayList(selectionContext.getSelectedVertexRefs());
+        //getState().setSelected(mapToSuggestions(vertexRefs));
 
     }
 
     @Override
     public void graphChanged(GraphContainer graphContainer) {
-        VertexHopCriteria hopCriteria = VertexHopGraphProvider.getVertexHopCriteriaForContainer(graphContainer);
+        Criteria[] criterium = graphContainer.getCriteria();
+        for(Criteria criteria : criterium){
+          //Work needs to be done here for showing Focused nodes
+        }
+
+
+        /*FocusNodeHopCriteria hopCriteria = VertexHopGraphProvider.getFocusNodeHopCriteriaForContainer(graphContainer);
 
         Set<VertexRef> vertices = hopCriteria.getVertices();
-        getState().setFocused(mapToSuggestions(Lists.newArrayList(vertices)));
+        List<VertexRef> vertexRefs = Lists.newArrayList(vertices);
+
+        getState().setFocused(Lists.transform(vertexRefs, new Function<VertexRef, SearchSuggestion>(){
+            @Override
+            public SearchSuggestion apply(VertexRef input) {
+                SearchSuggestion suggestion = new SearchSuggestion();
+                suggestion.setId(input.getId());
+                suggestion.setNamespace(input.getNamespace());
+                suggestion.setLabel(input.getLabel());
+                return suggestion;
+            }
+        })  );*/
 
     }
 
@@ -221,8 +305,8 @@ public class SearchBox extends AbstractComponent implements SelectionListener, G
         }
 
         @Override
-        public boolean matches(VertexRef vertexRef) {
-            return vertexRef.getLabel().toLowerCase().contains(getQueryString().toLowerCase());
+        public boolean matches(String str) {
+            return str.toLowerCase().contains(getQueryString().toLowerCase());
         }
     }
 
@@ -233,7 +317,7 @@ public class SearchBox extends AbstractComponent implements SelectionListener, G
         }
 
         @Override
-        public boolean matches(VertexRef vertexRef) {
+        public boolean matches(String str) {
             return true;
         }
     }

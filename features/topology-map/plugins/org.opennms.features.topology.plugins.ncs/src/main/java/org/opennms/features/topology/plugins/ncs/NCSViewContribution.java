@@ -23,7 +23,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-public class NCSViewContribution implements IViewContribution, SearchProvider {
+public class NCSViewContribution implements SearchProvider {
 	
 	private NCSComponentRepository m_ncsComponentRepository;
 	private NCSEdgeProvider m_ncsEdgeProvider;
@@ -36,81 +36,25 @@ public class NCSViewContribution implements IViewContribution, SearchProvider {
         m_container = new NCSServiceContainer(m_ncsComponentRepository);
 	}
 
-    @Override
-    public Component getView(final VaadinApplicationContext applicationContext, final WidgetContext widgetContext) {
-
-        final Tree tree = new Tree("Services", new FilterableHierarchicalContainer(m_container));
-		tree.setMultiSelect(true);
-		tree.setImmediate(true);
-		tree.setItemCaptionMode(ItemCaptionMode.PROPERTY);
-		tree.setItemCaptionPropertyId("name");
-		tree.addValueChangeListener(new ValueChangeListener() {
-
-			private static final long serialVersionUID = -7443836886894714291L;
-			
-			public void valueChange(ValueChangeEvent event) {
-				Collection<Long> selectedIds = new HashSet<Long>( (Collection<Long>) event.getProperty().getValue() );
-				
-				Collection<Long> nonSelectableIds = new ArrayList<Long>();
-				
-				for(Long id : selectedIds) {
-				    boolean isRoot = (Boolean) tree.getItem(id).getItemProperty("isRoot").getValue();
-				    if(id < 0 && isRoot) {
-				        nonSelectableIds.add(id);
-				    }
-				}
-				selectedIds.removeAll(nonSelectableIds);
-				for(Long id : nonSelectableIds) {
-				    tree.unselect(id);
-				}
-				
-				Criteria criteria = NCSEdgeProvider.createCriteria(selectedIds);
-				
-				m_serviceManager.registerCriteria(criteria, widgetContext.getGraphContainer().getSessionId());
-                if(m_serviceManager.isCriteriaRegistered("ncsPath", widgetContext.getGraphContainer().getSessionId())) {
-                    m_serviceManager.unregisterCriteria("ncsPath", widgetContext.getGraphContainer().getSessionId());
-                }
-				selectVerticesForEdge(criteria, widgetContext.getGraphContainer().getSelectionManager());
-			}
-		});
-		
-		
-		
-		m_serviceManager.addCriteriaServiceListener(new ServiceListener() {
-
-            @Override
-            public void serviceChanged(ServiceEvent event) {
-                if(event.getType() == ServiceEvent.UNREGISTERING) {
-                    //tree.setValue( tree.getNullSelectionItemId() );
-                }
-            }
-            
-		}, widgetContext.getGraphContainer().getSessionId(), "ncs");
-		
-		return tree;
-	}
-
     protected void selectVerticesForEdge(Criteria criteria, SelectionManager selectionManager) {
-	    List<VertexRef> vertexRefs = new ArrayList<VertexRef>();
-	    List<Edge> edges = m_ncsEdgeProvider.getEdges(criteria);
-	    for(Edge ncsEdge : edges) {
-	        vertexRefs.add(ncsEdge.getSource().getVertex());
-	        vertexRefs.add(ncsEdge.getTarget().getVertex());
-	    }
-	    selectionManager.setSelectedVertexRefs(vertexRefs);
+	    selectionManager.setSelectedVertexRefs(getVertexRefsForEdges(criteria));
 	    
     }
 
-    @Override
-	public String getTitle() {
-		return "Services";
-	}
+    protected void deselectVerticesForEgde(Criteria criteria, SelectionManager selectionManager) {
+        selectionManager.deselectVertexRefs(getVertexRefsForEdges(criteria));
+    }
 
-	@Override
-	public Resource getIcon() {
-		return null;
-	}
-	
+    private List<VertexRef> getVertexRefsForEdges(Criteria criteria) {
+        List<VertexRef> vertexRefs = Lists.newArrayList();
+        List<Edge> edges = m_ncsEdgeProvider.getEdges(criteria);
+        for(Edge ncsEdge : edges) {
+            vertexRefs.add(ncsEdge.getSource().getVertex());
+            vertexRefs.add(ncsEdge.getTarget().getVertex());
+        }
+        return vertexRefs;
+    }
+
 	public void setNcsEdgeProvider(NCSEdgeProvider ncsEdgeProvider) {
         m_ncsEdgeProvider = ncsEdgeProvider;
     }
@@ -120,44 +64,50 @@ public class NCSViewContribution implements IViewContribution, SearchProvider {
 	}
 
     @Override
-    public List<VertexRef> query(SearchQuery searchQuery) {
-        List<VertexRef> vertexRefs = Lists.newArrayList();
+    public List<SearchResult> query(SearchQuery searchQuery) {
+        List<SearchResult> searchResults = Lists.newArrayList();
 
         List<NCSComponent> components = m_ncsComponentRepository.findByType("Service");
         for (NCSComponent component : components) {
-            VertexRef vRef = new AbstractVertexRef("ncs service", String.valueOf(component.getId()), component.getName());
-            if(searchQuery.matches(vRef)) {
-                vertexRefs.add(vRef);
+            if(searchQuery.matches(component.getName())) {
+                searchResults.add(new SearchResult(String.valueOf(component.getId()), "ncs service", component.getName()));
             }
 
         }
-        return vertexRefs;
+        return searchResults;
     }
 
     @Override
-    public AbstractSearchSelectionOperation getSelectionOperation() {
-        return new AbstractSearchSelectionOperation() {
-            @Override
-            public Undoer execute(List<VertexRef> targets, OperationContext operationContext) {
+    public void onSelectSearchResult(SearchResult searchResult, OperationContext operationContext) {
+        Criteria criteria = NCSEdgeProvider.createCriteria(Lists.newArrayList(Long.parseLong(searchResult.getId())));
 
-                if(targets != null && targets.size() > 0){
-                    Criteria criteria = NCSEdgeProvider.createCriteria(Lists.newArrayList(Long.parseLong(targets.get(0).getId())));
+        m_serviceManager.registerCriteria(criteria, operationContext.getGraphContainer().getSessionId());
+        if(m_serviceManager.isCriteriaRegistered("ncsPath", operationContext.getGraphContainer().getSessionId())) {
+            m_serviceManager.unregisterCriteria("ncsPath", operationContext.getGraphContainer().getSessionId());
+        }
+        selectVerticesForEdge(criteria, operationContext.getGraphContainer().getSelectionManager());
+    }
 
-                    m_serviceManager.registerCriteria(criteria, operationContext.getGraphContainer().getSessionId());
-                    if(m_serviceManager.isCriteriaRegistered("ncsPath", operationContext.getGraphContainer().getSessionId())) {
-                        m_serviceManager.unregisterCriteria("ncsPath", operationContext.getGraphContainer().getSessionId());
-                    }
-                    selectVerticesForEdge(criteria, operationContext.getGraphContainer().getSelectionManager());
-                }
+    @Override
+    public void onDeselectSearchResult(SearchResult searchResult, OperationContext operationContext) {
+        Criteria criteria = NCSEdgeProvider.createCriteria(Lists.newArrayList(Long.parseLong(searchResult.getId())));
 
-                return null;
-            }
-        };
+        if(m_serviceManager.isCriteriaRegistered("ncsPath", operationContext.getGraphContainer().getSessionId())) {
+            m_serviceManager.unregisterCriteria("ncsPath", operationContext.getGraphContainer().getSessionId());
+        }
+        deselectVerticesForEgde(criteria, operationContext.getGraphContainer().getSelectionManager());
     }
 
     @Override
     public boolean supportsPrefix(String searchPrefix) {
-        return searchPrefix.equals("service=");
+        return searchPrefix.equals("ncs=");
+    }
+
+    @Override
+    public List<VertexRef> getVertexRefsBy(SearchResult searchResult) {
+        Criteria criteria = NCSEdgeProvider.createCriteria(Lists.newArrayList(Long.parseLong(searchResult.getId())));
+
+        return getVertexRefsForEdges(criteria);
     }
 
 }

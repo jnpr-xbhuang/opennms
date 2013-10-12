@@ -1,11 +1,11 @@
 package org.opennms.netmgt.dao.mock;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.opennms.netmgt.dao.api.AlarmDao;
 import org.opennms.netmgt.model.OnmsAlarm;
 import org.opennms.netmgt.model.alarm.AlarmSummary;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MockAlarmDao extends AbstractMockDao<OnmsAlarm, Integer> implements AlarmDao {
     private AtomicInteger m_id = new AtomicInteger(0);
@@ -45,7 +45,7 @@ public class MockAlarmDao extends AbstractMockDao<OnmsAlarm, Integer> implements
     }
 
     @Override
-    public List<AlarmSummary> getNodeAlarmSummaries(final Integer... nodeIds) {
+    public List<AlarmSummary> getNodeAlarmSummaries() {
         throw new UnsupportedOperationException("Not yet implemented!");
     }
 
@@ -54,4 +54,7 @@ public class MockAlarmDao extends AbstractMockDao<OnmsAlarm, Integer> implements
         return 0;
     }
 
+    public List<AlarmSummary> getNodeAlarmSummariesIncludeAcknowledgedOnes(List<Integer> nodeIds) {
+        throw new UnsupportedOperationException("Not yet implemented!");
+    }
 }
