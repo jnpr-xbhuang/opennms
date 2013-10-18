@@ -547,20 +547,20 @@
     </tr>
     <tr class="<%=alarm.getSeverity().getLabel()%>">
         <td colspan="3">
-            <form method="post" action="alarm/saveSticky.htm">        
+            <form method="post" action="alarm/saveStickyMemo.htm">        
                 <textarea style="width:99%" name="stickyMemoBody" ><%=alarm.getStickyMemo() == null? "" : (alarm.getStickyMemo().getBody() != null ? alarm.getStickyMemo().getBody() : "")%></textarea>
                 <br/>
                 <input type="hidden" name="alarmId" value="<%=alarm.getId()%>"/>
                 <input type="submit" value="Save" />    
             </form>
-            <form method="post" action="alarm/clearSticky.htm">
+            <form method="post" action="alarm/removeStickyMemo.htm">
                  <input type="hidden" name="alarmId" value="<%=alarm.getId()%>"/>
-                 <input type="submit" value="Clear" />
+                 <input type="submit" value="Delete" />
             </form>
         </td>
 
         <td colspan="3"> 
-            <form method="post" action="alarm/saveJournal.htm">        
+            <form method="post" action="alarm/saveJournalMemo.htm">        
                 <textarea style="width:99%" name="journalMemoBody" ><%=alarm.getReductionKeyMemo() == null? "" : (alarm.getReductionKeyMemo().getBody() != null ? alarm.getReductionKeyMemo().getBody() : "")%></textarea>
                 <br/>
                 <input type="hidden" name="alarmId" value="<%=alarm.getId()%>"/>
@@ -568,7 +568,7 @@
             </form>
             <form method="post" action="alarm/removeJournalMemo.htm">
                 <input type="hidden" name="alarmId" value="<%=alarm.getId()%>"/>
-                <input type="submit" value="Clear" />    
+                <input type="submit" value="Delete" />    
             </form>
         </td>
     </tr>
