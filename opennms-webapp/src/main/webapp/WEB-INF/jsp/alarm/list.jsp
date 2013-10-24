@@ -495,10 +495,10 @@
               <%=this.makeSortLink(callback, parms, SortStyle.SERVICE,   SortStyle.REVERSE_SERVICE,   "service",   "Service", favorite   )%>
               </c:if>
             </th>
-			<th width="3%">
+			<th width="6%">
               <%=this.makeSortLink(callback, parms, SortStyle.COUNT,  SortStyle.REVERSE_COUNT,  "count",  "Count", favorite  )%>
             </th>
-			<th width="20%">
+			<th width="17%">
               <%=this.makeSortLink(callback, parms, SortStyle.LASTEVENTTIME,  SortStyle.REVERSE_LASTEVENTTIME,  "lasteventtime",  "Last Event Time", favorite  )%>
               <c:if test="${param.display == 'long'}">
               <br />
@@ -710,8 +710,9 @@
           </jsp:include>
         <% } %>
 
-
+<%--
 <jsp:include page="/includes/bookmark.jsp" flush="false" />
+--%>
 <jsp:include page="/includes/footer.jsp" flush="false" />
 
 
