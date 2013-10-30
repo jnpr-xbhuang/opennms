@@ -148,11 +148,11 @@ function doDelete() {
       <p>
          <a href="${eventUrl}">View Events</a>
          
- 	
+ <% if( request.isUserInRole( Authentication.ROLE_ADMIN ) || !request.isUserInRole( Authentication.ROLE_READONLY ) ) { %>	
        <sec:authorize url="admin/deleteService">
          &nbsp;&nbsp;&nbsp;<a href="admin/deleteService" onClick="return doDelete()">Delete</a>
        </sec:authorize>
-
+<% } %>
 	
 
       </p>
