@@ -196,11 +196,21 @@ public interface AlarmRepository {
     public List<String> getFilterStringsForEvent(OnmsAlarm alarm);
     	   
     /**
-    * Delete the selected alarm 
-    *
-    * @param alarmsId a list of {@link java.lang.Integer} object.
-    * 
-    */
-    public abstract void purgeAlarms(List<Integer> alarmIds);
+     * Delete an alarm by id 
+     * @param alarmId an int type.
+     */
+    public abstract int purgeAlarm(int alarmId);
+    
+    /**
+     * Delete an event by id 
+     * @param eventId an int type.
+     */
+    public abstract int purgeEvent(int eventId);
+    
+    /**
+     * Delete an acknowledgement by refid 
+     * @param refId an int type.
+     */
+    public abstract int purgeAcknowledge(int refId);
 
 }

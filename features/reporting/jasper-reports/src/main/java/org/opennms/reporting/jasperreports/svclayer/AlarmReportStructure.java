@@ -198,6 +198,9 @@ public class AlarmReportStructure {
 
 	/** persistent field */
 	private String m_eventDisplay;
+	
+	/** The event alarmId if reduced. Can be null. */
+	private Integer m_eventAlarmId;
 
 	/** nullable persistent field */
 	private String m_eventAckUser;
@@ -1406,6 +1409,23 @@ public class AlarmReportStructure {
 		m_eventDisplay = eventdisplay;
 	}
 
+	 /**
+     * <p>Getter for the field <code>eventAlarmId</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
+	public Integer getEventAlarmId() {
+		return m_eventAlarmId;
+	}
+
+	/**
+     * <p>Setter for the field <code>alarmId</code>.</p>
+     *
+     * @param eventAlarmId a {@link java.lang.Integer} object.
+     */
+	public void setEventAlarmId(Integer eventAlarmId) {
+		m_eventAlarmId = eventAlarmId;
+	}
 	/**
 	 * <p>getEventAckUser</p>
 	 *

@@ -133,9 +133,10 @@ public interface ReportWrapperService {
      * @param reportFormat format to render the report
      * @param outputStream stream to render the resulting report
      * @param fileName a {@link java.lang.String} object.
+     * @param folderName a {@link java.lang.String} object.
      */
     public abstract void getAlarmReport(List<Integer> alarmIds,HashMap<Integer, List<Integer>> eventIdsForAlarms ,
-    		String reportId, ReportFormat reportFormat, OutputStream outputStream, String fileName);
+    		String reportId, ReportFormat reportFormat, String fileName, String folderName);
     /**
      * This method retrieves the event details taken by the report
      *
@@ -143,8 +144,9 @@ public interface ReportWrapperService {
      * @param eventIdsForEvents a HashMap of {@link java.lang.Integer} and a list of {@link java.lang.Integer} object.
      * @param reportId a {@link java.lang.String} object.
      * @param reportFormat format to render the report
-     * @param outputStream stream to render the resulting report
+     * @param fileName
+     * @param folderName 
      */
-    public abstract void getEventReport(List<Integer> eventIds,String reportId, ReportFormat reportFormat, OutputStream outputStream);
-
+    public abstract void getEventReport(List<Integer> eventIds,String reportId, ReportFormat reportFormat,  String fileName,String folderName);
+    
 }

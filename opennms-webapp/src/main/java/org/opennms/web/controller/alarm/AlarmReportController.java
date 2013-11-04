@@ -28,36 +28,33 @@
 
 package org.opennms.web.controller.alarm;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
-import org.opennms.api.reporting.ReportFormat;
-import org.opennms.core.utils.InetAddressUtils;
-import org.opennms.core.utils.WebSecurityUtils;
 import org.opennms.netmgt.dao.api.AlarmRepository;
-import org.opennms.netmgt.model.OnmsAlarm;
 import org.opennms.reporting.core.svclayer.ReportWrapperService;
-import org.opennms.web.alarm.AlarmUtil;
-import org.opennms.web.alarm.filter.AlarmCriteria;
-import org.opennms.web.event.Event;
-import org.opennms.web.event.EventQueryParms;
-import org.opennms.web.event.EventUtil;
-import org.opennms.web.event.SortStyle;
 import org.opennms.web.event.WebEventRepository;
-import org.opennms.web.event.filter.EventCriteria;
-import org.opennms.web.filter.Filter;
+import org.opennms.web.rest.AlarmBean;
+import org.opennms.web.rest.AlarmRestResource;
+import org.opennms.web.rest.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
+import org.springframework.web.servlet.view.RedirectView;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 /**
  * This servlet receives an HTTP POST with a list of alarms and export or export all action
@@ -73,28 +70,13 @@ public class AlarmReportController extends AbstractController implements Initial
     /** Constant <code>EXPORTALL_ACTION="2"</code> */
     public final static String EXPORTALL_ACTION = "2";
     
-    /** To hold report file name <code>FILE_NAME="EMPTY"</code> */
-    public static String FILE_NAME = "EMPTY";
+    /** To hold report file name <code>EXPORT_LIMIT=100000</code> */
+    public static int EXPORT_LIMIT = 100000;
     
-	/**
-	 * OpenNMS alarm default acknowledge type
-	 */
-	private org.opennms.web.alarm.AcknowledgeType m_defaultAlarmAcknowledgeType = org.opennms.web.alarm.AcknowledgeType.UNACKNOWLEDGED;
-	
-	/**
-	 * OpenNMS event default acknowledge type
-	 */
-	private org.opennms.web.event.AcknowledgeType m_defaultEventAcknowledgeType = org.opennms.web.event.AcknowledgeType.UNACKNOWLEDGED;
-	
-	/**
-	 * OpenNMS default sort style
-	 */
-	private SortStyle m_defaultSortStyle = SortStyle.NODE;
-
     /**
 	 * OpenNMS alarm repository
 	 */
-    private AlarmRepository m_webAlarmRepository;
+	private AlarmRepository m_webAlarmRepository;
     
     /**
      * OpenNMS event repository
@@ -106,11 +88,14 @@ public class AlarmReportController extends AbstractController implements Initial
      */
     private ReportWrapperService m_reportWrapperService;
     
+    /** To hold default redirectView page */
+    private String m_redirectView;
+    
     /**
      * Logging
      */
     private Logger logger = LoggerFactory.getLogger("OpenNMS.WEB." + AlarmReportController.class.getName());
-
+     
     /**
      * <p>setWebAlarmRepository</p>
      *
@@ -118,6 +103,7 @@ public class AlarmReportController extends AbstractController implements Initial
      */
     public void setAlarmRepository(AlarmRepository webAlarmRepository) {
         m_webAlarmRepository = webAlarmRepository;
+        AlarmRestResource.setAlarmRepository(webAlarmRepository);
     }
 
     /**
@@ -127,6 +113,7 @@ public class AlarmReportController extends AbstractController implements Initial
      */
     public void setWebEventRepository(WebEventRepository webEventRepository) {
         m_webEventRepository = webEventRepository;
+        AlarmRestResource.setWebEventRepository(webEventRepository);
     }
     
     /**
@@ -136,7 +123,18 @@ public class AlarmReportController extends AbstractController implements Initial
      */
     public void setReportWrapperService(ReportWrapperService reportWrapperService) {
         m_reportWrapperService = reportWrapperService;
+        AlarmRestResource.setReportWrapperService(reportWrapperService);
     }
+    
+    /**
+     * <p>setRedirectView</p>
+     *
+     * @param redirectView a {@link java.lang.String} object.
+     */
+    public void setRedirectView(String redirectView) {
+        m_redirectView = redirectView;
+    }
+    
     
     /**
      * <p>afterPropertiesSet</p>
@@ -148,178 +146,123 @@ public class AlarmReportController extends AbstractController implements Initial
         Assert.notNull(m_webAlarmRepository, "webAlarmRepository must be set");
         Assert.notNull(m_webEventRepository, "webEventRepository must be set");
         Assert.notNull(m_reportWrapperService, "webAlarmRepository must be set");
+        Assert.notNull(m_redirectView, "redirectView must be set");
     }
-
+    
     /**
      * {@inheritDoc}
      *
      * Export or export all action of the selected alarms specified in the POST and 
      * then display the client to an appropriate URL.
      */
-    protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    protected ModelAndView handleRequestInternal(final HttpServletRequest request, final HttpServletResponse response) throws Exception {
         
-    	logger.info("Enter into the AlarmReportController action");
+    	// Handle the alarm bean class
+        AlarmBean alarmBean = new AlarmBean();
     	
-    	// Handle the alarm and actionCode parameter
+        // Handle the alarm id strings parameter
     	String[] alarmIdStrings = request.getParameterValues("alarm");
+    	alarmBean.setAlarmids(alarmIdStrings);
+    	
+    	// Handle the actionCode parameter
         String action = request.getParameter("actionCode");
+        alarmBean.setAction(action);
         
-        List<OnmsAlarm> alarmList = new ArrayList<OnmsAlarm>();
-        if (alarmIdStrings != null && action.equals(EXPORT_ACTION)) {
-        	
-        	// Convert the alarm id strings to int's
-            int[] alarmIds = new int[alarmIdStrings.length];
-            for (int i = 0; i < alarmIds.length; i++) {
-            	try{
-            		alarmIds[i] = WebSecurityUtils.safeParseInt(alarmIdStrings[i]);
-            	} catch (Exception e) {
-    				logger.error("Could not parse alarm ID '{}' to integer.",alarmIdStrings[i]);
-    			}
-            }
-            
-            // Get alarm by it's id
-    		for (int alarmId : alarmIds) {
-    			try {
-        			alarmList.add(m_webAlarmRepository.getAlarm(alarmId));
-    			} catch (Exception e) {
-    				logger.error("Could not retrieve alarm from webAlarmRepository for ID='{}'", alarmId);
-    			}
-    		}
-        }
-        
-        // Handle the sort style parameter
- 		String sortStyleString = request.getParameter("sortby");
- 		SortStyle sortStyle = m_defaultSortStyle;
- 		if (sortStyleString != null) {
- 			try {
- 				sortStyle = SortStyle.getSortStyle(sortStyleString);
- 			} catch (Exception e) {
- 				logger.error("Could not retrieve sort id for this '{}'.",sortStyleString);
- 			}
- 		}
-     		
         // Handle the acknowledge type parameter
         String ackTypeString = request.getParameter("acktype");
+        alarmBean.setAcktype(ackTypeString);
         
-        org.opennms.web.alarm.AcknowledgeType alarmAckType = m_defaultAlarmAcknowledgeType;
-        org.opennms.web.event.AcknowledgeType eventAckType = m_defaultEventAcknowledgeType;
-        
-        if (ackTypeString != null) {
-        	try{
-		        alarmAckType = org.opennms.web.alarm.AcknowledgeType.getAcknowledgeType(ackTypeString);
-	        } catch (Exception e) {
-				logger.error("Could not retrieve acknowledge type for this '{}'.",ackTypeString);
-			}
-        }
+        // Handle the sortStyle type parameter
+        String sortStyleString = request.getParameter("sortby");
+        alarmBean.setSortStyle(sortStyleString);
         
         // Handle the filter parameter
-        List<Filter> filterList = new ArrayList<Filter>();
         String[] filterStrings = request.getParameterValues("filter");
-        if (action.equals(EXPORTALL_ACTION)) {
-        	if(filterStrings != null){
-	            for (int i = 0; i < filterStrings.length; i++) {
-	                Filter filter = AlarmUtil.getFilter(filterStrings[i], getServletContext());
-	                if (filter != null) {
-	                    filterList.add(filter);
-	                }
-	            }
-        	}
-        }
+        alarmBean.setFilterStrings(filterStrings);
         
-        //Get the alarms by alarm criteria
-        Filter[] alarmFilters = filterList.toArray(new Filter[0]);
-        if(action.equals(EXPORTALL_ACTION)){
-        	alarmList.clear();
-        	AlarmCriteria alarmQueryCriteria = new AlarmCriteria(alarmFilters,alarmAckType);
-        	OnmsAlarm[] alarms = m_webAlarmRepository.getMatchingAlarms(AlarmUtil.getOnmsCriteria(alarmQueryCriteria));
-	        
-	        for(OnmsAlarm alarm : alarms){
-	        	alarmList.add(alarm);
-	        }
-        }
-        
-        // Handle the report format and reportId parameter
+        // Handle the reportId parameter
         String reportId = request.getParameter("reportId");
+        if(reportId!=null){
+        	alarmBean.setReportId(reportId);
+        }
+        
+        // Handle the report format parameter
         String requestFormat = request.getParameter("format");
-        
-    	if (ReportFormat.PDF == ReportFormat.valueOf(requestFormat)) {
-            response.setContentType("application/pdf;charset=UTF-8");
-        } else if(ReportFormat.CSV == ReportFormat.valueOf(requestFormat)){
-        	response.setContentType("text/csv;charset=UTF-8");
-        } else if(ReportFormat.XLS == ReportFormat.valueOf(requestFormat)){
-        	response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-        } else if(ReportFormat.HTML == ReportFormat.valueOf(requestFormat)){
-        	response.setContentType("text/html;charset=UTF-8");
-        } else{
-        	logger.error("Unknown file format : " + requestFormat);
+        if(requestFormat!=null){
+        	alarmBean.setRequestFormat(requestFormat);
         }
-    	
-    	FILE_NAME =  "alarm_report"+new SimpleDateFormat("_MMddyyyy_HHmmss").format(new Date())+"."+requestFormat.toLowerCase();
-    			
-    	response.setHeader("Content-disposition", "inline; filename="+FILE_NAME);
-    	response.setHeader("Pragma", "public");
-    	response.setHeader("Cache-Control", "cache");
-    	response.setHeader("Cache-Control", "must-revalidate");
         
-        HashMap<Integer, List<Integer>> eventIdsForAlarms = new HashMap<Integer, List<Integer>>();
-        List<Integer> alarmIds = new ArrayList<Integer>();
+        // Handle the alarm report folder name parameter
+        String folderName = request.getRemoteUser()+"_alarm_report_"+new SimpleDateFormat("MMddyyyy_HHmmss").format(new Date());
+    	if(folderName!=null){
+    		alarmBean.setFolderName(folderName);
+    	}
         
-        for(OnmsAlarm alarm : alarmList){
-        	
-	        //Get the default event filters
-        	filterList.clear();
-        	for (String filterString : m_webAlarmRepository.getFilterStringsForEvent(alarm)) {
-        		try{
-        			Filter filter= EventUtil.getFilter(filterString, getServletContext());
-        			if(filter != null){
-        				filterList.add(filter);
-        			}
-        		} catch(Exception e){
-        			logger.error("Could not retrieve filter name for filterString='{}'", filterString);
-        		}
-            }
-        	
-	    	Filter[] filters = filterList.toArray(new Filter[0]);
-	        List<Integer> eventIdsList = new ArrayList<Integer>();
-	        
-	        if(alarm != null){
-	        	
-	        	EventQueryParms parms = new EventQueryParms();
-	    		parms.ackType = eventAckType;
-	    		parms.filters = filterList;
-	    		parms.sortStyle = m_defaultSortStyle;
-	    		
-	        	//Get the events by event criteria
-	        	Event[] events = null;
-	        	EventCriteria eventCriteria = new EventCriteria(filters, sortStyle, eventAckType, 0, 0);
-	        	try{
-	        		events = m_webEventRepository.getMatchingEvents(eventCriteria);
-	        	} catch(Exception e){
-	        		logger.error("Could not retrieve events for this EventCriteria ='{}'", eventCriteria);
-	        	}
-		        
-		        //Get the event Id's
-	        	for(Event event : events){
-	        		eventIdsList.add(event.getId());
-	    		}
+    	// Handle the alarm bean marshal string 
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		String bean = null;
+		try {
+			JAXBContext m_context = JAXBContext.newInstance(AlarmBean.class);
+			Marshaller m_marshaller = m_context.createMarshaller();
+			m_marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			m_marshaller = m_context.createMarshaller();
+			m_marshaller.marshal(alarmBean, out);
+			bean = out.toString();
+			out.close();
+		} catch(Exception ex) {
+    		ex.printStackTrace();
+    		logger.error("Unable to marshall your alarm bean class because of  "+ex.getMessage());
+    	} finally {
+    		if(out != null){
+    			out.close();
+    		}
+    	}
+		
+        // Get the address for junos server
+        String addressForServer = System.getProperty("junos.server.address");
+		
+		// Handle the rest client for junos rest api
+    	ClientResponse clientResponse = null;
+        try{	
+    		if(addressForServer!=null && addressForServer!=" "){
+    			Client client = Client.create();
+    			client.setReadTimeout(60000);
+    			WebResource service=client.resource("http://"+addressForServer+":8080/fmpm/restful/alarms/export");
+    			clientResponse = service.type(MediaType.APPLICATION_XML).post(ClientResponse.class,bean);
+    		} else {
+    			logger.error("Unable to call junose rest api because junos server address ["+addressForServer+"] is invalid");
+    		}
+    	} catch(Exception ex) {
+    		ex.printStackTrace();
+    		logger.error("Unable to call junose rest api from alarm report controller because of "+ex.getMessage());
+    	}
+        
+        // Get the response status from junos rest api
+        int taskId = -1;
+        try {
+	        Task restTask = clientResponse.getEntity(Task.class);
+	        if(restTask!=null){
+	        	taskId = restTask.getId();
 	        }
-	        alarmIds.add(alarm.getId());
-	        eventIdsForAlarms.put(alarm.getId(), eventIdsList);
-		}
-        
-        // Handle the export action
-        if (action.equals(EXPORT_ACTION)|| action.equals(EXPORTALL_ACTION)) {
-        	try{
-        		m_reportWrapperService.getAlarmReport(alarmIds, eventIdsForAlarms, reportId,
-        				ReportFormat.valueOf(requestFormat), response.getOutputStream(), FILE_NAME);
-        	} catch(final Exception e){
-        	    logger.error("Unable to do export action for this alarm Id's.", alarmIds);
-        	}
-        } else {
-        	logger.error("Unknown alarm action: " + action);
+        } catch(Exception ex) {
+        	logger.error("Could not get the task response from junose rest api");
         }
         
-        logger.info("Terminated from the AlarmReportController action");
-        return null;
+    	// Handle the redirect parameters
+        String redirectParms = request.getParameter("redirectParms");
+        String redirectPage = request.getParameter("redirectPage");
+        String viewName = m_redirectView;
+        
+        if(redirectParms!=null && redirectParms != "" && redirectParms != " "){
+        	viewName = m_redirectView + "?" + redirectParms;
+        } else if(redirectPage!= null){
+        	viewName = redirectPage;
+        }
+        
+        RedirectView view = new RedirectView(viewName, true);
+        request.getSession().setAttribute("actionStatus","E"+","+taskId);
+        
+        logger.info("Job Id["+taskId+"] for your AlarmReportController action");
+        return new ModelAndView(view);
     }
 }

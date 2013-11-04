@@ -28,10 +28,13 @@
 
 package org.opennms.web.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -39,16 +42,22 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 import org.opennms.core.criteria.CriteriaBuilder;
+import org.opennms.core.utils.WebSecurityUtils;
 import org.opennms.netmgt.dao.api.AcknowledgmentDao;
 import org.opennms.netmgt.dao.api.AlarmDao;
 import org.opennms.netmgt.model.AckAction;
 import org.opennms.netmgt.model.OnmsAcknowledgment;
 import org.opennms.netmgt.model.OnmsAlarm;
 import org.opennms.netmgt.model.OnmsAlarmCollection;
+import org.opennms.web.alarm.AlarmUtil;
+import org.opennms.web.controller.alarm.AlarmPurgeController;
+import org.opennms.web.controller.alarm.AlarmReportController;
+import org.opennms.web.filter.Filter;
 import org.opennms.web.api.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -57,12 +66,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sun.jersey.spi.resource.PerRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 @Component
 @PerRequest
 @Scope("prototype")
 @Path("alarms")
 public class AlarmRestService extends AlarmRestServiceBase {
-
+    private static final Logger LOG = LoggerFactory.getLogger(AlarmRestService.class);
     @Autowired
     private AlarmDao m_alarmDao;
 
@@ -74,7 +87,10 @@ public class AlarmRestService extends AlarmRestServiceBase {
 
     @Context
     SecurityContext m_securityContext;
-
+    
+    @Context
+    ServletContext m_servletContext;
+    
     /**
      * <p>
      * getAlarm
@@ -147,7 +163,302 @@ public class AlarmRestService extends AlarmRestServiceBase {
 
     /**
      * <p>
-     * updateAlarm
+     * Purge Alarm
+     * </p>
+     * 
+     * @param alarmBeanString a {@link java.lang.String} object.
+     */
+    @POST
+    @Path("purge")
+    @Consumes(MediaType.APPLICATION_XML)
+    public Response purgeAlarm(final String alarmBeanString) {
+    	
+    	LOG.info("Entering into the AlarmRestService to do AlarmPurgeController action");
+    	writeLock();
+        ResponseBuilder builder = Response.ok();
+        
+        try{
+        	
+        	// Get the alarm rest resource
+        	AlarmRestResource alarmRestResource= new AlarmRestResource();
+        	
+        	// Convert the alarm bean string to object
+        	final AlarmBean alarmBean = (AlarmBean) alarmRestResource.convertToJaxb(alarmBeanString);
+        	
+		 	// Handle the alarmid strings parameter
+        	final String[] alarmIdStrings = alarmBean.getAlarmids();
+	    	
+	    	// Handle the actionCode parameter
+        	final String action = alarmBean.getAction();
+	        
+	        // Handle the acknowledge type parameter
+        	final String ackTypeString = alarmBean.getAcktype();
+	        
+	        // Handle the sortStyle type parameter
+        	final String sortStyleString = alarmBean.getSortStyle();
+		 	
+		 	// Handle the filter parameter
+        	final String[] filterStrings = alarmBean.getFilterStrings();
+        	
+	        // Get the alarm list for alarm purge selected option
+	        List<OnmsAlarm> alarmList = new ArrayList<OnmsAlarm>();
+	        
+	        if (alarmIdStrings != null && action.equals(AlarmPurgeController.PURGE_ACTION)) {
+	        	
+	        	// Convert the alarm id strings to int's
+	            int[] alarmIds = new int[alarmIdStrings.length];
+	            for (int i = 0; i < alarmIds.length; i++) {
+	            	try{
+	            		alarmIds[i] = WebSecurityUtils.safeParseInt(alarmIdStrings[i]);
+	            	} catch (Exception e) {
+	            		LOG.error("Could not parse alarm ID ["+alarmIdStrings[i]+"] to integer.");
+	    			}
+	            }
+	            
+	            // Get alarm by it's id
+	    		for (int alarmId : alarmIds) {
+	    			try {
+	        			alarmList.add(m_alarmDao.get(alarmId));
+	    			} catch (Exception e) {
+	    				LOG.error("Could not retrieve alarm from webAlarmRepository for ID=["+alarmId+"]");
+	    			}
+	    		}
+	        }
+	        
+	        // Get the filters for purge all option
+	        final List<Filter> filterList = new ArrayList<Filter>();
+	        if (action.equals(AlarmPurgeController.PURGEALL_ACTION)) {
+	        	if(filterStrings != null){
+		            for (int i = 0; i < filterStrings.length; i++) {
+		                Filter filter = AlarmUtil.getFilter(filterStrings[i], m_servletContext);
+		                if (filter != null) {
+		                    filterList.add(filter);
+		                }
+		            }
+	        	}
+	        }
+	        
+	        // Get the alarm purge limit from the opennms.properties file
+	        String purgeLimitString = System.getProperty("opennms.alarm.purge.limit");
+	        int purgeLimit = AlarmPurgeController.PURGE_LIMIT;
+	        if(purgeLimitString!=null && purgeLimitString!="" && purgeLimitString!=" "){
+	        	try{
+	        		purgeLimit = Integer.parseInt(purgeLimitString);
+	        	} catch(Exception ex){
+	        		ex.printStackTrace();
+	        		LOG.error("Could not parse alarm purge limit value ["+purgeLimitString+"] to int.");
+	        	}
+	        }
+	        
+	        // Handle the purge and purge all action
+	        Filter[] alarmFilters = filterList.toArray(new Filter[0]);
+	        
+	        if(action.equals(AlarmPurgeController.PURGE_ACTION)){
+	        	try{
+	        		int purgeStatus = alarmRestResource.splitEventListByLimit(alarmList,purgeLimit);
+	        		if(purgeStatus == 1){
+	        			builder.entity("1");
+	        			LOG.info("The Purge action is successfully completed for the alarm list "+alarmList);
+	        		} else {
+	        			builder.entity("0");
+	        			LOG.error("Unable to do purge action for this alarm list "+alarmList);
+	        		}
+	        	} catch(Exception ex){
+	        		builder.entity("0");
+	        		ex.printStackTrace();
+	        	    LOG.error("Unable to do purge action for this alarm list "+alarmList);
+	        	}
+	        } else if(action.equals(AlarmPurgeController.PURGEALL_ACTION)){
+	        	try{
+	        		int purgeStatus = alarmRestResource.splitAlarmListByLimit(alarmFilters, sortStyleString, ackTypeString,purgeLimit);
+	        		if(purgeStatus == 1){
+	        			builder.entity("1");
+	        			LOG.error("The purge all action is successfully completed.");
+	        		} else {
+	        			builder.entity("0");
+		        	    LOG.error("Unable to do purge all action.");
+	        		}
+	        	} catch(Exception ex){
+	        		builder.entity("0");
+	        		ex.printStackTrace();
+	        	    LOG.error("Unable to do purge all action.");
+	        	}
+	        } else {
+	        	LOG.error("Unknown action name");
+	        	builder.entity("0");
+	        }
+	        
+        } catch(Exception ex) {
+        	builder.entity("0");
+        	throw getException(null, "Can't get the alarm details because, " + ex.getMessage());
+        } finally {
+        	writeUnlock();
+        }
+        LOG.info("Terminated from the AlarmRestService after completed the AlarmPurgeController action");
+        
+        return (Response) builder.build();
+    }
+    
+    /**
+     * <p>
+     * Export Alarm
+     * </p>
+     * 
+     * @param alarmBeanString a {@link java.lang.String} object.
+     */
+    @POST
+    @Path("export")
+    @Consumes(MediaType.APPLICATION_XML)
+    public Response exportAlarm(final String alarmBeanString) {
+    	
+    	LOG.info("Entering into the AlarmRestService to do AlarmReportController action");
+    	writeLock();
+    	ResponseBuilder builder = Response.ok();
+    	
+        try{
+        	
+        	// Get the alarm rest resource
+        	AlarmRestResource alarmRestResource= new AlarmRestResource();
+        	
+        	// Convert the alarm bean string to object
+        	final AlarmBean alarmBean = (AlarmBean) alarmRestResource.convertToJaxb(alarmBeanString);
+        	
+		 	// Handle the alarm id strings parameter
+        	final String[] alarmIdStrings = alarmBean.getAlarmids();
+	    	
+	    	// Handle the actionCode parameter
+        	final String action = alarmBean.getAction();
+	        
+	        // Handle the acknowledge type parameter
+        	final String ackTypeString = alarmBean.getAcktype();
+	        
+	        // Handle the sortStyle type parameter
+        	final String sortStyleString = alarmBean.getSortStyle();
+		 	
+		 	// Handle the filter parameter
+        	final String[] filterStrings = alarmBean.getFilterStrings();
+        	
+            // Handle the reportId parameter
+            final String reportId = alarmBean.getReportId();
+            
+            // Handle the report format parameter
+            final String requestFormat = alarmBean.getRequestFormat();
+            
+            // Handle the alarm report folder name parameter
+            final String folderName = alarmBean.getFolderName();
+        	
+	        // Get the alarm list for alarm purge selected option
+            final List<OnmsAlarm> alarmList = new ArrayList<OnmsAlarm>();
+            if (alarmIdStrings != null && action.equals(AlarmReportController.EXPORT_ACTION)) {
+            	
+            	// Convert the alarm id strings to int's
+                int[] alarmIds = new int[alarmIdStrings.length];
+                for (int i = 0; i < alarmIds.length; i++) {
+                	try{
+                		alarmIds[i] = WebSecurityUtils.safeParseInt(alarmIdStrings[i]);
+                	} catch (Exception e) {
+        				LOG.error("Could not parse alarm ID "+alarmIdStrings[i]+" to integer.");
+        			}
+                }
+                
+                // Get alarm by it's id
+        		for (int alarmId : alarmIds) {
+        			try {
+        				alarmList.add(m_alarmDao.get(alarmId));
+        			} catch (Exception e) {
+        				LOG.error("Could not retrieve alarm from webAlarmRepository for ID="+alarmId);
+        			}
+        		}
+            }
+            
+            // Handle the filter parameter
+            final List<Filter> filterList = new ArrayList<Filter>();
+            
+            if (action.equals(AlarmReportController.EXPORTALL_ACTION)) {
+            	if(filterStrings != null){
+    	            for (int i = 0; i < filterStrings.length; i++) {
+    	                Filter filter = AlarmUtil.getFilter(filterStrings[i], m_servletContext);
+    	                if (filter != null) {
+    	                    filterList.add(filter);
+    	                }
+    	            }
+            	}
+            }
+            
+            // Handle the alarm export data limit
+            String reportLimitString = System.getProperty("opennms.alarm.export.limit");
+            int exportLimit = AlarmReportController.EXPORT_LIMIT;
+            
+            if(reportLimitString!=null && reportLimitString!="" && reportLimitString!=" "){
+            	try{
+            		exportLimit = Integer.parseInt(reportLimitString);
+            	} catch(Exception ex){
+            		ex.printStackTrace();
+            		LOG.error("Could not parse alarm export limit value "+reportLimitString+" to int.");
+            	}
+            }
+	        
+	        // Handle the purge and purge all action
+	        Filter[] alarmFilters = filterList.toArray(new Filter[0]);
+	        
+	        if(action.equals(AlarmReportController.EXPORT_ACTION)){
+	        	try{
+	        		
+	        		int exportStatus = alarmRestResource.splitEventListByLimit(alarmList, reportId, requestFormat, folderName , exportLimit);
+	        		if(exportStatus==1){
+	        			// Handle the folder delete action
+		        		alarmRestResource.deleteReportFolderAfterCompressed(folderName);
+		        		
+		        		LOG.info("The Export action is successfully completed for the alarm list "+alarmList);
+		        		builder.entity("1"+","+folderName);
+	        		} else {
+	        			builder.entity("0");
+	        			LOG.error("Unable to do export action for this alarm list "+alarmList);
+	        		}
+	        		
+	        	} catch(Exception ex){
+	        		builder.entity("0");
+	        		ex.printStackTrace();
+	        	    LOG.error("Unable to do export action for this alarm list "+alarmList);
+	        	}
+	        } else if(action.equals(AlarmReportController.EXPORTALL_ACTION)){
+	        	try{
+	        		int exportStatus = alarmRestResource.splitAlarmListByLimit(alarmFilters, sortStyleString, ackTypeString, reportId, requestFormat, folderName ,exportLimit);
+	        		if(exportStatus==1){
+	        			// Handle the folder delete action
+	        			alarmRestResource.deleteReportFolderAfterCompressed(folderName);
+            		
+	        			builder.entity("1"+","+folderName);
+	        			LOG.info("The Export all action is successfully completed.");
+	        		} else {
+	        			builder.entity("0");
+		        	    LOG.error("Unable to do export all action.");
+	        		}
+	        	} catch(Exception ex){
+	        		builder.entity("0");
+	        		ex.printStackTrace();
+	        	    LOG.error("Unable to do export all action.");
+	        	}
+	        } else {
+	        	LOG.error("Unknown action name");
+	        	builder.entity("0");
+	        }
+	         		
+        } catch(Exception ex) {
+        	builder.entity("0");
+        	throw getException(null, "Can't get the alarm details because, " + ex.getMessage());
+        } finally {
+        	writeUnlock();
+        }
+        
+        LOG.info("Terminated from the AlarmRestService after completed the AlarmReportController action");
+        
+        return (Response) builder.build();
+    }
+    
+    /**
+     * <p>
+    * updateAlarm
      * </p>
      * 
      * @param alarmId
@@ -283,3 +594,4 @@ public class AlarmRestService extends AlarmRestServiceBase {
     }
 
 }
+

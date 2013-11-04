@@ -28,223 +28,218 @@
 
 package org.opennms.web.controller.event;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.ByteArrayOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MediaType;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
-import org.hibernate.ObjectNotFoundException;
-import org.jfree.util.Log;
-import org.opennms.core.utils.WebSecurityUtils;
 import org.opennms.netmgt.dao.api.AlarmRepository;
-import org.opennms.netmgt.model.OnmsAlarm;
-import org.opennms.web.event.Event;
-import org.opennms.web.event.EventUtil;
 import org.opennms.web.event.WebEventRepository;
-import org.opennms.web.event.filter.EventCriteria;
-import org.opennms.web.filter.Filter;
+import org.opennms.web.rest.EventBean;
+import org.opennms.web.rest.EventRestResource;
+import org.opennms.web.rest.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.orm.hibernate3.HibernateObjectRetrievalFailureException;
 import org.springframework.util.Assert;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
 /**
- * This servlet receives an HTTP POST with a list of events and acknowledgments for 
- * the selected alarms to purge , and then it redirects the client to a URL for display.
- * The target URL is configurable in the servlet config (web.xml file).
- *
+ * This servlet receives an HTTP POST with a list of events and acknowledgments
+ * for the selected events to purge , and then it redirects the client to a URL
+ * for display. The target URL is configurable in the servlet config (web.xml
+ * file).
+ * 
  */
 
-public class EventPurgeController extends AbstractController implements InitializingBean {
-    
-    /** Constant <code>PURGE_ACTION="1"</code> */
-    public final static String PURGE_ACTION = "1";
-    
-    /** Constant <code>PURGEALL_ACTION="2"</code> */
-    public final static String PURGEALL_ACTION = "2";
-    
-    /** Constant <code>SUCCESS_ACTION="Y"</code> */
-    public final static String SUCCESS_ACTION = "Y";
-    
-    /** Constant <code>FAILURE_ACTION="N"</code> */
-    public final static String FAILURE_ACTION = "N";
-    
+public class EventPurgeController extends AbstractController implements
+		InitializingBean {
+
+	/** Constant <code>PURGE_ACTION="1"</code> */
+	public final static String PURGE_ACTION = "1";
+
+	/** Constant <code>PURGEALL_ACTION="2"</code> */
+	public final static String PURGEALL_ACTION = "2";
+
 	/** To hold default redirectView page */
-    private String m_redirectView;
-    
-    
-    /**
-     * OpenNMS event repository
-     */
-    private WebEventRepository m_webEventRepository;
-    
-    /**
-     * OpenNMS alarm repository
-     */
-    private AlarmRepository m_alarmRepository;
-    
-    /**
-     * Logging
-     */
-    private Logger logger = LoggerFactory.getLogger("OpenNMS.WEB." + EventPurgeController.class.getName());
+	private String m_redirectView;
 
-    /**
-     * <p>setRedirectView</p>
-     *
-     * @param redirectView a {@link java.lang.String} object.
-     */
-    public void setRedirectView(String redirectView) {
-        m_redirectView = redirectView;
-    }
-    
-  
-    /**
-     * <p>afterPropertiesSet</p>
-     *
-     * @throws java.lang.Exception if any.
-     */
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        Assert.notNull(m_redirectView, "redirectView must be set");
-        Assert.notNull(m_webEventRepository, "webEventRepository must be set");
-        Assert.notNull(m_alarmRepository, "alarmRepository must be set");
-    }
+	/**
+	 * OpenNMS event repository
+	 */
+	private WebEventRepository m_webEventRepository;
 
-  
+	/**
+	 * OpenNMS alarm repository
+	 */
+	private AlarmRepository m_alarmRepository;
 
-    /**
-     * {@inheritDoc}
-     *
-     * Purge of the selected alarms specified in the POST and then redirect the client
-     * to an appropriate URL for display.
-     */
-    protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
-    	logger.info("Enter into the EventPurgeController action");
+	/**
+	 * Logging
+	 */
+	private Logger logger = LoggerFactory.getLogger("OpenNMS.WEB."
+			+ EventPurgeController.class.getName());
+
+	/**
+	 * <p>
+	 * setRedirectView
+	 * </p>
+	 * 
+	 * @param redirectView
+	 *            a {@link java.lang.String} object.
+	 */
+	public void setRedirectView(String redirectView) {
+		m_redirectView = redirectView;
+	}
+
+	/**
+	 * <p>
+	 * afterPropertiesSet
+	 * </p>
+	 * 
+	 * @throws java.lang.Exception
+	 *             if any.
+	 */
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		Assert.notNull(m_redirectView, "redirectView must be set");
+		Assert.notNull(m_webEventRepository, "webEventRepository must be set");
+		Assert.notNull(m_alarmRepository, "alarmRepository must be set");
+	}
+
+	
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Purge of the selected events specified in the POST and then redirect the
+	 * client to an appropriate URL for display.
+	 */
+	protected ModelAndView handleRequestInternal(
+			final HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		logger.info("Enter into the EventPurgeController action");
+
+		// Handle the event bean class
+        EventBean eventBean = new EventBean();
     	
-    	// handle the event and actionCode parameter
-    	String[] eventIdStrings = request.getParameterValues("event");
-        String action = request.getParameter("actionCode");
+		// handle the event and actionCode parameter
+		final String[] eventIdStrings = request.getParameterValues("event");
+		eventBean.setEventids(eventIdStrings);
+		
+		final String action = request.getParameter("actionCode");
+		eventBean.setAction(action);
+		// Handle the acknowledge type parameter
+		final String ackTypeString = request.getParameter("acktype");
+		eventBean.setAcktype(ackTypeString);
+		// Handle the sortStyle type parameter
+		final String sortbyString = request.getParameter("sortby");
+		eventBean.setSortStyle(sortbyString);
+		String[] filterStrings = request.getParameterValues("filter");
+        eventBean.setFilterStrings(filterStrings);
         
-        List<Event> eventList = new ArrayList<Event>();
-        if (eventIdStrings != null) {
-        	
-        	// convert the event id strings to int's
-            int[] eventIds = new int[eventIdStrings.length];
-            for (int i = 0; i < eventIds.length; i++) {
-            	try{
-            		eventIds[i] = WebSecurityUtils.safeParseInt(eventIdStrings[i]);
-            	} catch (Exception e) {
-    				logger.error("Could not parse event ID '{}' to integer.",eventIdStrings[i]);
-    			}
-            }
-            
-            // Get event by it's id
-    		for (int eventId : eventIds) {
-    			try {
-        			eventList.add(m_webEventRepository.getEvent(eventId));
-    			} catch (Exception e) {
-    				logger.error("Could not retrieve event from webeventRepository for ID='{}'", eventId);
-    			}
+        
+    	// Handle the event bean marshal string 
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		String bean = null;
+		try {
+			JAXBContext m_context = JAXBContext.newInstance(EventBean.class);
+			Marshaller m_marshaller = m_context.createMarshaller();
+			m_marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			m_marshaller = m_context.createMarshaller();
+			m_marshaller.marshal(eventBean, out);
+			bean = out.toString();
+			out.close();
+		} catch(Exception ex) {
+    		ex.printStackTrace();
+    		logger.error("Unable to marshall your event bean class because of  "+ex.getMessage());
+    	} finally {
+    		if(out != null){
+    			out.close();
     		}
-        }
+    	}
+    	
+        // Get the address for junos server
+        String addressForServer = System.getProperty("junos.server.address");
+		
+    	// Handle the rest client for junos rest api
+    	ClientResponse clientResponse = null;
+        try{	
+			if(addressForServer!=null && addressForServer!=" "){
+				Client client = Client.create();
+				WebResource service=client.resource("http://"+addressForServer+":8080/fmpm/restful/events/purge");
+				client.setReadTimeout(10000);
+				clientResponse = service.type(MediaType.APPLICATION_XML).post(ClientResponse.class,bean);
+				logger.info("Client Response is " + clientResponse.getStatus());
+			} else {
+    			logger.error("Unable to call junose rest api because junos server address ["+addressForServer+"] is invalid");
+    		}
+    	} catch(Exception ex) {
+    		ex.printStackTrace();
+    		logger.error("Unable to call junose rest api from event purge controller because of "+ex.getMessage());
+    	}
+            
         
-        
-        // handle the filter parameter
-        List<Filter> filterList = new ArrayList<Filter>();
-        String[] filterStrings = request.getParameterValues("filter");
-        if (action.equals(PURGEALL_ACTION)) {
-        	if(filterStrings != null){
-	            for (int i = 0; i < filterStrings.length; i++) {
-	                Filter filter = EventUtil.getFilter(filterStrings[i], getServletContext());
-	                if (filter != null) {
-	                    filterList.add(filter);
-	                }
-	            }
-        	}
-        }
-        
-        //Get the events by event criteria
-        Filter[] eventFilters = filterList.toArray(new Filter[0]);
-        if(action.equals(PURGEALL_ACTION)){
-        	
-        	EventCriteria eventQueryCriteria = new EventCriteria(eventFilters);
-	        Event[] events = m_webEventRepository.getMatchingEvents(eventQueryCriteria);
-	        
-	        for(Event event : events){
-	        	eventList.add(event);
+        // Get the response status from junos rest api
+        int taskId = -1;
+        try {
+	        Task restTask = clientResponse.getEntity(Task.class);
+	        if(restTask!=null){
+	        	taskId = restTask.getId();
 	        }
+        } catch(Exception ex) {
+        	logger.error("Could not get the task response from junose rest api");
         }
-        
-        List<Integer> eventIds = new ArrayList<Integer>();
-        
-        for(Event event : eventList){
-        	try {
-        		int alarmId = event.getAlarmId();
-        		OnmsAlarm alarm =  m_alarmRepository.getAlarm(alarmId);
-        		if(alarm ==null || alarm.getId() != alarmId)
-        			eventIds.add(event.getId());
-        		else {
-        			Log.debug("Active alarm is present for event with id " + event.getId());
-        		}
-        	}
-	        catch (HibernateObjectRetrievalFailureException  e) {
-	        	Log.error("HibernateObjectRetrievalFailureException : No active alarm is present for event with id " + event.getId());
-	        	eventIds.add(event.getId());
-	        	continue;
-			}catch (ObjectNotFoundException oe) {
-				Log.error("ObjectNotFoundException : No active alarm is present for event with id " + event.getId());
-				eventIds.add(event.getId());
-	        	continue;
-			}
-		}
-        
-        // handle the purge action
-        int eventsDeleted =0;
-        if (action.equals(PURGE_ACTION) || action.equals(PURGEALL_ACTION) ) {
-        	try{
-        		eventsDeleted = m_webEventRepository.purgeEvents(eventIds);
-        		request.getSession().setAttribute("actionStatus", eventsDeleted +","+SUCCESS_ACTION+","+eventList.size());
-        	} catch(final Exception e){
-        		request.getSession().setAttribute("actionStatus", eventList.size()+","+FAILURE_ACTION);
-        	    logger.error("Unable to do this action for this event Id's.", eventIds);
-        	}
-        } 
-        
-        // handle the redirect parameters
+            
+    	// Handle the redirect parameters
         String redirectParms = request.getParameter("redirectParms");
         String viewName = m_redirectView;
-        if(redirectParms!=null){
+        if(redirectParms!=null && redirectParms != "" && redirectParms != " "){
         	viewName = m_redirectView + "?" + redirectParms;
         }
+        
         RedirectView view = new RedirectView(viewName, true);
+        request.getSession().setAttribute("actionStatus","P"+","+taskId);
+    	
         logger.info("Terminated from the EventPurgeController action");
         return new ModelAndView(view);
     }
-    
-    /**
-     * <p>setWebEventRepository</p>
-     *
-     * @param webEventRepository a {@link org.opennms.web.event.WebEventRepository} object.
-     */
-    public void setWebEventRepository(WebEventRepository webEventRepository) {
-        m_webEventRepository = webEventRepository;
-    }
+        
 
-    /**
-     * <p>setAlarmRepository</p>
-     *
-     * @param webAlarmRepository a {@link org.opennms.web.event.WebAlarmRepository} object.
-     */
-    public void setAlarmRepository(AlarmRepository alarmRepository) {
-        m_alarmRepository = alarmRepository;
-    }
-    
-    
-   
+	/**
+	 * <p>
+	 * setWebEventRepository
+	 * </p>
+	 * 
+	 * @param webEventRepository
+	 *            a {@link org.opennms.web.event.WebEventRepository} object.
+	 */
+	public void setWebEventRepository(WebEventRepository webEventRepository) {
+		m_webEventRepository = webEventRepository;
+		EventRestResource.setWebEventRepository(m_webEventRepository);
+	}
+
+	/**
+	 * <p>
+	 * setAlarmRepository
+	 * </p>
+	 * 
+	 * @param webAlarmRepository
+	 *            a {@link org.opennms.web.event.WebAlarmRepository} object.
+	 */
+	public void setAlarmRepository(AlarmRepository alarmRepository) {
+		m_alarmRepository = alarmRepository;
+		EventRestResource.setAlarmRepository(m_alarmRepository);
+	}
+
 }

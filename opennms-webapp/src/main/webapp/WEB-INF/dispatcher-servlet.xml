@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:tx="http:/www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:onmsgi="http://xmlns.opennms.org/xsd/spring/onms-osgi" 
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       http://www.sprinframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
        http://xmlns.opennms.org/xsd/spring/onms-osgi http://xmlns.opennms.org/xsd/spring/onms-osgi.xsd"
         >
-
-    <tx:annotation-driven/>
+     
     <context:annotation-config/>
 
     <!-- Scan the following packages for controllers that are annotated with the @Controller annotation -->
@@ -291,10 +291,9 @@
 	<property name="alarmRepository" ref="alarmRepository"/>
 	<property name="webEventRepository" ref="webEventRepository"/>
 	<property name="reportWrapperService" ref="reportWrapperService"/>
+	<property name="redirectView" value="/alarm/list.htm"/>
     </bean>
-
     <bean name="/alarm/createFavorite" class="org.opennms.web.controller.alarm.AlarmFilterController"/>
-
     <bean name="/alarm/deleteFavorite" class="org.opennms.web.controller.alarm.AlarmFilterController"/>
 
 <!-- Bean for EventPurgeController-->
@@ -308,14 +307,15 @@
     <bean name="/event/exportEvents" class="org.opennms.web.controller.event.EventExportController">
 	<property name="webEventRepository" ref="webEventRepository"/>
 	<property name="reportWrapperService" ref="reportWrapperService"/>
+	<property name="redirectView" value="/event/list.htm"/>
     </bean>
     
     <alias name="/alarm/index.htm" alias="/alarm/index"/>
     <bean name="/alarm/index.htm" class="org.opennms.web.controller.alarm.AlarmFilterController"/>
-
+     
     <alias name="/alarm/list.htm" alias="/alarm/list"/>
     <bean name="/alarm/list.htm" class="org.opennms.web.controller.alarm.AlarmFilterController"/>
-
+   
     <!-- Bean for AlarmDetailController-->
     <alias name="/alarm/detail.htm" alias="/alarm/detail.jsp"/>
     <bean name="/alarm/detail.htm" class="org.opennms.web.controller.alarm.AlarmDetailController">
@@ -347,8 +347,8 @@
         <property name="successView" value="alarm/summary-box"/>
         <property name="alarmRepository" ref="alarmRepository"/>
     </bean>
-
-   	<bean name="/event/*" class="org.opennms.web.controller.event.EventController">
+ 
+     <bean name="/event/*" class="org.opennms.web.controller.event.EventController">
     </bean>
 
 
@@ -463,11 +463,10 @@
         <property name="url" value="maps.htm" />
         <property name="entries">
             <list>
-                <bean class="org.opennms.web.navigate.DistributedStatusNavBarEntry">
+                <bean class="org.opennms.web.navigate.LocationBasedNavBarEntry">
                     <property name="name" value="Distributed"/>
                     <property name="url" value="RemotePollerMap/index.jsp"/>
                     <property name="locationMatch" value="RemotePollerMap"/>
-                    <property name="locationMonitorDao" ref="locationMonitorDao"/>
                 </bean>
                 <bean class="org.opennms.web.navigate.LocationBasedNavBarEntry">
                     <property name="name" value="Topology"/>
@@ -493,7 +492,7 @@
         <property name="mapMenuEntries" ref="mapMenuEntries" />
     </bean>
 
-    <bean name="dashboardMenuEntries" class="org.opennms.web.navigate.MenuDropdownNavBarEntry">
+        <bean name="dashboardMenuEntries" class="org.opennms.web.navigate.MenuDropdownNavBarEntry">
         <property name="name" value="Dashboards" />
         <property name="url" value="dashboards.htm" />
         <property name="entries">
@@ -544,13 +543,11 @@
                     <property name="locationMatch" value="pathOutage"/>
                 </bean>
 
-                <!--
                 <bean class="org.opennms.web.navigate.LocationBasedNavBarEntry">
                     <property name="name" value="Dashboard"/>
                     <property name="url" value="dashboard.jsp"/>
                     <property name="locationMatch" value="dashboard"/>
                 </bean>
-                -->
 
                 <ref bean="dashboardMenuEntries" />
 
@@ -947,3 +944,4 @@
          </bean>
      -->
 </beans>
+

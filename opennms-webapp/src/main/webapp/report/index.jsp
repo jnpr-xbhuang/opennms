@@ -66,8 +66,8 @@
         <li><a href="inventory/rancidReport.htm">Inventory</a></li>
 <% }%>
         <li><a href="statisticsReports/index.htm">Statistics Reports</a></li>
-        <!--  Added for historical reports 
-         <li><a href="report/historical/index.htm">Historical Reports</a></li> -->
+        <!--  Added for historical reports --> 
+         <li><a href="report/historical/index.htm">Historical Reports</a></li>
       </ul>
     </div>
   <!-- more reports will follow -->

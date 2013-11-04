@@ -28,12 +28,19 @@
 
 package org.opennms.web.rest;
 
+import java.io.File;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -43,27 +50,38 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
+import org.hibernate.ObjectNotFoundException;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.opennms.core.criteria.CriteriaBuilder;
+import org.opennms.core.utils.WebSecurityUtils;
 import org.opennms.netmgt.dao.api.EventDao;
+import org.opennms.netmgt.model.OnmsAlarm;
 import org.opennms.netmgt.model.OnmsEvent;
 import org.opennms.netmgt.model.OnmsEventCollection;
+import org.opennms.web.controller.event.EventExportController;
+import org.opennms.web.controller.event.EventPurgeController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.orm.hibernate3.HibernateObjectRetrievalFailureException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sun.jersey.spi.resource.PerRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Component
 @PerRequest
 @Scope("prototype")
 @Path("events")
 public class EventRestService extends OnmsRestService {
+	  private static final Logger LOG = LoggerFactory.getLogger(EventRestService.class);
     private static final DateTimeFormatter ISO8601_FORMATTER_MILLIS = ISODateTimeFormat.dateTime();
     private static final DateTimeFormatter ISO8601_FORMATTER = ISODateTimeFormat.dateTimeNoMillis();
 
@@ -79,27 +97,31 @@ public class EventRestService extends OnmsRestService {
     @Context
     SecurityContext m_securityContext;
 
-    /**
-     * <p>
-     * getEvent
-     * </p>
-     * 
-     * @param eventId
-     *            a {@link java.lang.String} object.
-     * @return a {@link org.opennms.netmgt.model.OnmsEvent} object.
-     */
-    @GET
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_ATOM_XML})
-    @Path("{eventId}")
-    @Transactional
-    public OnmsEvent getEvent(@PathParam("eventId") final String eventId) {
-        readLock();
-        try {
-            return m_eventDao.get(new Integer(eventId));
-        } finally {
-            readUnlock();
-        }
-    }
+	@Context
+	ServletContext m_servletContext;
+
+	/**
+	 * <p>
+	 * getEvent
+	 * </p>
+	 * 
+	 * @param eventId
+	 *            a {@link java.lang.String} object.
+	 * @return a {@link org.opennms.netmgt.model.OnmsEvent} object.
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
+			MediaType.APPLICATION_ATOM_XML })
+	@Path("{eventId}")
+	@Transactional
+	public OnmsEvent getEvent(@PathParam("eventId") final String eventId) {
+		readLock();
+		try {
+			return m_eventDao.get(new Integer(eventId));
+		} finally {
+			readUnlock();
+		}
+	}
 
     /**
      * returns a plaintext string being the number of events
@@ -276,14 +298,202 @@ public class EventRestService extends OnmsRestService {
         }
     }
 
-    private void processEventAck(final OnmsEvent event, final Boolean ack) {
-        if (ack) {
-            event.setEventAckTime(new Date());
-            event.setEventAckUser(m_securityContext.getUserPrincipal().getName());
-        } else {
-            event.setEventAckTime(null);
-            event.setEventAckUser(null);
-        }
-        m_eventDao.save(event);
-    }
+	private void processEventAck(final OnmsEvent event, final Boolean ack) {
+		if (ack) {
+			event.setEventAckTime(new Date());
+			event.setEventAckUser(m_securityContext.getUserPrincipal()
+					.getName());
+		} else {
+			event.setEventAckTime(null);
+			event.setEventAckUser(null);
+		}
+		m_eventDao.save(event);
+	}
+
+	/**
+	 * <p>
+	 * Purge Event
+	 * </p>
+	 * 
+	 * @param eventBeanString
+	 *            a {@link java.lang.String} object.
+	 */
+	@POST
+	@Path("purge")
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response purgeEvent(final String eventBeanString) {
+		writeLock();
+		LOG.debug("In purge event rest service for eventBean " + eventBeanString);
+		ResponseBuilder builder = Response.ok();
+		try {
+			// Get the event rest resource
+			EventRestResource eventRestResource = new EventRestResource();
+
+			// Convert the event bean string to object
+			final EventBean eventBean = (EventBean) eventRestResource
+					.convertToJaxb(eventBeanString);
+
+			// Handle the eventid strings parameter
+			final String[] eventIdStrings = eventBean.getEventids();
+
+			// Handle the actionCode parameter
+			final String action = eventBean.getAction();
+
+			// Handle the acknowledge type parameter
+			final String ackTypeString = eventBean.getAcktype();
+
+			// Handle the sortStyle type parameter
+			final String sortStyleString = eventBean.getSortStyle();
+
+			// Handle the filter parameter
+			final String[] filterStrings = eventBean.getFilterStrings();
+
+			
+			// convert the event id strings to int's
+			
+			List<Integer> eventIdList = new ArrayList<Integer>();
+			if (action.equals(EventPurgeController.PURGE_ACTION)) {
+				int[] eventIds = new int[eventIdStrings.length];
+				try {
+					for (int i = 0; i < eventIdStrings.length; i++) {
+						try {
+							eventIds[i] = WebSecurityUtils
+									.safeParseInt(eventIdStrings[i]);
+							OnmsEvent event = m_eventDao.get(eventIds[i]);
+							OnmsAlarm alarm = event.getAlarm();
+							if (alarm == null || alarm.getId() != 0)
+								eventIdList.add(event.getId());
+							else {
+								LOG.debug(
+										"Active alarm is present for event with id "
+												+ event.getId());
+							}
+
+						} catch (HibernateObjectRetrievalFailureException e) {
+							LOG.error(
+									"HibernateObjectRetrievalFailureException : No active alarm is present for event with id "
+											+ eventIds[i]);
+							eventIdList.add(eventIds[i]);
+							continue;
+						} catch (ObjectNotFoundException oe) {
+							LOG.error(
+									"ObjectNotFoundException : No active alarm is present for event with id "
+											+ eventIds[i]);
+							eventIdList.add(eventIds[i]);
+							continue;
+						} catch (Exception e) {
+							LOG.error(
+									"Could not retrieve event ID "
+											+ eventIdStrings[i]);
+							continue;
+						}
+					}
+
+					int status =1;
+					if(eventIdList.size() > 0)
+						status = eventRestResource.purgeEvents(eventIdList);
+					builder.entity(String.valueOf(status));
+					LOG.info(
+							"The Purge action is successfully completed for the event list "
+									+ eventIdList);
+				} catch (Exception e) {
+					builder.entity("0");
+					e.printStackTrace();
+					LOG.error(
+							"Unable to do purge action for this event list "
+									+ eventIdList);
+				}
+			} else if (action.equals(EventPurgeController.PURGEALL_ACTION)) {
+				try {
+					int status = eventRestResource.splitAndPurgeEvents(filterStrings,
+							sortStyleString, ackTypeString);
+					builder.entity(String.valueOf(status));
+				} catch (Exception e) {
+					builder.entity("0");
+					LOG.error("Unable to do purge all action ");
+				}
+			}
+			LOG.debug("purgeEvent method completed for event bean " + eventBeanString);
+			return (Response) builder.build();
+		} catch (Exception ex) {
+			throw getException(null, "Can't get the event details because, "
+					+ ex.getMessage());
+		} finally {
+			writeUnlock();
+		}
+	}
+
+	@POST
+	@Path("export")
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response exportEvent(final String eventBeanString) {
+
+		writeLock();
+		LOG.debug("In export event rest service for eventBean " + eventBeanString);
+		try {
+			ResponseBuilder builder = Response.ok();
+
+			// Convert the event bean string to object
+			// Get the event rest resource
+			EventRestResource eventRestResource = new EventRestResource();
+			final EventBean eventBean = (EventBean) eventRestResource
+					.convertToJaxb(eventBeanString);
+
+			final String[] eventIdStrings = eventBean.getEventids();
+			final String action = eventBean.getAction();
+
+			// Handle the report format and reportId parameter
+			final String reportId = eventBean.getReportId();
+			final String requestFormat = eventBean.getRequestFormat();
+			final String[] filterStrings = eventBean.getFilterStrings();
+			final String ackTypeString = eventBean.getAcktype();
+			final String baseDir = System
+					.getProperty("opennms.event.report.dir");
+
+			if (eventIdStrings != null
+					&& action.equals(EventExportController.EXPORT_ACTION)) {
+				try {
+				String fileName = "event_report"
+						+ new SimpleDateFormat("_MMddyyyy_HHmmss")
+								.format(new Date()) + "."
+						+ requestFormat.toLowerCase();
+				LOG.debug("File to be created " + fileName);
+				int status = eventRestResource.exportEvents(eventIdStrings, fileName,
+						reportId, requestFormat);
+				builder.entity(status + "," + fileName);
+				}catch(Exception ex){
+	        		builder.entity("0");
+	        		ex.printStackTrace();
+	        	    LOG.error("Unable to do export action for this event list " + Arrays.toString(eventIdStrings));
+	        	}
+			}
+
+			else if (action.equals(EventExportController.EXPORTALL_ACTION)) {
+				try{
+				String dirStr = "event_report"
+						+ new SimpleDateFormat("_MMddyyyy_HHmmss")
+								.format(new Date());
+				String zipFile = dirStr + ".zip";
+				int status = eventRestResource.splitAndExportEvents(filterStrings,
+						ackTypeString, dirStr, reportId, requestFormat);
+				
+				builder.entity(status + "," + zipFile);
+				}catch(Exception ex){
+	        		builder.entity("0");
+	        		ex.printStackTrace();
+	        	    LOG.error("Unable to do export action for this event list " + Arrays.toString(eventIdStrings));
+	        	}
+			} else {
+				LOG.error("Unknown event action: " + action);
+			}
+			LOG.debug("exportEvent method completed for event bean " + eventBeanString);
+			return (Response) builder.build();
+		} catch (Exception ex) {
+			throw getException(null, "Can't get the event details because, "
+					+ ex.getMessage());
+		} finally {
+			writeUnlock();
+		}
+	}
 }
+

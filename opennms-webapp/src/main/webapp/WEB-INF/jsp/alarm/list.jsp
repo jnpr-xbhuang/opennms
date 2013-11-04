@@ -51,6 +51,10 @@
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.List" %>
 <%@page import="org.opennms.web.tags.FavoriteTag" %>
+<%@page import="org.opennms.core.utils.WebSecurityUtils" %>
+<%@page import="org.opennms.web.controller.alarm.AcknowledgeAlarmController" %>
+<%@page import="org.opennms.web.alarm.AlarmQueryParms" %>
+<%@page import="org.opennms.web.alarm.AlarmUtil" %>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -96,8 +100,22 @@
     pageContext.setAttribute("addAfterFilter", "[&lt;]");
     pageContext.setAttribute("filterFavoriteSelectTagHandler", new FilterFavoriteSelectTagHandler());
     
-    //Get the purge action status
+    //Get the action status for purge and export
     String actionStatus = (String) req.getSession().getAttribute("actionStatus");
+    
+    //Get the alarm purge limit
+    Integer purgeLimit = AlarmPurgeController.PURGE_LIMIT;
+    String purgePropLimit = System.getProperty("opennms.alarm.purge.limit");
+    if(purgePropLimit!=null && purgePropLimit!="" && purgePropLimit!=" "){
+	purgeLimit = Integer.parseInt(purgePropLimit);
+    }
+    
+    //Get the alarm export limit
+    Integer exportDataLimit = AlarmReportController.EXPORT_LIMIT;
+    String exportPropLimit = System.getProperty("opennms.alarm.export.limit");
+    if(exportPropLimit!=null && exportPropLimit!="" && exportPropLimit!=" "){
+	exportDataLimit = Integer.parseInt(exportPropLimit);
+    }
     
     final String baseHref = org.opennms.web.api.Util.calculateUrlBase(request);
 %>
@@ -192,7 +210,8 @@
 		
 		//Get the confirmation status for purge action
 		var regularNoun = (parseInt(alarmCount) == 1)?'alarm':'alarms';
-		var confirmText = (anAction=="purge" || anAction=="export" )? 'Are you sure you want to '+anAction+' selected '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')' : 'Are you sure you want to '+anAction+' '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')';
+		var confirmText = "";
+                  confirmText = (anAction=="purge" || anAction=="export" )? confirmText+ 'Are you sure you want to '+anAction+' selected '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')' : confirmText+'Are you sure you want to '+anAction+' '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')';
 		if((anAction == "purge" || anAction == "purgeall") && parseInt(alarmCount)>0) {
 			if(confirm(confirmText)){
 				isPurgeExport = true;
@@ -235,14 +254,10 @@
 					} else {
 						document.alarm_action_form.submit();
 					}
-					if(anAction == "purge")
-					getProgressBar();
 					}
 				    else if (isChecked)
 				    {
 					document.alarm_action_form.submit();
-					if(anAction == "purge")
-					getProgressBar();
 				    }
 				    else
 				    {
@@ -252,8 +267,6 @@
 				    if (document.alarm_action_form.alarm.checked)
 				    {
 					document.alarm_action_form.submit();
-					if(anAction == "purge")
-					getProgressBar();
 				    }
 				    else
 				    {
@@ -262,85 +275,11 @@
 				}
 			}else{
 				document.alarm_action_form.submit();
-				getProgressBar();
 			}
 		}else{
 			alert("There is currently no alarms for this category to " + anAction + ".");
 		}
 	}
-    
-    function submitForm(anAction)
-    {
-        var isChecked = false
-        var numChecked = 0;
-        
-        // Decide to which servlet we will submit
-        if (anAction == "clear" || anAction == "escalate") {
-        	document.alarm_action_form.action = "alarm/changeSeverity";
-        } else if (anAction == "acknowledge" || anAction == "unacknowledge") {
-        	document.alarm_action_form.action = "alarm/acknowledge";
-        }
-        
-        // Decide what our action should be
-        if (anAction == "escalate") {
-        	document.alarm_action_form.actionCode.value = "<%=AlarmSeverityChangeController.ESCALATE_ACTION%>";
-        } else if (anAction == "clear") {
-        	document.alarm_action_form.actionCode.value = "<%=AlarmSeverityChangeController.CLEAR_ACTION%>";
-        } else if (anAction == "acknowledge") {
-        	document.alarm_action_form.actionCode.value = "<%= AcknowledgeType.ACKNOWLEDGED.getShortName() %>";
-        } else if (anAction == "unacknowledge") {
-        	document.alarm_action_form.actionCode.value = "<%= AcknowledgeType.UNACKNOWLEDGED.getShortName() %>";
-        }
- 
-        if (document.alarm_action_form.alarm.length)
-        {
-            for( i = 0; i < document.alarm_action_form.alarm.length; i++ ) 
-            {
-              //make sure something is checked before proceeding
-              if (document.alarm_action_form.alarm[i].checked)
-              {
-                isChecked=true;
-                numChecked+=1;
-              }
-            }
-            
-            if (isChecked && document.alarm_action_form.multiple)
-            {
-              if (numChecked == parseInt(document.alarm_action_form.alarm.length)) 
-              { 
-                var newPageNum = parseInt(document.alarm_action_form.multiple.value) - 1;
-                var findVal = "multiple=" + document.alarm_action_form.multiple.value;
-                var replaceWith = "multiple=" + newPageNum;
-                var tmpRedirect = document.alarm_action_form.redirectParms.value;
-                document.alarm_action_form.redirectParms.value = tmpRedirect.replace(findVal, replaceWith);
-                document.alarm_action_form.submit();
-              } 
-              else 
-              {
-                document.alarm_action_form.submit();
-              }
-            }
-            else if (isChecked)
-            {
-              document.alarm_action_form.submit();
-            }
-            else
-            {
-                alert("Please check the alarms that you would like to " + anAction + ".");
-            }
-        }
-        else
-        {
-            if (document.alarm_action_form.alarm.checked)
-            {
-                document.alarm_action_form.submit();
-            }
-            else
-            {
-                alert("Please check the alarms that you would like to " + anAction + ".");
-            }
-        }
-    }
 
     function changeFavorite(selectElement) {
         var selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -370,6 +309,19 @@
       </c:choose>
       <li><a onclick="javascript:window.open('<%=Util.calculateUrlBase(req, "alarm/severity.jsp")%>','alarm_severity_legend', 'fullscreen=no,toolbar=no,status=no,menubar=no,scrollbars=no,resizable=yes,directories=no,location=no,width=525,height=330')" title="Open a window explaining the alarm severities">Severity Legend</a></li>
       
+
+         <!-- Popup message box for alarm export action -->
+         <div id="exportConfirmation" style="display:none">
+                 <center>
+                         <div id="alertText">&nbsp;</div>
+                         <br>Select your file format :
+                         <input type="radio" name="format" value="PDF" checked="checked">PDF
+                         <input type="radio" name="format" value="HTML">HTML
+                         <input type="radio" name="format" value="CSV">CSV<br><br>
+                         <input type="button" onclick="javascript:callExportAction();" value="Ok" />
+                         <input type="button" onclick="javascript:hideTransBackground();" value="Cancel"/>
+                 </center>
+         </div>
       <% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
         <% if ( alarmCount > 0 ) { %>
           <li>
@@ -380,9 +332,9 @@
               <%=Util.makeHiddenTags(req)%>
             </form>
             <% if( parms.getAckType().equals(AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType()) ) { %>
-              <a href="javascript:void()" onclick="if (confirm('Are you sure you want to acknowledge all alarms in the current search including those not shown on your screen?  (<%=alarmCount%> total alarms)')) { document.acknowledge_by_filter_form.submit(); }" title="Acknowledge all alarms that match the current search constraints, even those not shown on the screen">Acknowledge entire search</a>
+              <a href="javascript:void()" onclick="if (confirm('Are you sure you want to acknowledge all alarms in the current search including those not shown on your screen? (<%=alarmCount%> total alarms)')) { document.acknowledge_by_filter_form.submit(); }" title="Acknowledge all alarms that match the current search constraints, even those not shown on the screen">Acknowledge entire search</a>
             <% } else { %>
-              <a href="#javascript:void()" onclick="if (confirm('Are you sure you want to unacknowledge all alarms in the current search including those not shown on your screen)?  (<%=alarmCount%> total alarms)')) { document.acknowledge_by_filter_form.submit(); }" title="Unacknowledge all alarms that match the current search constraints, even those not shown on the screen">Unacknowledge entire search</a>
+              <a href="#javascript:void()" onclick="if (confirm('Are you sure you want to unacknowledge all alarms in the current search including those not shown on your screen)? (<%=alarmCount%> total alarms)')) { document.acknowledge_by_filter_form.submit(); }" title="Unacknowledge all alarms that match the current search constraints, even those not shown on the screen">Unacknowledge entire search</a>
             <% } %>
           </li>
         <% } %>
@@ -397,27 +349,27 @@
             <% if( alarmCount > 0 ) { %>
               <% String baseUrl = this.makeLink(callback, parms, favorite); %>
               <jsp:include page="/includes/resultsIndex.jsp" flush="false" >
-                <jsp:param name="count"    value="<%=alarmCount%>" />
-                <jsp:param name="baseurl"  value="<%=baseUrl%>"    />
-                <jsp:param name="limit"    value="<%=parms.getLimit()%>"      />
-                <jsp:param name="multiple" value="<%=parms.getMultiple()%>"   />
+                <jsp:param name="count" value="<%=alarmCount%>" />
+                <jsp:param name="baseurl" value="<%=baseUrl%>" />
+                <jsp:param name="limit" value="<%=parms.getLimit()%>" />
+                <jsp:param name="multiple" value="<%=parms.getMultiple()%>" />
               </jsp:include>
-            <% } %>
+            <% } %>        
 
-	<!-- Popup message box for alarm export action -->
-	<div id="exportConfirmation" style="display:none">
-		<center>
-			<div id="alertText">&nbsp;</div><br>
-			Select your file format : 
-			<input type="radio" name="format" value="PDF" checked="checked">PDF
-			<!-- <input type="radio" name="format" value="XLS">XLS -->
-			<input type="radio" name="format" value="HTML">HTML
-			<input type="radio" name="format" value="CSV">CSV<br><br>
-			<input type="button" onclick="javascript:callExportAction();" value="Ok" />
-			<input type="button" onclick="javascript:hideTransBackground();" value="Cancel"/>
-		</center>
-	</div>
-	
+        <!-- Popup message box for alarm export action -->
+        <div id="exportConfirmation" style="display:none">
+                <center>
+                        <div id="alertText">&nbsp;</div><br>
+                        Select your file format :
+                        <input type="radio" name="format" value="PDF" checked="checked">PDF
+                        <!-- <input type="radio" name="format" value="XLS">XLS -->
+                        <input type="radio" name="format" value="HTML">HTML
+                        <input type="radio" name="format" value="CSV">CSV<br><br>
+                        <input type="button" onclick="javascript:callExportAction();" value="Ok" />
+                        <input type="button" onclick="javascript:hideTransBackground();" value="Cancel"/>
+                </center>
+        </div>
+        
             <% if( parms.getFilters().size() > 0 || AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) || AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
                 <p>
                     Favorites:
@@ -446,88 +398,84 @@
                 </p>
             <% } %>
             <onms:alert/>
-
+	
       <% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
           <form action="<%= Util.calculateUrlBase(request, "alarm/acknowledge") %>" method="post" name="alarm_action_form">
           <input type="hidden" name="redirectParms" value="<c:out value="<%=req.getQueryString()%>"/>" />
           <input type="hidden" name="actionCode" value="<%=action%>" />
 	  
 	  <!-- Hidden datas for alarm purge and export action-->
-	  <input type="hidden" name="nodeid" value="node=" />
-	  <input type="hidden" name="exactuei" value="exactUei=" />
-	  <input type="hidden" name="ipaddress" value="interface=" />
 	  <input type="hidden" name="format" value="pdf" />
 	  <input type="hidden" name="reportId" value="local_alarm-report" />
-	  <div id="progressBar" class="jquery-ui-like"><div><center>Action in progress, Please wait...</center></div></div>
 	  <div id="backgroundPopup"></div><body/>
 	  
           <%=Util.makeHiddenTags(req)%>
       <% } %>
 			<jsp:include page="/includes/key.jsp" flush="false" />
       <table>
-				<thead>
-					<tr>
+                                <thead>
+                                        <tr>
                                              <% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
-						<% if ( parms.getAckType().equals(AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType()) ) { %>
-						<th width="3%">Ack</th>
-						<% } else if ( parms.getAckType().equals(AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType()) ) { %>
-						<th width="3%">UnAck</th>
-						<% } else if ( parms.getAckType().equals(AcknowledgeType.BOTH.toNormalizedAcknowledgeType()) ) { %>
-						<th width="3%">Ack?</th>
-						<% } %>
+                                                <% if ( parms.getAckType().equals(AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType()) ) { %>
+                                                <th width="3%">Ack</th>
+                                                <% } else if ( parms.getAckType().equals(AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType()) ) { %>
+                                                <th width="3%">UnAck</th>
+                                                <% } else if ( parms.getAckType().equals(AcknowledgeType.BOTH.toNormalizedAcknowledgeType()) ) { %>
+                                                <th width="3%">Ack?</th>
+                                                <% } %>
                     <% } else { %>
                         <th width="1%">&nbsp;</th>
                     <% } %>
 
 
 
-			<th width="8%">
-              <%=this.makeSortLink(callback, parms, SortStyle.ID,        SortStyle.REVERSE_ID,        "id",        "ID" , favorite )%>
+                        <th width="8%">
+              <%=this.makeSortLink(callback, parms, SortStyle.ID, SortStyle.REVERSE_ID, "id", "ID" , favorite )%>
               <br />
-              <%=this.makeSortLink(callback, parms, SortStyle.SEVERITY,  SortStyle.REVERSE_SEVERITY,  "severity",  "Severity", favorite  )%>
+              <%=this.makeSortLink(callback, parms, SortStyle.SEVERITY, SortStyle.REVERSE_SEVERITY, "severity", "Severity", favorite )%>
             </th>
-			<th width="19%">
-              <%=this.makeSortLink(callback, parms, SortStyle.NODE,      SortStyle.REVERSE_NODE,      "node",      "Node", favorite      )%>
+                        <th width="19%">
+              <%=this.makeSortLink(callback, parms, SortStyle.NODE, SortStyle.REVERSE_NODE, "node", "Node", favorite )%>
               <c:if test="${param.display == 'long'}">
               <br />
               <%=this.makeSortLink(callback, parms, SortStyle.INTERFACE, SortStyle.REVERSE_INTERFACE, "interface", "Interface", favorite )%>
               <br />
-              <%=this.makeSortLink(callback, parms, SortStyle.SERVICE,   SortStyle.REVERSE_SERVICE,   "service",   "Service", favorite   )%>
+              <%=this.makeSortLink(callback, parms, SortStyle.SERVICE, SortStyle.REVERSE_SERVICE, "service", "Service", favorite )%>
               </c:if>
             </th>
-			<th width="3%">
-              <%=this.makeSortLink(callback, parms, SortStyle.COUNT,  SortStyle.REVERSE_COUNT,  "count",  "Count", favorite  )%>
+                        <th width="6%">
+              <%=this.makeSortLink(callback, parms, SortStyle.COUNT, SortStyle.REVERSE_COUNT, "count", "Count", favorite )%>
             </th>
-			<th width="20%">
-              <%=this.makeSortLink(callback, parms, SortStyle.LASTEVENTTIME,  SortStyle.REVERSE_LASTEVENTTIME,  "lasteventtime",  "Last Event Time", favorite  )%>
+                        <th width="17%">
+              <%=this.makeSortLink(callback, parms, SortStyle.LASTEVENTTIME, SortStyle.REVERSE_LASTEVENTTIME, "lasteventtime", "Last Event Time", favorite )%>
               <c:if test="${param.display == 'long'}">
               <br />
-              <%=this.makeSortLink(callback, parms, SortStyle.FIRSTEVENTTIME,  SortStyle.REVERSE_FIRSTEVENTTIME,  "firsteventtime",  "First Event Time", favorite  )%>
+              <%=this.makeSortLink(callback, parms, SortStyle.FIRSTEVENTTIME, SortStyle.REVERSE_FIRSTEVENTTIME, "firsteventtime", "First Event Time", favorite )%>
               <br />
               <% if ( parms.getAckType().equals(AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType()) ) { %>
-              <%=this.makeSortLink(callback, parms, SortStyle.ACKUSER,  SortStyle.REVERSE_ACKUSER,  "ackuser",  "Acknowledged By", favorite  )%>
+              <%=this.makeSortLink(callback, parms, SortStyle.ACKUSER, SortStyle.REVERSE_ACKUSER, "ackuser", "Acknowledged By", favorite )%>
               <% } %>
               </c:if>
             </th>
                         <th width="24%">Description</th>
-			<th width="24%">Log Msg</th>
-		</tr>
-	</thead>
+                        <th width="24%">Log Msg</th>
+                </tr>
+        </thead>
 
-      <% for( int i=0; i < alarms.length; i++ ) { 
-      	pageContext.setAttribute("alarm", alarms[i]);
-      %> 
+      <% for( int i=0; i < alarms.length; i++ ) {
+              pageContext.setAttribute("alarm", alarms[i]);
+      %>
 
         <tr class="<%=alarms[i].getSeverity().getLabel()%>">
           <% if( parms.getAckType().equals(AcknowledgeType.BOTH.toNormalizedAcknowledgeType()) ) { %>
               <td class="divider" valign="middle" rowspan="1">
                 <nobr>
-                  <input type="checkbox" name="alarm" disabled="true" <%=alarms[i].isAcknowledged() ? "checked='true'" : ""%> /> 
+                  <input type="checkbox" name="alarm" disabled="true" <%=alarms[i].isAcknowledged() ? "checked='true'" : ""%> />
                 </nobr>
           <% } else if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
               <td class="divider" valign="middle" rowspan="1">
                 <nobr>
-                  <input type="checkbox" name="alarm" value="<%=alarms[i].getId()%>" /> 
+                  <input type="checkbox" name="alarm" value="<%=alarms[i].getId()%>" />
                 </nobr>
           <% } else { %>
             <td valign="middle" rowspan="1" class="divider">&nbsp;
@@ -536,16 +484,16 @@
 
           
           <td class="divider bright" valign="middle" rowspan="1">
-	  
-	   <!-- Get the events details for this Alarm Id -->
+        
+         <!-- Get the events details for this Alarm Id -->
           <a style="vertical-align:middle" href="alarm/detail.htm?id=<%=alarms[i].getId()%>"><%=alarms[i].getId()%></a>
-	   
-	<c:if test="<%= alarms[i].getStickyMemo() != null && alarms[i].getStickyMemo().getId() != null%>">
-                <img style="vertical-align:middle" src="images/AlarmMemos/StickyMemo.png" width="20" height="20" 
-		     title="<%=alarms[i].getStickyMemo().getBody() %>"/>
+        
+        <c:if test="<%= alarms[i].getStickyMemo() != null && alarms[i].getStickyMemo().getId() != null%>">
+                <img style="vertical-align:middle" src="images/AlarmMemos/StickyMemo.png" width="20" height="20"
+                 title="<%=alarms[i].getStickyMemo().getBody() %>"/>
             </c:if>
             <c:if test="<%= alarms[i].getReductionKeyMemo() != null && alarms[i].getReductionKeyMemo().getId() != null%>">
-                <img style="vertical-align:middle" src="images/AlarmMemos/JournalMemo.png" width="20" height="20" 
+                <img style="vertical-align:middle" src="images/AlarmMemos/JournalMemo.png" width="20" height="20"
                      title="<%=alarms[i].getReductionKeyMemo().getBody() %>"/>
             </c:if>
 
@@ -562,9 +510,9 @@
             <% } else { %>
               &nbsp;
             <% } %>
-            <% Filter severityFilter = new SeverityFilter(alarms[i].getSeverity()); %>      
+            <% Filter severityFilter = new SeverityFilter(alarms[i].getSeverity()); %>
             <% if( !parms.getFilters().contains( severityFilter )) { %>
-		<br />Sev.
+                <br />Sev.
               <nobr>
                 <a href="<%=this.makeLink(callback, parms, severityFilter, true, favorite)%>" class="filterLink" title="Show only alarms with this severity">${addPositiveFilter}</a>
                 <a href="<%=this.makeLink(callback, parms, new NegativeSeverityFilter(alarms[i].getSeverity()), true, favorite)%>" class="filterLink" title="Do not show alarms with this severity">${addNegativeFilter}</a>
@@ -574,8 +522,8 @@
           </c:if>
           </td>
           <td class="divider">
-	    <% if(alarms[i].getNodeId() != null && alarms[i].getNodeLabel()!= null ) { %>
-              <% Filter nodeFilter = new NodeFilter(alarms[i].getNodeId(), getServletContext()); %>             
+         <% if(alarms[i].getNodeId() != null && alarms[i].getNodeLabel()!= null ) { %>
+              <% Filter nodeFilter = new NodeFilter(alarms[i].getNodeId(), getServletContext()); %>
               <% String[] labels = this.getNodeLabels( alarms[i].getNodeLabel() ); %>
               <a href="element/node.jsp?node=<%=alarms[i].getNodeId()%>" title="<%=labels[1]%>"><%=labels[0]%></a>
                     
@@ -589,7 +537,7 @@
               &nbsp;
             <% } %>
           <c:if test="${param.display == 'long'}">
-		<br />
+                <br />
             <% if(alarms[i].getIpAddr() != null ) { %>
               <% Filter intfFilter = new InterfaceFilter(alarms[i].getIpAddr()); %>
               <% if( alarms[i].getNodeId() != null ) { %>
@@ -628,12 +576,12 @@
                   <a href="<%=this.makeLink(callback, parms, serviceFilter, true, favorite)%>" class="filterLink" title="Show only alarms with this service type">${addPositiveFilter}</a>
                   <a href="<%=this.makeLink(callback, parms, new NegativeServiceFilter(alarms[i].getServiceType().getId(), getServletContext()), true, favorite)%>" class="filterLink" title="Do not show alarms for this service">${addNegativeFilter}</a>
                 </nobr>
-              <% } %>                            
+              <% } %>
             <% } %>
             </c:if>
-          </td>          
+          </td>
           <td class="divider" valign="middle" rowspan="1" >
-	    <% if(alarms[i].getId() > 0 ) { %>           
+         <% if(alarms[i].getId() > 0 ) { %>
                 <nobr>
                   <a href="event/list.htm?sortby=id&amp;acktype=unack&amp;filter=alarm%3d<%=alarms[i].getId()%>"><%=alarms[i].getCounter()%></a>
                 </nobr>
@@ -644,31 +592,31 @@
           <td class="divider">
             <nobr><span title="Event <%= alarms[i].getLastEvent().getId()%>"><a href="event/detail.htm?id=<%= alarms[i].getLastEvent().getId()%>"><fmt:formatDate value="${alarm.lastEventTime}" type="date" dateStyle="short"/>&nbsp;<fmt:formatDate value="${alarm.lastEventTime}" type="time" pattern="HH:mm:ss"/></a></span></nobr>
             <nobr>
-              <a href="<%=this.makeLink(callback, parms, new AfterLastEventTimeFilter(alarms[i].getLastEventTime()), true, favorite)%>"  class="filterLink" title="Only show alarms occurring after this one">${addAfterFilter}</a>
+              <a href="<%=this.makeLink(callback, parms, new AfterLastEventTimeFilter(alarms[i].getLastEventTime()), true, favorite)%>" class="filterLink" title="Only show alarms occurring after this one">${addAfterFilter}</a>
               <a href="<%=this.makeLink(callback, parms, new BeforeLastEventTimeFilter(alarms[i].getLastEventTime()), true, favorite)%>" class="filterLink" title="Only show alarms occurring before this one">${addBeforeFilter}</a>
             </nobr>
           <c:if test="${param.display == 'long'}">
           <br />
             <nobr><fmt:formatDate value="${alarm.firstEventTime}" type="date" dateStyle="short"/>&nbsp;<fmt:formatDate value="${alarm.firstEventTime}" type="time" pattern="HH:mm:ss"/></nobr>
             <nobr>
-              <a href="<%=this.makeLink(callback, parms, new AfterFirstEventTimeFilter(alarms[i].getFirstEventTime()), true, favorite)%>"  class="filterLink" title="Only show alarms occurring after this one">${addAfterFilter}</a>
+              <a href="<%=this.makeLink(callback, parms, new AfterFirstEventTimeFilter(alarms[i].getFirstEventTime()), true, favorite)%>" class="filterLink" title="Only show alarms occurring after this one">${addAfterFilter}</a>
               <a href="<%=this.makeLink(callback, parms, new BeforeFirstEventTimeFilter(alarms[i].getFirstEventTime()), true, favorite)%>" class="filterLink" title="Only show alarms occurring before this one">${addBeforeFilter}</a>
             </nobr>
           <br />
               <% if ( parms.getAckType().equals(AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType()) ) { %>
-			<nobr><%=alarms[i].getAckUser()%></nobr>          
+                        <nobr><%=alarms[i].getAckUser()%></nobr>
             <nobr>
-              <a href="<%=this.makeLink(callback, parms, new AcknowledgedByFilter(alarms[i].getAckUser()), true, favorite)%>"  class="filterLink" title="Only show alarms ack by this user">${addPositiveFilter}</a>
+              <a href="<%=this.makeLink(callback, parms, new AcknowledgedByFilter(alarms[i].getAckUser()), true, favorite)%>" class="filterLink" title="Only show alarms ack by this user">${addPositiveFilter}</a>
               <a href="<%=this.makeLink(callback, parms, new NegativeAcknowledgedByFilter(alarms[i].getAckUser()), true, favorite)%>" class="filterLink" title="Only show alarms ack by other users">${addNegativeFilter}</a>
             </nobr>
-			<% }%>
+                        <% }%>
           </c:if>
           </td>
           <td class="divider"><%=this.getTextDesc(alarms[i].getDescription())%></td>
           <td class="divider"><%=alarms[i].getLogMsg()%></td>
-       </tr> 
+       </tr>
       <% } /*end for*/%>
-	
+        
       </table>
 			<hr />
 			 <p><%=alarms.length%> alarms &nbsp;
@@ -683,7 +631,6 @@
         <% } %>
           <option value="clear">Clear Alarms</option>
           <option value="escalate">Escalate Alarms</option>
-	 <!--
 	  <optgroup label="Export Alarms">
 	        <option value="exportall">Export All</option>
           	<option value="export">Export Selected</option>
@@ -692,7 +639,6 @@
 	        <option value="purgeall">Purge All</option>
           	<option value="purge">Purge Selected</option>
 	   </optgroup>
-	  -->
           </select>
           <input type="button" value="Go" onClick="submitForm(document.alarm_action_form.alarmAction.value)" />
       <% } %>
@@ -703,15 +649,16 @@
         <% if( alarmCount > 0 ) { %>
           <% String baseUrl = this.makeLink(callback, parms, favorite); %>
           <jsp:include page="/includes/resultsIndex.jsp" flush="false" >
-            <jsp:param name="count"    value="<%=alarmCount%>" />
-            <jsp:param name="baseurl"  value="<%=baseUrl%>"    />
-            <jsp:param name="limit"    value="<%=parms.getLimit()%>"      />
-            <jsp:param name="multiple" value="<%=parms.getMultiple()%>"   />
+            <jsp:param name="count" value="<%=alarmCount%>" />
+            <jsp:param name="baseurl" value="<%=baseUrl%>" />
+            <jsp:param name="limit" value="<%=parms.getLimit()%>" />
+            <jsp:param name="multiple" value="<%=parms.getMultiple()%>" />
           </jsp:include>
         <% } %>
 
-
+<%--
 <jsp:include page="/includes/bookmark.jsp" flush="false" />
+--%>
 <jsp:include page="/includes/footer.jsp" flush="false" />
 
 
@@ -744,7 +691,7 @@
           buffer.append( this.makeLink( callback, parms, style, favorite ));
           buffer.append( "\" title=\"Sort by " );
           buffer.append( sortString );
-          buffer.append( "\">" );   
+          buffer.append( "\">" );
       }
 
       buffer.append( title );
@@ -755,6 +702,7 @@
       return( buffer.toString() );
     }
 
+    
     public String makeLink( FilterCallback callback, NormalizedQueryParameters params, OnmsFilterFavorite favorite) {
         return callback.createLink(urlBase, params, favorite);
     }
@@ -801,7 +749,7 @@
         String[] labels = null;
 
         if( nodeLabel.length() > 32 ) {
-            String shortLabel = nodeLabel.substring( 0, 31 ) + "...";                        
+            String shortLabel = nodeLabel.substring( 0, 31 ) + "...";
             labels = new String[] { shortLabel, nodeLabel };
         }
         else {
@@ -815,21 +763,25 @@
 <%!
     protected String getTextDesc( String desc ) {
          if ( desc != null && desc.indexOf("<table>") > 0 ) {
-             return desc.substring( 0, desc.indexOf("<table>"));  
+             return desc.substring( 0, desc.indexOf("<table>")); 
          }
          return desc;
     }
 %>
 <script type="text/javascript">
-   //Query status for the purge action
+    //Action status for purge and export
     var actionStatus = "<%=actionStatus%>";
     var seperateStatus = actionStatus.split(",");
-    var regularNoun = (parseInt(seperateStatus[0]) == 1)?'alarm is':'alarms are';
-    var queryStatus = seperateStatus[1];
-    if(queryStatus == "<%=AlarmPurgeController.SUCCESS_ACTION%>"){
-	alert("The "+regularNoun+" successfully deleted from the DB");
-    }else if(queryStatus == "<%=AlarmPurgeController.FAILURE_ACTION%>"){
-	alert("The "+regularNoun+" not able to delete from the DB");
+    if(actionStatus != "null"){
+	    if(seperateStatus[0] == "P" || seperateStatus[0] == "E"){
+		if(parseInt(seperateStatus[1]) >= 0){
+			alert("Your Job ["+seperateStatus[1]+"] is successfully created.Please wait, your purge or export action is in progress...");
+		} else if(parseInt(seperateStatus[1]) == -2) {
+			alert("Already purge or export action is in progress, please try after some time...");
+		} else {
+			alert("Unable to create your job. Please check the log files");
+		}
+	    }
     }
 </script>
 <% request.getSession().setAttribute("actionStatus", "null"); %>
