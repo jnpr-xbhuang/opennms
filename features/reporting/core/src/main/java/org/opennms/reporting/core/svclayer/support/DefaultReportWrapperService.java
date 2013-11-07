@@ -1,51 +1,52 @@
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2010-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2010-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 package org.opennms.reporting.core.svclayer.support;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
-import org.exolab.castor.xml.MarshalException;
+import org.apache.commons.io.IOUtils;
 import org.exolab.castor.xml.ValidationException;
 import org.opennms.api.reporting.ReportException;
 import org.opennms.api.reporting.ReportFormat;
 import org.opennms.api.reporting.ReportMode;
 import org.opennms.api.reporting.ReportService;
 import org.opennms.api.reporting.parameter.ReportParameters;
+import org.opennms.core.logging.Logging;
 import org.opennms.javamail.JavaMailer;
 import org.opennms.javamail.JavaMailerException;
 import org.opennms.netmgt.config.UserFactory;
@@ -56,16 +57,17 @@ import org.opennms.reporting.core.DeliveryOptions;
 import org.opennms.reporting.core.svclayer.ReportServiceLocator;
 import org.opennms.reporting.core.svclayer.ReportStoreService;
 import org.opennms.reporting.core.svclayer.ReportWrapperService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import org.exolab.castor.xml.MarshalException;
 /**
- * <p>DefaultReportWrapperService class.</p>
- *
- * @author ranger
- * @version $Id: $
- */
+* <p>DefaultReportWrapperService class.</p>
+*
+* @author ranger
+* @version $Id: $
+*/
 public class DefaultReportWrapperService implements ReportWrapperService {
     private static final Logger LOG = LoggerFactory.getLogger(DefaultReportWrapperService.class);
 
@@ -76,48 +78,41 @@ public class DefaultReportWrapperService implements ReportWrapperService {
     private static final String LOG4J_CATEGORY = "OpenNMS.Report";
 
     /**
-     * <p>Constructor for DefaultReportWrapperService.</p>
-     */
+* <p>Constructor for DefaultReportWrapperService.</p>
+*/
     public DefaultReportWrapperService() {
-        //String oldPrefix = ThreadCategory.getPrefix();
-        //ThreadCategory.setPrefix(LOG4J_CATEGORY);
-        //log = ThreadCategory.getInstance(DefaultReportWrapperService.class);
-        //ThreadCategory.setPrefix(oldPrefix);
     }
 
     /** {@inheritDoc} */
     @Override
-    public DeliveryOptions getDeliveryOptions(String reportId, String userId) {
-        DeliveryOptions options = new DeliveryOptions();
+    public DeliveryOptions getDeliveryOptions(final String reportId, final String userId) {
+        final DeliveryOptions options = new DeliveryOptions();
 
         options.setFormat(ReportFormat.HTML);
         options.setPersist(true);
         options.setSendMail(false);
 
-        UserManager userFactory = UserFactory.getInstance();
+        Logging.withPrefix(LOG4J_CATEGORY, new Runnable() {
+            @Override public void run() {
+                UserManager userFactory = UserFactory.getInstance();
 
-        try {
-            String emailAddress = userFactory.getEmail(userId);
-            if (emailAddress != null) {
-                options.setMailTo(emailAddress);
+                try {
+                    final String emailAddress = userFactory.getEmail(userId);
+                    if (emailAddress != null && !emailAddress.isEmpty()) {
+                        options.setMailTo(emailAddress);
+                    }
+                } catch (final ValidationException e) {
+                    LOG.error("validation exception trying to set destination email address", e);
+                } catch (final NullPointerException e) { // See NMS-5111 for more details.
+                    LOG.warn("the user {} does not have any email configured.", userId);
+                } catch (final Exception e) {
+                    LOG.error("An error occurred while attempting to determine and set the destination email address for user {}", userId, e);
+                }
+
+                options.setInstanceId(reportId + " " + userId);
+
             }
-        } catch (MarshalException e) {
-            LOG.error(
-                      "marshal exception trying to set destination email address",
-                      e);
-        } catch (ValidationException e) {
-            LOG.error(
-                      "validation exception trying to set destination email address",
-                      e);
-        } catch (IOException e) {
-            LOG.error("IO exception trying to set destination email address",
-                      e);
-        } catch (NullPointerException e) { // See NMS-5111 for more details.
-            LOG.warn("the user " + userId + " does not have any email configured.");
-        }
-
-        options.setInstanceId(reportId + " " + userId);
-
+        });
         return options;
     }
 
@@ -129,21 +124,27 @@ public class DefaultReportWrapperService implements ReportWrapperService {
 
     /** {@inheritDoc} */
     @Override
-    public ReportParameters getParameters(String reportId) {
+    public ReportParameters getParameters(final String reportId) {
         try {
-            return getReportService(reportId).getParameters(reportId);
-        } catch (ReportException e) {
-            LOG.error("Report Exception when retrieving report parameters",
-                      e);
+            return Logging.withPrefix(LOG4J_CATEGORY, new Callable<ReportParameters>() {
+                @Override public ReportParameters call() throws Exception {
+                    try {
+                        return getReportService(reportId).getParameters(reportId);
+                    } catch (final ReportException e) {
+                        LOG.error("Report Exception when retrieving report parameters", e);
+                    }
+                    return null;
+                }
+            });
+        } catch (final Exception e) {
+            return null;
         }
-        return null;
     }
-    
+
     /** {@inheritDoc} */
     @Override
-    public Boolean hasParameters(String reportId) {
-       
-        Map<String, Object> reportParms = getParameters(reportId).getReportParms();
+    public Boolean hasParameters(final String reportId) {
+        final Map<String, Object> reportParms = getParameters(reportId).getReportParms();
         if ((reportParms == null)||(reportParms.isEmpty())) {
             return false;
         } else {
@@ -153,75 +154,70 @@ public class DefaultReportWrapperService implements ReportWrapperService {
 
     /** {@inheritDoc} */
     @Override
-    public void render(String reportId, String location, ReportFormat format,
-            OutputStream outputStream) {
-        try {
-            getReportService(reportId).render(reportId, location, format,
-                                              outputStream);
-        } catch (ReportException e) {
-            LOG.error("failed to render report", e);
-        }
-
+    public void render(final String reportId, final String location, final ReportFormat format, final OutputStream outputStream) {
+        Logging.withPrefix(LOG4J_CATEGORY, new Runnable() {
+            @Override public void run() {
+                try {
+                    getReportService(reportId).render(reportId, location, format, outputStream);
+                } catch (final ReportException e) {
+                    LOG.error("failed to render report", e);
+                }
+            }
+        });
     }
-    
+
     /** {@inheritDoc} */
     @Override
-    public void run(ReportParameters parameters,
-            ReportMode mode,
-            DeliveryOptions deliveryOptions,
-            String reportId) {
-        
-        if (!deliveryOptions.getPersist()) {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            BufferedOutputStream bout = new BufferedOutputStream(out);
-            try {
-                getReportService(reportId).runAndRender(
-                                                        parameters.getReportParms(mode),
-                                                        reportId,
-                                                        deliveryOptions.getFormat(),
-                                                        bout);
-            } catch (ReportException reportException) {
-                LOG.error("failed to run or render report: " + reportId, reportException);
-            }
-            mailReport(deliveryOptions, out);
-        } else {
-            String outputPath;
-            try {
-                outputPath = getReportService(reportId).run(
-                                                                   parameters.getReportParms(mode),
-                                                                   reportId);
-                ReportCatalogEntry catalogEntry = new ReportCatalogEntry();
-                catalogEntry.setReportId(reportId);
-                catalogEntry.setTitle(deliveryOptions.getInstanceId());
-                catalogEntry.setLocation(outputPath);
-                catalogEntry.setDate(new Date());
-                m_reportStoreService.save(catalogEntry);
-                if (deliveryOptions.getMailTo().length() != 0) {
-                    ByteArrayOutputStream out = new ByteArrayOutputStream();
-                    BufferedOutputStream bout = new BufferedOutputStream(out);
-                    getReportService(reportId).render(
-                                                      reportId,
-                                                      outputPath,
-                                                      deliveryOptions.getFormat(),
-                                                      bout);
-                    mailReport(deliveryOptions, out);
-                }
-            } catch (ReportException reportException) {
-                LOG.error("failed to run or render report: " + reportId, reportException);
-            }
-        }
+    public void run(final ReportParameters parameters, final ReportMode mode, final DeliveryOptions deliveryOptions, final String reportId) {
+        Logging.withPrefix(LOG4J_CATEGORY, new Runnable() {
+            @Override public void run() {
+                ByteArrayOutputStream out = null;
+                BufferedOutputStream bout = null;
 
+                try {
+                    out = new ByteArrayOutputStream();
+                    bout = new BufferedOutputStream(out);
+                    if (!deliveryOptions.getPersist()) {
+                        try {
+                            getReportService(reportId).runAndRender(parameters.getReportParms(mode), reportId, deliveryOptions.getFormat(), bout);
+                        } catch (final ReportException reportException) {
+                            LOG.error("failed to run or render report: {}", reportId, reportException);
+                        }
+                        mailReport(deliveryOptions, out);
+                    } else {
+                        final String outputPath = getReportService(reportId).run(parameters.getReportParms(mode), reportId);
+                        final ReportCatalogEntry catalogEntry = new ReportCatalogEntry();
+                        catalogEntry.setReportId(reportId);
+                        catalogEntry.setTitle(deliveryOptions.getInstanceId());
+                        catalogEntry.setLocation(outputPath);
+                        catalogEntry.setDate(new Date());
+                        m_reportStoreService.save(catalogEntry);
+                        if (deliveryOptions.getMailTo().length() != 0) {
+                            getReportService(reportId).render(reportId, outputPath, deliveryOptions.getFormat(), bout);
+                            mailReport(deliveryOptions, out);
+                        }
+                    }
+                } catch (final Exception e) {
+                    LOG.error("failed to run or render report: {}", reportId, e);
+                } finally {
+                    IOUtils.closeQuietly(bout);
+                    IOUtils.closeQuietly(out);
+                }
+            }
+        });
     }
 
-    private void mailReport(DeliveryOptions deliveryOptions,
-            ByteArrayOutputStream outputStream) {
+    private void mailReport(final DeliveryOptions deliveryOptions, final ByteArrayOutputStream outputStream) {
+        ByteArrayInputStream inputStream = null;
         try {
-            JavaMailer jm = new JavaMailer();
+            inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+
+            final JavaMailer jm = new JavaMailer();
             jm.setTo(deliveryOptions.getMailTo());
             jm.setSubject(deliveryOptions.getInstanceId());
             jm.setMessageText("Here is your report from the OpenNMS report service.");
-            jm.setInputStream(new ByteArrayInputStream(
-                                                       outputStream.toByteArray()));
+            jm.setInputStream(inputStream);
+
             switch (deliveryOptions.getFormat()) {
 
             case HTML:
@@ -236,77 +232,74 @@ public class DefaultReportWrapperService implements ReportWrapperService {
                 jm.setInputStreamName(deliveryOptions.getInstanceId()+ ".pdf");
                 jm.setInputStreamContentType("application/pdf");
                 break;
+            case CSV:
+                jm.setInputStreamName(deliveryOptions.getInstanceId()+ ".csv");
+                jm.setInputStreamContentType("text/csv");
+                break;
             default:
                 jm.setInputStreamName(deliveryOptions.getInstanceId() + ".htm");
                 jm.setInputStreamContentType("text/html");
 
             }
             jm.mailSend();
-        } catch (JavaMailerException e) {
+        } catch (final JavaMailerException e) {
             LOG.error("Caught JavaMailer exception sending report", e);
+        } finally {
+            IOUtils.closeQuietly(inputStream);
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean validate(ReportParameters parameters, String reportId) {
-        return getReportService(reportId).validate(
-                                                   parameters.getReportParms(),
-                                                   reportId);
+    public boolean validate(final ReportParameters parameters, final String reportId) {
+        return getReportService(reportId).validate(parameters.getReportParms(), reportId);
     }
 
-    private ReportService getReportService(String reportId) {
+    private ReportService getReportService(final String reportId) {
         return m_reportServiceLocator.getReportServiceForId(reportId);
     }
 
     /**
-     * <p>setReportServiceLocator</p>
-     *
-     * @param reportServiceLocator a {@link org.opennms.reporting.core.svclayer.ReportServiceLocator} object.
-     */
-    public void setReportServiceLocator(
-            ReportServiceLocator reportServiceLocator) {
+* <p>setReportServiceLocator</p>
+*
+* @param reportServiceLocator a {@link org.opennms.reporting.core.svclayer.ReportServiceLocator} object.
+*/
+    public void setReportServiceLocator(final ReportServiceLocator reportServiceLocator) {
         m_reportServiceLocator = reportServiceLocator;
     }
 
     /**
-     * <p>setReportStoreService</p>
-     *
-     * @param reportStoreService a {@link org.opennms.reporting.core.svclayer.ReportStoreService} object.
-     */
-    public void setReportStoreService(ReportStoreService reportStoreService) {
+* <p>setReportStoreService</p>
+*
+* @param reportStoreService a {@link org.opennms.reporting.core.svclayer.ReportStoreService} object.
+*/
+    public void setReportStoreService(final ReportStoreService reportStoreService) {
         m_reportStoreService = reportStoreService;
     }
 
     /** {@inheritDoc} */
-   
+
     @Override
-    public void runAndRender(ReportParameters parameters, ReportMode mode,
-            OutputStream outputStream) {
+    public void runAndRender(final ReportParameters parameters, final ReportMode mode, final OutputStream outputStream) {
+        Logging.withPrefix(LOG4J_CATEGORY, new Runnable() {
+            @Override public void run() {
+                if (LOG.isDebugEnabled()) {
+                    // TODO remove this debug code
+                    final Map<String, Object> reportParms = parameters.getReportParms(mode);
+                    for (final String key : reportParms.keySet()) {
+                        final Object value = reportParms.get(key);
+                        LOG.debug("param {} set {}", key, value == null? "NULL" : value);
+                    }
+                }
 
-        // TODO remove this debug code
-        Map<String, Object> reportParms = parameters.getReportParms(mode);
-        for (String key : reportParms.keySet()) {
-            String value;
-            if (reportParms.get(key) == null) {
-                value = "NULL";
-            } else {
-                value = reportParms.get(key).toString();
+                try {
+                    getReportService(parameters.getReportId()).runAndRender(parameters.getReportParms(mode), parameters.getReportId(), parameters.getFormat(), outputStream);
+                } catch (final ReportException e) {
+                    LOG.error("failed to run or render report: ", parameters.getReportId(), e);
+                }
+
             }
-            LOG.debug("param " + key + " set " + value);
-        }
-
-        try {
-            getReportService(parameters.getReportId()).runAndRender(
-                                                                    parameters.getReportParms(mode),
-                                                                    parameters.getReportId(),
-                                                                    parameters.getFormat(),
-                                                                    outputStream);
-        } catch (ReportException reportException) {
-            LOG.error("failed to run or render report: "
-                    + parameters.getReportId(), reportException);
-        }
-
+        });
     }
 
     /** {@inheritDoc} */
@@ -315,7 +308,7 @@ public class DefaultReportWrapperService implements ReportWrapperService {
     	try {
     		getReportService(reportId).runAndRender(alarmIds,eventIdsForAlarms,reportId,reportFormat, fileName, folderName);
 		} catch (ReportException reportException) {
-			LOG.error("failed to run or render report: " + reportId, reportException);
+			LOG.error("failed to run or render report: {}", reportId, reportException);
 		}
     }
     @Override
@@ -325,9 +318,8 @@ public class DefaultReportWrapperService implements ReportWrapperService {
     	try {
     		getReportService(reportId).runAndRender(eventIds,reportId,reportFormat,fileName,dirName);
 		} catch (ReportException reportException) {
-			LOG.error("failed to run or render report: " + reportId, reportException);
+			LOG.error("failed to run or render report: {}", reportId, reportException);
 		}
     
 	}
 }
-

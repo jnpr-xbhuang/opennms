@@ -1,46 +1,47 @@
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2009-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2009-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 package org.opennms.web.controller.alarm;
 
-import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 
+import org.opennms.core.utils.WebSecurityUtils;
 import org.opennms.netmgt.dao.api.AlarmRepository;
+import org.opennms.netmgt.model.OnmsAlarm;
+import org.opennms.web.alarm.AcknowledgeType;
+import org.opennms.web.alarm.AlarmUtil;
+import org.opennms.web.alarm.filter.AlarmCriteria;
 import org.opennms.web.event.WebEventRepository;
-import org.opennms.web.rest.AlarmBean;
-import org.opennms.web.rest.AlarmRestResource;
-import org.opennms.web.rest.Task;
+import org.opennms.web.filter.Filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -52,13 +53,20 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import java.io.ByteArrayOutputStream;
+import javax.ws.rs.core.MediaType;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import org.opennms.web.rest.AlarmBean;
+import org.opennms.web.rest.AlarmRestResource;
+import org.opennms.web.rest.Task;
 
 /**
- * This servlet receives an HTTP POST with a list of alarms and purge or purge all action 
- * for the alarms, and then it redirects the client to a URL for display.
- * The target URL is configurable in the servlet config (web.xml file).
- *
- */
+* This servlet receives an HTTP POST with a list of alarms and purge or purge all action
+* for the selected alarms, and then it redirects the client to a URL for display.
+* The target URL is configurable in the servlet config (web.xml file).
+*
+*/
 
 public class AlarmPurgeController extends AbstractController implements InitializingBean {
     
@@ -72,57 +80,57 @@ public class AlarmPurgeController extends AbstractController implements Initiali
     public static int PURGE_LIMIT = 100000;
     
     /**
-	 * OpenNMS alarm repository
-	 */
+         * OpenNMS alarm repository
+         */
     private AlarmRepository m_webAlarmRepository;
     
     /**
-     * OpenNMS event repository
-     */
+* OpenNMS event repository
+*/
     private WebEventRepository m_webEventRepository;
     
     /** To hold default redirectView page */
     private String m_redirectView;
     
     /**
-     * Logging
-     */
+* Logging
+*/
     private Logger logger = LoggerFactory.getLogger("OpenNMS.WEB." + AlarmPurgeController.class.getName());
 
     /**
-     * <p>setRedirectView</p>
-     *
-     * @param redirectView a {@link java.lang.String} object.
-     */
+* <p>setRedirectView</p>
+*
+* @param redirectView a {@link java.lang.String} object.
+*/
     public void setRedirectView(String redirectView) {
         m_redirectView = redirectView;
     }
     
     /**
-     * <p>setWebAlarmRepository</p>
-     *
-     * @param webAlarmRepository a {@link org.opennms.netmgt.dao.AlarmRepository} object.
-     */
+* <p>setWebAlarmRepository</p>
+*
+* @param webAlarmRepository a {@link org.opennms.netmgt.dao.AlarmRepository} object.
+*/
     public void setAlarmRepository(AlarmRepository webAlarmRepository) {
         m_webAlarmRepository = webAlarmRepository;
         AlarmRestResource.setAlarmRepository(webAlarmRepository);
     }
 
     /**
-     * <p>setWebEventRepository</p>
-     *
-     * @param webEventRepository a {@link org.opennms.web.event.WebEventRepository} object.
-     */
+* <p>setWebEventRepository</p>
+*
+* @param webEventRepository a {@link org.opennms.web.event.WebEventRepository} object.
+*/
     public void setWebEventRepository(WebEventRepository webEventRepository) {
         m_webEventRepository = webEventRepository;
         AlarmRestResource.setWebEventRepository(webEventRepository);
     }
     
     /**
-     * <p>afterPropertiesSet</p>
-     *
-     * @throws java.lang.Exception if any.
-     */
+* <p>afterPropertiesSet</p>
+*
+* @throws java.lang.Exception if any.
+*/
     @Override
     public void afterPropertiesSet() throws Exception {
         Assert.notNull(m_webAlarmRepository, "webAlarmRepository must be set");
@@ -131,19 +139,21 @@ public class AlarmPurgeController extends AbstractController implements Initiali
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * Purge or purge all action for the selected alarms specified in the POST and then redirect 
-     * the client to an appropriate URL for display.
-     */
+* {@inheritDoc}
+*
+* Purge or purge all action of the selected alarms specified in the POST and then redirect
+* the client to an appropriate URL for display.
+*/
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         
+            logger.info("Enter into the AlarmPurgeController action");
+            
     	// Handle the alarm bean class
         AlarmBean alarmBean = new AlarmBean();
     	
-        // Handle the alarm strings parameter
-    	String[] alarmIdStrings = request.getParameterValues("alarm");
-    	alarmBean.setAlarmids(alarmIdStrings);
+            // Handle the alarm and actionCode parameter
+            String[] alarmIdStrings = request.getParameterValues("alarm");
+    	    alarmBean.setAlarmids(alarmIdStrings);
     	
     	// Handle the actionCode parameter
         String action = request.getParameter("actionCode");
@@ -225,3 +235,4 @@ public class AlarmPurgeController extends AbstractController implements Initiali
         return new ModelAndView(view);
     }
 }
+

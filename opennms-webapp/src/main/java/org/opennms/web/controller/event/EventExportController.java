@@ -1,33 +1,61 @@
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2009-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2009-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 package org.opennms.web.controller.event;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.opennms.api.reporting.ReportFormat;
+import org.opennms.core.utils.WebSecurityUtils;
+import org.opennms.reporting.core.svclayer.ReportWrapperService;
+import org.opennms.web.event.Event;
+import org.opennms.web.event.EventUtil;
+import org.opennms.web.event.WebEventRepository;
+import org.opennms.web.event.filter.EventCriteria;
+import org.opennms.web.filter.Filter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.AbstractController;
+
+import org.springframework.web.servlet.view.RedirectView;
+import org.apache.commons.io.FileUtils;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,98 +63,66 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-
-import org.apache.commons.io.FileUtils;
-import org.opennms.reporting.core.svclayer.ReportWrapperService;
-import org.opennms.web.event.WebEventRepository;
 import org.opennms.web.rest.EventBean;
 import org.opennms.web.rest.EventRestResource;
 import org.opennms.web.rest.Task;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.util.Assert;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
-import org.springframework.web.servlet.view.RedirectView;
-
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-
 /**
- * This servlet receives an HTTP POST with a list of events and export or export
- * all action for the selected events. and then it displays the event reports on
- * current URL page
- * 
- */
+* This servlet receives an HTTP POST with a list of events and export or export all action
+* for the selected events. and then it displays the event reports on current URL page
+*
+*/
 
-public class EventExportController extends AbstractController implements
-		InitializingBean {
+public class EventExportController extends AbstractController implements InitializingBean {
+    
+    /** Constant <code>EXPORT_ACTION="1"</code> */
+    public final static String EXPORT_ACTION = "1";
+    
+    /** Constant <code>EXPORTALL_ACTION="2"</code> */
+    public final static String EXPORTALL_ACTION = "2";
 
-	/** Constant <code>EXPORT_ACTION="1"</code> */
-	public final static String EXPORT_ACTION = "1";
-
-	/** Constant <code>EXPORTALL_ACTION="2"</code> */
-	public final static String EXPORTALL_ACTION = "2";
-
-	/**
-	 * OpenNMS event repository
-	 */
-	private WebEventRepository m_webEventRepository;
-
-	/**
-	 * OpenNMS report wrapper service
-	 */
-	private ReportWrapperService m_reportWrapperService;
-
-	/**
-	 * Logging
-	 */
-	private Logger logger = LoggerFactory.getLogger("OpenNMS.WEB."
-			+ EventExportController.class.getName());
+    /**    
+* OpenNMS event repository
+*/
+    private WebEventRepository m_webEventRepository;
+    
+    /**
+* OpenNMS report wrapper service
+*/
+    private ReportWrapperService m_reportWrapperService;
+    
+    /**
+* Logging
+*/
+    private Logger logger = LoggerFactory.getLogger("OpenNMS.WEB." + EventExportController.class.getName());
 
 	/** To hold report file name <code>FILE_NAME="EMPTY"</code> */
 	public static String FILE_NAME = "EMPTY";
 
-	/**
-	 * <p>
-	 * setWebEventRepository
-	 * </p>
-	 * 
-	 * @param webEventRepository
-	 *            a {@link org.opennms.web.event.WebEventRepository} object.
-	 */
-	public void setWebEventRepository(WebEventRepository webEventRepository) {
-		m_webEventRepository = webEventRepository;
-		EventRestResource.setWebEventRepository(m_webEventRepository);
-	}
+    /**
+* <p>setWebEventRepository</p>
+*
+* @param webEventRepository a {@link org.opennms.web.event.WebEventRepository} object.
+*/
+    public void setWebEventRepository(WebEventRepository webEventRepository) {
+        m_webEventRepository = webEventRepository;
+    }
 
 	/** To hold default redirectView page */
 	private String m_redirectView;
-
-	/**
-	 * <p>
-	 * setReportWrapperService
-	 * </p>
-	 * 
-	 * @param reportWrapperService
-	 *            a
-	 *            {@link org.opennms.reporting.core.svclayer.ReportWrapperService}
-	 *            object.
-	 */
-	public void setReportWrapperService(
-			ReportWrapperService reportWrapperService) {
-		m_reportWrapperService = reportWrapperService;
+    
+    /**
+* <p>setReportWrapperService</p>
+*
+* @param reportWrapperService a {@link org.opennms.reporting.core.svclayer.ReportWrapperService} object.
+*/
+    public void setReportWrapperService(ReportWrapperService reportWrapperService) {
+        m_reportWrapperService = reportWrapperService;
 		EventRestResource.setReportWrapperService(m_reportWrapperService);
-	}
-
+    }
+    
 	/**
 	 * <p>
 	 * setRedirectView
@@ -139,34 +135,29 @@ public class EventExportController extends AbstractController implements
 		m_redirectView = redirectView;
 	}
 
-	/**
-	 * <p>
-	 * afterPropertiesSet
-	 * </p>
-	 * 
-	 * @throws java.lang.Exception
-	 *             if any.
-	 */
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		Assert.notNull(m_webEventRepository, "webEventRepository must be set");
-		Assert.notNull(m_reportWrapperService,
-				"reportWrapperService must be set");
-		Assert.notNull(m_redirectView, "redirectView must be set");
-	}
+    /**
+* <p>afterPropertiesSet</p>
+*
+* @throws java.lang.Exception if any.
+*/
+    @Override
+    public void afterPropertiesSet() throws Exception {
+       Assert.notNull(m_webEventRepository, "webEventRepository must be set");
+       Assert.notNull(m_reportWrapperService, "reportWrapperService must be set");
+       Assert.notNull(m_redirectView, "redirectView must be set");
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * Export or export all action of the selected events specified in the POST
-	 * and then display the client to an appropriate URL.
-	 */
-	protected ModelAndView handleRequestInternal(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		logger.info("Enter into the EventExportController action");
-
-		// Handle the event and actionCode parameter
+    /**
+* {@inheritDoc}
+*
+* Export or export all action of the selected events specified in the POST and
+* then display the client to an appropriate URL.
+*/
+    protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        
+            logger.info("Enter into the EventExportController action");
+            
+            // Handle the event and actionCode parameter
 		EventBean eventBean = new EventBean();
 		String[] eventIdStrings = request.getParameterValues("event");
 		eventBean.setEventids(eventIdStrings);
@@ -327,3 +318,4 @@ public class EventExportController extends AbstractController implements
 
 	}
 }
+

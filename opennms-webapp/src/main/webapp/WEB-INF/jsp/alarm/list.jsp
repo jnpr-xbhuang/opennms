@@ -1,31 +1,31 @@
 <%--
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2008-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2008-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 --%>
 
@@ -62,11 +62,11 @@
 
 <%--
   This page is written to be the display (view) portion of the AlarmQueryServlet
-  at the /alarm/list.htm URL.  It will not work by itself, as it requires two request
+  at the /alarm/list.htm URL. It will not work by itself, as it requires two request
   attributes be set:
   
   1) alarms: the list of {@link OnmsAlarm} instances to display
-  2) parms: an org.opennms.web.alarm.AlarmQueryParms object that holds all the 
+  2) parms: an org.opennms.web.alarm.AlarmQueryParms object that holds all the
      parameters used to make this query
 --%>
 
@@ -132,154 +132,153 @@
 
 <script type="text/javascript" src="<c:url value="/js/jquery/jquery.js"/>"></script>
 <script type="text/javascript">
-	function checkAllCheckboxes() {
-	       if( document.alarm_action_form.alarm.length ) {  
-			 for( i = 0; i < document.alarm_action_form.alarm.length; i++ ) {
-				document.alarm_action_form.alarm[i].checked = true
-			 }
-	       }
-	       else {
-			document.alarm_action_form.alarm.checked = true
-	       }
-	}
-	
-	function submitForm(anAction)
-	{
-		var isChecked = false
-		var numChecked = 0;
-		var isAlarmAvailabilty = false;
-		var isPurgeExport = true;
-			
-		// Decide to which servlet we will submit
-		if (anAction == "clear" || anAction == "escalate") {
-			document.alarm_action_form.action = "alarm/changeSeverity";
-		} else if (anAction == "acknowledge" || anAction == "unacknowledge") {
-			document.alarm_action_form.action = "alarm/acknowledge";
-		} else if(anAction == "purge" || anAction == "purgeall"){
-			document.alarm_action_form.action = "alarm/alarmPurge";
-		} else if(anAction == "export" || anAction == "exportall") {
-			document.alarm_action_form.action = "alarm/alarmExport";
-		}
-		
-		// Decide what our action should be
-		if (anAction == "escalate") {
-			document.alarm_action_form.actionCode.value = "<%=AlarmSeverityChangeController.ESCALATE_ACTION%>";
-		} else if (anAction == "clear") {
-			document.alarm_action_form.actionCode.value = "<%=AlarmSeverityChangeController.CLEAR_ACTION%>";
-		} else if (anAction == "acknowledge") {
-			document.alarm_action_form.actionCode.value = "<%= AcknowledgeType.ACKNOWLEDGED.getShortName() %>";
-		} else if (anAction == "unacknowledge") {
-			document.alarm_action_form.actionCode.value = "<%= AcknowledgeType.UNACKNOWLEDGED.getShortName() %>";
-		} else if (anAction == "purge") {
-			document.alarm_action_form.actionCode.value = "<%=AlarmPurgeController.PURGE_ACTION%>";
-		} else if (anAction == "purgeall") {
-			document.alarm_action_form.actionCode.value = "<%=AlarmPurgeController.PURGEALL_ACTION%>";
-		}else if (anAction == "export") {
-			document.alarm_action_form.actionCode.value = "<%=AlarmReportController.EXPORT_ACTION%>";
-		} else if (anAction == "exportall") {
-			document.alarm_action_form.actionCode.value = "<%=AlarmReportController.EXPORTALL_ACTION%>";
-		}
-		  
-		//Check the alarm availability
-		for( i = 0; i < document.alarm_action_form.elements.length; i++ ) {
-			if(document.alarm_action_form.elements[i].name == "alarm"){
-				isAlarmAvailabilty = true;
-			}
-		}
-		
-		//Get the alarm count
-		var alarmCount = <%=alarmCount%> ;
-		if( (anAction == "purge" || anAction == "export" ) && isAlarmAvailabilty){
-			alarmCount = 0;
-			if (document.alarm_action_form.alarm.length)
-			{	
-				for( i = 0; i < document.alarm_action_form.alarm.length; i++ ) 
-				{
-					if (document.alarm_action_form.alarm[i].checked)
-					{
-						alarmCount+=1;
-					}
-				}
-			}else{
-				if (document.alarm_action_form.alarm.checked)
-				{
-					alarmCount+=1;
-				}
-			}
-		}
-		
-		//Get the confirmation status for purge action
-		var regularNoun = (parseInt(alarmCount) == 1)?'alarm':'alarms';
-		var confirmText = "";
-                  confirmText = (anAction=="purge" || anAction=="export" )? confirmText+ 'Are you sure you want to '+anAction+' selected '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')' : confirmText+'Are you sure you want to '+anAction+' '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')';
-		if((anAction == "purge" || anAction == "purgeall") && parseInt(alarmCount)>0) {
-			if(confirm(confirmText)){
-				isPurgeExport = true;
-			}else{
-				isPurgeExport = false;
-			}
-		}
-		
-		//Get the confirmation status for export action
-		if((anAction == "export" || anAction == "exportall") && parseInt(alarmCount)>0) {
-			isPurgeExport = false;
-			showPopup(confirmText);
-		}
-		
-		if(isPurgeExport)
-		if(isAlarmAvailabilty){
-			if(anAction != "purgeall"){
-				if (document.alarm_action_form.alarm.length)
-				{
-					for( i = 0; i < document.alarm_action_form.alarm.length; i++ ) 
-					{
-						//make sure something is checked before proceeding
-						if (document.alarm_action_form.alarm[i].checked)
-						{
-							isChecked=true;
-							numChecked+=1;
-						}
-					}
-				    
-				    if (isChecked && document.alarm_action_form.multiple)
-				    {
-					if (numChecked == parseInt(document.alarm_action_form.alarm.length)) 
-					{ 
-						var newPageNum = parseInt(document.alarm_action_form.multiple.value) - 1;
-						var findVal = "multiple=" + document.alarm_action_form.multiple.value;
-						var replaceWith = "multiple=" + newPageNum;
-						var tmpRedirect = document.alarm_action_form.redirectParms.value;
-						document.alarm_action_form.redirectParms.value = tmpRedirect.replace(findVal, replaceWith);
-						document.alarm_action_form.submit();
-					} else {
-						document.alarm_action_form.submit();
-					}
-					}
-				    else if (isChecked)
-				    {
-					document.alarm_action_form.submit();
-				    }
-				    else
-				    {
-					alert("Please check the alarms that you would like to " + anAction + ".");
-				    }
-				}else{
-				    if (document.alarm_action_form.alarm.checked)
-				    {
-					document.alarm_action_form.submit();
-				    }
-				    else
-				    {
-					alert("Please check the alarms that you would like to " + anAction + ".");
-				    }
-				}
-			}else{
-				document.alarm_action_form.submit();
-			}
-		}else{
-			alert("There is currently no alarms for this category to " + anAction + ".");
-		}
-	}
+        function checkAllCheckboxes() {
+         if( document.alarm_action_form.alarm.length ) {
+                         for( i = 0; i < document.alarm_action_form.alarm.length; i++ ) {
+                                document.alarm_action_form.alarm[i].checked = true
+                         }
+         }
+         else {
+                        document.alarm_action_form.alarm.checked = true
+         }
+        }
+        
+        function submitForm(anAction)
+        {
+                var isChecked = false
+                var numChecked = 0;
+                var isAlarmAvailabilty = false;
+                var isPurgeExport = true;
+                        
+                // Decide to which servlet we will submit
+                if (anAction == "clear" || anAction == "escalate") {
+                        document.alarm_action_form.action = "alarm/changeSeverity";
+                } else if (anAction == "acknowledge" || anAction == "unacknowledge") {
+                        document.alarm_action_form.action = "alarm/acknowledge";
+                } else if(anAction == "purge" || anAction == "purgeall"){
+                        document.alarm_action_form.action = "alarm/alarmPurge";
+                } else if(anAction == "export" || anAction == "exportall") {
+                        document.alarm_action_form.action = "alarm/alarmExport";
+                }
+                
+                // Decide what our action should be
+                if (anAction == "escalate") {
+                        document.alarm_action_form.actionCode.value = "<%=AlarmSeverityChangeController.ESCALATE_ACTION%>";
+                } else if (anAction == "clear") {
+                        document.alarm_action_form.actionCode.value = "<%=AlarmSeverityChangeController.CLEAR_ACTION%>";
+                } else if (anAction == "acknowledge") {
+                        document.alarm_action_form.actionCode.value = "<%= AcknowledgeType.ACKNOWLEDGED.getShortName() %>";
+                } else if (anAction == "unacknowledge") {
+                        document.alarm_action_form.actionCode.value = "<%= AcknowledgeType.UNACKNOWLEDGED.getShortName() %>";
+                } else if (anAction == "purge") {
+                        document.alarm_action_form.actionCode.value = "<%=AlarmPurgeController.PURGE_ACTION%>";
+                } else if (anAction == "purgeall") {
+                        document.alarm_action_form.actionCode.value = "<%=AlarmPurgeController.PURGEALL_ACTION%>";
+                }else if (anAction == "export") {
+                        document.alarm_action_form.actionCode.value = "<%=AlarmReportController.EXPORT_ACTION%>";
+                } else if (anAction == "exportall") {
+                        document.alarm_action_form.actionCode.value = "<%=AlarmReportController.EXPORTALL_ACTION%>";
+                }
+                
+                //Check the alarm availability
+                for( i = 0; i < document.alarm_action_form.elements.length; i++ ) {
+                        if(document.alarm_action_form.elements[i].name == "alarm"){
+                                isAlarmAvailabilty = true;
+                        }
+                }
+                
+                //Get the alarm count
+                var alarmCount = <%=alarmCount%> ;
+                if( (anAction == "purge" || anAction == "export" ) && isAlarmAvailabilty){
+                        alarmCount = 0;
+                        if (document.alarm_action_form.alarm.length)
+                        {        
+                                for( i = 0; i < document.alarm_action_form.alarm.length; i++ )
+                                {
+                                        if (document.alarm_action_form.alarm[i].checked)
+                                        {
+                                                alarmCount+=1;
+                                        }
+                                }
+                        }else{
+                                if (document.alarm_action_form.alarm.checked)
+                                {
+                                        alarmCount+=1;
+                                }
+                        }
+                }
+                
+                //Get the confirmation status for purge action
+                var regularNoun = (parseInt(alarmCount) == 1)?'alarm':'alarms';
+                var confirmText = (anAction=="purge" || anAction=="export" )? confirmText+ 'Are you sure you want to '+anAction+' selected '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')' : confirmText+'Are you sure you want to '+anAction+' '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')';
+                if((anAction == "purge" || anAction == "purgeall") && parseInt(alarmCount)>0) {
+                        if(confirm(confirmText)){
+                                isPurgeExport = true;
+                        }else{
+                                isPurgeExport = false;
+                        }
+                }
+                
+                //Get the confirmation status for export action
+                if((anAction == "export" || anAction == "exportall") && parseInt(alarmCount)>0) {
+                        isPurgeExport = false;
+                        showPopup(confirmText);
+                }
+                
+                if(isPurgeExport)
+                if(isAlarmAvailabilty){
+                        if(anAction != "purgeall"){
+                                if (document.alarm_action_form.alarm.length)
+                                {
+                                        for( i = 0; i < document.alarm_action_form.alarm.length; i++ )
+                                        {
+                                                //make sure something is checked before proceeding
+                                                if (document.alarm_action_form.alarm[i].checked)
+                                                {
+                                                        isChecked=true;
+                                                        numChecked+=1;
+                                                }
+                                        }
+                                
+                                 if (isChecked && document.alarm_action_form.multiple)
+                                 {
+                                        if (numChecked == parseInt(document.alarm_action_form.alarm.length))
+                                        {
+                                                var newPageNum = parseInt(document.alarm_action_form.multiple.value) - 1;
+                                                var findVal = "multiple=" + document.alarm_action_form.multiple.value;
+                                                var replaceWith = "multiple=" + newPageNum;
+                                                var tmpRedirect = document.alarm_action_form.redirectParms.value;
+                                                document.alarm_action_form.redirectParms.value = tmpRedirect.replace(findVal, replaceWith);
+                                                document.alarm_action_form.submit();
+                                        } else {
+                                                document.alarm_action_form.submit();
+                                        }
+                                 }else if (isChecked)
+                                 {
+                                        document.alarm_action_form.submit();
+                                 }
+                                 else
+                                 {
+                                        alert("Please check the alarms that you would like to " + anAction + ".");
+                                 }
+                                }else{
+                                 if (document.alarm_action_form.alarm.checked)
+                                 {
+                                        document.alarm_action_form.submit();
+                                 }
+                                 else
+                                 {
+                                        alert("Please check the alarms that you would like to " + anAction + ".");
+                                 }
+                                }
+                        }else{
+                                document.alarm_action_form.submit();
+                        }
+                }else{
+                        alert("There is currently no alarms for this category to " + anAction + ".");
+                }
+        }
+    
 
     function changeFavorite(selectElement) {
         var selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -289,7 +288,7 @@
     }
 
          // Progress bar for purge and export action
-         progressBar(100, $('#progressBar'));
+         //progressBar(100, $('#progressBar'));
 
   </script>
 
@@ -354,7 +353,7 @@
                 <jsp:param name="limit" value="<%=parms.getLimit()%>" />
                 <jsp:param name="multiple" value="<%=parms.getMultiple()%>" />
               </jsp:include>
-            <% } %>        
+            <% } %>
 
         <!-- Popup message box for alarm export action -->
         <div id="exportConfirmation" style="display:none">
@@ -398,20 +397,20 @@
                 </p>
             <% } %>
             <onms:alert/>
-	
+
       <% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
           <form action="<%= Util.calculateUrlBase(request, "alarm/acknowledge") %>" method="post" name="alarm_action_form">
           <input type="hidden" name="redirectParms" value="<c:out value="<%=req.getQueryString()%>"/>" />
           <input type="hidden" name="actionCode" value="<%=action%>" />
-	  
-	  <!-- Hidden datas for alarm purge and export action-->
+        
+         <!-- Hidden datas for alarm purge and export action-->
 	  <input type="hidden" name="format" value="pdf" />
 	  <input type="hidden" name="reportId" value="local_alarm-report" />
 	  <div id="backgroundPopup"></div><body/>
 	  
           <%=Util.makeHiddenTags(req)%>
       <% } %>
-			<jsp:include page="/includes/key.jsp" flush="false" />
+                        <jsp:include page="/includes/key.jsp" flush="false" />
       <table>
                                 <thead>
                                         <tr>
@@ -618,8 +617,8 @@
       <% } /*end for*/%>
         
       </table>
-			<hr />
-			 <p><%=alarms.length%> alarms &nbsp;
+                        <hr />
+                         <p><%=alarms.length%> alarms &nbsp;
       <% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
           <input TYPE="reset" />
           <input TYPE="button" VALUE="Select All" onClick="checkAllCheckboxes()"/>
@@ -631,14 +630,14 @@
         <% } %>
           <option value="clear">Clear Alarms</option>
           <option value="escalate">Escalate Alarms</option>
-	  <optgroup label="Export Alarms">
-	        <option value="exportall">Export All</option>
-          	<option value="export">Export Selected</option>
-	   </optgroup>
-	  <optgroup label="Purge Alarms">
-	        <option value="purgeall">Purge All</option>
-          	<option value="purge">Purge Selected</option>
-	   </optgroup>
+         <optgroup label="Export Alarms">
+         <option value="exportall">Export All</option>
+        <option value="export">Export Selected</option>
+         </optgroup>
+         <optgroup label="Purge Alarms">
+         <option value="purgeall">Purge All</option>
+        <option value="purge">Purge Selected</option>
+         </optgroup>
           </select>
           <input type="button" value="Go" onClick="submitForm(document.alarm_action_form.alarmAction.value)" />
       <% } %>
@@ -702,7 +701,6 @@
       return( buffer.toString() );
     }
 
-    
     public String makeLink( FilterCallback callback, NormalizedQueryParameters params, OnmsFilterFavorite favorite) {
         return callback.createLink(urlBase, params, favorite);
     }
@@ -763,7 +761,7 @@
 <%!
     protected String getTextDesc( String desc ) {
          if ( desc != null && desc.indexOf("<table>") > 0 ) {
-             return desc.substring( 0, desc.indexOf("<table>")); 
+             return desc.substring( 0, desc.indexOf("<table>"));
          }
          return desc;
     }

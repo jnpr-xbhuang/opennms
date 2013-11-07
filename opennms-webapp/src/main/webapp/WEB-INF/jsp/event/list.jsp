@@ -1,35 +1,35 @@
 <%--
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2009-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2009-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 --%>
 
-<%@page language="java"	contentType="text/html"	session="true" %>
+<%@page language="java"        contentType="text/html"        session="true" %>
 
 <%@page import="org.opennms.netmgt.model.OnmsFilterFavorite"%>
 <%@page import="org.opennms.web.admin.notification.noticeWizard.NotificationWizardServlet"%>
@@ -57,18 +57,19 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="../../taglib.tld" prefix="onms" %>
+
 <%--
   This page is written to be the display (view) portion of the EventFilterController
-  at the /event/list.htm URL.  It will not work by itself, as it requires two request
+  at the /event/list.htm URL. It will not work by itself, as it requires two request
   attributes be set:
   
   1) events: the list of org.opennms.web.element.Event instances to display
-  2) parms: an org.opennms.web.event.EventQueryParms object that holds all the 
+  2) parms: an org.opennms.web.event.EventQueryParms object that holds all the
      parameters used to make this query
 --%>
 
 <%
-	XssRequestWrapper req = new XssRequestWrapper(request);
+        XssRequestWrapper req = new XssRequestWrapper(request);
 
     //required attributes
     Event[] events = (Event[])req.getAttribute( "events" );
@@ -127,8 +128,6 @@ purgeDataLimit = 100000;
 
 
 
-<%@page import="org.opennms.web.event.AcknowledgeType"%>
-<%@page import="org.opennms.web.event.SortStyle"%>
 <jsp:include page="/includes/header.jsp" flush="false" >
   <jsp:param name="title" value="Event List" />
   <jsp:param name="headTitle" value="List" />
@@ -139,7 +138,7 @@ purgeDataLimit = 100000;
 <script type="text/javascript" src="<c:url value="/js/jquery/jquery.js"/>"></script>
   <script type="text/javascript">
     function checkAllCheckboxes() {
-       if( document.acknowledge_form.event.length ) {  
+       if( document.acknowledge_form.event.length ) {
          for( i = 0; i < document.acknowledge_form.event.length; i++ ) {
            document.acknowledge_form.event[i].checked = true
          }
@@ -147,9 +146,9 @@ purgeDataLimit = 100000;
        else {
          document.acknowledge_form.event.checked = true
        }
-         
+
     }
-    
+
     function submitForm(anAction)
     {
         var isChecked = false
@@ -240,7 +239,7 @@ if (isPurgeExport)
  
         if (document.acknowledge_form.event.length)
         {
-            for( i = 0; i < document.acknowledge_form.event.length; i++ ) 
+            for( i = 0; i < document.acknowledge_form.event.length; i++ )
             {
               //make sure something is checked before proceeding
               if (document.acknowledge_form.event[i].checked)
@@ -249,19 +248,19 @@ if (isPurgeExport)
                 numChecked+=1;
               }
             }
-            
+
             if (isChecked && document.acknowledge_form.multiple)
             {
-              if (numChecked == parseInt(document.acknowledge_form.event.length)) 
-              { 
+              if (numChecked == parseInt(document.acknowledge_form.event.length))
+              {
                 var newPageNum = parseInt(document.acknowledge_form.multiple.value) - 1;
                 var findVal = "multiple=" + document.acknowledge_form.multiple.value;
                 var replaceWith = "multiple=" + newPageNum;
                 var tmpRedirect = document.acknowledge_form.redirectParms.value;
                 document.acknowledge_form.redirectParms.value = tmpRedirect.replace(findVal, replaceWith);
                 document.acknowledge_form.submit();
-              } 
-              else 
+              }
+              else
               {
                 document.acknowledge_form.submit();
               }
@@ -303,8 +302,8 @@ if (isPurgeExport)
     }
     
     function submitNewNotificationForm(uei) {
-    	document.getElementById("uei").value=uei;
-    	document.add_notification_form.submit();
+            document.getElementById("uei").value=uei;
+            document.add_notification_form.submit();
     }
 
     function changeFavorite(selectElement) {
@@ -344,12 +343,11 @@ if (isPurgeExport)
       </div>
       <!-- end menu -->
 
-	  <!-- hidden form for adding a new Notification -->
-	  <form action="admin/notification/noticeWizard/notificationWizard" method="post" name="add_notification_form">
-	  	<input type="hidden" name="sourcePage" value="<%=NotificationWizardServlet.SOURCE_PAGE_OTHER_WEBUI%>" />
-	  	<input type="hidden" name="uei" id="uei" value="" /> <!-- Set by java script -->
-	  </form>
-	  
+         <!-- hidden form for adding a new Notification -->
+         <form action="admin/notification/noticeWizard/notificationWizard" method="post" name="add_notification_form">
+                 <input type="hidden" name="sourcePage" value="<%=NotificationWizardServlet.SOURCE_PAGE_OTHER_WEBUI%>" />
+                 <input type="hidden" name="uei" id="uei" value="" /> <!-- Set by java script -->
+         </form>
 
       <jsp:include page="/includes/event-querypanel.jsp" flush="false" />
           
@@ -370,7 +368,7 @@ if (isPurgeExport)
                   <jsp:param name="multiple" value="<%=parms.getMultiple()%>" />
                 </jsp:include>
               <% } %>
-            <% } %>         
+            <% } %>
 
             <% if( parms.getFilters().size() > 0 || AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) || AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
                 <p>
@@ -439,28 +437,27 @@ if (isPurgeExport)
         <thead>
         <tr>
           <% if( "true".equals(acknowledgeEvent) ) { %>
-						<% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
+                                                <% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
                                                         <% if ( AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
-							<th width="2%">Ack</th>
-							<% } else { %>
-							<th width="2%">UnAck</th>
-							<% } %>
-						<% } else { %>
-							<th width="2%">&nbsp;</th>
-						<% } %>
+                                                        <th width="2%">Ack</th>
+                                                        <% } else { %>
+                                                        <th width="2%">UnAck</th>
+                                                        <% } %>
+                                                <% } else { %>
+                                                        <th width="2%">&nbsp;</th>
+                                                <% } %>
           <% } %>
-          <th width="4%"> Select</th>
           <th width="4%"> <%=this.makeSortLink(callback, parms, SortStyle.ID, SortStyle.REVERSE_ID, "id", "ID" , favorite)%></th>
           <th width="10%"><%=this.makeSortLink(callback, parms, SortStyle.SEVERITY, SortStyle.REVERSE_SEVERITY, "severity", "Severity" , favorite)%></th>
           <th width="19%"><%=this.makeSortLink(callback, parms, SortStyle.TIME, SortStyle.REVERSE_TIME, "time", "Time" , favorite)%></th>
           <th width="24%"><%=this.makeSortLink(callback, parms, SortStyle.NODE, SortStyle.REVERSE_NODE, "node", "Node" , favorite)%></th>
           <th width="16%"><%=this.makeSortLink(callback, parms, SortStyle.INTERFACE, SortStyle.REVERSE_INTERFACE, "interface", "Interface" , favorite)%></th>
           <th width="14%"><%=this.makeSortLink(callback, parms, SortStyle.SERVICE, SortStyle.REVERSE_SERVICE, "service", "Service" , favorite)%></th>
-      </tr>
-        </thead>     
+        </tr>
+        </thead>
       <% for( int i=0; i < events.length; i++ ) {
         Event event = events[i];
-      	pageContext.setAttribute("event", event);
+              pageContext.setAttribute("event", event);
       %>
       
         <tr valign="top" class="<%=events[i].getSeverity().getLabel()%>">
@@ -569,7 +566,7 @@ if (isPurgeExport)
                 </nobr>
               <% } %>
               <% if (req.isUserInRole(Authentication.ROLE_ADMIN)) { %>
-               	  <a href="javascript:void()" onclick="submitNewNotificationForm('<%=events[i].getUei()%>');" title="Edit notifications for this Event UEI">Edit notifications for event</a>
+                        <a href="javascript:void()" onclick="submitNewNotificationForm('<%=events[i].getUei()%>');" title="Edit notifications for this Event UEI">Edit notifications for event</a>
               <% } %>
             <% } else { %>
               &nbsp;
@@ -589,7 +586,7 @@ if (isPurgeExport)
       </table>
         
         <p><%=events.length%> events
-          <% 
+          <%
                 	if( (req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ))) {
                 %>
 		<input TYPE="reset" /> <input TYPE="button" VALUE="Select All"
@@ -641,8 +638,7 @@ if (isPurgeExport)
 <%--
     <jsp:include page="/includes/bookmark.jsp" flush="false" />
 --%>
-<jsp:include page="/includes/footer.jsp" flush="false" />
-
+    <jsp:include page="/includes/footer.jsp" flush="false" />
 
 <%!
     final String urlBase = "event/list";
@@ -725,7 +721,7 @@ if (isPurgeExport)
         String[] labels = null;
 
         if( nodeLabel.length() > 32 ) {
-            String shortLabel = nodeLabel.substring( 0, 31 ) + "...";                        
+            String shortLabel = nodeLabel.substring( 0, 31 ) + "...";
             labels = new String[] { shortLabel, nodeLabel };
         }
         else {
@@ -739,7 +735,7 @@ if (isPurgeExport)
 <%!
     protected String getTextDesc( String desc ) {
          if ( desc != null && desc.indexOf("<table>") > 0 ) {
-             return desc.substring( 0, desc.indexOf("<table>"));  
+             return desc.substring( 0, desc.indexOf("<table>"));
          }
          return desc;
     }
@@ -760,4 +756,4 @@ if (isPurgeExport)
 	    } 
     }
 </script>
-<% request.getSession().setAttribute("actionStatus", "null"); %>
+<% request.getSession().setAttribute("actionStatus", "null"); %> 

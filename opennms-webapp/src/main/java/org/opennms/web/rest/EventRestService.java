@@ -1,46 +1,39 @@
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2008-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2008-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 package org.opennms.web.rest;
 
-import java.io.File;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -50,28 +43,36 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
-import org.hibernate.ObjectNotFoundException;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.opennms.core.criteria.CriteriaBuilder;
-import org.opennms.core.utils.WebSecurityUtils;
 import org.opennms.netmgt.dao.api.EventDao;
-import org.opennms.netmgt.model.OnmsAlarm;
 import org.opennms.netmgt.model.OnmsEvent;
 import org.opennms.netmgt.model.OnmsEventCollection;
-import org.opennms.web.controller.event.EventExportController;
-import org.opennms.web.controller.event.EventPurgeController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.orm.hibernate3.HibernateObjectRetrievalFailureException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sun.jersey.spi.resource.PerRequest;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.ws.rs.POST;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.servlet.ServletContext;
+import org.opennms.web.controller.event.EventExportController;
+import org.opennms.web.controller.event.EventPurgeController;
+import org.opennms.core.utils.WebSecurityUtils;
+import org.springframework.orm.hibernate3.HibernateObjectRetrievalFailureException;
+import org.hibernate.ObjectNotFoundException;
+import org.opennms.netmgt.model.OnmsAlarm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,7 +82,7 @@ import org.slf4j.LoggerFactory;
 @Scope("prototype")
 @Path("events")
 public class EventRestService extends OnmsRestService {
-	  private static final Logger LOG = LoggerFactory.getLogger(EventRestService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(EventRestService.class);
     private static final DateTimeFormatter ISO8601_FORMATTER_MILLIS = ISODateTimeFormat.dateTime();
     private static final DateTimeFormatter ISO8601_FORMATTER = ISODateTimeFormat.dateTimeNoMillis();
 
@@ -100,34 +101,33 @@ public class EventRestService extends OnmsRestService {
 	@Context
 	ServletContext m_servletContext;
 
-	/**
-	 * <p>
-	 * getEvent
-	 * </p>
-	 * 
-	 * @param eventId
-	 *            a {@link java.lang.String} object.
-	 * @return a {@link org.opennms.netmgt.model.OnmsEvent} object.
-	 */
-	@GET
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-			MediaType.APPLICATION_ATOM_XML })
-	@Path("{eventId}")
-	@Transactional
-	public OnmsEvent getEvent(@PathParam("eventId") final String eventId) {
-		readLock();
-		try {
-			return m_eventDao.get(new Integer(eventId));
-		} finally {
-			readUnlock();
-		}
-	}
+    /**
+* <p>
+* getEvent
+* </p>
+*
+* @param eventId
+* a {@link java.lang.String} object.
+* @return a {@link org.opennms.netmgt.model.OnmsEvent} object.
+*/
+    @GET
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_ATOM_XML})
+    @Path("{eventId}")
+    @Transactional
+    public OnmsEvent getEvent(@PathParam("eventId") final String eventId) {
+        readLock();
+        try {
+            return m_eventDao.get(new Integer(eventId));
+        } finally {
+            readUnlock();
+        }
+    }
 
     /**
-     * returns a plaintext string being the number of events
-     * 
-     * @return a {@link java.lang.String} object.
-     */
+* returns a plaintext string being the number of events
+*
+* @return a {@link java.lang.String} object.
+*/
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("count")
@@ -142,13 +142,13 @@ public class EventRestService extends OnmsRestService {
     }
 
     /**
-     * Returns all the events which match the filter/query in the query
-     * parameters
-     * 
-     * @return Collection of OnmsEvents (ready to be XML-ified)
-     * @throws java.text.ParseException
-     *             if any.
-     */
+* Returns all the events which match the filter/query in the query
+* parameters
+*
+* @return Collection of OnmsEvents (ready to be XML-ified)
+* @throws java.text.ParseException
+* if any.
+*/
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_ATOM_XML})
     @Transactional
@@ -170,13 +170,13 @@ public class EventRestService extends OnmsRestService {
     }
 
     /**
-     * Returns all the events which match the filter/query in the query
-     * parameters
-     * 
-     * @return Collection of OnmsEvents (ready to be XML-ified)
-     * @throws java.text.ParseException
-     *             if any.
-     */
+* Returns all the events which match the filter/query in the query
+* parameters
+*
+* @return Collection of OnmsEvents (ready to be XML-ified)
+* @throws java.text.ParseException
+* if any.
+*/
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_ATOM_XML})
     @Path("between")
@@ -236,15 +236,15 @@ public class EventRestService extends OnmsRestService {
     }
 
     /**
-     * Updates the event with id "eventid" If the "ack" parameter is "true",
-     * then acks the events as the current logged in user, otherwise unacks
-     * the events
-     * 
-     * @param eventId
-     *            a {@link java.lang.String} object.
-     * @param ack
-     *            a {@link java.lang.Boolean} object.
-     */
+* Updates the event with id "eventid" If the "ack" parameter is "true",
+* then acks the events as the current logged in user, otherwise unacks
+* the events
+*
+* @param eventId
+* a {@link java.lang.String} object.
+* @param ack
+* a {@link java.lang.Boolean} object.
+*/
     @PUT
     @Path("{eventId}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -265,13 +265,13 @@ public class EventRestService extends OnmsRestService {
     }
 
     /**
-     * Updates all the events that match any filter/query supplied in the
-     * form. If the "ack" parameter is "true", then acks the events as the
-     * current logged in user, otherwise unacks the events
-     * 
-     * @param formProperties
-     *            Map of the parameters passed in by form encoding
-     */
+* Updates all the events that match any filter/query supplied in the
+* form. If the "ack" parameter is "true", then acks the events as the
+* current logged in user, otherwise unacks the events
+*
+* @param formProperties
+* Map of the parameters passed in by form encoding
+*/
     @PUT
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Transactional
@@ -298,17 +298,16 @@ public class EventRestService extends OnmsRestService {
         }
     }
 
-	private void processEventAck(final OnmsEvent event, final Boolean ack) {
-		if (ack) {
-			event.setEventAckTime(new Date());
-			event.setEventAckUser(m_securityContext.getUserPrincipal()
-					.getName());
-		} else {
-			event.setEventAckTime(null);
-			event.setEventAckUser(null);
-		}
-		m_eventDao.save(event);
-	}
+    private void processEventAck(final OnmsEvent event, final Boolean ack) {
+        if (ack) {
+            event.setEventAckTime(new Date());
+            event.setEventAckUser(m_securityContext.getUserPrincipal().getName());
+        } else {
+            event.setEventAckTime(null);
+            event.setEventAckUser(null);
+        }
+        m_eventDao.save(event);
+    }
 
 	/**
 	 * <p>
