@@ -140,7 +140,7 @@ public class FavoriteTag extends TagSupport {
             "       if (favoriteName != null && favoriteName.length < 30) {\n" +
             "           window.location.href = '{CREATE_FAVORITE_URL}' + favoriteName;\n" +
             "       } else {\n" +
-            "           alert(\"The favorite name is more than 20 characters or empty\");\n" +
+            "           alert(\"The favorite name is more than 30 characters or empty\");\n" +
             "       }\n" +
             "}";
 
