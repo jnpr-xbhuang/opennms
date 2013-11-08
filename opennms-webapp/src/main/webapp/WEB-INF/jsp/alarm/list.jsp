@@ -210,7 +210,8 @@
                 
                 //Get the confirmation status for purge action
                 var regularNoun = (parseInt(alarmCount) == 1)?'alarm':'alarms';
-                var confirmText = (anAction=="purge" || anAction=="export" )? confirmText+ 'Are you sure you want to '+anAction+' selected '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')' : confirmText+'Are you sure you want to '+anAction+' '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')';
+                var confirmText = ""; 
+                confirmText = (anAction=="purge" || anAction=="export" )? confirmText+ 'Are you sure you want to '+anAction+' selected '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')' : confirmText+'Are you sure you want to '+anAction+' '+regularNoun+' ? ('+alarmCount+' total '+regularNoun+')';
                 if((anAction == "purge" || anAction == "purgeall") && parseInt(alarmCount)>0) {
                         if(confirm(confirmText)){
                                 isPurgeExport = true;
