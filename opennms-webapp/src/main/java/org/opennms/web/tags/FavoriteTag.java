@@ -136,9 +136,11 @@ public class FavoriteTag extends TagSupport {
 
     private static final String CREATE_FAVORITE_JAVASCRIPT_TEMPLATE =
             "   function createFavorite() {\n" +
-            "       var favoriteName = prompt(\"Please enter a favorite name\", \"{DEFAULT_FAVORITE}\");\n" +
-            "       if (favoriteName != null) {\n" +
+            "       var favoriteName = prompt(\"Please enter a favorite name: no more than 30 characters\", \"{DEFAULT_FAVORITE}\");\n" +
+            "       if (favoriteName != null && favoriteName.length < 30) {\n" +
             "           window.location.href = '{CREATE_FAVORITE_URL}' + favoriteName;\n" +
+            "       } else {\n" +
+            "           alert(\"The favorite name is more than 20 characters or empty\");\n" +
             "       }\n" +
             "}";
 
