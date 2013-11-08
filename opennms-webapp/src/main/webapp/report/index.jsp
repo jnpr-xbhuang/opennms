@@ -1,37 +1,37 @@
 <%--
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2006-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2006-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 --%>
 
 <%@page language="java"
-	contentType="text/html"
-	session="true"
+        contentType="text/html"
+        session="true"
 %>
 
 
@@ -66,8 +66,8 @@
         <li><a href="inventory/rancidReport.htm">Inventory</a></li>
 <% }%>
         <li><a href="statisticsReports/index.htm">Statistics Reports</a></li>
-        <!--  Added for historical reports 
-         <li><a href="report/historical/index.htm">Historical Reports</a></li> -->
+        <!-- Added for historical reports -->
+<li><a href="report/historical/index.htm">Historical Reports</a></li>
       </ul>
     </div>
   <!-- more reports will follow -->
@@ -98,23 +98,23 @@
           in the "Name contains" field. This will invoke a case-insensitive substring
           match on resource names.
       </p>
-	
+        
      <!--
-	  <p> <b> Historical Reports </b> provide option to save and view the all the 
-	  reports of Alarms and Events available in the server.
-      </p>
-     -->
+         <p> <b> Historical Reports </b> provide option to save and view the all the
+         reports of Alarms and Events available in the server.
+</p>
+-->
       <p><b>Database Reports</b> provide graphical or numeric
           view of your service level metrics for the current
           month-to-date, previous month, and last twelve months by categories.
       </p>
       
 <% if ("true".equalsIgnoreCase(Vault.getProperty("opennms.rancidIntegrationEnabled"))) {%>
-      <p><b>Inventory Reports</b> provide html or XML report list of 
+      <p><b>Inventory Reports</b> provide html or XML report list of
        nodes inventories and rancid devices matching at a specific date using
        a search matching criteria .
       </p>
-<% } %> 
+<% } %>
       <p><b>Statistics Reports</b> provide regularly scheduled statistical
           reports on collected numerical data (response time, SNMP performance
           data, etc.).

@@ -1,30 +1,30 @@
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2010-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2010-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 package org.opennms.reporting.jasperreports.svclayer;
 
@@ -96,20 +96,26 @@ import java.io.FileOutputStream;
 import java.text.ParseException;
 
 import java.util.*;
+import java.io.IOException;
+import java.sql.SQLException;
+import org.opennms.netmgt.dao.api.NodeDao;
 /**
- * <p>
- * JasperReportService class.
- * </p>
- *
- * @author jonathan@opennms.org
- * @version $Id: $
- */
+* <p>
+* JasperReportService class.
+* </p>
+*
+* @author jonathan@opennms.org
+* @version $Id: $
+*/
 public class JasperReportService implements ReportService {
     private static final Logger LOG = LoggerFactory.getLogger(JasperReportService.class);
 
-    private static final String LOG4J_CATEGORY = "reports";
+    private static final String LOG4J_CATEGORY = "OpenNMS.Report";
 
     private static final String STRING_INPUT_TYPE = "org.opennms.report.stringInputType";
+    
+    // Date format for an alarm events
+    private static final SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yy hh:mm:ss aaa",Locale.ENGLISH);
 
     private GlobalReportRepository m_globalReportRepository;
 
@@ -122,18 +128,21 @@ public class JasperReportService implements ReportService {
     @Autowired
     AcknowledgmentDao m_ackDao;
     
+    @Autowired
+    NodeDao m_nodeDao; 
+    
 
     /**
-     * <p>
-     * Constructor for JasperReportService.
-     * </p>
-     */
+* <p>
+* Constructor for JasperReportService.
+* </p>
+*/
     public JasperReportService() {
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Override
     public List<ReportFormat> getFormats(String reportId) {
         List<ReportFormat> formats = new ArrayList<ReportFormat>();
@@ -143,10 +152,10 @@ public class JasperReportService implements ReportService {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @throws ReportException
-     */
+* {@inheritDoc}
+*
+* @throws ReportException
+*/
     @Override
     public ReportParameters getParameters(final String reportId) throws ReportException {
         try {
@@ -335,7 +344,7 @@ public class JasperReportService implements ReportService {
                             throw new ReportException("Unsupported report parameter type " + reportParm.getValueClassName());
                         }
                     }
-                    return reportParameters;                }
+                    return reportParameters; }
             });
         } catch (final Exception e) {
             if (e instanceof ReportException) throw (ReportException)e;
@@ -344,8 +353,8 @@ public class JasperReportService implements ReportService {
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Override
     public void render(final String reportId, final String location, final ReportFormat format, final OutputStream outputStream) throws ReportException {
         try {
@@ -392,8 +401,8 @@ public class JasperReportService implements ReportService {
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Override
     public String run(final HashMap<String, Object> reportParms, final String reportId) throws ReportException {
         try {
@@ -450,13 +459,13 @@ public class JasperReportService implements ReportService {
 
 
     /**
-     * Method to find all sub reports as parameter. Compile sub reports and put all compile sub reports in a parameter map.
-     * Returned map is compatible to common jasper report parameter map.
-     *
-     * @param mainReportId String for specific main report identified by a report id
-     * @param mainReport   JasperReport a compiled main report
-     * @return a sub report parameter map as {@link java.util.HashMap<String,Object>} object
-     */
+* Method to find all sub reports as parameter. Compile sub reports and put all compile sub reports in a parameter map.
+* Returned map is compatible to common jasper report parameter map.
+*
+* @param mainReportId String for specific main report identified by a report id
+* @param mainReport JasperReport a compiled main report
+* @return a sub report parameter map as {@link java.util.HashMap<String,Object>} object
+*/
     private HashMap<String, Object> buildSubreport(final String mainReportId, final JasperReport mainReport) {
         String repositoryId = mainReportId.substring(0, mainReportId.indexOf("_"));
         HashMap<String, Object> subreportMap = new HashMap<String, Object>();
@@ -485,8 +494,8 @@ public class JasperReportService implements ReportService {
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Override
     public void runAndRender(final HashMap<String, Object> reportParms, final String reportId, final ReportFormat format, final OutputStream outputStream) throws ReportException {
         try {
@@ -562,29 +571,29 @@ public class JasperReportService implements ReportService {
     
     private void exportReportToXls(JasperPrint jasperPrint,
             OutputStream outputStream) throws JRException {
-		JRXlsxExporter exporter = new JRXlsxExporter();
-		exporter.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
-		exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
-		exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE); 
-		exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_COLUMNS, Boolean.TRUE);
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
-		
-		exporter.exportReport();
-	}
+                JRXlsxExporter exporter = new JRXlsxExporter();
+                exporter.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
+                exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
+                exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
+                exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_COLUMNS, Boolean.TRUE);
+                exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
+                
+                exporter.exportReport();
+        }
 
     private void exportReportToHtml(JasperPrint jasperPrint,
             OutputStream outputStream) throws JRException {
-		JRHtmlExporter exporter = new JRHtmlExporter();
-		exporter.setParameter(JRHtmlExporterParameter.BETWEEN_PAGES_HTML,"");
-		exporter.setParameter(JRHtmlExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS,Boolean.TRUE);
-		exporter.setParameter(JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,Boolean.FALSE);
-		exporter.setParameter(JRHtmlExporterParameter.IMAGES_MAP,new HashMap());
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
-		
-		exporter.exportReport();
-	}
+                JRHtmlExporter exporter = new JRHtmlExporter();
+                exporter.setParameter(JRHtmlExporterParameter.BETWEEN_PAGES_HTML,"");
+                exporter.setParameter(JRHtmlExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS,Boolean.TRUE);
+                exporter.setParameter(JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN,Boolean.FALSE);
+                exporter.setParameter(JRHtmlExporterParameter.IMAGES_MAP,new HashMap());
+                exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
+                
+                exporter.exportReport();
+        }
     
 
     private HashMap<String, Object> buildJRparameters(final HashMap<String, Object> onmsReportParms, final JRParameter[] reportParms) throws ReportException {
@@ -650,8 +659,8 @@ public class JasperReportService implements ReportService {
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Override
     public boolean validate(final HashMap<String, Object> reportParms, final String reportId) {
         // returns true until we can take parameters
@@ -659,14 +668,14 @@ public class JasperReportService implements ReportService {
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
 	@Override
 	public void runAndRender(List<Integer> eventIds, String reportId,
-			ReportFormat format, OutputStream outputStream)
+			ReportFormat format,String fileName,String dirName)
 			throws ReportException {
 
-    	
+		LOG.info("Enter into the rundAndRender action for event report");
     	// Get the event report details
         ArrayList<EventReportStructure> eventReportList = new ArrayList<EventReportStructure>();
         eventReportList = getEventReportList(eventIds,format);
@@ -682,48 +691,36 @@ public class JasperReportService implements ReportService {
             throw new ReportException("unable to compile jasperReport", e);
         }
 		
-        if ("null".equalsIgnoreCase(m_globalReportRepository.getEngine(reportId))) {
-            try {
-         		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(eventReportList);
-         		
-         		JRGzipVirtualizer virtualizer = new JRGzipVirtualizer(10240);
-         		reportParms.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
-
-         		jasperPrint = JasperFillManager.fillReport(jasperReport,reportParms,beanColDataSource);
-         		
-         		if(ReportFormat.PDF == format || ReportFormat.CSV == format ){
-         			exportReport(format, jasperPrint, outputStream);
-         		} else if(ReportFormat.HTML == format) {
-         			exportReportToHtml(jasperPrint,outputStream);
-         		} else if(ReportFormat.XLS == format){
-         			exportReportToXls(jasperPrint,outputStream);
-         		} else {
-                	LOG.error("Unknown file format : {}", format);
-                }
-            } catch (JRException e) {
-                LOG.error("jasper report exception", e);
-                throw new ReportException("unable to run or render jasperReport",e);
-            }
-        }
+       
         
         // Create the event report folder if it's not exist already
         String baseDir = System.getProperty("opennms.report.dir")+"/event";
         File eventReportfolder = new File(baseDir);  
 		if (!eventReportfolder.exists()){  
 			if(eventReportfolder.mkdir()){
-				LOG.debug("The event report folder is successfully created in {} location", baseDir);
+				LOG.debug("The event report folder is successfully created in "+baseDir+" location");
 			} else {
-				LOG.debug("unable to create the event report folder in {} location", baseDir);
+				LOG.debug("unable to create the event report folder in "+baseDir+" location");
 			}
 		}else{  
 			LOG.debug("The event report folder is already exist in server location");
 		}
 		
 		// Store the event report into the local server
- 		String outputFileName = new String(baseDir + "/" + jasperReport.getName()+ new SimpleDateFormat("_MMddyyyy_HHmmss").format(new Date())+"."+String.valueOf(format).toLowerCase());
+		String outputFileName = null;
+		if(dirName != null)
+			outputFileName = new String(baseDir + "/" + dirName+"/"+fileName);
+		else
+			outputFileName = new String(baseDir + "/"+fileName);
  		OutputStream outputReportStream = null;
 		try{
+			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(eventReportList);
+     		JRGzipVirtualizer virtualizer = new JRGzipVirtualizer(10240);
+     		reportParms.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+     		jasperPrint = JasperFillManager.fillReport(jasperReport,reportParms,beanColDataSource);
+     		
 			outputReportStream = new FileOutputStream (outputFileName);
+			LOG.info("Starting event export action for file " + outputFileName);
 			if(ReportFormat.PDF == format || ReportFormat.CSV == format ){
      			exportReport(format, jasperPrint, outputReportStream);
      		} else if(ReportFormat.HTML == format) {
@@ -731,13 +728,25 @@ public class JasperReportService implements ReportService {
      		} else if(ReportFormat.XLS == format){
      			exportReportToXls(jasperPrint,outputReportStream);
      		} else {
-     			LOG.error("Unknown file format : {}", format);
+     			LOG.error("Unknown file format : " + format);
      		}
+			LOG.info("The event report "+ outputFileName  + " is successfully stored in the local server");
 		} catch(JRException e){
-			LOG.error("jasper report exception", e);
+			LOG.error("jasper report exception ", e);
 		} catch (FileNotFoundException e) {
-			LOG.error("unable to find the server location", e);
+			LOG.error("unable to find the server location ", e);
+		}finally{
+			if(outputReportStream != null){
+				try {
+					outputReportStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
+		
+		LOG.info("Terminated from the rundAndRender action for event report");
 	}
 	
 	public ArrayList<EventReportStructure> getEventReportList(List<Integer> eventIds,ReportFormat format) throws ReportException{
@@ -780,7 +789,11 @@ public class JasperReportService implements ReportService {
 				 eventJasperReportStructure.setNodeLabel(null);
 			 }
 		 } catch(Exception e){
-			 eventJasperReportStructure.setNodeLabel(null);
+			 if(onmsEvent.getNode()!= null){
+				 eventJasperReportStructure.setNodeLabel(m_nodeDao.getLabelForId(onmsEvent.getNode().getId()));
+ 			} else {
+ 				eventJasperReportStructure.setNodeLabel(null);
+ 			}
 		 }
 		 
 		 if(onmsEvent != null)
@@ -806,342 +819,430 @@ public class JasperReportService implements ReportService {
 	
 	
 
-	 public EventReportStructure getEventReportStructureforCSV(OnmsEvent onmsEvent) throws ReportException{
-	    	
-	    	// Date format for an events
-		 SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yy hh:mm:ss aaa",Locale.ENGLISH);
-		 try{
-			 		 		    
-		 EventReportStructure eventJasperReportStructure = new EventReportStructure();
-		 
-		 try{
-			 if(onmsEvent.getNodeLabel() != null){
-				 eventJasperReportStructure.setNodeLabel(onmsEvent.getNodeLabel());
-			 }else{
-				 eventJasperReportStructure.setNodeLabel(null);
-			 }
-		 } catch(Exception e){
-			 eventJasperReportStructure.setNodeLabel(null);
-		 }
-		 if(onmsEvent != null)
-		 eventJasperReportStructure.setEventId(onmsEvent.getId());
-		 OnmsAlarm onmsAlarm = onmsEvent.getAlarm();
-		 if(onmsAlarm != null)
-			 eventJasperReportStructure.setAlarmId(onmsAlarm.getId());
-		 eventJasperReportStructure.setEventUEI(onmsEvent.getEventUei());
-		 
-		 try{
-			 if(onmsEvent.getNode()!=null){
-				 eventJasperReportStructure.setNodeId(onmsEvent.getNode().getId());
-			 }
-			 else{
-				 eventJasperReportStructure.setNodeId(null);
-			 }
-		 } catch(Exception e){
-			 eventJasperReportStructure.setNodeId(null);
-		 }
-		 
-		 if(onmsEvent.getEventTime()!=null)
-		 eventJasperReportStructure.setEventTime(String.valueOf(formater.format(onmsEvent.getEventTime())));
-		 eventJasperReportStructure.setEventHost(onmsEvent.getEventHost());
-		 eventJasperReportStructure.setEventSource(onmsEvent.getEventSource());
-		 if(onmsEvent.getIpAddr()!=null)
-		 eventJasperReportStructure.setIpAddr(onmsEvent.getIpAddr().getHostAddress());
-		 if(onmsEvent.getDistPoller()!=null)
-		 eventJasperReportStructure.setEventDpName(onmsEvent.getDistPoller().getName());//needto confirm
-	     eventJasperReportStructure.setEventSnmpHost(onmsEvent.getEventSnmpHost());
-	     if(onmsEvent.getServiceType() !=null)
-	     eventJasperReportStructure.setServiceID(onmsEvent.getServiceType().getId());//need to clarify
-	     eventJasperReportStructure.setEventSnmp(onmsEvent.getEventSnmp());
-	     eventJasperReportStructure.setEventParms(onmsEvent.getEventParms());
-	     if(onmsEvent.getEventCreateTime()!=null)
-	     eventJasperReportStructure.setEventCreateTime(String.valueOf(formater.format(onmsEvent.getEventCreateTime())));
-	     eventJasperReportStructure.setEventDescr(onmsEvent.getEventDescr());
-	     eventJasperReportStructure.setEventLogGroup(onmsEvent.getEventLogGroup());
-	     eventJasperReportStructure.setEventLogMsg(onmsEvent.getEventLogMsg());
-	     eventJasperReportStructure.setEventSeverity(onmsEvent.getSeverityLabel().toString());
-	     eventJasperReportStructure.setEventPathOutage(onmsEvent.getEventPathOutage());
-	     eventJasperReportStructure.setEventCorrelation(onmsEvent.getEventCorrelation());
-	     eventJasperReportStructure.setEventSuppressedCount(onmsEvent.getEventSuppressedCount());
-	     eventJasperReportStructure.setEventOperInstruct(onmsEvent.getEventOperInstruct());
-	     eventJasperReportStructure.setEventAutoAction(onmsEvent.getEventAutoAction());
-	     eventJasperReportStructure.setEventOperAction(onmsEvent.getEventOperAction());
-	     eventJasperReportStructure.setEventOperActionMenuText(onmsEvent.getEventOperActionMenuText());
-	     eventJasperReportStructure.setEventNotification(onmsEvent.getEventNotification());
-	     eventJasperReportStructure.setEventTTicket(onmsEvent.getEventTTicket());
-	     eventJasperReportStructure.setEventTTicketState(onmsEvent.getEventTTicketState());
-	     eventJasperReportStructure.setEventForward(onmsEvent.getEventForward());
-	     eventJasperReportStructure.setEventMouseOverText(onmsEvent.getEventMouseOverText());
-	     eventJasperReportStructure.setEventLog(onmsEvent.getEventLog());
-	     eventJasperReportStructure.setEventDisplay(onmsEvent.getEventDisplay());
-	     eventJasperReportStructure.setEventAckUser(onmsEvent.getEventAckUser());
-	     if(onmsEvent.getEventAckTime()!=null)
-	     eventJasperReportStructure.setEventAckTime(String.valueOf(formater.format(onmsEvent.getEventAckTime())));	        
-	     eventJasperReportStructure.setIfIndex(onmsEvent.getIfIndex());
-	     return eventJasperReportStructure;
-		 }
-		 
-		 catch(Exception e)
-		 {
-			 LOG.error("Error in EventReportStructure CSV report", e);
-	         throw new ReportException("Error in EventReportStructure CSV report ", e); 
-			 
-		 }
-	 }
-	 
-	public void setEventDao(EventDao m_eventDao) {
-		this.m_eventDao = m_eventDao;
-	}
+         public EventReportStructure getEventReportStructureforCSV(OnmsEvent onmsEvent) throws ReportException{
+                 
+                 // Date format for an events
+                 SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yy hh:mm:ss aaa",Locale.ENGLISH);
+                 try{
+                                                          
+                 EventReportStructure eventJasperReportStructure = new EventReportStructure();
+                
+                 try{
+                         if(onmsEvent.getNodeLabel() != null){
+                                 eventJasperReportStructure.setNodeLabel(onmsEvent.getNodeLabel());
+                         }else{
+                                 eventJasperReportStructure.setNodeLabel(null);
+                         }
+                 } catch(Exception e){
+                         if(onmsEvent.getNode()!= null){
+				 			eventJasperReportStructure.setNodeLabel(m_nodeDao.getLabelForId(onmsEvent.getNode().getId()));
+ 						} else {
+ 						eventJasperReportStructure.setNodeLabel(null);
+ 						}
+                 }
+                 if(onmsEvent != null)
+                 eventJasperReportStructure.setEventId(onmsEvent.getId());
+                 OnmsAlarm onmsAlarm = onmsEvent.getAlarm();
+                 if(onmsAlarm != null)
+                         eventJasperReportStructure.setAlarmId(onmsAlarm.getId());
+                 eventJasperReportStructure.setEventUEI(onmsEvent.getEventUei());
+                
+                 try{
+                         if(onmsEvent.getNode()!=null){
+                                 eventJasperReportStructure.setNodeId(onmsEvent.getNode().getId());
+                         }
+                         else{
+                                 eventJasperReportStructure.setNodeId(null);
+                         }
+                 } catch(Exception e){
+                         eventJasperReportStructure.setNodeId(null);
+                 }
+                
+                 if(onmsEvent.getEventTime()!=null)
+                 eventJasperReportStructure.setEventTime(String.valueOf(formater.format(onmsEvent.getEventTime())));
+                 eventJasperReportStructure.setEventHost(onmsEvent.getEventHost());
+                 eventJasperReportStructure.setEventSource(onmsEvent.getEventSource());
+                 if(onmsEvent.getIpAddr()!=null)
+                 eventJasperReportStructure.setIpAddr(onmsEvent.getIpAddr().getHostAddress());
+                 if(onmsEvent.getDistPoller()!=null)
+                 eventJasperReportStructure.setEventDpName(onmsEvent.getDistPoller().getName());//needto confirm
+         eventJasperReportStructure.setEventSnmpHost(onmsEvent.getEventSnmpHost());
+         if(onmsEvent.getServiceType() !=null)
+         eventJasperReportStructure.setServiceID(onmsEvent.getServiceType().getId());//need to clarify
+         eventJasperReportStructure.setEventSnmp(onmsEvent.getEventSnmp());
+         eventJasperReportStructure.setEventParms(onmsEvent.getEventParms());
+         if(onmsEvent.getEventCreateTime()!=null)
+         eventJasperReportStructure.setEventCreateTime(String.valueOf(formater.format(onmsEvent.getEventCreateTime())));
+         eventJasperReportStructure.setEventDescr(onmsEvent.getEventDescr());
+         eventJasperReportStructure.setEventLogGroup(onmsEvent.getEventLogGroup());
+         eventJasperReportStructure.setEventLogMsg(onmsEvent.getEventLogMsg());
+         eventJasperReportStructure.setEventSeverity(onmsEvent.getSeverityLabel().toString());
+         eventJasperReportStructure.setEventPathOutage(onmsEvent.getEventPathOutage());
+         eventJasperReportStructure.setEventCorrelation(onmsEvent.getEventCorrelation());
+         eventJasperReportStructure.setEventSuppressedCount(onmsEvent.getEventSuppressedCount());
+         eventJasperReportStructure.setEventOperInstruct(onmsEvent.getEventOperInstruct());
+         eventJasperReportStructure.setEventAutoAction(onmsEvent.getEventAutoAction());
+         eventJasperReportStructure.setEventOperAction(onmsEvent.getEventOperAction());
+         eventJasperReportStructure.setEventOperActionMenuText(onmsEvent.getEventOperActionMenuText());
+         eventJasperReportStructure.setEventNotification(onmsEvent.getEventNotification());
+         eventJasperReportStructure.setEventTTicket(onmsEvent.getEventTTicket());
+         eventJasperReportStructure.setEventTTicketState(onmsEvent.getEventTTicketState());
+         eventJasperReportStructure.setEventForward(onmsEvent.getEventForward());
+         eventJasperReportStructure.setEventMouseOverText(onmsEvent.getEventMouseOverText());
+         eventJasperReportStructure.setEventLog(onmsEvent.getEventLog());
+         eventJasperReportStructure.setEventDisplay(onmsEvent.getEventDisplay());
+         eventJasperReportStructure.setEventAckUser(onmsEvent.getEventAckUser());
+         if(onmsEvent.getEventAckTime()!=null)
+         eventJasperReportStructure.setEventAckTime(String.valueOf(formater.format(onmsEvent.getEventAckTime())));        
+         eventJasperReportStructure.setIfIndex(onmsEvent.getIfIndex());
+         return eventJasperReportStructure;
+                 }
+                
+                 catch(Exception e)
+                 {
+                         LOG.error("Error in EventReportStructure CSV report", e);
+         throw new ReportException("Error in EventReportStructure CSV report ", e);
+                        
+                 }
+         }
+        
+        public void setEventDao(EventDao m_eventDao) {
+                this.m_eventDao = m_eventDao;
+        }
 
     public void runAndRender(List<Integer> alarmIds,HashMap<Integer, List<Integer>> eventIdsForAlarms ,
-    		String reportId, ReportFormat format, OutputStream outputStream, String fileName) throws ReportException {
+    		String reportId, ReportFormat format, String fileName, String folderName) throws ReportException {
     	
-    	LOG.info("Enter into the rundAndRender action for alarm report");
-    	// Get the alarm report details
-        ArrayList<AlarmReportStructure> alarmReportList = new ArrayList<AlarmReportStructure>();
-        alarmReportList = getAlarmReportList(alarmIds,eventIdsForAlarms,format);
-		
-        JasperReport jasperReport = null;
+    	LOG.info("Enter the runAndRender action to generate alarm report for the alarm list "+alarmIds+"and event list "+eventIdsForAlarms);
+    	
+    	JRBeanCollectionDataSource beanColDataSource = null;
+    	JasperReport jasperReport = null;
         JasperPrint jasperPrint = null;
         HashMap<String, Object> reportParms = new HashMap<String, Object>();
+    	
+    	// Get the alarm report details
+    	if(ReportFormat.CSV == format){
+    		ArrayList<AlarmReportStructure> alarmReportList = getAlarmReportListForCSV(alarmIds, eventIdsForAlarms, format);
+    		beanColDataSource = new JRBeanCollectionDataSource(alarmReportList);
+    	} else {
+    		ArrayList<AlarmReportBean> alarmReportList = getAlarmReportList(alarmIds, eventIdsForAlarms, format);
+    		beanColDataSource = new JRBeanCollectionDataSource(alarmReportList);
+    	}
+        
         try {
         	JasperDesign jasperDesign = JRXmlLoader.load(m_globalReportRepository.getTemplateStream(reportId));
-            jasperReport = JasperCompileManager.compileReport(jasperDesign);
+        	jasperReport = JasperCompileManager.compileReport(jasperDesign);
         } catch (JRException e) {
-            LOG.error("unable to compile jasper report", e);
-            throw new ReportException("unable to compile jasperReport", e);
-        }
-		
-        if ("null".equalsIgnoreCase(m_globalReportRepository.getEngine(reportId))) {
-            try {
-         		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(alarmReportList);
-         		JRGzipVirtualizer virtualizer = new JRGzipVirtualizer(10240);
-         		reportParms.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
-         		jasperPrint = JasperFillManager.fillReport(jasperReport,reportParms,beanColDataSource);
-         		
-         		if(ReportFormat.PDF == format || ReportFormat.CSV == format ){
-         			exportReport(format, jasperPrint, outputStream);
-         		} else if(ReportFormat.HTML == format) {
-         			exportReportToHtml(jasperPrint,outputStream);
-         		} else if(ReportFormat.XLS == format){
-         			exportReportToXls(jasperPrint,outputStream);
-         		} else {
-                	LOG.error("Unknown file format : {}", format);
-                }
-            } catch (JRException e) {
-                LOG.error("jasper report exception", e);
-                throw new ReportException("unable to run or render jasperReport",e);
-            }
+            LOG.error("unable to compile alarm jasper report", e);
+            throw new ReportException("unable to compile alarm jasperReport", e);
         }
         
-        String baseDir = System.getProperty("opennms.alarm.report.dir");
-        File alarmReportfolder = new File(baseDir);
+        if(!(ReportFormat.CSV == format)){
+	        try {
+	            JasperDesign jasperSubReportDesign = JRXmlLoader.load(m_globalReportRepository.getTemplateStream("local_alarm-subreport"));
+	            JasperReport jasperSubReport = JasperCompileManager.compileReport(jasperSubReportDesign);
+	            reportParms.put("subreportParameter", jasperSubReport);
+	        } catch (JRException e) {
+	            LOG.error("unable to compile alarm jasper subreport", e);
+	            throw new ReportException("unable to compile alarm jasperReport", e);
+	        }
+        }
+        
+        String reportDir = System.getProperty("opennms.report.dir");
+        String alarmReportDir = System.getProperty("opennms.alarm.report.dir");
+        File alarmReportfolder = new File(alarmReportDir);
         
         // Create the alarm report folder if it's not exist already
         if (!alarmReportfolder.exists()){
-        	baseDir = System.getProperty("opennms.report.dir")+"/alarm";
-        	alarmReportfolder = new File(baseDir);
+        	alarmReportDir = reportDir+"/alarm";
+        	alarmReportfolder = new File(alarmReportDir);
         	if(alarmReportfolder.mkdir()){
-        		 LOG.debug("The alarm report folder is successfully created in {} location", baseDir);
+        		 LOG.debug("The alarm report folder is successfully created in the "+reportDir+" location");
 			} else {
-				 LOG.error("Unable to create the alarm report folder in {} location", baseDir);
+				 LOG.error("Unable to creat the alarm report folder in the "+reportDir+" location");
 			}
         }
 		
+        // Create the alarm sub folder
+        String alarmReportSubDir = alarmReportDir+"/"+folderName;
+        if (alarmReportfolder.exists()){
+            File alarmSubFolder = new File(alarmReportSubDir);
+            if(!alarmSubFolder.exists()){
+	            if(alarmSubFolder.mkdir()){
+	       		 LOG.debug("The alarm sub folder is successfully created in the "+alarmReportfolder+" location");
+				} else {
+					 LOG.error("Unable to creat the alarm sub folder in the "+alarmReportfolder+" location");
+				}
+            }
+        } else {
+        	LOG.error("The alarm folder is not available in the "+reportDir+" location");
+        }
+        
 		// To Store the alarm report in the local server
- 		String outputFileName = new String(baseDir + "/" + fileName);
+ 		String outputFileName = new String(alarmReportSubDir + "/" + fileName);
  		OutputStream outputReportStream = null;
 		try{
 			LOG.info("The alarm report is currently exporting...");
-			outputReportStream = new FileOutputStream (outputFileName);
+			
+     		JRGzipVirtualizer virtualizer = new JRGzipVirtualizer(10240);
+     		reportParms.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+     		jasperPrint = JasperFillManager.fillReport(jasperReport,reportParms,beanColDataSource);
+			
+     		outputReportStream = new FileOutputStream (outputFileName);
 			if(ReportFormat.PDF == format || ReportFormat.CSV == format ){
      			exportReport(format, jasperPrint, outputReportStream);
      			LOG.info("The alarm report is successfully stored in the local server");
      		} else if(ReportFormat.HTML == format) {
      			exportReportToHtml(jasperPrint,outputReportStream);
      			LOG.info("The alarm report is successfully stored in the local server");
-     		} else if(ReportFormat.XLS == format){
-     			exportReportToXls(jasperPrint,outputReportStream);
-     			LOG.info("The alarm report is successfully stored in the local server");
      		} else {
-     			LOG.error("Unknown file format : {}", format);
+     			LOG.error("Unknown file format : " + format);
      		}
 		} catch(JRException e){
-			LOG.error("jasper report exception", e);
+			LOG.error("jasper report exception ", e);
 		} catch (FileNotFoundException e) {
-			LOG.error("unable to find the server location", e);
+			LOG.error("unable to find the server location ", e);
+		} finally {
+			if(outputReportStream != null){
+				try {
+					outputReportStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					LOG.error("Unable to close output report stream in jasper report service", e);
+				}
+			}
 		}
-		LOG.info("Terminated from the rundAndRender action for alarm report");
+		LOG.info("Terminated the runAndRender action after exported the alarm report for the alarm list "+alarmIds+"and event list "+eventIdsForAlarms);
     }
     
-    
-    public ArrayList<AlarmReportStructure> getAlarmReportList(List<Integer> alarmIds, HashMap<Integer, List<Integer>> eventIdsForAlarms, ReportFormat format){
+    public ArrayList<AlarmReportBean> getAlarmReportList(List<Integer> alarmIds, HashMap<Integer, List<Integer>> eventIdsForAlarms, ReportFormat format){
     	
-		// Date format for an alarm events
-	    SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yy hh:mm:ss aaa",Locale.ENGLISH);
-	    
-	    ArrayList<AlarmReportStructure> alarmReportList = new ArrayList<AlarmReportStructure>();
-		for(Integer alarmId : alarmIds){
-			
-			// Get the alarm and events by it's id's
-			OnmsAlarm onmsAlarm = m_alarmDao.get(alarmId);
-			
-			List<OnmsEvent> onmsEventList = getEvents(eventIdsForAlarms, alarmId);
-			
-			for(int eventIterator = 0; eventIterator < onmsEventList.size() ; eventIterator++){
+	    ArrayList<AlarmReportBean> onmsAlarmListForSubReport = new ArrayList<AlarmReportBean>();
+	    try{
+			for(Integer alarmId : alarmIds){
 				
-				OnmsEvent currOnmsEvent = onmsEventList.get(eventIterator);
-				if(currOnmsEvent.getAlarm() != null){
-					if(currOnmsEvent.getAlarm().getId()!= null && currOnmsEvent.getAlarm().getId()>0){
+				// Get the alarm and events by it's id's
+				OnmsAlarm onmsAlarm = m_alarmDao.get(alarmId);
+				List<OnmsEvent> onmsEventList = getEvents(eventIdsForAlarms, alarmId);				
+				ArrayList<AlarmReportStructure> onmsEventListForSubReport = new ArrayList<AlarmReportStructure>();
+				AlarmReportBean alarmWithEvent = new AlarmReportBean();
+				for(int eventIterator = 0; eventIterator < onmsEventList.size() ; eventIterator++){
+					onmsEventListForSubReport = getEventListForAlarm(onmsEventListForSubReport, onmsEventList, onmsAlarm, format, eventIterator);
+				}
+	
+				alarmWithEvent.setAlarmReportStructure(onmsEventListForSubReport);
+				onmsAlarmListForSubReport.add(alarmWithEvent);
+			}
+	    } catch(Exception ex) {
+	    	ex.printStackTrace();
+    		LOG.error("unable to get alarm report list for pdf/html format in getAlarmReportList method ", ex);
+	    }
+		return onmsAlarmListForSubReport;
+    }
+    
+	public ArrayList<AlarmReportStructure> getAlarmReportListForCSV(List<Integer> alarmIds, HashMap<Integer, List<Integer>> eventIdsForAlarms, ReportFormat format){
+		
+	    ArrayList<AlarmReportStructure> alarmReportList = new ArrayList<AlarmReportStructure>();
+	    try{
+			for(Integer alarmId : alarmIds){
+				
+				// Get the alarm and events by it's id's
+				OnmsAlarm onmsAlarm = m_alarmDao.get(alarmId);
+				List<OnmsEvent> onmsEventList = getEvents(eventIdsForAlarms, alarmId);			
+				
+				for(int eventIterator = 0; eventIterator < onmsEventList.size() ; eventIterator++){
+					alarmReportList = getEventListForAlarm(alarmReportList, onmsEventList, onmsAlarm, format, eventIterator);
+				}
+			}
+	    } catch(Exception ex) {
+	    	ex.printStackTrace();
+    		LOG.error("unable to get alarm report list for csv format in getAlarmReportListForCSV method ", ex);
+	    }
+		return alarmReportList;
+	}
+
+    public ArrayList<AlarmReportStructure> getEventListForAlarm(ArrayList<AlarmReportStructure> alarmReportList, List<OnmsEvent> onmsEventList, OnmsAlarm onmsAlarm, ReportFormat format, int eventIterator){
+    	
+		OnmsEvent currOnmsEvent = onmsEventList.get(eventIterator);
+		try{
+			if(currOnmsEvent.getAlarm() != null){
+				if(currOnmsEvent.getAlarm().getId()!= null && currOnmsEvent.getAlarm().getId()>0){
+				
+	    			Calendar eventCreatTime = null;
+					try {
+						eventCreatTime = this.getDateFormat(formater.parse(formater.format(currOnmsEvent.getEventCreateTime())));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+	    			
+	    			// Find the duplicate alarm Id
+					boolean	isAlarmsWithSameId = false;
+					if(eventIterator>0) {
+						isAlarmsWithSameId = getDuplicateIdStatus(onmsEventList.get(eventIterator-1), currOnmsEvent.getAlarm().getId(),eventIterator);
+					}
 					
-		    			Calendar eventCreatTime = null;
-						try {
-							eventCreatTime = this.getDateFormat(formater.parse(formater.format(currOnmsEvent.getEventCreateTime())));
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-		    			
-		    			// Find the duplicate alarm Id
-						boolean	isAlarmsWithSameId = false;
-						if(eventIterator>0) {
-							isAlarmsWithSameId = getDuplicateIdStatus(onmsEventList.get(eventIterator-1), currOnmsEvent.getAlarm().getId(),eventIterator);
-						}
+					// Get the acknowledgment by it's id
+					List<OnmsAcknowledgment> onmsAcknowledgmentList = getAcknowledgments(currOnmsEvent.getAlarm().getId());
+					if(onmsAcknowledgmentList.size()>0){
 						
-						// Get the acknowledgment by it's id
-						List<OnmsAcknowledgment> onmsAcknowledgmentList = getAcknowledgments(currOnmsEvent.getAlarm().getId());
-						if(onmsAcknowledgmentList.size()>0){
+						boolean isEmptyAcknowledgment = true;
+						String[] getAckStatus = new String[3]; 
+						int ackCount = 0;
+						
+						if(isAlarmsWithSameId){
+							OnmsEvent preOnmsEvent = onmsEventList.get(eventIterator-1);
+							Calendar preEventCreatTime = null;
+							try {
+								preEventCreatTime = this.getDateFormat(formater.parse(formater.format(preOnmsEvent.getEventCreateTime())));
+							} catch (ParseException e) {
+								e.printStackTrace();
+							}
 							
-							boolean isEmptyAcknowledgment = true;
-							String[] getAckStatus = new String[3]; 
-							int ackCount = 0;
-							
-							if(isAlarmsWithSameId){
-								OnmsEvent preOnmsEvent = onmsEventList.get(eventIterator-1);
-								Calendar preEventCreatTime = null;
+							for(OnmsAcknowledgment onmsAcknowledgment : onmsAcknowledgmentList){
+								Calendar ackTime = null;
 								try {
-									preEventCreatTime = this.getDateFormat(formater.parse(formater.format(preOnmsEvent.getEventCreateTime())));
+									ackTime = this.getDateFormat(formater.parse(formater.format(onmsAcknowledgment.getAckTime())));
 								} catch (ParseException e) {
 									e.printStackTrace();
 								}
 								
-								for(OnmsAcknowledgment onmsAcknowledgment : onmsAcknowledgmentList){
-									Calendar ackTime = null;
-									try {
-										ackTime = this.getDateFormat(formater.parse(formater.format(onmsAcknowledgment.getAckTime())));
-									} catch (ParseException e) {
-										e.printStackTrace();
+								//Comparison of event creation time with acknowledgment time
+								if((((eventCreatTime.compareTo(ackTime)) < 0) && ((preEventCreatTime.compareTo(ackTime)) > 0))){
+									if(ackCount == 0){
+										getAckStatus[0] = String.valueOf(formater.format(onmsAcknowledgment.getAckTime()));
+										getAckStatus[1] = "\n"+onmsAcknowledgment.getAckUser();
+										getAckStatus[2] = "\n"+String.valueOf(onmsAcknowledgment.getAckAction());
+										ackCount++;
+									} else {
+										getAckStatus[0] = getAckStatus[0] +"\n"+ String.valueOf(formater.format(onmsAcknowledgment.getAckTime()));
+										getAckStatus[1] = getAckStatus[1] +"\n\n"+ onmsAcknowledgment.getAckUser();
+										getAckStatus[2] = getAckStatus[2] +"\n\n"+ String.valueOf(onmsAcknowledgment.getAckAction());
 									}
-									
-									//Comparison of event creation time with acknowledgment time
-									if((((eventCreatTime.compareTo(ackTime)) < 0) && ((preEventCreatTime.compareTo(ackTime)) > 0))){
-										if(ackCount == 0){
-											getAckStatus[0] = String.valueOf(formater.format(onmsAcknowledgment.getAckTime()));
-											getAckStatus[1] = "\n"+onmsAcknowledgment.getAckUser();
-											getAckStatus[2] = "\n"+String.valueOf(onmsAcknowledgment.getAckAction());
-											ackCount++;
-										} else {
-											getAckStatus[0] = getAckStatus[0] +"\n"+ String.valueOf(formater.format(onmsAcknowledgment.getAckTime()));
-											getAckStatus[1] = getAckStatus[1] +"\n\n"+ onmsAcknowledgment.getAckUser();
-											getAckStatus[2] = getAckStatus[2] +"\n\n"+ String.valueOf(onmsAcknowledgment.getAckAction());
-										}
-					        			isEmptyAcknowledgment = false;
-									}
+				        			isEmptyAcknowledgment = false;
 								}
-							} else {
-								
-								for(OnmsAcknowledgment onmsAcknowledgment : onmsAcknowledgmentList){
-									Calendar ackTime = null;
-									try {
-										ackTime = this.getDateFormat(formater.parse(formater.format(onmsAcknowledgment.getAckTime())));
-									} catch (ParseException e) {
-										e.printStackTrace();
-									}
-									//Comparison of event creation time with acknowledgment time
-									if((eventCreatTime.compareTo(ackTime)) < 0){
-										if(ackCount == 0){
-											getAckStatus[0] = String.valueOf(formater.format(onmsAcknowledgment.getAckTime()));
-											getAckStatus[1] = "\n"+onmsAcknowledgment.getAckUser();
-											getAckStatus[2] = "\n"+String.valueOf(onmsAcknowledgment.getAckAction());
-											ackCount++;
-										} else {
-											getAckStatus[0] = getAckStatus[0] +"\n"+ String.valueOf(formater.format(onmsAcknowledgment.getAckTime()));
-											getAckStatus[1] = getAckStatus[1] +"\n\n"+ onmsAcknowledgment.getAckUser();
-											getAckStatus[2] = getAckStatus[2] +"\n\n"+ String.valueOf(onmsAcknowledgment.getAckAction());
-										}
-					        			isEmptyAcknowledgment = false;
-									}
-				    			}
-							}
-							if(isEmptyAcknowledgment){
-								alarmReportList.add(getAlarmReportStructure(onmsAlarm, currOnmsEvent, null,format));
-							} else {
-								alarmReportList.add(getAlarmReportStructure(onmsAlarm, currOnmsEvent, getAckStatus, format));
 							}
 						} else {
-							alarmReportList.add(getAlarmReportStructure(onmsAlarm, currOnmsEvent, null, format));
+							
+							for(OnmsAcknowledgment onmsAcknowledgment : onmsAcknowledgmentList){
+								Calendar ackTime = null;
+								try {
+									ackTime = this.getDateFormat(formater.parse(formater.format(onmsAcknowledgment.getAckTime())));
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}
+								//Comparison of event creation time with acknowledgment time
+								if((eventCreatTime.compareTo(ackTime)) < 0){
+									if(ackCount == 0){
+										getAckStatus[0] = String.valueOf(formater.format(onmsAcknowledgment.getAckTime()));
+										getAckStatus[1] = "\n"+onmsAcknowledgment.getAckUser();
+										getAckStatus[2] = "\n"+String.valueOf(onmsAcknowledgment.getAckAction());
+										ackCount++;
+									} else {
+										getAckStatus[0] = getAckStatus[0] +"\n"+ String.valueOf(formater.format(onmsAcknowledgment.getAckTime()));
+										getAckStatus[1] = getAckStatus[1] +"\n\n"+ onmsAcknowledgment.getAckUser();
+										getAckStatus[2] = getAckStatus[2] +"\n\n"+ String.valueOf(onmsAcknowledgment.getAckAction());
+									}
+				        			isEmptyAcknowledgment = false;
+								}
+			    			}
+						}
+						if(isEmptyAcknowledgment){
+							alarmReportList.add(getAlarmWithEventValues(onmsAlarm, currOnmsEvent, null,format));
+						} else {
+							alarmReportList.add(getAlarmWithEventValues(onmsAlarm, currOnmsEvent, getAckStatus, format));
 						}
 					} else {
-						alarmReportList.add(getAlarmReportStructure(onmsAlarm, currOnmsEvent, null, format));
+						alarmReportList.add(getAlarmWithEventValues(onmsAlarm, currOnmsEvent, null, format));
 					}
+				} else {
+					alarmReportList.add(getAlarmWithEventValues(onmsAlarm, currOnmsEvent, null, format));
 				}
+			} else {
+				alarmReportList.add(getAlarmWithEventValues(onmsAlarm, currOnmsEvent, null, format));
 			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+    		LOG.error("unable to get the event list for an alarm in getEventListForAlarm method ", ex);
 		}
 		return alarmReportList;
     }
-
-    public AlarmReportStructure getAlarmReportStructure(OnmsAlarm onmsAlarm, OnmsEvent onmsEvent, String[] ackStatus, ReportFormat format){
+    
+    public AlarmReportStructure getAlarmWithEventValues(OnmsAlarm onmsAlarm, OnmsEvent onmsEvent, String[] ackStatus, ReportFormat format){
     	
-    	// Date format for an alarm events
-	    SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yy hh:mm:ss aaa",Locale.ENGLISH);
-	    
     	AlarmReportStructure alarmJasperReportStructure = new AlarmReportStructure();
-
-    	if(onmsEvent.getAlarm()!= null){
-			if(onmsEvent.getAlarm().getId() != 0){
-				alarmJasperReportStructure.setAlarmId(onmsEvent.getAlarm().getId());
-			} else{
-				alarmJasperReportStructure.setAlarmId(0);
+    	try {
+    		
+    		if(onmsAlarm.getId()!= null){
+    			alarmJasperReportStructure.setAlarmId(onmsAlarm.getId());
+    		} else {
+    			alarmJasperReportStructure.setAlarmId(null);
+    		}
+    		
+    		try {
+	    		if(onmsAlarm.getNodeLabel()!= null) {
+	    			alarmJasperReportStructure.setNodeLabel(onmsAlarm.getNodeLabel());
+	    		} else {
+	    			alarmJasperReportStructure.setNodeLabel(null);
+	    		} 
+    		} catch(Exception ex) {
+    			if(onmsAlarm.getNode()!= null){
+    				alarmJasperReportStructure.setNodeLabel(m_nodeDao.getLabelForId(onmsAlarm.getNode().getId()));
+    			} else {
+    				alarmJasperReportStructure.setNodeLabel(null);
+    			}
+    		}
+    		
+			alarmJasperReportStructure.setEventId(onmsEvent.getId());
+			alarmJasperReportStructure.setEventLogMsg(onmsEvent.getEventLogMsg());
+			alarmJasperReportStructure.setEventSeverity(onmsEvent.getSeverityLabel());
+			alarmJasperReportStructure.setIpAddr(InetAddressUtils.str(onmsAlarm.getIpAddr()));
+			
+	    	if(onmsEvent.getAlarm()!= null){
+				if(onmsEvent.getAlarm().getId() != 0){
+					alarmJasperReportStructure.setEventAlarmId(onmsEvent.getAlarm().getId());
+				} else{
+					alarmJasperReportStructure.setEventAlarmId(null);
+				}
+			} else {
+				alarmJasperReportStructure.setEventAlarmId(null);
 			}
-		}
-
-		 try{
-			 if(onmsAlarm.getNodeLabel() != null){
-				 alarmJasperReportStructure.setNodeLabel(onmsAlarm.getNodeLabel());
-			 }else{
-				 alarmJasperReportStructure.setNodeLabel(null);
-			 }
-		 } catch(Exception e){
-			 alarmJasperReportStructure.setNodeLabel(null);
-		 }
-		 
-		alarmJasperReportStructure.setEventId(onmsEvent.getId());
-		alarmJasperReportStructure.setEventUEI(onmsEvent.getEventUei());
-
-		if(ackStatus != null){
-			alarmJasperReportStructure.setAckTime(ackStatus[0]);
-			alarmJasperReportStructure.setAckUser(ackStatus[1]);
-			alarmJasperReportStructure.setAckAction(ackStatus[2]);
-		} else {
-			alarmJasperReportStructure.setAckTime(null);
-			alarmJasperReportStructure.setAckUser(null);
-			alarmJasperReportStructure.setAckAction(null);
-		}
-		
-		if(onmsEvent.getEventCreateTime() != null){
-			alarmJasperReportStructure.setEventCreateTime(String.valueOf(formater.format(onmsEvent.getEventCreateTime())));
-		} else {
-			alarmJasperReportStructure.setEventCreateTime(null);
-		}
-		
-		if(ReportFormat.CSV == format){
+			
+			if(ackStatus != null){
+				alarmJasperReportStructure.setAckTime(ackStatus[0]);
+				alarmJasperReportStructure.setAckUser(ackStatus[1]);
+				alarmJasperReportStructure.setAckAction(ackStatus[2]);
+			} else {
+				alarmJasperReportStructure.setAckTime(null);
+				alarmJasperReportStructure.setAckUser(null);
+				alarmJasperReportStructure.setAckAction(null);
+			}
+			
+			if(onmsEvent.getEventCreateTime() != null){
+				alarmJasperReportStructure.setEventCreateTime(String.valueOf(formater.format(onmsEvent.getEventCreateTime())));
+			} else {
+				alarmJasperReportStructure.setEventCreateTime(null);
+			}
+			
+			if(ReportFormat.CSV == format){
+				getAlarmWithEventValuesForCSV(alarmJasperReportStructure, onmsAlarm, onmsEvent);
+			}
+			
+    	} catch (Exception ex) {
+    		ex.printStackTrace();
+    		LOG.error("unable to set the alarm or event values in getAlarmWithEventValues method ", ex);
+    	}
+    	return alarmJasperReportStructure;
+    }
+    
+    public void getAlarmWithEventValuesForCSV(AlarmReportStructure alarmJasperReportStructure, OnmsAlarm onmsAlarm, OnmsEvent onmsEvent){
+    	
+    	try{
 			if(onmsAlarm.getDistPoller() != null){
 				alarmJasperReportStructure.setDpName(onmsAlarm.getDistPoller().getName());
 			} else {
 				alarmJasperReportStructure.setDpName(null);
 			}
-			
-			alarmJasperReportStructure.setNodeId(onmsAlarm.getNodeId());
-			alarmJasperReportStructure.setIpAddr(InetAddressUtils.str(onmsAlarm.getIpAddr()));
 			
 			if(onmsAlarm.getServiceType() != null){
 				alarmJasperReportStructure.setServiceID(onmsAlarm.getServiceType().getId());
@@ -1149,19 +1250,11 @@ public class JasperReportService implements ReportService {
 				alarmJasperReportStructure.setServiceID(null);
 			}
 			
-			alarmJasperReportStructure.setReductionKey(onmsAlarm.getReductionKey());
-			alarmJasperReportStructure.setAlarmType(onmsAlarm.getAlarmType());
-			alarmJasperReportStructure.setCounter(onmsAlarm.getCounter());
-			alarmJasperReportStructure.setSeverity(onmsAlarm.getSeverityLabel());
-			
 			if(onmsAlarm.getLastEvent() != null){
 				alarmJasperReportStructure.setLastEventId(onmsAlarm.getLastEvent().getId());
 			} else {
 				alarmJasperReportStructure.setLastEventId(null);
 			}
-			
-			alarmJasperReportStructure.setFirstEventTime(String.valueOf(formater.format(onmsAlarm.getFirstEventTime())));
-			alarmJasperReportStructure.setLastEventTime(String.valueOf(formater.format(onmsAlarm.getLastEventTime())));
 			
 			if(onmsAlarm.getFirstAutomationTime() != null){
 				alarmJasperReportStructure.setFirstAutomationTime(String.valueOf(formater.format(onmsAlarm.getFirstAutomationTime())));
@@ -1175,11 +1268,24 @@ public class JasperReportService implements ReportService {
 				alarmJasperReportStructure.setLastAutomationTime(null);
 			}
 			
+			alarmJasperReportStructure.setNodeId(onmsAlarm.getNodeId());
+			alarmJasperReportStructure.setReductionKey(onmsAlarm.getReductionKey());
+			alarmJasperReportStructure.setAlarmType(onmsAlarm.getAlarmType());
+			alarmJasperReportStructure.setCounter(onmsAlarm.getCounter());
+			alarmJasperReportStructure.setSeverity(onmsAlarm.getSeverityLabel());
+			alarmJasperReportStructure.setFirstEventTime(String.valueOf(formater.format(onmsAlarm.getFirstEventTime())));
+			alarmJasperReportStructure.setLastEventTime(String.valueOf(formater.format(onmsAlarm.getLastEventTime())));
 			alarmJasperReportStructure.setDescription(onmsAlarm.getDescription());
 			alarmJasperReportStructure.setLogMsg(onmsAlarm.getLogMsg());
 			alarmJasperReportStructure.setOperInstruct(onmsAlarm.getOperInstruct());
 			alarmJasperReportStructure.settTicketId(onmsAlarm.getTTicketId());
-			alarmJasperReportStructure.settTicketState(String.valueOf(onmsAlarm.getTTicketState()).trim());
+			
+			if(onmsAlarm.getTTicketState()!= null){
+				alarmJasperReportStructure.settTicketState(String.valueOf(onmsAlarm.getTTicketState()));
+			} else {
+				alarmJasperReportStructure.settTicketState(null);
+			}
+			
 			alarmJasperReportStructure.setMouseOverText(onmsAlarm.getMouseOverText());
 			
 			if(onmsAlarm.getSuppressedUntil()!= null){
@@ -1194,14 +1300,13 @@ public class JasperReportService implements ReportService {
 				alarmJasperReportStructure.setSuppressedTime(null);
 			}
 			
-			alarmJasperReportStructure.setAlarmAckUser(onmsAlarm.getAlarmAckUser());
-			
 			if(onmsAlarm.getAlarmAckTime() != null){
 				alarmJasperReportStructure.setAlarmAckTime(String.valueOf(formater.format(onmsAlarm.getAlarmAckTime())));
 			} else {
 				alarmJasperReportStructure.setAlarmAckTime(null);
 			}
 			
+			alarmJasperReportStructure.setAlarmAckUser(onmsAlarm.getAlarmAckUser());
 			alarmJasperReportStructure.setSuppressedUser(onmsAlarm.getSuppressedUser());
 			alarmJasperReportStructure.setManagedObjectInstance(onmsAlarm.getManagedObjectInstance());
 			alarmJasperReportStructure.setManagedObjectType(onmsAlarm.getManagedObjectType());
@@ -1213,6 +1318,7 @@ public class JasperReportService implements ReportService {
 			alarmJasperReportStructure.setClearKey(onmsAlarm.getClearKey());
 			alarmJasperReportStructure.setIfIndex(onmsAlarm.getIfIndex());
 			alarmJasperReportStructure.setEventParms(onmsAlarm.getEventParms());
+			alarmJasperReportStructure.setEventUEI(onmsEvent.getEventUei());
 			
 			if(onmsAlarm.getStickyMemo() != null){
 				alarmJasperReportStructure.setStickyMemo(onmsAlarm.getStickyMemo().getBody());
@@ -1226,16 +1332,11 @@ public class JasperReportService implements ReportService {
 				alarmJasperReportStructure.setEventTime(null);
 			}
 			
-			alarmJasperReportStructure.setEventHost(onmsEvent.getEventHost());
-			alarmJasperReportStructure.setEventSource(onmsEvent.getEventSource());
-			
 			if(onmsEvent.getDistPoller() != null){
 				alarmJasperReportStructure.setEventDbName(onmsEvent.getDistPoller().getName());
 			} else {
 				alarmJasperReportStructure.setEventDbName(null);
 			}
-			
-			alarmJasperReportStructure.setEventSnmpHost(onmsEvent.getEventSnmpHost());
 			
 			if(onmsEvent.getServiceType() != null){
 				alarmJasperReportStructure.setEventServiceID(onmsEvent.getServiceType().getId());
@@ -1243,11 +1344,13 @@ public class JasperReportService implements ReportService {
 				alarmJasperReportStructure.setEventServiceID(null);
 			}
 			
+			alarmJasperReportStructure.setEventHost(onmsEvent.getEventHost());
+			alarmJasperReportStructure.setEventSource(onmsEvent.getEventSource());
+			alarmJasperReportStructure.setEventSnmpHost(onmsEvent.getEventSnmpHost());
 			alarmJasperReportStructure.setEventParms(onmsEvent.getEventParms());
 			alarmJasperReportStructure.setEventDescr(onmsEvent.getEventDescr());
 			alarmJasperReportStructure.setEventLogGroup(onmsEvent.getEventLogGroup());
-			alarmJasperReportStructure.setEventLogMsg(onmsEvent.getEventLogMsg());
-			alarmJasperReportStructure.setEventSeverity(String.valueOf(onmsEvent.getSeverityLabel()));
+			alarmJasperReportStructure.setEventLog(onmsEvent.getEventLog());
 			alarmJasperReportStructure.setEventPathOutage(onmsEvent.getEventPathOutage());
 			alarmJasperReportStructure.setEventCorrelation(onmsEvent.getEventCorrelation());
 			alarmJasperReportStructure.setEventSuppressedCount(onmsEvent.getEventSuppressedCount());
@@ -1260,8 +1363,9 @@ public class JasperReportService implements ReportService {
 			alarmJasperReportStructure.setEventTTicketState(onmsEvent.getEventTTicketState());
 			alarmJasperReportStructure.setEventForward(onmsEvent.getEventForward());
 			alarmJasperReportStructure.setEventMouseOverText(onmsEvent.getEventMouseOverText());
-			alarmJasperReportStructure.setEventLog(onmsEvent.getEventLog());
 			alarmJasperReportStructure.setEventDisplay(onmsEvent.getEventDisplay());
+			alarmJasperReportStructure.setEventAckUser(onmsEvent.getEventAckUser());
+			alarmJasperReportStructure.setEventIfIndex(onmsEvent.getIfIndex());
 			
 			if(onmsEvent.getEventAckTime() != null){
 				alarmJasperReportStructure.setEventAckTime(String.valueOf(formater.format(onmsEvent.getEventAckTime())));
@@ -1269,34 +1373,34 @@ public class JasperReportService implements ReportService {
 				alarmJasperReportStructure.setEventAckTime(null);
 			}
 			
-			alarmJasperReportStructure.setEventAckUser(onmsEvent.getEventAckUser());
-			alarmJasperReportStructure.setEventIfIndex(onmsEvent.getIfIndex());
-			
 			if(onmsEvent.getIpAddr() != null){
 				alarmJasperReportStructure.setEventIpAddr(InetAddressUtils.str(onmsEvent.getIpAddr()));
 			} else {
 				alarmJasperReportStructure.setEventIpAddr(null);
 			}
+			
+    	} catch (Exception ex) {
+    		ex.printStackTrace();
+    		LOG.error("unable to set the alarm or event values in getAlarmWithEventValuesForCSV method ", ex);
     	}
-    	return alarmJasperReportStructure;
     }
     
     public boolean getDuplicateIdStatus(OnmsEvent onmsEvent, int currEventAlarmId, int eventIterator){
-		if(onmsEvent.getAlarm() != null){
-			if((currEventAlarmId == onmsEvent.getAlarm().getId()) && currEventAlarmId != 0){
-				return true;
-			}
-		}
-    	return false;
+                if(onmsEvent.getAlarm() != null){
+                        if((currEventAlarmId == onmsEvent.getAlarm().getId()) && currEventAlarmId != 0){
+                                return true;
+                        }
+                }
+            return false;
     }
     
     public List<OnmsEvent> getEvents(HashMap<Integer, List<Integer>> eventIdsForAlarms , Integer alarmId){
-    	List<OnmsEvent> onmsEventList= new ArrayList<OnmsEvent>();
-    	for(Integer eventId : eventIdsForAlarms.get(alarmId)){
-    		OnmsEvent onmsEvent = m_eventDao.get(eventId);
-    		onmsEventList.add(onmsEvent);
-    	}
-    	return onmsEventList;
+            List<OnmsEvent> onmsEventList= new ArrayList<OnmsEvent>();
+            for(Integer eventId : eventIdsForAlarms.get(alarmId)){
+                    OnmsEvent onmsEvent = m_eventDao.get(eventId);
+                    onmsEventList.add(onmsEvent);
+            }
+            return onmsEventList;
     }
     
     public List<OnmsAcknowledgment> getAcknowledgments(int alarmId) {
@@ -1307,11 +1411,11 @@ public class JasperReportService implements ReportService {
     }
     
     public Calendar getDateFormat(Date date){
-    	Calendar calendar = Calendar.getInstance();  
-    	calendar.setTime(date);
-    	Calendar calDate = new GregorianCalendar(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
-    			calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),calendar.get(Calendar.SECOND));
-    	return calDate;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            Calendar calDate = new GregorianCalendar(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),
+                            calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),calendar.get(Calendar.SECOND));
+            return calDate;
     }
 
     public void setGlobalReportRepository(final GlobalReportRepository globalReportRepository) {

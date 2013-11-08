@@ -1,30 +1,30 @@
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2009-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2009-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 package org.opennms.netmgt.dao.hibernate;
 
@@ -62,12 +62,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <p>DaoWebAlarmRepository class.</p>
- *
- * @author ranger
- * @version $Id: $
- * @since 1.8.1
- */
+* <p>DaoWebAlarmRepository class.</p>
+*
+* @author ranger
+* @version $Id: $
+* @since 1.8.1
+*/
 public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBean {
     private static final Logger LOG = LoggerFactory.getLogger(AlarmRepositoryHibernate.class);
 
@@ -89,8 +89,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public void acknowledgeAll(String user, Date timestamp) {
@@ -105,8 +105,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public void acknowledgeMatchingAlarms(String user, Date timestamp, OnmsCriteria criteria) {
@@ -123,8 +123,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public void clearAlarms(int[] alarmIds, String user, Date timestamp) {
@@ -144,8 +144,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public int countMatchingAlarms(OnmsCriteria criteria) {
@@ -153,8 +153,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public int[] countMatchingAlarmsBySeverity(final OnmsCriteria criteria) {
@@ -166,8 +166,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public void escalateAlarms(int[] alarmIds, String user, Date timestamp) {
@@ -186,8 +186,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public OnmsAlarm getAlarm(int alarmId) {
@@ -195,8 +195,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public OnmsAlarm[] getMatchingAlarms(OnmsCriteria criteria) {
@@ -204,8 +204,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public void unacknowledgeAll(String user) {
@@ -213,8 +213,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public void unacknowledgeMatchingAlarms(OnmsCriteria criteria, String user) {
@@ -229,8 +229,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public void acknowledgeAlarms(int[] alarmIds, String user, Date timestamp) {
@@ -240,8 +240,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Transactional
     @Override
     public void unacknowledgeAlarms(int[] alarmIds, String user) {
@@ -251,8 +251,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Override
     @Transactional
     public void updateStickyMemo(Integer alarmId, String body, String user) {
@@ -270,8 +270,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Override
     @Transactional
     public void updateReductionKeyMemo(Integer alarmId, String body, String user) {
@@ -292,8 +292,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Override
     @Transactional
     public void removeStickyMemo(Integer alarmId) {
@@ -305,8 +305,8 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     }
 
     /**
-     * {@inheritDoc}
-     */
+* {@inheritDoc}
+*/
     @Override
     @Transactional
     public void removeReductionKeyMemo(int alarmId) {
@@ -335,63 +335,82 @@ public class AlarmRepositoryHibernate implements AlarmRepository, InitializingBe
     @Override
     @Transactional
     public List<String> getFilterStringsForEvent(OnmsAlarm alarm){
-    	
-    	String filterToken[] = {"node=","interface=","exactUei=","ifindex="};
-    	List<String> filtersString = new ArrayList<String>();
-    	
-    	if(alarm.getNodeId()!= null){
-    		filtersString.add(filterToken[0].concat(String.valueOf(alarm.getNodeId())));
-    	}
-    	if(alarm.getIpAddr()!= null){
-    		filtersString.add(filterToken[1].concat(InetAddressUtils.str(alarm.getIpAddr())));
-    	}
-    	if(alarm.getUei()!= null){
-    		filtersString.add(filterToken[2].concat(alarm.getUei()));
-    	}
-    	if(alarm.getIfIndex()!= null){
-    		filtersString.add(filterToken[3].concat(String.valueOf(alarm.getIfIndex())));
-    	}
-    	
-    	return filtersString;
+            
+            String filterToken[] = {"node=","interface=","exactUei=","ifindex="};
+            List<String> filtersString = new ArrayList<String>();
+            
+            if(alarm.getNodeId()!= null){
+                    filtersString.add(filterToken[0].concat(String.valueOf(alarm.getNodeId())));
+            }
+            if(alarm.getIpAddr()!= null){
+                    filtersString.add(filterToken[1].concat(InetAddressUtils.str(alarm.getIpAddr())));
+            }
+            if(alarm.getUei()!= null){
+                    filtersString.add(filterToken[2].concat(alarm.getUei()));
+            }
+            if(alarm.getIfIndex()!= null){
+                    filtersString.add(filterToken[3].concat(String.valueOf(alarm.getIfIndex())));
+            }
+            
+            return filtersString;
     }
     
     @Override
     @Transactional
-	public void purgeAlarms(List<Integer> alarmIds) {
-    	for(Integer alarmId : alarmIds){
-    		//Delete an alarm by Id
-    		try{
-				if(m_alarmDao.deleteAlarmById(alarmId)>0){
-					LOG.warn("An Alarm [{}] is successfully deleted from the DB", alarmId);
-					
-					//Delete the events by alarmId
-					try{
-						if(m_eventDao.deleteEventByAlarmId(alarmId)>0){
-							LOG.warn("The event for the alarm [{}] is successfully deleted from the DB", alarmId);
-						} else {
-							LOG.warn("The event for alarm [{}] does not exist in the DB", alarmId);
-						}
-					} catch(Exception ex){
-						LOG.error("Unable to delete the event for the alarm [{}] from then DB", alarmId, ex);
-					}
-					
-					//Delete the acknowledgments by refId
-					try{
-						if(m_ackDao.deleteAcknowledgmentByRefId((int)alarmId)>0){
-							LOG.warn("The acknowledgment for the alarm [{}] is successfully deleted from the DB", alarmId);
-						} else {
-							LOG.warn("The acknowledgment for the alarm [{}] does not exist in the DB", alarmId);
-						}
-					} catch(Exception ex) {
-						LOG.error("Unable to delete the acknowledgment for the alarm [{}] from then DB", alarmId, ex);
-					}
-					
-				} else {
-					LOG.warn("An alarm [{}] does not exist in the DB", alarmId);
-				}
-    		} catch(Exception ex){
-    			LOG.error("Unable to delete an alarm [{}] from then DB", alarmId, ex);
-    		}
-    	}
+    public int purgeAlarm(int alarmId) {
+    	
+    	try{
+    		if(m_alarmDao.deleteAlarmById(alarmId)>0){
+    			LOG.warn("An Alarm ["+alarmId+"] is successfully deleted.");
+    			return 1;
+			} else {
+				LOG.warn("An Alarm ["+alarmId+"] does not exist in the DB");
+				return 0;
+			}
+		} catch(Exception ex){
+			ex.printStackTrace();
+			LOG.error("Unable to delete an alarm ["+alarmId+"] from then DB");
+		}
+    	
+    	return 0;
     }
+    
+    @Override
+    @Transactional
+    public int purgeEvent(int eventId) {
+    	try{
+			if(m_eventDao.deleteEventById(eventId)>0){
+				LOG.warn("An Event ["+eventId+"] is successfully deleted.");
+				return 1;
+			} else {
+				LOG.warn("An Event ["+eventId+"] does not exist in the DB");
+				return 0;
+			}
+		} catch(Exception ex){
+			ex.printStackTrace();
+			LOG.error("Unable to delete an event ["+eventId+"] from then DB");
+		}
+    	return 0;
+    }
+    
+    @Override
+    @Transactional
+    public int purgeAcknowledge(int refId) {
+		try{
+			if(m_ackDao.deleteAcknowledgmentByRefId(refId)>0){
+				LOG.warn("An Acknowledgment ["+refId+"] is successfully deleted.");
+				return 1;
+			} else {
+				LOG.warn("An Acknowledgment ["+refId+"] does not exist in the DB");
+				return 0;
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			LOG.error("Unable to delete an acknowledgment ["+refId+"] from then DB");
+		}
+		return 0;
+    }
+    
 }
+
+

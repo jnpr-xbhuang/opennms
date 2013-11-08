@@ -1,30 +1,30 @@
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2009-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2009-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 package org.opennms.web.controller.alarm;
 
@@ -50,12 +50,23 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import java.io.ByteArrayOutputStream;
+import javax.ws.rs.core.MediaType;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import org.opennms.web.rest.AlarmBean;
+import org.opennms.web.rest.AlarmRestResource;
+import org.opennms.web.rest.Task;
+
 /**
- * This servlet receives an HTTP POST with a list of alarms and purge or purge all action 
- * for the selected alarms, and then it redirects the client to a URL for display.
- * The target URL is configurable in the servlet config (web.xml file).
- *
- */
+* This servlet receives an HTTP POST with a list of alarms and purge or purge all action
+* for the selected alarms, and then it redirects the client to a URL for display.
+* The target URL is configurable in the servlet config (web.xml file).
+*
+*/
 
 public class AlarmPurgeController extends AbstractController implements InitializingBean {
     
@@ -65,67 +76,61 @@ public class AlarmPurgeController extends AbstractController implements Initiali
     /** Constant <code>PURGEALL_ACTION="2"</code> */
     public final static String PURGEALL_ACTION = "2";
     
-    /** Constant <code>SUCCESS_ACTION="Y"</code> */
-    public final static String SUCCESS_ACTION = "Y";
+    /** To hold report file name <code>PURGE_LIMIT=100000</code> */
+    public static int PURGE_LIMIT = 100000;
     
-    /** Constant <code>FAILURE_ACTION="N"</code> */
-    public final static String FAILURE_ACTION = "N";
-    
-	/**
-	 * OpenNMS alarm default acknowledge type
-	 */
-	private AcknowledgeType m_defaultAlarmAcknowledgeType = AcknowledgeType.UNACKNOWLEDGED;
-	
     /**
-	 * OpenNMS alarm repository
-	 */
+         * OpenNMS alarm repository
+         */
     private AlarmRepository m_webAlarmRepository;
     
     /**
-     * OpenNMS event repository
-     */
+* OpenNMS event repository
+*/
     private WebEventRepository m_webEventRepository;
     
     /** To hold default redirectView page */
     private String m_redirectView;
     
     /**
-     * Logging
-     */
+* Logging
+*/
     private Logger logger = LoggerFactory.getLogger("OpenNMS.WEB." + AlarmPurgeController.class.getName());
 
     /**
-     * <p>setRedirectView</p>
-     *
-     * @param redirectView a {@link java.lang.String} object.
-     */
+* <p>setRedirectView</p>
+*
+* @param redirectView a {@link java.lang.String} object.
+*/
     public void setRedirectView(String redirectView) {
         m_redirectView = redirectView;
     }
     
     /**
-     * <p>setWebAlarmRepository</p>
-     *
-     * @param webAlarmRepository a {@link org.opennms.netmgt.dao.AlarmRepository} object.
-     */
+* <p>setWebAlarmRepository</p>
+*
+* @param webAlarmRepository a {@link org.opennms.netmgt.dao.AlarmRepository} object.
+*/
     public void setAlarmRepository(AlarmRepository webAlarmRepository) {
         m_webAlarmRepository = webAlarmRepository;
+        AlarmRestResource.setAlarmRepository(webAlarmRepository);
     }
 
     /**
-     * <p>setWebEventRepository</p>
-     *
-     * @param webEventRepository a {@link org.opennms.web.event.WebEventRepository} object.
-     */
+* <p>setWebEventRepository</p>
+*
+* @param webEventRepository a {@link org.opennms.web.event.WebEventRepository} object.
+*/
     public void setWebEventRepository(WebEventRepository webEventRepository) {
         m_webEventRepository = webEventRepository;
+        AlarmRestResource.setWebEventRepository(webEventRepository);
     }
     
     /**
-     * <p>afterPropertiesSet</p>
-     *
-     * @throws java.lang.Exception if any.
-     */
+* <p>afterPropertiesSet</p>
+*
+* @throws java.lang.Exception if any.
+*/
     @Override
     public void afterPropertiesSet() throws Exception {
         Assert.notNull(m_webAlarmRepository, "webAlarmRepository must be set");
@@ -134,94 +139,100 @@ public class AlarmPurgeController extends AbstractController implements Initiali
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * Purge or purge all action of the selected alarms specified in the POST and then redirect 
-     * the client to an appropriate URL for display.
-     */
+* {@inheritDoc}
+*
+* Purge or purge all action of the selected alarms specified in the POST and then redirect
+* the client to an appropriate URL for display.
+*/
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         
-    	logger.info("Enter into the AlarmPurgeController action");
+            logger.info("Enter into the AlarmPurgeController action");
+            
+    	// Handle the alarm bean class
+        AlarmBean alarmBean = new AlarmBean();
     	
-    	// Handle the alarm and actionCode parameter
-    	String[] alarmIdStrings = request.getParameterValues("alarm");
+            // Handle the alarm and actionCode parameter
+            String[] alarmIdStrings = request.getParameterValues("alarm");
+    	    alarmBean.setAlarmids(alarmIdStrings);
+    	
+    	// Handle the actionCode parameter
         String action = request.getParameter("actionCode");
-        
-        List<Integer> alarmIds = new ArrayList<Integer>();
-        if (alarmIdStrings != null && action.equals(PURGE_ACTION)) {
-            for (int i = 0; i < alarmIdStrings.length; i++) {
-            	try{
-            		alarmIds.add(WebSecurityUtils.safeParseInt(alarmIdStrings[i]));
-            	} catch (Exception e) {
-    				logger.error("Could not parse alarm ID '{}' to integer.",alarmIdStrings[i]);
-    			}
-            }
-        }
+        alarmBean.setAction(action);
         
         // Handle the acknowledge type parameter
         String ackTypeString = request.getParameter("acktype");
-        AcknowledgeType alarmAckType = m_defaultAlarmAcknowledgeType;
+        alarmBean.setAcktype(ackTypeString);
         
-        if (ackTypeString != null) {
-        	try{
-		        alarmAckType = AcknowledgeType.getAcknowledgeType(ackTypeString);
-	        } catch (Exception e) {
-				logger.error("Could not retrieve acknowledge type for this '{}'.",ackTypeString);
-			}
-        }
+        // Handle the sortStyle type parameter
+        String sortStyleString = request.getParameter("sortby");
+        alarmBean.setSortStyle(sortStyleString);
         
         // Handle the filter parameter
-        List<Filter> filterList = new ArrayList<Filter>();
         String[] filterStrings = request.getParameterValues("filter");
+        alarmBean.setFilterStrings(filterStrings);
         
-        if (action.equals(PURGEALL_ACTION)) {
-        	if(filterStrings != null){
-	            for (int i = 0; i < filterStrings.length; i++) {
-	                Filter filter = AlarmUtil.getFilter(filterStrings[i], getServletContext());
-	                if (filter != null) {
-	                    filterList.add(filter);
-	                }
-	            }
-        	}
-        }
-        
-        //Get the alarms by alarm criteria
-        Filter[] alarmFilters = filterList.toArray(new Filter[0]);
-        
-        if(action.equals(PURGEALL_ACTION)){
-        	alarmIds.clear();
-        	AlarmCriteria alarmQueryCriteria = new AlarmCriteria(alarmFilters,alarmAckType);
-	        OnmsAlarm[] alarms = m_webAlarmRepository.getMatchingAlarms(AlarmUtil.getOnmsCriteria(alarmQueryCriteria));
-	        for(OnmsAlarm alarm : alarms){
-	        	alarmIds.add(alarm.getId());
+		// Handle the alarm bean marshal string 
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		String bean = null;
+		try {
+			JAXBContext m_context = JAXBContext.newInstance(AlarmBean.class);
+			Marshaller m_marshaller = m_context.createMarshaller();
+			m_marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			m_marshaller = m_context.createMarshaller();
+			m_marshaller.marshal(alarmBean, out);
+			bean = out.toString();
+			out.close();
+		} catch(Exception ex) {
+    		ex.printStackTrace();
+    		logger.error("Unable to marshall your alarm bean class because of  "+ex.getMessage());
+    	} finally {
+    		if(out != null){
+    			out.close();
+    		}
+    	}
+    	
+        // Get the address for junos server
+        String addressForServer = System.getProperty("junos.server.address");
+		
+    	// Handle the rest client for junos rest api
+    	ClientResponse clientResponse = null;
+        try{	
+			if(addressForServer!=null && addressForServer!=" "){
+				Client client = Client.create();
+				client.setReadTimeout(60000);
+				WebResource service=client.resource("http://"+addressForServer+":8080/fmpm/restful/alarms/purge");
+				clientResponse = service.type(MediaType.APPLICATION_XML).post(ClientResponse.class,bean);
+			} else {
+    			logger.error("Unable to call junose rest api because junos server address ["+addressForServer+"] is invalid");
+    		}
+    	} catch(Exception ex) {
+    		ex.printStackTrace();
+    		logger.error("Unable to call junose rest api from alarm purge controller because of "+ex.getMessage());
+    	}
+            
+        // Get the response status from junos rest api
+        int taskId = -1;
+        try {
+	        Task restTask = clientResponse.getEntity(Task.class);
+	        if(restTask!=null){
+	        	taskId = restTask.getId();
 	        }
+        } catch(Exception ex) {
+        	logger.error("Could not get the task response from junose rest api");
         }
-        
-        // Handle the purge action
-        if (action.equals(PURGE_ACTION) || action.equals(PURGEALL_ACTION)) {
-        	try{
-        		m_webAlarmRepository.purgeAlarms(alarmIds);
-        		request.getSession().setAttribute("actionStatus", alarmIds.size()+","+SUCCESS_ACTION);
-        		logger.info("The Purge action is successfully completed for the alarm Id's "+alarmIds+" ");
-        	} catch(final Exception ex){
-        		ex.printStackTrace();
-        		request.getSession().setAttribute("actionStatus", alarmIds.size()+","+FAILURE_ACTION);
-        	    logger.error("Unable to do purge action for this alarm Id's.", alarmIds);
-        	}
-        } else {
-        	logger.error("Unknown alarm action: " + action);
-        }
-        
-        // Handle the redirect parameters
+            
+    	// Handle the redirect parameters
         String redirectParms = request.getParameter("redirectParms");
         String viewName = m_redirectView;
-        if(redirectParms!=null){
+        if(redirectParms!=null && redirectParms != "" && redirectParms != " "){
         	viewName = m_redirectView + "?" + redirectParms;
         }
         
         RedirectView view = new RedirectView(viewName, true);
-        logger.info("Terminated from the AlarmPurgeController action");
+        request.getSession().setAttribute("actionStatus","P"+","+taskId);
         
+        logger.info("Job Id["+taskId+"] for your AlarmPurgeController action");
         return new ModelAndView(view);
     }
 }
+

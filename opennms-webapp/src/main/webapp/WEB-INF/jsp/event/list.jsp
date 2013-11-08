@@ -1,35 +1,35 @@
 <%--
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2009-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2009-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 --%>
 
-<%@page language="java"	contentType="text/html"	session="true" %>
+<%@page language="java"        contentType="text/html"        session="true" %>
 
 <%@page import="org.opennms.netmgt.model.OnmsFilterFavorite"%>
 <%@page import="org.opennms.web.admin.notification.noticeWizard.NotificationWizardServlet"%>
@@ -49,22 +49,27 @@
 <%@page import="org.opennms.web.api.Util" %>
 <%@page import="org.opennms.web.tags.FavoriteTag" %>
 
+<%@page import="org.opennms.core.utils.WebSecurityUtils"%>
+<%@page import="org.opennms.web.event.EventQueryParms"%>
+<%@page import="org.opennms.web.event.EventUtil"%>
+<%@page	import="org.opennms.web.controller.event.EventPurgeController"%>
+<%@page	import="org.opennms.web.controller.event.EventExportController"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="../../taglib.tld" prefix="onms" %>
 
 <%--
   This page is written to be the display (view) portion of the EventFilterController
-  at the /event/list.htm URL.  It will not work by itself, as it requires two request
+  at the /event/list.htm URL. It will not work by itself, as it requires two request
   attributes be set:
   
   1) events: the list of org.opennms.web.element.Event instances to display
-  2) parms: an org.opennms.web.event.EventQueryParms object that holds all the 
+  2) parms: an org.opennms.web.event.EventQueryParms object that holds all the
      parameters used to make this query
 --%>
 
 <%
-	XssRequestWrapper req = new XssRequestWrapper(request);
+        XssRequestWrapper req = new XssRequestWrapper(request);
 
     //required attributes
     Event[] events = (Event[])req.getAttribute( "events" );
@@ -83,7 +88,7 @@
     // Make 'action' the opposite of the current acknowledgement state
     String action = AcknowledgeType.ACKNOWLEDGED.getShortName();
     if (parms.getAckType() != null && parms.getAckType().equals(AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType())) {
-    	action = AcknowledgeType.UNACKNOWLEDGED.getShortName();
+            action = AcknowledgeType.UNACKNOWLEDGED.getShortName();
     }
 
     pageContext.setAttribute("addPositiveFilter", "[+]");
@@ -91,6 +96,34 @@
     pageContext.setAttribute("addBeforeFilter", "[&gt;]");
     pageContext.setAttribute("addAfterFilter", "[&lt;]");
     pageContext.setAttribute("filterFavoriteSelectTagHandler", new FilterFavoriteSelectTagHandler());
+    //Get the purge action status
+    String actionStatus = (String) req.getSession().getAttribute("actionStatus");
+
+	//Get the report data limit
+    int exportDataLimit =0;
+try{
+    String reportLimit = System.getProperty("opennms.event.export.limit");
+    if(reportLimit!=null && reportLimit.trim()!=""){
+	exportDataLimit = Integer.parseInt(reportLimit);
+    } }
+catch(Exception e)
+{
+exportDataLimit = 100000;
+}
+
+	int purgeDataLimit =100000;
+try{
+	String purgeLimit = System.getProperty("opennms.event.purge.limit");
+	    
+	if(purgeLimit!=null && purgeLimit.trim()!=""){
+	purgeDataLimit = Integer.parseInt(purgeLimit);
+	  
+	}}
+catch(Exception e)
+{
+purgeDataLimit = 100000;
+}
+
 %>
 
 
@@ -102,7 +135,7 @@
   <jsp:param name="breadcrumb" value="<a href= 'event/index' title='Events System Page'>Events</a>" />
   <jsp:param name="breadcrumb" value="List" />
 </jsp:include>
-
+<script type="text/javascript" src="<c:url value="/js/jquery/jquery.js"/>"></script>
   <script type="text/javascript">
     function checkAllCheckboxes() {
        if( document.acknowledge_form.event.length ) {
@@ -120,7 +153,90 @@
     {
         var isChecked = false
         var numChecked = 0;
+		var isEventAvailabilty = false;
+		var isPurgeExport = true;
 
+		if(anAction == "purge" || anAction == "purgeall"){
+		document.acknowledge_form.action = "event/purgeEvents";
+		} else if(anAction == "export" || anAction == "exportall") {
+		document.acknowledge_form.action = "event/exportEvents";
+		}
+    // Decide what our action should be
+    if (anAction == "purge") {
+		document.acknowledge_form.actionCode.value = "<%=EventPurgeController.PURGE_ACTION%>";
+  	} else if (anAction == "purgeall") {
+		document.acknowledge_form.actionCode.value = "<%=EventPurgeController.PURGEALL_ACTION%>";
+	}else if (anAction == "export") {
+		document.acknowledge_form.actionCode.value = "<%=EventExportController.EXPORT_ACTION%>";
+  	} else if (anAction == "exportall") {
+  		document.acknowledge_form.actionCode.value = "<%=EventExportController.EXPORTALL_ACTION%>";
+	}//Check the event availability
+	for (i = 0; i < document.acknowledge_form.elements.length; i++) {
+		if (document.acknowledge_form.elements[i].name == "event") {
+			isEventAvailabilty = true;
+		}
+	}
+
+		//Get the event count
+		var eventCount =<%=eventCount%>;
+		if ((anAction == "purge" || anAction == "export" ) && isEventAvailabilty) {
+                   
+			eventCount = 0;
+			if (document.acknowledge_form.event.length) {
+				for (i = 0; i < document.acknowledge_form.event.length; i++) {
+					//make sure something is checked before proceeding
+					if (document.acknowledge_form.event[i].checked) {
+						eventCount += 1;
+					}
+				}
+			} else {
+				if (document.acknowledge_form.event.checked) {
+					eventCount += 1;
+				}
+			}
+		}
+	
+        //Get the confirmation status for purge and export action
+        var regularNoun = (parseInt(eventCount) == 1) ? 'event' : 'events';
+
+        if (anAction == "purge" && parseInt(eventCount) > 0) {
+        	isPurgeExport = false;
+                var confirmText ='Note:Events with correlated alarms will not be purged.Are you sure you want to purge selected '
+                                + regularNoun
+                                + ' ? ('
+                                + eventCount
+                                + ' total '
+                                + regularNoun + ')';
+                if (confirm(confirmText)) {
+                        isPurgeExport = true;
+                } else {
+                        isPurgeExport = false;
+                }
+        }else if (anAction == "export" && parseInt(eventCount) > 0) {
+		isPurgeExport = false;
+        var confirmText = 'Are you sure you want to export ' + regularNoun
+                                                + ' ? (' + eventCount + ' total ' + regularNoun + ')';
+       	showPopup(confirmText);
+        } else if (anAction == "purgeall") {
+	
+           if (confirm("Note:Events with correlated alarms will not be purged.Are you sure to purge the filtered events? ")) {
+                        isPurgeExport = true;
+                } else {
+                        isPurgeExport = false;
+                }
+        } else  if (anAction == "exportall") {
+		isPurgeExport = false;
+		var confirmText = "Are you sure you want to  exportall  the  filtered  events ?";
+
+	        showPopup(confirmText);
+        }
+
+		
+		
+if (isPurgeExport)
+			if (isEventAvailabilty) {
+				if (anAction != "purgeall") {
+ 
         if (document.acknowledge_form.event.length)
         {
             for( i = 0; i < document.acknowledge_form.event.length; i++ )
@@ -169,11 +285,25 @@
                 alert("Please check the events that you would like to " + anAction + ".");
             }
         }
+        } else {
+        	if(document.acknowledge_form.multiple){
+                var findVal = "multiple=" + document.acknowledge_form.multiple.value;
+                var replaceWith = "multiple=0" ;
+                var tmpRedirect = document.acknowledge_form.redirectParms.value;
+                document.acknowledge_form.redirectParms.value = tmpRedirect.replace(findVal, replaceWith);
+              }
+                  		
+					document.acknowledge_form.submit();
     }
-
+			} else {
+				alert("There is currently no events in this category to "
+						+ anAction + ".");
+			}
+    }
+    
     function submitNewNotificationForm(uei) {
-    	document.getElementById("uei").value=uei;
-    	document.add_notification_form.submit();
+            document.getElementById("uei").value=uei;
+            document.add_notification_form.submit();
     }
 
     function changeFavorite(selectElement) {
@@ -202,9 +332,9 @@
               </form>
 
               <% if( AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
-                <a href="javascript:void()" onclick="if (confirm('Are you sure you want to acknowledge all events in the current search including those not shown on your screen?  (<%=eventCount%> total events)')) {  document.acknowledge_by_filter_form.submit(); }" title="Acknowledge all events that match the current search constraints, even those not shown on the screen">Acknowledge entire search</a>
+                <a href="javascript:void()" onclick="if (confirm('Are you sure you want to acknowledge all events in the current search including those not shown on your screen? (<%=eventCount%> total events)')) { document.acknowledge_by_filter_form.submit(); }" title="Acknowledge all events that match the current search constraints, even those not shown on the screen">Acknowledge entire search</a>
               <% } else { %>
-                <a href="javascript:void()" onclick="if (confirm('Are you sure you want to unacknowledge all events in the current search including those not shown on your screen)?  (<%=eventCount%> total events)')) { document.acknowledge_by_filter_form.submit(); }" title="Unacknowledge all events that match the current search constraints, even those not shown on the screen">Unacknowledge entire search</a>
+                <a href="javascript:void()" onclick="if (confirm('Are you sure you want to unacknowledge all events in the current search including those not shown on your screen)? (<%=eventCount%> total events)')) { document.acknowledge_by_filter_form.submit(); }" title="Unacknowledge all events that match the current search constraints, even those not shown on the screen">Unacknowledge entire search</a>
               <% } %>
             </li>
           <% } %>
@@ -213,11 +343,11 @@
       </div>
       <!-- end menu -->
 
-	  <!-- hidden form for adding a new Notification -->
-	  <form action="admin/notification/noticeWizard/notificationWizard" method="post" name="add_notification_form">
-	  	<input type="hidden" name="sourcePage" value="<%=NotificationWizardServlet.SOURCE_PAGE_OTHER_WEBUI%>" />
-	  	<input type="hidden" name="uei" id="uei" value="" /> <!-- Set by java script -->
-	  </form>
+         <!-- hidden form for adding a new Notification -->
+         <form action="admin/notification/noticeWizard/notificationWizard" method="post" name="add_notification_form">
+                 <input type="hidden" name="sourcePage" value="<%=NotificationWizardServlet.SOURCE_PAGE_OTHER_WEBUI%>" />
+                 <input type="hidden" name="uei" id="uei" value="" /> <!-- Set by java script -->
+         </form>
 
       <jsp:include page="/includes/event-querypanel.jsp" flush="false" />
           
@@ -225,17 +355,17 @@
               <% String baseUrl = this.makeLink(callback, parms, favorite); %>
               <% if ( eventCount == -1 ) { %>
                 <jsp:include page="/includes/resultsIndexNoCount.jsp" flush="false" >
-                  <jsp:param name="itemCount"    value="<%=events.length%>" />
-                  <jsp:param name="baseurl"  value="<%=baseUrl%>"    />
-                  <jsp:param name="limit"    value="<%=parms.getLimit()%>"      />
-                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>"   />
+                  <jsp:param name="itemCount" value="<%=events.length%>" />
+                  <jsp:param name="baseurl" value="<%=baseUrl%>" />
+                  <jsp:param name="limit" value="<%=parms.getLimit()%>" />
+                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>" />
                 </jsp:include>
               <% } else { %>
                 <jsp:include page="/includes/resultsIndex.jsp" flush="false" >
-                  <jsp:param name="count"    value="<%=eventCount%>" />
-                  <jsp:param name="baseurl"  value="<%=baseUrl%>"    />
-                  <jsp:param name="limit"    value="<%=parms.getLimit()%>"      />
-                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>"   />
+                  <jsp:param name="count" value="<%=eventCount%>" />
+                  <jsp:param name="baseurl" value="<%=baseUrl%>" />
+                  <jsp:param name="limit" value="<%=parms.getLimit()%>" />
+                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>" />
                 </jsp:include>
               <% } %>
             <% } %>
@@ -269,11 +399,34 @@
               </p>
             <% } %>
             <onms:alert/>
+        <!-- Popup message box for event export action -->
+        <div id="exportConfirmation" style="display:none">
+                <center>
+                        <div id="alertText">&nbsp;</div>
+    <div></div>
 
+                        Select your file format :
+                        <input type="radio" name="format" value="PDF" checked="checked">PDF
+                <!--    <input type="radio" name="format" value="XLS">XLS -->
+                        <input type="radio" name="format" value="HTML">HTML
+                        <input type="radio" name="format" value="CSV">CSV<br><br>
+                        <input type="button" onclick="javascript:callEventExportAction();" value="Ok" />
+                        <input type="button" onclick="javascript:hideTransBackground();" value="Cancel"/>
+                </center>
+        </div>
     <% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
       <form action="event/acknowledge" method="post" name="acknowledge_form">
         <input type="hidden" name="redirectParms" value="<c:out value="<%=req.getQueryString()%>"/>" />
         <input type="hidden" name="actionCode" value="<%=action%>" />
+
+	<!-- Hidden datas for event/purge and export  -->
+	<input type="hidden" name="nodeid" value="node=" /> 
+	<input type="hidden" name="exactuei" value="exactUei=" /> 
+	<input type="hidden" name="ipaddress" value="interface=" />
+        <input type="hidden" name="format" value="pdf" />
+	<input type="hidden" name="reportId" value="local_event-report" />
+	<div id="backgroundPopup"></div>
+	<body />
         <%=org.opennms.web.api.Util.makeHiddenTags(req)%>
     <% } %>
                 <jsp:include page="/includes/key.jsp" flush="false" />
@@ -284,45 +437,45 @@
         <thead>
         <tr>
           <% if( "true".equals(acknowledgeEvent) ) { %>
-						<% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
-							<% if ( AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
-							<th width="2%">Ack</th>
-							<% } else { %>
-							<th width="2%">UnAck</th>
-							<% } %>
-						<% } else { %>
-							<th width="2%">&nbsp;</th>
-						<% } %>
+                                                <% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
+                                                        <% if ( AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
+                                                        <th width="2%">Ack</th>
+                                                        <% } else { %>
+                                                        <th width="2%">UnAck</th>
+                                                        <% } %>
+                                                <% } else { %>
+                                                        <th width="2%">&nbsp;</th>
+                                                <% } %>
           <% } %>
-          <th width="4%"> <%=this.makeSortLink(callback, parms, SortStyle.ID,        SortStyle.REVERSE_ID,        "id",        "ID"        , favorite)%></th>
-          <th width="10%"><%=this.makeSortLink(callback, parms, SortStyle.SEVERITY,  SortStyle.REVERSE_SEVERITY,  "severity",  "Severity"  , favorite)%></th>
-          <th width="19%"><%=this.makeSortLink(callback, parms, SortStyle.TIME,      SortStyle.REVERSE_TIME,      "time",      "Time"      , favorite)%></th>
-          <th width="24%"><%=this.makeSortLink(callback, parms, SortStyle.NODE,      SortStyle.REVERSE_NODE,      "node",      "Node"      , favorite)%></th>
+          <th width="4%"> <%=this.makeSortLink(callback, parms, SortStyle.ID, SortStyle.REVERSE_ID, "id", "ID" , favorite)%></th>
+          <th width="10%"><%=this.makeSortLink(callback, parms, SortStyle.SEVERITY, SortStyle.REVERSE_SEVERITY, "severity", "Severity" , favorite)%></th>
+          <th width="19%"><%=this.makeSortLink(callback, parms, SortStyle.TIME, SortStyle.REVERSE_TIME, "time", "Time" , favorite)%></th>
+          <th width="24%"><%=this.makeSortLink(callback, parms, SortStyle.NODE, SortStyle.REVERSE_NODE, "node", "Node" , favorite)%></th>
           <th width="16%"><%=this.makeSortLink(callback, parms, SortStyle.INTERFACE, SortStyle.REVERSE_INTERFACE, "interface", "Interface" , favorite)%></th>
-          <th width="14%"><%=this.makeSortLink(callback, parms, SortStyle.SERVICE,   SortStyle.REVERSE_SERVICE,   "service",   "Service"   , favorite)%></th>
+          <th width="14%"><%=this.makeSortLink(callback, parms, SortStyle.SERVICE, SortStyle.REVERSE_SERVICE, "service", "Service" , favorite)%></th>
         </tr>
-        </thead>     
+        </thead>
       <% for( int i=0; i < events.length; i++ ) {
         Event event = events[i];
-      	pageContext.setAttribute("event", event);
+              pageContext.setAttribute("event", event);
       %>
       
         <tr valign="top" class="<%=events[i].getSeverity().getLabel()%>">
-          <% if( "true".equals(acknowledgeEvent) ) { %>
-						<% if( request.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
-						<td valign="top" rowspan="4" class="divider">
-									<input type="checkbox" name="event" value="<%=events[i].getId()%>" /> 
-							</td>
-							<% } else { %>
-								<td valign="top" rowspan="4" class="divider">&nbsp;</td>
-							<% } %>
-            <% } %>
+          <%--<% if( "true".equals(acknowledgeEvent) ) { %>--%> 
+                                                <% if( request.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
+                                                <td valign="top" rowspan="4" class="divider">
+                                                                        <input type="checkbox" name="event" value="<%=events[i].getId()%>" />
+                                                        </td>
+                                                        <% } else { %>
+                                                                <td valign="top" rowspan="4" class="divider">&nbsp;</td>
+                                                        <% } %>
+            <%--<% } %>--%> 
 
           <td valign="top" rowspan="4" class="divider"><a href="event/detail.jsp?id=<%=events[i].getId()%>"><%=events[i].getId()%></a></td>
           
-          <td valign="top" rowspan="4" class="divider bright"> 
+          <td valign="top" rowspan="4" class="divider bright">
             <strong><%= events[i].getSeverity().getLabel() %></strong>
-            <% Filter severityFilter = new SeverityFilter(events[i].getSeverity()); %>      
+            <% Filter severityFilter = new SeverityFilter(events[i].getSeverity()); %>
             <% if( !parms.getFilters().contains(severityFilter)) { %>
               <nobr>
                 <a href="<%=this.makeLink(callback, parms, severityFilter, true, favorite)%>" class="filterLink" title="Show only events with this severity">${addPositiveFilter}</a>
@@ -333,12 +486,12 @@
           <td class="divider">
             <nobr><fmt:formatDate value="${event.time}" type="date" dateStyle="short"/>&nbsp;<fmt:formatDate value="${event.time}" type="time" pattern="HH:mm:ss"/></nobr>
             <nobr>
-              <a href="<%=this.makeLink(callback, parms, new AfterDateFilter(events[i].getTime()), true, favorite)%>"  class="filterLink" title="Only show events occurring after this one">${addAfterFilter}</a>
+              <a href="<%=this.makeLink(callback, parms, new AfterDateFilter(events[i].getTime()), true, favorite)%>" class="filterLink" title="Only show events occurring after this one">${addAfterFilter}</a>
               <a href="<%=this.makeLink(callback, parms, new BeforeDateFilter(events[i].getTime()), true, favorite)%>" class="filterLink" title="Only show events occurring before this one">${addBeforeFilter}</a>
             </nobr>
           </td>
           <td class="divider">
-	    <% if(events[i].getNodeId() != 0 && events[i].getNodeLabel()!= null ) { %>
+         <% if(events[i].getNodeId() != 0 && events[i].getNodeLabel()!= null ) { %>
               <% Filter nodeFilter = new NodeFilter(events[i].getNodeId(), pageContext.getServletContext()); %>
               <% String[] labels = this.getNodeLabels( events[i].getNodeLabel() ); %>
               <a href="element/node.jsp?node=<%=events[i].getNodeId()%>" title="<%=labels[1]%>"><%=labels[0]%></a>
@@ -393,7 +546,7 @@
                   <a href="<%=this.makeLink(callback, parms, serviceFilter, true, favorite)%>" class="filterLink" title="Show only events with this service type">${addPositiveFilter}</a>
                   <a href="<%=this.makeLink(callback, parms, new NegativeServiceFilter(events[i].getServiceId(), pageContext.getServletContext()), true, favorite)%>" class="filterLink" title="Do not show events for this service">${addNegativeFilter}</a>
                 </nobr>
-              <% } %>                            
+              <% } %>
             <% } else { %>
               &nbsp;
             <% } %>
@@ -413,7 +566,7 @@
                 </nobr>
               <% } %>
               <% if (req.isUserInRole(Authentication.ROLE_ADMIN)) { %>
-               	  <a href="javascript:void()" onclick="submitNewNotificationForm('<%=events[i].getUei()%>');" title="Edit notifications for this Event UEI">Edit notifications for event</a>
+                        <a href="javascript:void()" onclick="submitNewNotificationForm('<%=events[i].getUei()%>');" title="Edit notifications for this Event UEI">Edit notifications for event</a>
               <% } %>
             <% } else { %>
               &nbsp;
@@ -433,7 +586,23 @@
       </table>
         
         <p><%=events.length%> events
-          <% 
+          <%
+                	if( (req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ))) {
+                %>
+		<input TYPE="reset" /> <input TYPE="button" VALUE="Select All"
+			onClick="checkAllCheckboxes()" /> <select name="eventAction">
+			<optgroup label="Export Events">
+				<option value="export">Export Selected</option>
+	        		<option value="exportall">Export All</option>
+	   		</optgroup>
+			<optgroup label="Purge Events">
+				<option value="purge">Purge Selected</option>
+				<option value="purgeall">Purge All</option>
+			</optgroup>
+		</select> <input type="button" value="Go"
+			onClick="submitForm(document.acknowledge_form.eventAction.value)" />
+		<%
+			}
           if( (req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY )) && "true".equals(acknowledgeEvent)) { %>
             <% if( AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
               <input type="button" value="Acknowledge Events" onClick="submitForm('<%= AcknowledgeType.UNACKNOWLEDGED.getShortName() %>')"/>
@@ -452,17 +621,17 @@
               <% String baseUrl = this.makeLink(callback, parms, favorite); %>
               <% if ( eventCount == -1 ) { %>
                 <jsp:include page="/includes/resultsIndexNoCount.jsp" flush="false" >
-                  <jsp:param name="itemCount"    value="<%=events.length%>" />
-                  <jsp:param name="baseurl"  value="<%=baseUrl%>"    />
-                  <jsp:param name="limit"    value="<%=parms.getLimit()%>"      />
-                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>"   />
+                  <jsp:param name="itemCount" value="<%=events.length%>" />
+                  <jsp:param name="baseurl" value="<%=baseUrl%>" />
+                  <jsp:param name="limit" value="<%=parms.getLimit()%>" />
+                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>" />
                 </jsp:include>
               <% } else { %>
                 <jsp:include page="/includes/resultsIndex.jsp" flush="false" >
-                  <jsp:param name="count"    value="<%=eventCount%>" />
-                  <jsp:param name="baseurl"  value="<%=baseUrl%>"    />
-                  <jsp:param name="limit"    value="<%=parms.getLimit()%>"      />
-                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>"   />
+                  <jsp:param name="count" value="<%=eventCount%>" />
+                  <jsp:param name="baseurl" value="<%=baseUrl%>" />
+                  <jsp:param name="limit" value="<%=parms.getLimit()%>" />
+                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>" />
                 </jsp:include>
               <% } %>
             <% } %>          
@@ -500,7 +669,7 @@
           buffer.append( this.makeLink(callback, parms, style, favorite ));
           buffer.append( "\" title=\"Sort by " );
           buffer.append( sortString );
-          buffer.append( "\">" );   
+          buffer.append( "\">" );
       }
 
       buffer.append( title );
@@ -511,7 +680,7 @@
       return( buffer.toString() );
     }
 
-    public String makeLink(FilterCallback callback,  NormalizedQueryParameters parms, OnmsFilterFavorite favorite ) {
+    public String makeLink(FilterCallback callback, NormalizedQueryParameters parms, OnmsFilterFavorite favorite ) {
       return callback.createLink(urlBase, parms, favorite);
     }
 
@@ -552,7 +721,7 @@
         String[] labels = null;
 
         if( nodeLabel.length() > 32 ) {
-            String shortLabel = nodeLabel.substring( 0, 31 ) + "...";                        
+            String shortLabel = nodeLabel.substring( 0, 31 ) + "...";
             labels = new String[] { shortLabel, nodeLabel };
         }
         else {
@@ -566,8 +735,25 @@
 <%!
     protected String getTextDesc( String desc ) {
          if ( desc != null && desc.indexOf("<table>") > 0 ) {
-             return desc.substring( 0, desc.indexOf("<table>"));  
+             return desc.substring( 0, desc.indexOf("<table>"));
          }
          return desc;
     }
 %>
+<script type="text/javascript">
+    //Action status for purge and export
+    var actionStatus = "<%=actionStatus%>";
+    var seperateStatus = actionStatus.split(",");
+    if(actionStatus != "null"){
+	    if(seperateStatus[0] == "P" || seperateStatus[0] == "E"){
+		if(parseInt(seperateStatus[1]) >= 0){
+			alert("Your Job ["+seperateStatus[1]+"] is successfully created.Please wait, your purge or export action is in progress...");
+		} else if(parseInt(seperateStatus[1]) == -2) {
+			alert("Already purge or export action is in progress, please try after some time...");
+		} else {
+			alert("Unable to create your job. Please check the log files");
+		}
+	    } 
+    }
+</script>
+<% request.getSession().setAttribute("actionStatus", "null"); %> 

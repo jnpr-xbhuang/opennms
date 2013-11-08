@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="alarm_subreport" pageWidth="660" pageHeight="26" columnWidth="660" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty" >
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.csv.exclude.origin.band.pageFooter" value="pageFooter"/>
+	<property name="net.sf.jasperreports.export.html.exclude.origin.band.pageFooter" value="pageFooter"/>
+	<property name="net.sf.jasperreports.export.xls.exclude.origin.band.pageFooter" value="pageFooter"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="alarmId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[alarmId]]></fieldDescription>
+	</field>
+	<field name="nodeLabel" class="java.lang.String">
+		<fieldDescription><![CDATA[nodeLabel]]></fieldDescription>
+	</field>
+	<field name="eventId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[eventId]]></fieldDescription>
+	</field>
+	<field name="eventAlarmId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[eventAlarmId]]></fieldDescription>
+	</field>
+	<field name="eventLogMsg" class="java.lang.String">
+		<fieldDescription><![CDATA[eventLogMsg]]></fieldDescription>
+	</field>
+	<field name="eventCreateTime" class="java.lang.String">
+		<fieldDescription><![CDATA[eventCreateTime]]></fieldDescription>
+	</field>
+	<field name="eventSeverity" class="java.lang.String">
+		<fieldDescription><![CDATA[eventSeverity]]></fieldDescription>
+	</field>
+	<field name="ackTime" class="java.lang.String">
+		<fieldDescription><![CDATA[ackTime]]></fieldDescription>
+	</field>
+	<field name="ackUser" class="java.lang.String">
+		<fieldDescription><![CDATA[ackUser]]></fieldDescription>
+	</field>
+	<field name="ackAction" class="java.lang.String">
+		<fieldDescription><![CDATA[ackAction]]></fieldDescription>
+	</field>
+	<field name="ipAddr" class="java.lang.String">
+		<fieldDescription><![CDATA[ipAddr]]></fieldDescription>
+	</field>
+	<title>
+		<band height="13">
+			<textField isStretchWithOverflow="true">
+				<reportElement  mode="Opaque" x="0" y="0" width="660" height="12" forecolor="#FFFFFF" backcolor="#A8A8A8"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" "+$F{alarmId}+(($F{nodeLabel} != null) ? " : "+$F{nodeLabel} : "")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="13">
+			<rectangle>
+				<reportElement  stretchType="RelativeToBandHeight" x="0" y="0" width="660" height="12"/>
+				<graphicElement>
+					<pen lineWidth="0.1"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement  x="0" y="0" width="45" height="12"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" "+(($F{eventId} != null) ? String.valueOf($F{eventId}) : "-")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement  x="45" y="0" width="45" height="12"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{eventAlarmId} != null) ? String.valueOf($F{eventAlarmId}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement  x="90" y="0" width="241" height="12"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{eventLogMsg} != null) ? $F{eventLogMsg} : "-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement  x="331" y="0" width="71" height="12"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{eventCreateTime} != null) ? $F{eventCreateTime} : "-"]]></textFieldExpression>
+			</textField>
+            <textField isStretchWithOverflow="true">
+				<reportElement  x="402" y="0" width="60" height="12"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{eventSeverity} !=null) ? $F{eventSeverity}.toLowerCase() : "-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement  x="462" y="0" width="71" height="12"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{ackTime} !=null) ? $F{ackTime} : "-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement  x="533" y="0" width="50" height="12"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{ackUser} != null) ? $F{ackUser} : "-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement  x="583" y="0" width="77" height="12"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{ackAction} != null) ? $F{ackAction} : "-"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,30 +1,30 @@
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2010-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2010-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 package org.opennms.reporting.availability.svclayer;
 
@@ -60,9 +60,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import org.opennms.reporting.availability.render.ReportRenderException;
 /**
- * <p>AvailabilityReportService class.</p>
- */
+* <p>AvailabilityReportService class.</p>
+*/
 public class AvailabilityReportService implements ReportService {
     private static final Logger LOG = LoggerFactory.getLogger(AvailabilityReportService.class);
 
@@ -74,14 +77,14 @@ public class AvailabilityReportService implements ReportService {
 
     private ParameterConversionService m_parameterConversionService;
 
-    private static final String LOG4J_CATEGORY = "reports";
+    private static final String LOG4J_CATEGORY = "OpenNMS.Report";
 
     private static final String CAL_TYPE = "calendar";
 
 
     /**
-     * <p>Constructor for AvailabilityReportService.</p>
-     */
+* <p>Constructor for AvailabilityReportService.</p>
+*/
     public AvailabilityReportService() {
     }
 
@@ -323,50 +326,50 @@ public class AvailabilityReportService implements ReportService {
     
     /** {@inheritDoc} */
     public void	runAndRender(List<Integer> alarmIds,HashMap<Integer, List<Integer>> eventIdsForAlarms ,
-        		String reportId, ReportFormat reportFormat, OutputStream outputStream, String fileName){
+        		String reportId, ReportFormat reportFormat, String fileName, String folderName){
     	throw new UnsupportedOperationException("Not supported yet. AvailabilityReportService is deprecated.");
     }
     
 
     /**
-     * <p>setCalendarCalculator</p>
-     *
-     * @param calculator a {@link org.opennms.reporting.availability.AvailabilityCalculator} object.
-     */
+* <p>setCalendarCalculator</p>
+*
+* @param calculator a {@link org.opennms.reporting.availability.AvailabilityCalculator} object.
+*/
     public void setCalendarCalculator(AvailabilityCalculator calculator) {
         m_calendarCalculator = calculator;
     }
 
     /**
-     * <p>setClassicCalculator</p>
-     *
-     * @param calulator a {@link org.opennms.reporting.availability.AvailabilityCalculator} object.
-     */
+* <p>setClassicCalculator</p>
+*
+* @param calulator a {@link org.opennms.reporting.availability.AvailabilityCalculator} object.
+*/
     public void setClassicCalculator(AvailabilityCalculator calulator) {
         m_classicCalculator = calulator;
     }
 
     /**
-     * <p>setConfigDao</p>
-     *
-     * @param configDao a {@link org.opennms.netmgt.dao.api.OnmsReportConfigDao} object.
-     */
+* <p>setConfigDao</p>
+*
+* @param configDao a {@link org.opennms.netmgt.dao.api.OnmsReportConfigDao} object.
+*/
     public void setConfigDao(OnmsReportConfigDao configDao) {
         m_configDao = configDao;
     }
 
     /**
-     * <p>setParameterConversionService</p>
-     *
-     * @param parameterConversionService a {@link org.opennms.reporting.core.svclayer.ParameterConversionService} object.
-     */
+* <p>setParameterConversionService</p>
+*
+* @param parameterConversionService a {@link org.opennms.reporting.core.svclayer.ParameterConversionService} object.
+*/
     public void setParameterConversionService(ParameterConversionService parameterConversionService) {
         m_parameterConversionService = parameterConversionService;
     }
 
 	@Override
 	public void runAndRender(List<Integer> eventIds, String reportId,
-			ReportFormat reportFormat, OutputStream outputStream)
+			ReportFormat reportFormat, String fileName,String folderName)
 			throws ReportException {
 		throw new UnsupportedOperationException("Not supported yet. AvailabilityReportService is deprecated.");
 		

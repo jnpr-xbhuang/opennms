@@ -1,30 +1,30 @@
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2009-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2009-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 package org.opennms.web.event;
 
@@ -52,18 +52,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * <p>DaoWebEventRepository class.</p>
- * 
- * @deprecated Move all of these methods into the {@link EventDao}. This class just
- * delegates straight to it anyway.
- *
- * @author ranger
- * @version $Id: $
- * @since 1.8.1
- */
+* <p>DaoWebEventRepository class.</p>
+*
+* @deprecated Move all of these methods into the {@link EventDao}. This class just
+* delegates straight to it anyway.
+*
+* @author ranger
+* @version $Id: $
+* @since 1.8.1
+*/
 public class DaoWebEventRepository implements WebEventRepository, InitializingBean {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(DaoWebEventRepository.class);
+        
+        private static final Logger LOG = LoggerFactory.getLogger(DaoWebEventRepository.class);
 
     
     @Autowired
@@ -200,7 +200,7 @@ public class DaoWebEventRepository implements WebEventRepository, InitializingBe
 
     private Integer getNodeIdFromNode(OnmsEvent onmsEvent) {
         try {
-            return onmsEvent.getNode() != null ? onmsEvent.getNode().getId() : 0;            
+            return onmsEvent.getNode() != null ? onmsEvent.getNode().getId() : 0;
         } catch (org.hibernate.ObjectNotFoundException e) {
             LOG.debug("No node found in database for event with id: {}", onmsEvent.getId());
             return 0;
@@ -209,19 +209,19 @@ public class DaoWebEventRepository implements WebEventRepository, InitializingBe
     
     private String getNodeLabelFromNode(OnmsEvent onmsEvent) {
         try {
-            return onmsEvent.getNode() != null ? onmsEvent.getNode().getLabel() : "";                    
+            return onmsEvent.getNode() != null ? onmsEvent.getNode().getLabel() : "";
         } catch (org.hibernate.ObjectNotFoundException e) {
             LOG.debug("No node found in database for event with id: {}", onmsEvent.getId());
             return "";
-        } 
+        }
     }
     
     /**
-     * <p>acknowledgeAll</p>
-     *
-     * @param user a {@link java.lang.String} object.
-     * @param timestamp a java$util$Date object.
-     */
+* <p>acknowledgeAll</p>
+*
+* @param user a {@link java.lang.String} object.
+* @param timestamp a java$util$Date object.
+*/
     @Transactional
     @Override
     public void acknowledgeAll(String user, Date timestamp) {
@@ -289,15 +289,15 @@ public class DaoWebEventRepository implements WebEventRepository, InitializingBe
             
             while(eventIt.hasNext()){
                 events.add(mapOnmsEventToEvent(eventIt.next()));
-            }   
+            }
         }
         
         return events.toArray(new Event[0]);
     }
     
     /**
-     * <p>unacknowledgeAll</p>
-     */
+* <p>unacknowledgeAll</p>
+*/
     @Transactional
     @Override
     public void unacknowledgeAll() {
@@ -319,26 +319,26 @@ public class DaoWebEventRepository implements WebEventRepository, InitializingBe
     
 
 
-	@Override
-	public int purgeEvents(List<Integer> eventIds) {
-		
-		List<String> deleteSuccessStatus = new ArrayList<String>();
-		List<String> deleteFailStatus = new ArrayList<String>();
-		int eventsDeleted = 0;
-		LOG.debug("Event Id's received : {}", eventIds);
-		for(Integer eventId : eventIds){
-			//Delete an event by Id
-			
-			int deleteCount = m_eventDao.deleteEventById(eventId);
-			
-			if(deleteCount>0){
-				deleteSuccessStatus.add(String.valueOf(eventId));
-				eventsDeleted = eventsDeleted + 1;
-			}else{
-				LOG.warn("Event id {} does not exist in DB", eventId);
-			}
-			LOG.debug("Event Id's {} are successfully deleted from the DB for event id {}", deleteSuccessStatus, eventId);
-		}
-		return eventsDeleted;
-	}
+        @Override
+        public int purgeEvents(List<Integer> eventIds) {
+                
+                List<String> deleteSuccessStatus = new ArrayList<String>();
+                List<String> deleteFailStatus = new ArrayList<String>();
+                int eventsDeleted = 0;
+                LOG.debug("Event Id's received : {}", eventIds);
+                for(Integer eventId : eventIds){
+                        //Delete an event by Id
+                        
+                        int deleteCount = m_eventDao.deleteEventById(eventId);
+                        
+                        if(deleteCount>0){
+                                deleteSuccessStatus.add(String.valueOf(eventId));
+                                eventsDeleted = eventsDeleted + 1;
+                        }else{
+                                LOG.warn("Event id {} does not exist in DB", eventId);
+                        }
+                        LOG.debug("Event Id's {} are successfully deleted from the DB for event id {}", deleteSuccessStatus, eventId);
+                }
+                return eventsDeleted;
+        }
 }

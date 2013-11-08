@@ -1,30 +1,30 @@
 /*******************************************************************************
- * This file is part of OpenNMS(R).
- *
- * Copyright (C) 2010-2012 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
- *
- * OpenNMS(R) is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
- *
- * OpenNMS(R) is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with OpenNMS(R).  If not, see:
- *      http://www.gnu.org/licenses/
- *
- * For more information contact:
- *     OpenNMS(R) Licensing <license@opennms.org>
- *     http://www.opennms.org/
- *     http://www.opennms.com/
- *******************************************************************************/
+* This file is part of OpenNMS(R).
+*
+* Copyright (C) 2010-2012 The OpenNMS Group, Inc.
+* OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+*
+* OpenNMS(R) is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published
+* by the Free Software Foundation, either version 3 of the License,
+* or (at your option) any later version.
+*
+* OpenNMS(R) is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OpenNMS(R). If not, see:
+* http://www.gnu.org/licenses/
+*
+* For more information contact:
+* OpenNMS(R) Licensing <license@opennms.org>
+* http://www.opennms.org/
+* http://www.opennms.com/
+*******************************************************************************/
 
 package org.opennms.reporting.core.svclayer.support;
 
@@ -60,12 +60,14 @@ import org.opennms.reporting.core.svclayer.ReportWrapperService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import org.exolab.castor.xml.MarshalException;
 /**
- * <p>DefaultReportWrapperService class.</p>
- *
- * @author ranger
- * @version $Id: $
- */
+* <p>DefaultReportWrapperService class.</p>
+*
+* @author ranger
+* @version $Id: $
+*/
 public class DefaultReportWrapperService implements ReportWrapperService {
     private static final Logger LOG = LoggerFactory.getLogger(DefaultReportWrapperService.class);
 
@@ -73,11 +75,11 @@ public class DefaultReportWrapperService implements ReportWrapperService {
 
     private ReportStoreService m_reportStoreService;
 
-    private static final String LOG4J_CATEGORY = "reports";
+    private static final String LOG4J_CATEGORY = "OpenNMS.Report";
 
     /**
-     * <p>Constructor for DefaultReportWrapperService.</p>
-     */
+* <p>Constructor for DefaultReportWrapperService.</p>
+*/
     public DefaultReportWrapperService() {
     }
 
@@ -258,19 +260,19 @@ public class DefaultReportWrapperService implements ReportWrapperService {
     }
 
     /**
-     * <p>setReportServiceLocator</p>
-     *
-     * @param reportServiceLocator a {@link org.opennms.reporting.core.svclayer.ReportServiceLocator} object.
-     */
+* <p>setReportServiceLocator</p>
+*
+* @param reportServiceLocator a {@link org.opennms.reporting.core.svclayer.ReportServiceLocator} object.
+*/
     public void setReportServiceLocator(final ReportServiceLocator reportServiceLocator) {
         m_reportServiceLocator = reportServiceLocator;
     }
 
     /**
-     * <p>setReportStoreService</p>
-     *
-     * @param reportStoreService a {@link org.opennms.reporting.core.svclayer.ReportStoreService} object.
-     */
+* <p>setReportStoreService</p>
+*
+* @param reportStoreService a {@link org.opennms.reporting.core.svclayer.ReportStoreService} object.
+*/
     public void setReportStoreService(final ReportStoreService reportStoreService) {
         m_reportStoreService = reportStoreService;
     }
@@ -302,19 +304,19 @@ public class DefaultReportWrapperService implements ReportWrapperService {
 
     /** {@inheritDoc} */
     public void	getAlarmReport(List<Integer> alarmIds,HashMap<Integer, List<Integer>> eventIdsForAlarms ,
-        		String reportId, ReportFormat reportFormat, OutputStream outputStream, String fileName){
+        		String reportId, ReportFormat reportFormat, String fileName, String folderName){
     	try {
-    		getReportService(reportId).runAndRender(alarmIds,eventIdsForAlarms,reportId,reportFormat,outputStream, fileName);
+    		getReportService(reportId).runAndRender(alarmIds,eventIdsForAlarms,reportId,reportFormat, fileName, folderName);
 		} catch (ReportException reportException) {
 			LOG.error("failed to run or render report: {}", reportId, reportException);
 		}
     }
     @Override
 	public void getEventReport(List<Integer> eventIds, String reportId,
-			ReportFormat reportFormat, OutputStream outputStream) {
+			ReportFormat reportFormat,String fileName,String dirName) {
 
     	try {
-    		getReportService(reportId).runAndRender(eventIds,reportId,reportFormat,outputStream);
+    		getReportService(reportId).runAndRender(eventIds,reportId,reportFormat,fileName,dirName);
 		} catch (ReportException reportException) {
 			LOG.error("failed to run or render report: {}", reportId, reportException);
 		}
