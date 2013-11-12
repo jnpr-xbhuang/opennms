@@ -28,6 +28,7 @@ public class CategoryHopCriteria extends VertexHopCriteria implements Collapsibl
 	public static class CategoryVertex extends AbstractVertex {
 		public CategoryVertex(String namespace, String id, String label) {
 			super(namespace, id, label);
+			setIconKey("group");
 		}
 
 		@Override
@@ -38,8 +39,8 @@ public class CategoryHopCriteria extends VertexHopCriteria implements Collapsibl
 
 	public CategoryHopCriteria(String categoryName) {
 		m_categoryName = categoryName;
-        setLabel(m_categoryName);
-        m_collapsedVertex = new CategoryVertex("nodes", "category:" + m_categoryName, m_categoryName);
+		setLabel(m_categoryName);
+		m_collapsedVertex = new CategoryVertex("nodes", "category:" + m_categoryName, m_categoryName);
 	}
 
 	public CategoryDao getCategoryDao() {

@@ -351,26 +351,8 @@ if (isPurgeExport)
 
       <jsp:include page="/includes/event-querypanel.jsp" flush="false" />
           
-            <% if( events.length > 0 ) { %>
-              <% String baseUrl = this.makeLink(callback, parms, favorite); %>
-              <% if ( eventCount == -1 ) { %>
-                <jsp:include page="/includes/resultsIndexNoCount.jsp" flush="false" >
-                  <jsp:param name="itemCount" value="<%=events.length%>" />
-                  <jsp:param name="baseurl" value="<%=baseUrl%>" />
-                  <jsp:param name="limit" value="<%=parms.getLimit()%>" />
-                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>" />
-                </jsp:include>
-              <% } else { %>
-                <jsp:include page="/includes/resultsIndex.jsp" flush="false" >
-                  <jsp:param name="count" value="<%=eventCount%>" />
-                  <jsp:param name="baseurl" value="<%=baseUrl%>" />
-                  <jsp:param name="limit" value="<%=parms.getLimit()%>" />
-                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>" />
-                </jsp:include>
-              <% } %>
-            <% } %>
-
             <% if( parms.getFilters().size() > 0 || AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) || AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
+                <div>
                 <p>
                     Favorites:
                     <onms:select
@@ -378,6 +360,18 @@ if (isPurgeExport)
                             selected='${favorite}'
                             handler='${filterFavoriteSelectTagHandler}'
                             onChange='changeFavorite(this)'/>
+                </p>
+                <p>
+                    <onms:filters
+                            context="/event/list"
+                            favorite="${favorite}"
+                            parameters="${parms}"
+                            showRemoveLink="true"
+                            showAcknowledgeFilter="true"
+                            acknowledgeFilterPrefix="Event(s)"
+                            acknowledgeFilterSuffix="event(s)"
+                            callback="${callback}" />
+
                     <onms:favorite
                             favorite="${favorite}"
                             parameters="${parms}"
@@ -386,17 +380,9 @@ if (isPurgeExport)
                             createFavoriteController="/event/createFavorite"
                             deleteFavoriteController="/event/deleteFavorite"
                             onDeselect="<%=FavoriteTag.Action.CLEAR_FILTERS%>"/>
-                    <onms:filters
-                        context="/event/list"
-                        favorite="${favorite}"
-                        parameters="${parms}"
-                        showRemoveLink="true"
-                        showAcknowledgeFilter="true"
-                        acknowledgeFilterPrefix="Event(s)"
-                        acknowledgeFilterSuffix="event(s)"
-                        callback="${callback}" />
 
-              </p>
+                </p>
+                </div>
             <% } %>
             <onms:alert/>
         <!-- Popup message box for event export action -->
@@ -414,6 +400,26 @@ if (isPurgeExport)
                         <input type="button" onclick="javascript:hideTransBackground();" value="Cancel"/>
                 </center>
         </div>
+
+            <% if( events.length > 0 ) { %>
+              <% String baseUrl = this.makeLink(callback, parms, favorite); %>
+              <% if ( eventCount == -1 ) { %>
+                <jsp:include page="/includes/resultsIndexNoCount.jsp" flush="false" >
+                  <jsp:param name="itemCount"    value="<%=events.length%>" />
+                  <jsp:param name="baseurl"  value="<%=baseUrl%>"    />
+                  <jsp:param name="limit"    value="<%=parms.getLimit()%>"      />
+                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>"   />
+                </jsp:include>
+              <% } else { %>
+                <jsp:include page="/includes/resultsIndex.jsp" flush="false" >
+                  <jsp:param name="count"    value="<%=eventCount%>" />
+                  <jsp:param name="baseurl"  value="<%=baseUrl%>"    />
+                  <jsp:param name="limit"    value="<%=parms.getLimit()%>"      />
+                  <jsp:param name="multiple" value="<%=parms.getMultiple()%>"   />
+                </jsp:include>
+              <% } %>
+            <% } %>
+
     <% if( req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
       <form action="event/acknowledge" method="post" name="acknowledge_form">
         <input type="hidden" name="redirectParms" value="<c:out value="<%=req.getQueryString()%>"/>" />
