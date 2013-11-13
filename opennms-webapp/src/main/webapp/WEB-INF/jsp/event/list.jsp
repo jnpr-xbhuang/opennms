@@ -453,6 +453,7 @@ if (isPurgeExport)
                                                         <th width="2%">&nbsp;</th>
                                                 <% } %>
           <% } %>
+          <th width="4%"> Select</th>
           <th width="4%"> <%=this.makeSortLink(callback, parms, SortStyle.ID, SortStyle.REVERSE_ID, "id", "ID" , favorite)%></th>
           <th width="10%"><%=this.makeSortLink(callback, parms, SortStyle.SEVERITY, SortStyle.REVERSE_SEVERITY, "severity", "Severity" , favorite)%></th>
           <th width="19%"><%=this.makeSortLink(callback, parms, SortStyle.TIME, SortStyle.REVERSE_TIME, "time", "Time" , favorite)%></th>
