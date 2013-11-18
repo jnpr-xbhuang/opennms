@@ -54,6 +54,7 @@
 
     var user = parent.window.sessionStorage.getItem('opennmsuser').toLowerCase();
     var password = parent.window.sessionStorage.getItem('opennmspw');
+    var groups = parent.window.sessionStorage.getItem('opennmsdomainname');
 
     var form = document.createElement("form");
     form.setAttribute("method", "post");
@@ -70,6 +71,12 @@
     hiddenFieldPassword.setAttribute("name", "j_password");
     hiddenFieldPassword.setAttribute("value", password);
     form.appendChild(hiddenFieldPassword);
+
+    var hiddenFieldGroups = document.createElement("input");
+    hiddenFieldGroups.setAttribute("type", "hidden");
+    hiddenFieldGroups.setAttribute("name", "j_usergroups");
+    hiddenFieldGroups.setAttribute("value", groups);
+    form.appendChild(hiddenFieldGroups);
 
     document.body.appendChild(form);
     form.submit();
