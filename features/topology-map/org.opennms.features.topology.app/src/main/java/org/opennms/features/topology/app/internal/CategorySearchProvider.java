@@ -48,18 +48,15 @@ import org.opennms.features.topology.app.internal.support.CategoryHopCriteriaFac
 import org.opennms.netmgt.dao.api.CategoryDao;
 import org.opennms.netmgt.dao.api.NodeDao;
 import org.opennms.netmgt.model.OnmsCategory;
-import org.opennms.netmgt.model.OnmsCriteria;
-import org.opennms.netmgt.model.OnmsNode;
 
 public class CategorySearchProvider extends AbstractSearchProvider implements SearchProvider {
 
-    private final NodeDao m_nodeDao;
     private CategoryHopCriteriaFactory m_categoryHopFactory;
     private CategoryDao m_categoryDao;
+    private String m_hiddenCategoryPrefix = null;
 
     public CategorySearchProvider(CategoryDao categoryDao, NodeDao nodeDao){
         m_categoryDao = categoryDao;
-        m_nodeDao = nodeDao;
         m_categoryHopFactory = new CategoryHopCriteriaFactory(categoryDao, nodeDao);
     }
 
@@ -75,15 +72,12 @@ public class CategorySearchProvider extends AbstractSearchProvider implements Se
 
     @Override
     public List<SearchResult> query(SearchQuery searchQuery, GraphContainer graphContainer) {
-        List<OnmsNode> nodes = m_nodeDao.findAll();
-        Set<OnmsCategory> categories = new LinkedHashSet<OnmsCategory>();
-        for(OnmsNode node : nodes){
-            categories.addAll(node.getCategories());
-        }
+
+        Collection<OnmsCategory> categories = m_categoryDao.findAll();
 
         List<SearchResult> results = new ArrayList<SearchResult>();
         for (OnmsCategory category : categories) {
-            if (searchQuery.matches(category.getName())) {
+            if (!checkHiddenPrefix(category.getName()) && searchQuery.matches(category.getName())) {
                 SearchResult result = new SearchResult("category", category.getId().toString(), category.getName());
                 result.setCollapsible(true);
                 CollapsibleCriteria criteria = getMatchingCriteria(graphContainer, category.getName());
@@ -96,6 +90,14 @@ public class CategorySearchProvider extends AbstractSearchProvider implements Se
         return results;
     }
 
+    private boolean checkHiddenPrefix(String name) {
+        if(m_hiddenCategoryPrefix == null || m_hiddenCategoryPrefix.equals("")) return false;
+
+        return name.startsWith(m_hiddenCategoryPrefix);
+
+
+    }
+
     @Override
     public boolean supportsPrefix(String searchPrefix) {
         return supportsPrefix("category=", searchPrefix);
@@ -103,7 +105,7 @@ public class CategorySearchProvider extends AbstractSearchProvider implements Se
 
     @Override
     public Set<VertexRef> getVertexRefsBy(SearchResult searchResult) {
-        return null;
+        return Collections.emptySet();
     }
 
     @Override
@@ -126,6 +128,10 @@ public class CategorySearchProvider extends AbstractSearchProvider implements Se
 
     public void setCategoryDao(CategoryDao m_categoryDao) {
         this.m_categoryDao = m_categoryDao;
+    }
+
+    public void setHiddenCategoryPrefix(String prefix) {
+        m_hiddenCategoryPrefix = prefix;
     }
 
     @Override

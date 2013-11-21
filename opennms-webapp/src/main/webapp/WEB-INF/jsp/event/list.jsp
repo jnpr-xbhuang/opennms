@@ -95,7 +95,7 @@
     pageContext.setAttribute("addNegativeFilter", "[-]");
     pageContext.setAttribute("addBeforeFilter", "[&gt;]");
     pageContext.setAttribute("addAfterFilter", "[&lt;]");
-    pageContext.setAttribute("filterFavoriteSelectTagHandler", new FilterFavoriteSelectTagHandler());
+    pageContext.setAttribute("filterFavoriteSelectTagHandler", new FilterFavoriteSelectTagHandler("All Events"));    
     //Get the purge action status
     String actionStatus = (String) req.getSession().getAttribute("actionStatus");
 
@@ -356,6 +356,7 @@ if (isPurgeExport)
                 <p>
                     Favorites:
                     <onms:select
+                            defaultText="All Events"
                             elements='${favorites}'
                             selected='${favorite}'
                             handler='${filterFavoriteSelectTagHandler}'
