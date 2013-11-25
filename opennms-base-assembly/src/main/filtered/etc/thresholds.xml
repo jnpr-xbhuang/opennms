@@ -60,6 +60,120 @@
 		<group name="coffee"
 				rrdRepository = "${install.share.dir}/rrd/snmp/">
 				<expression type="low" expression ="coffeePotLevel / coffeePotCapacity * 100.0" ds-type="node" ds-label="" value="25.0" rearm="100.0" trigger="1"/>
-		</group>
-
+	</group>
+	<group name="JNX-Util" rrdRepository="/opt/opennms/share/rrd/snmp/">
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="100.0" rearm="0.0" trigger="2"
+            ds-label="TwoWayDelayAvg"
+            triggeredUEI="uei.opennms.org/juniper/twowaydelayavghigh"
+            rearmedUEI="uei.opennms.org/juniper/twowaydelayavgrearm"
+            filterOperator="or" expression="TwoWayDelayAvg">
+            <resource-filter field="TwoWayDelayAvg">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="100.0" rearm="0.0" trigger="2"
+            ds-label="TwoWayDelayBest"
+            triggeredUEI="uei.opennms.org/juniper/twowaydelaybesthigh"
+            rearmedUEI="uei.opennms.org/juniper/twowaydelaybestrearm"
+            filterOperator="or" expression="TwoWayDelayBest">
+            <resource-filter field="TwoWayDelayBest">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="100.0" rearm="0.0" trigger="2"
+            ds-label="TwoWayDelayWorst"
+            triggeredUEI="uei.opennms.org/juniper/twowaydelayworsthigh"
+            rearmedUEI="uei.opennms.org/juniper/twowaydelayworstrearm"
+            filterOperator="or" expression="TwoWayDelayWorst">
+            <resource-filter field="TwoWayDelayWorst">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="10.0" rearm="0.0" trigger="2"
+            ds-label="TwoWayDelayVar"
+            triggeredUEI="uei.opennms.org/juniper/twowaydelayvariationhigh"
+            rearmedUEI="uei.opennms.org/juniper/twowaydelayvariationrearm"
+            filterOperator="or" expression="TwoWayDelayVar">
+            <resource-filter field="TwoWayDelayVar">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="100.0" rearm="0.0" trigger="2"
+            ds-label="OneWayDelayAvg"
+            triggeredUEI="uei.opennms.org/juniper/onewaydelayavghigh"
+            rearmedUEI="uei.opennms.org/juniper/onewaydelayavgrearm"
+            filterOperator="or" expression="OneWayDelayAvg">
+            <resource-filter field="OneWayDelayAvg">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="100.0" rearm="0.0" trigger="2"
+            ds-label="OneWayDelayBest"
+            triggeredUEI="uei.opennms.org/juniper/onewaydelaybesthigh"
+            rearmedUEI="uei.opennms.org/juniper/onewaydelaybestrearm"
+            filterOperator="or" expression="OneWayDelayBest">
+            <resource-filter field="OneWayDelayBest">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="100.0" rearm="0.0" trigger="2"
+            ds-label="OneWayDelayWorst"
+            triggeredUEI="uei.opennms.org/juniper/onewaydelayworsthigh"
+            rearmedUEI="uei.opennms.org/juniper/onewaydelayworstrearm"
+            filterOperator="or" expression="OneWayDelayWorst">
+            <resource-filter field="OneWayDelayWorst">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="10.0" rearm="0.0" trigger="2"
+            ds-label="OneWayDelayVar"
+            triggeredUEI="uei.opennms.org/juniper/onewaydelayvariationhigh"
+            rearmedUEI="uei.opennms.org/juniper/onewaydelayvariationrearm"
+            filterOperator="or" expression="OneWayDelayVar">
+            <resource-filter field="OneWayDelayVar">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="10.0" rearm="0.0" trigger="2"
+            ds-label="FrameLossFEAvg"
+            triggeredUEI="uei.opennms.org/juniper/framelossfarendavghigh"
+            rearmedUEI="uei.opennms.org/juniper/framelossfarendavgrearm"
+            filterOperator="or" expression="FrameLossFEAvg">
+            <resource-filter field="FrameLossFEAvg">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="10.0" rearm="0.0" trigger="2"
+            ds-label="FrameLossFEBest"
+            triggeredUEI="uei.opennms.org/juniper/framelossfarendbesthigh"
+            rearmedUEI="uei.opennms.org/juniper/framelossfarendbestrearm"
+            filterOperator="or" expression="FrameLossFEBest">
+            <resource-filter field="FrameLossFEBest">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="10.0" rearm="0.0" trigger="2"
+            ds-label="FrameLossFEWorst"
+            triggeredUEI="uei.opennms.org/juniper/framelossfarendworsthigh"
+            rearmedUEI="uei.opennms.org/juniper/framelossfarendworstrearm"
+            filterOperator="or" expression="FrameLossFEWorst">
+            <resource-filter field="FrameLossFEWorst">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="10.0" rearm="0.0" trigger="2"
+            ds-label="FrameLossNEAvg"
+            triggeredUEI="uei.opennms.org/juniper/framelossnearendavghigh"
+            rearmedUEI="uei.opennms.org/juniper/framelossnearendavgrearm"
+            filterOperator="or" expression="FrameLossNEAvg">
+            <resource-filter field="FrameLossNEAvg">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="10.0" rearm="0.0" trigger="2"
+            ds-label="FrameLossNEBest"
+            triggeredUEI="uei.opennms.org/juniper/framelossnearendbesthigh"
+            rearmedUEI="uei.opennms.org/juniper/framelossnearendbestrearm"
+            filterOperator="or" expression="FrameLossNEBest">
+            <resource-filter field="FrameLossNEBest">.*</resource-filter>
+        </expression>
+        <expression type="high" ds-type="jnxUtilIntegerName"
+            value="10.0" rearm="0.0" trigger="2"
+            ds-label="FrameLossNEWorst"
+            triggeredUEI="uei.opennms.org/juniper/framelossnearendworsthigh"
+            rearmedUEI="uei.opennms.org/juniper/framelossnearendworstrearm"
+            filterOperator="or" expression="FrameLossNEWorst">
+            <resource-filter field="FrameLossNEWorst">.*</resource-filter>
+        </expression>
+	</group>
 </thresholding-config>
+

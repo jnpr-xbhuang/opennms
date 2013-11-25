@@ -1,0 +1,230 @@
+<!-- Start of auto generated data from MIB: JUNIPER-UTIL-MIB -->
+<events xmlns="http://xmlns.opennms.org/xsd/eventconf">
+  <event>
+       <uei>uei.opennms.org/juniper/twowaydelayavghigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/twowaydelayavghigh</event-label>
+       <descr>Two Way Delay Average Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for Two Way Delay Average Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/twowaydelayavgrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/twowaydelayavgrearm</event-label>
+       <descr>Two Way Delay Average Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for Two Way Delay Average Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/twowaydelayavghigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+     <event>
+       <uei>uei.opennms.org/juniper/twowaydelaybesthigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/twowaydelaybesthigh</event-label>
+       <descr>Two Way Delay Best Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for Two Way Delay Best Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/twowaydelaybestrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/twowaydelaybestrearm</event-label>
+       <descr>Two Way Delay Best Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for Two Way Delay Best Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/twowaydelaybesthigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+  <event>
+       <uei>uei.opennms.org/juniper/twowaydelayworsthigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/twowaydelayworsthigh</event-label>
+       <descr>Two Way Delay Worst Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for Two Way Delay Worst Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/twowaydelayworstrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/twowaydelayworstrearm</event-label>
+       <descr>Two Way Delay Worst Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for Two Way Delay Worst Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/twowaydelayworsthigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/twowaydelayvariationhigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/twowaydelayvariationhigh</event-label>
+       <descr>Two Way Delay Variation Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for Two Way Delay Variation Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/twowaydelayvariationrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/twowaydelayvariationrearm</event-label>
+       <descr>Two Way Delay Variation Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for Two Way Delay Variation Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/twowaydelayvariationhigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+   
+  <event>
+       <uei>uei.opennms.org/juniper/onewaydelayavghigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/onewaydelayavghigh</event-label>
+       <descr>One Way Delay Average Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for One Way Delay Average Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/onewaydelayavgrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/onewaydelayavgrearm</event-label>
+        <descr>One Way Delay Average Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for One Way Delay Average Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/onewaydelayavghigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/onewaydelaybesthigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/onewaydelaybesthigh</event-label>
+       <descr>One Way Delay Best Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for One Way Delay Best Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/onewaydelaybestrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/onewaydelaybestrearm</event-label>
+        <descr>One Way Delay Best Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for One Way Delay Best Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/onewaydelaybesthigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+  <event>
+       <uei>uei.opennms.org/juniper/onewaydelayworsthigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/onewaydelayworsthigh</event-label>
+       <descr>One Way Delay Worst Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for One Way Delay Worst Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/onewaydelayworstrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/onewaydelayworstrearm</event-label>
+        <descr>One Way Delay Worst Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for One Way Delay Worst Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/onewaydelayworsthigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/onewaydelayvariationhigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/onewaydelayvariationhigh</event-label>
+       <descr>One Way Delay Variation Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for One Way Delay Variation Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/onewaydelayvariationrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/onewaydelayvariationrearm</event-label>
+        <descr>One Way Delay Variation Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for One Way Delay Variation Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/onewaydelayvariationhigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+   
+   <event>
+       <uei>uei.opennms.org/juniper/framelossfarendavghigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossfarendavghigh</event-label>
+       <descr>Frame Loss Far End Average Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for Frame Loss Far End Average Performance Value , parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossfarendavgrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossfarendavgrearm</event-label>
+        <descr>Frame Loss Far End Average Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for Frame Loss Far End Average Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/framelossfarendavghigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossfarendbesthigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossfarendbesthigh</event-label>
+       <descr>Frame Loss Far End Best Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for Frame Loss Far End Best Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossfarendbestrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossfarendbestrearm</event-label>
+        <descr>Frame Loss Far End Best Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for Frame Loss Far End Best Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/framelossfarendbesthigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossfarendworsthigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossfarendworsthigh</event-label>
+       <descr>Frame Loss Far End Worst Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for Frame Loss Far End Worst Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossfarendworstrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossfarendworstrearm</event-label>
+        <descr>Frame Loss Far End Worst Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for Frame Loss Far End Worst Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/framelossfarendworsthigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossnearendavghigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossnearendavghigh</event-label>
+       <descr>Frame Loss Near End Average Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for Frame Loss Near End Average Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossnearendavgrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossnearendavgrearm</event-label>
+        <descr>Frame Loss Near End Average Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for Frame Loss Near End Average Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/framelossnearendavghigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossnearendbesthigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossnearendbesthigh</event-label>
+       <descr>Frame Loss Near End Best Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for Frame Loss Near End Best Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossnearendbestrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossnearendbestrearm</event-label>
+        <descr>Frame Loss Near End Best Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for Frame Loss Near End Best Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/framelossnearendbesthigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossnearendworsthigh</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossnearendworsthigh</event-label>
+       <descr>Frame Loss Near End Worst Performance Value  %parm[value]% - exceeded  the threshold value %parm[threshold]% and Rearm value is %parm[threshold]% </descr> 
+       <logmsg dest="logndisplay">Threshold exceeded for Frame Loss Near End Worst Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Major</severity>
+       <alarm-data  reduction-key="%uei%!%nodeid%!%parm[instance]%" alarm-type="1" auto-clean="false" />
+   </event>
+   <event>
+       <uei>uei.opennms.org/juniper/framelossnearendworstrearm</uei>
+       <event-label>User-defined threshold event uei.opennms.org/juniper/framelossnearendworstrearm</event-label>
+        <descr>Frame Loss Near End Worst Performance Value %parm[value]% - rearmed</descr>
+       <logmsg dest="logndisplay">Threshold rearmed for Frame Loss Near End Worst Performance Value, parms: %parm[all]%</logmsg>
+       <severity>Normal</severity>
+       <alarm-data clear-key="uei.opennms.org/juniper/framelossnearendworsthigh!%nodeid%!%parm[instance]%" reduction-key="%uei%:%nodeid%:%parm[instance]%" alarm-type="2" auto-clean="false"/>
+   </event>
+</events>
+<!-- End of auto generated data from MIB: JUNIPER-UTIL-MIB -->

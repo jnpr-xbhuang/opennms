@@ -33,7 +33,7 @@ function void sendResolvedComponentEvent( DroolsCorrelationEngine engine, Compon
       %parm[componentType]% %parm[componentName]% was impacted due to event %parm[cause]%.
     </logmsg>
     <severity>Minor</severity>
-        <alarm-data reduction-key="%uei%:%parm[componentType]%:%parm[componentForeignSource]%:%parm[componentForeignId]%" alarm-type="1" auto-clean="false" />
+        <alarm-data reduction-key="%uei%:%parm[componentType]%:%parm[componentForeignSource]%:%parm[componentForeignId]%:%parm[nodeid]%" alarm-type="1" auto-clean="false" />
   </event>
   <event>
     <uei>uei.opennms.org/internal/ncs/componentResolved</uei>
@@ -46,9 +46,9 @@ function void sendResolvedComponentEvent( DroolsCorrelationEngine engine, Compon
       and has been resolved
     </logmsg>
     <severity>Normal</severity>
-        <alarm-data reduction-key="%uei%:%parm[componentType]%:%parm[componentForeignSource]%:%parm[componentForeignId]%"
+        <alarm-data reduction-key="%uei%:%parm[componentType]%:%parm[componentForeignSource]%:%parm[componentForeignId]%:%parm[nodeid]%"
                     alarm-type="2"
-                    clear-key="uei.opennms.org/internal/ncs/componentImpacted:%parm[componentType]%:%parm[componentForeignSource]%:%parm[componentForeignId]%"
+                    clear-key="uei.opennms.org/internal/ncs/componentImpacted:%parm[componentType]%:%parm[componentForeignSource]%:%parm[componentForeignId]%:%parm[nodeid]%"
                     auto-clean="false"/>
   </event>
   <event>
@@ -85,3 +85,4 @@ function void sendResolvedComponentEvent( DroolsCorrelationEngine engine, Compon
     <severity>Warning</severity>
   </event>
 </events>
+

@@ -94,7 +94,7 @@ public class SelectTag<T> extends SimpleTagSupport {
     public void setOnChange(String onChange) {
         m_onChange = onChange;
     }
-/**
+
     public void setElements(T[] elements) {
         List<T> elementsToAdd = new ArrayList<T>();
         for (T eachElement : elements) {
@@ -102,8 +102,8 @@ public class SelectTag<T> extends SimpleTagSupport {
         }
         setElements(elementsToAdd);
     }
-**/
-    private void setElements(List<T> elements) {
+    
+private void setElements(List<T> elements) {
         m_elements = new ArrayList<T>();
         if (elements == null) return;
         m_elements.addAll(elements);

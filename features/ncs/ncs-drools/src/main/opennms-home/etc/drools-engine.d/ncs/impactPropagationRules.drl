@@ -102,9 +102,33 @@ when
 then
 	retract( $d );
 	retract( $i );
+
+	List<Object> list = engine.getMemoryObjects();
+	for (Object obj: list) {
+	
+		if (obj instanceof ImpactEventSent) {
+			println("impacted event object is " + ((ImpactEventSent)obj).getComponent().getId());
+		} else {
+			println("non ImpactEvent Object");
+		}
+	}
+
+end
+
+
+rule "send resolution event"
+	salience 200
+when
+	$ie : ImpactEventSent( $c : component , $cause : cause )
+	$r : ComponentEventResolved( cause == $cause )
+then
+	println( "Sending resolution event for '" + $c.getName() + "'" );
+	retract( $ie );
+	sendComponentResolvedEvent( engine, $c, $cause.getEvent() );
 end
 
 rule "clean up resolutions"
+	salience 100
 when
 	$r : ComponentEventResolved( $c : cause )
 	not( ComponentImpacted( cause == $c ) )
@@ -148,6 +172,9 @@ function void sendComponentImpactedEvent( DroolsCorrelationEngine engine, Compon
 	bldr.addParam("componentForeignSource", c.getForeignSource() );
 	bldr.addParam("componentForeignId", c.getForeignId() );
 	bldr.addParam("cause", e.getDbid() );
+	bldr.addParam("nodeid", e.getNodeid() );
+	println("AvailablecomponentForeignSource: "+ c.getForeignSource() );
+  
 	engine.sendEvent(bldr.getEvent());
 }
 
@@ -161,8 +188,12 @@ function void sendComponentResolvedEvent( DroolsCorrelationEngine engine, Compon
 	bldr.addParam("componentForeignSource", c.getForeignSource() );
 	bldr.addParam("componentForeignId", c.getForeignId() );
 	bldr.addParam("cause", e.getDbid() );
+	bldr.addParam("nodeid", e.getNodeid() );
+	println("AvailablecomponentForeignSource: "+ c.getForeignSource() );
+
 	engine.sendEvent(bldr.getEvent());
 }
+
 
 
 

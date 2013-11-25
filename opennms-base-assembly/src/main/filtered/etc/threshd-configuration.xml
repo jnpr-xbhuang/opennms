@@ -62,6 +62,17 @@
 			<parameter key="thresholding-group" value="netsnmp-memory-nonlinux"/>
 		</service>
 	</package>
+	
+	<package name="JNX-Util">
+		<filter>IPADDR != '0.0.0.0'</filter>	 
+		<include-range begin="1.1.1.1" end="254.254.254.254"/>
+		<include-range begin="::1" end="ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff" />
+		
+		<service name="SNMP" interval="300000" user-defined="false" status="on">
+			<parameter key="thresholding-group" value="JNX-Util"/>
+		</service>
+	</package>
 
 </threshd-configuration>
+
 
