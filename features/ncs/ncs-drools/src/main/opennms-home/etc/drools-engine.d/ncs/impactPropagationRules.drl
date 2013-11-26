@@ -61,7 +61,6 @@ rule "send impact events"
 	salience 100
 when
 	ComponentImpacted ( $c : target, $cause : cause )
-	not ImpactEventSent( component == $c )
 then
 	println( "Sending impact event for '" + $c.getName() + "'" + " Component Id " + $c.getId() );
 	sendComponentImpactedEvent( engine, $c, $cause.getEvent() );
@@ -94,14 +93,14 @@ then
 end
 
 rule "resolved component"
-	salience 1000
+        salience 1000
 when
-	$r : ComponentEventResolved( $cause : cause )
-	$i : ComponentImpacted( cause == $cause, $c : target )
-	$d : DependenciesNeeded( requestor == $cause )
+        $r : ComponentEventResolved( $cause : cause )
+        $i : ComponentImpacted( cause == $cause, $c : target )
+        $d : DependenciesNeeded( requestor == $cause )
 then
-	retract( $d );
-	retract( $i );
+        retract( $d );
+        retract( $i );
 
 	List<Object> list = engine.getMemoryObjects();
 	for (Object obj: list) {
@@ -135,16 +134,6 @@ when
 then
 	println( "Cleanup up resolve " + $r );
 	retract( $r );
-end
-
-rule "send resolution event"
-when
-	$i : ImpactEventSent( $c : component, $cause : cause )
-	not( ComponentImpacted( target == $c ) )
-then
-	println( "Sending resolution event for '" + $c.getName() + "'" );
-	retract( $i );
-	sendComponentResolvedEvent( engine, $c, $cause.getEvent() );
 end
 
 rule "clean up single UP event"
@@ -193,7 +182,3 @@ function void sendComponentResolvedEvent( DroolsCorrelationEngine engine, Compon
 
 	engine.sendEvent(bldr.getEvent());
 }
-
-
-
-
