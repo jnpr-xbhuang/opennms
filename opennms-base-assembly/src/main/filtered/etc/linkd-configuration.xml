@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <linkd-configuration xmlns="http://xmlns.opennms.org/xsd/config/linkd" 
-                     threads="5" initial_sleep_time="3600000"
+                     threads="5" initial_sleep_time="300000"
                      snmp_poll_interval="18000000" discovery_link_interval="1800000"
 	                 use-lldp-discovery="true" 
 		             use-bridge-discovery="true"

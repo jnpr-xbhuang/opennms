@@ -354,7 +354,7 @@ if (isPurgeExport)
             <% if( parms.getFilters().size() > 0 || AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) || AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
                 <div>
                 <p>
-                    Favorites:
+                    Filter Names:
                     <onms:select
                             defaultText="All Events"
                             elements='${favorites}'

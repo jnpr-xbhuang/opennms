@@ -276,7 +276,7 @@ public class FavoriteTag extends TagSupport {
                 BUTTON_TEMPLATE,
                 getSelectAction().getJavascriptCallback(this),
                 getSelectAction().getDescription(),
-                "save filter");
+                "Save filter");
     }
 
     /**
