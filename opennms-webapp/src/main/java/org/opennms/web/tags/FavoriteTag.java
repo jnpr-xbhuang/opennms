@@ -273,13 +273,13 @@ public class FavoriteTag extends TagSupport {
                     BUTTON_TEMPLATE,
                     getDeselectAction().getJavascriptCallback(this),
                     getDeselectAction().getDescription(),
-                    "remove filter");
+                    "Remove Filter");
         }
         return MessageFormat.format(
                 BUTTON_TEMPLATE,
                 getSelectAction().getJavascriptCallback(this),
                 getSelectAction().getDescription(),
-                "Save filter");
+                "Save Filter");
     }
 
     /**
