@@ -138,13 +138,16 @@ public class FavoriteTag extends TagSupport {
 
     private static final String CREATE_FAVORITE_JAVASCRIPT_TEMPLATE =
             "   function createFavorite() {\n" +
-            "       var favoriteName = prompt(\"Please enter a favorite name: no more than 30 characters\", \"{DEFAULT_FAVORITE}\");\n" +
-            "       if (favoriteName != null && favoriteName.length < 30) {\n" +
-            "           window.location.href = '{CREATE_FAVORITE_URL}' + favoriteName;\n" +
+            "       var inputcheck = /.*[#%&].*/;" +
+            "       var favoriteName = prompt(\"Please enter a favorite name: no more than 30 characters and not include %&#\", \"{DEFAULT_FAVORITE}\");\n" +
+            "       if (favoriteName == null || favoriteName.length >= 30) {\n" +
+            "          alert(\"The favorite name is more than 30 characters or empty\");\n" +
+            "       } else if (inputcheck.test(favoriteName)) {\n" +
+            "          alert (\"The favorite name must not inlcude %#&\");\n" +
             "       } else {\n" +
-            "           alert(\"The favorite name is more than 30 characters or empty\");\n" +
+            "           window.location.href = '{CREATE_FAVORITE_URL}' + favoriteName;\n" +
             "       }\n" +
-            "}";
+            "    }";
 
     private static final String DELETE_FAVORITE_JAVASCRIPT_TEMPLATE =
             "   function deleteFavorite(favoriteId) {\n" +
