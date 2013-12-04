@@ -349,7 +349,7 @@ if (isPurgeExport)
                  <input type="hidden" name="uei" id="uei" value="" /> <!-- Set by java script -->
          </form>
 
-      <jsp:include page="/includes/event-querypanel.jsp" flush="false" />
+
           
             <% if( parms.getFilters().size() > 0 || AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) || AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
                 <div>
@@ -362,6 +362,11 @@ if (isPurgeExport)
                             handler='${filterFavoriteSelectTagHandler}'
                             onChange='changeFavorite(this)'/>
                 </p>
+            <% } %>
+
+            <jsp:include page="/includes/event-querypanel.jsp" flush="false" />
+
+            <% if( parms.getFilters().size() > 0 || AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) || AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
                 <p>
                     <onms:filters
                             context="/event/list"

@@ -167,10 +167,10 @@ public class AssetServiceImpl extends RemoteServiceServlet implements AssetServi
 
         // This is a poor re-implementation of modify permission based on spring
         // roles
-        if (m_securityContext.hasRole(Authentication.ROLE_ADMIN) || m_securityContext.hasRole(Authentication.ROLE_PROVISION)) {
-            assetCommand.setAllowModify(true);
-        } else {
+        if (m_securityContext.hasRole(Authentication.ROLE_READONLY)) {
             assetCommand.setAllowModify(false);
+        } else {
+            assetCommand.setAllowModify(true);
         }
 
         // assign the asset record back to the node

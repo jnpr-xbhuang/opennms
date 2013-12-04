@@ -358,6 +358,10 @@
                             handler='${filterFavoriteSelectTagHandler}'
                             onChange='changeFavorite(this)'/>
                 </p>
+            <% } %>
+            <jsp:include page="/includes/alarm-querypanel.jsp" flush="false" />
+
+            <% if( parms.getFilters().size() > 0 || AcknowledgeType.UNACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) || AcknowledgeType.ACKNOWLEDGED.toNormalizedAcknowledgeType().equals(parms.getAckType()) ) { %>
                 <p>
                     <onms:filters
                             context="/alarm/list"
