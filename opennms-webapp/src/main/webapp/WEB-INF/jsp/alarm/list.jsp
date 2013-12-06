@@ -331,7 +331,6 @@
       </div>
       <!-- end menu -->
 
-            <jsp:include page="/includes/alarm-querypanel.jsp" flush="false" />
           
         <!-- Popup message box for alarm export action -->
         <div id="exportConfirmation" style="display:none">
@@ -628,14 +627,14 @@
         <% } %>
           <option value="clear">Clear Alarms</option>
           <option value="escalate">Escalate Alarms</option>
-         <optgroup label="Export Alarms">
+        <!-- <optgroup label="Export Alarms">
          <option value="exportall">Export All</option>
         <option value="export">Export Selected</option>
          </optgroup>
          <optgroup label="Purge Alarms">
          <option value="purgeall">Purge All</option>
         <option value="purge">Purge Selected</option>
-         </optgroup>
+         </optgroup> -->
           </select>
           <input type="button" value="Go" onClick="submitForm(document.alarm_action_form.alarmAction.value)" />
       <% } %>

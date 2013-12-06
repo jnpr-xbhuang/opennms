@@ -459,7 +459,7 @@ if (isPurgeExport)
                                                         <th width="2%">&nbsp;</th>
                                                 <% } %>
           <% } %>
-          <th width="4%"> Select</th>
+         <!--<th width="4%"> Select</th>%>-->
           <th width="4%"> <%=this.makeSortLink(callback, parms, SortStyle.ID, SortStyle.REVERSE_ID, "id", "ID" , favorite)%></th>
           <th width="10%"><%=this.makeSortLink(callback, parms, SortStyle.SEVERITY, SortStyle.REVERSE_SEVERITY, "severity", "Severity" , favorite)%></th>
           <th width="19%"><%=this.makeSortLink(callback, parms, SortStyle.TIME, SortStyle.REVERSE_TIME, "time", "Time" , favorite)%></th>
@@ -474,7 +474,7 @@ if (isPurgeExport)
       %>
       
         <tr valign="top" class="<%=events[i].getSeverity().getLabel()%>">
-          <%--<% if( "true".equals(acknowledgeEvent) ) { %>--%> 
+        <!--  <%--<% if( "true".equals(acknowledgeEvent) ) { %>--%> 
                                                 <% if( request.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ) ) { %>
                                                 <td valign="top" rowspan="4" class="divider">
                                                                         <input type="checkbox" name="event" value="<%=events[i].getId()%>" />
@@ -483,7 +483,7 @@ if (isPurgeExport)
                                                                 <td valign="top" rowspan="4" class="divider">&nbsp;</td>
                                                         <% } %>
             <%--<% } %>--%> 
-
+-->
           <td valign="top" rowspan="4" class="divider"><a href="event/detail.jsp?id=<%=events[i].getId()%>"><%=events[i].getId()%></a></td>
           
           <td valign="top" rowspan="4" class="divider bright">
@@ -597,7 +597,7 @@ if (isPurgeExport)
        
       <% } /*end for*/%>
       </table>
-        
+        <!--
         <p><%=events.length%> events
           <%
                 	if( (req.isUserInRole( Authentication.ROLE_ADMIN ) || !req.isUserInRole( Authentication.ROLE_READONLY ))) {
@@ -627,7 +627,7 @@ if (isPurgeExport)
               <input TYPE="reset" />
             <% } %>
           <% } %>
-        </p>
+        </p>-->
       </form>
 
             <% if( events.length > 0 ) { %>

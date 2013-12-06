@@ -660,8 +660,8 @@ org.opennms.web.api.Authentication"
             </td>
         </tr>
         <% } // showEscalate || showClear %>
-                <tr class="<%=alarm.getSeverity().getLabel()%>">
-                 <td>
+             <!--   <tr class="<%=alarm.getSeverity().getLabel()%>">
+             <td>
                         <form method="post" name="alarm_action_form">
                                 <div class="exportConfirmation" id="exportConfirmation" style="font-size:120%;display:none" >
                                         <center>
@@ -686,8 +686,8 @@ org.opennms.web.api.Authentication"
                                 <input type="button" value="Export" onClick="submitForm()"/>
                         </form>
                  </td>
-                 <td>Export this alarm</td>
-                </tr>
+               <td>Export this alarm</td>
+                </tr>-->
     </tbody>
 </table>
 
