@@ -187,7 +187,7 @@
              </nobr>
            </td>
        <% } else {%>
-	<td class="divider" width="15%">&nbsp;</td>
+	<td class="divider" width="15%"><a href="event/detail.jsp?id=<%=event.getId()%>"><%=event.getId()%></a></td>
 	<%}%>
        <td class="divider" width="15%"><fmt:formatDate value="${event.time}" type="date" dateStyle="short"/>&nbsp;<fmt:formatDate value="${event.time}" type="time" pattern="HH:mm:ss"/></td>
        <td class="divider bright" width="15%"><%= event.getSeverity().getLabel() %></td>
