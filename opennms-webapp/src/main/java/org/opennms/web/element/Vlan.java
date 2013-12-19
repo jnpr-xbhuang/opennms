@@ -128,7 +128,7 @@ public class Vlan
         int greenoffset = 29;
         int blueoffset = 23;
         if (m_vlanId == 0) return "";
-        if (m_vlanId == 1) return "#FFFFFF";
+        if (m_vlanId == 1) return "#232323";
         red = (red + m_vlanId * redoffset)%255;
         green = (green + m_vlanId * greenoffset)%255;
         blue = (blue + m_vlanId * blueoffset)%255;

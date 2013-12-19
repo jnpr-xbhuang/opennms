@@ -276,7 +276,7 @@ public class StpInterface
 	        int greenoffset = 29;
 	        int blueoffset = 23;
 	        if (m_stpvlan == 0) return "";
-	        if (m_stpvlan == 1) return "#FFFFFF";
+	        if (m_stpvlan == 1) return "#232323";
 	        red = (red + m_stpvlan * redoffset)%255;
 	        green = (green + m_stpvlan * greenoffset)%255;
 	        blue = (blue + m_stpvlan * blueoffset)%255;

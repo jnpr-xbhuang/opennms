@@ -269,7 +269,7 @@ public class StpNode
         int greenoffset = 29;
         int blueoffset = 23;
         if (m_basevlan == 0) return "";
-        if (m_basevlan == 1) return "#FFFFFF";
+        if (m_basevlan == 1) return "#232323";
         red = (red + m_basevlan * redoffset)%255;
         green = (green + m_basevlan * greenoffset)%255;
         blue = (blue + m_basevlan * blueoffset)%255;
