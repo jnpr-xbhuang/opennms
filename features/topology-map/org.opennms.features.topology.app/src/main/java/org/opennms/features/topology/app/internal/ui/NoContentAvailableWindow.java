@@ -54,7 +54,7 @@ public class NoContentAvailableWindow extends Window {
 
         Label label = new Label("This means" +
                 "<ul>" +
-                "<li>the last vertex was removed from focus or</li>" +
+                "<li>the last node was removed from focus or</li>" +
                 "<li>no default focus is available.</li>" +
                 "</ul>" +
                 "To add a node to focus" +
