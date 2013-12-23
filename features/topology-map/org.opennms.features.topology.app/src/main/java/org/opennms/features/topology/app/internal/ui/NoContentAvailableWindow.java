@@ -43,7 +43,7 @@ public class NoContentAvailableWindow extends Window {
     private final Label noDefaultsAvailable;
 
     public NoContentAvailableWindow(final GraphContainer graphContainer) {
-        super("No focus defined");
+        super("Node Display Warning");
 
         setResizable(false);
         setClosable(false);
@@ -52,15 +52,11 @@ public class NoContentAvailableWindow extends Window {
         setWidth(500, Sizeable.Unit.PIXELS);
         setHeight(300, Sizeable.Unit.PIXELS);
 
-        Label label = new Label("This means" +
+        Label label = new Label("If you do not see any nodes in this view, please try one of the options below" +
                 "<ul>" +
-                "<li>the last node was removed from focus or</li>" +
-                "<li>no default focus is available.</li>" +
-                "</ul>" +
-                "To add a node to focus" +
-                "<ul>" +
-                "<li>manually add a node to focus via the search box</li>" +
-                "<li>use the default focus</li>" +
+                "<li>1. Try adding a node manually via the search box.</li>" +
+                "<li>2. Try using the default focus by clicking on the button below.</li>" +
+                "<li>3. Try clicking on View->Refresh Now.</li>" +
                 "</ul>",  ContentMode.HTML);
 
         final HorizontalLayout defaultLayout = new HorizontalLayout();
