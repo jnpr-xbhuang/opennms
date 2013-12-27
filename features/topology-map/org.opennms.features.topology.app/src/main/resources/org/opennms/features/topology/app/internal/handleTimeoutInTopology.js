@@ -1,16 +1,17 @@
-  if (window.top != window.self) { 
+  if (window.top != window.self) {
     document.onclick = function(e) {
-                        if (parent.resetIdle != null)
-                            parent.resetIdle();
+                        if (top.Jx.shell.sessionController.resetIdleNotifyTabs != null)
+                            top.Jx.shell.sessionController.resetIdleNotifyTabs();
                      }
 
     document.onkeypress = function(e) {
-                        if (parent.resetIdle != null)
-                            parent.resetIdle();
+                        if (top.Jx.shell.sessionController.resetIdleNotifyTabs != null)
+                            top.Jx.shell.sessionController.resetIdleNotifyTabs();
                      }
 
     document.onmousemove = function(e) {
-                        if (parent.resetIdle != null)
-                            parent.resetIdle();
+                        if (top.Jx.shell.sessionController.resetIdleNotifyTabs != null)
+                            top.Jx.shell.sessionController.resetIdleNotifyTabs();
                      }
   }
+

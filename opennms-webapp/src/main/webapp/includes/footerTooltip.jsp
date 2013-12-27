@@ -108,20 +108,20 @@
 <script>
   if (window.top != window.self) { // inside an iframe
     document.onclick = function(e) {
-                        if (parent.resetIdle != null)
-                            parent.resetIdle();
+                        if (top.Jx.shell.sessionController.resetIdleNotifyTabs != null)
+                            top.Jx.shell.sessionController.resetIdleNotifyTabs();
                      }
 
     document.onkeypress = function(e) {
-                        if (parent.resetIdle != null)
-                            parent.resetIdle();
+                        if (top.Jx.shell.sessionController.resetIdleNotifyTabs != null)
+                            top.Jx.shell.sessionController.resetIdleNotifyTabs();
                      }
 
 #    document.onmousemove = function(e) {
-#                        if (parent.resetIdle != null)
-#                            parent.resetIdle();
+#                        if (top.Jx.shell.sessionController.resetIdleNotifyTabs != null)
+#                            top.Jx.shell.sessionController.resetIdleNotifyTabs();
 #                     }
-  } 
+  }
 </script>
 
 <%-- The </body> and </html> tags are unmatched in this file (the matching
