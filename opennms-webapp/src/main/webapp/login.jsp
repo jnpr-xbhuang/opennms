@@ -80,6 +80,13 @@
 
     document.body.appendChild(form);
     form.submit();
+
+ <c:if test="${not empty param.login_error}">
+  <p style="color:red;">
+    <strong>Network Monitoring module is initializing for this user, please wait a moment... </strong>
+  </p>
+
+</c:if> 
   
    } else {
     window.top.location = '../mainui/unsecured/logout?appName=CMP';
@@ -94,11 +101,12 @@
          --%>
 <c:if test="${not empty param.login_error}">
   <p style="color:red;">
-    <strong>Your log-in attempt failed, please try again</strong>
+    <strong>Network Monitoring module is initializing for this user, please wait a moment... </strong>
   </p>
 
-  <%-- This is: AbstractProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY --%>
+  <%-- This is: AbstractProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY
   <p>Reason: ${SPRING_SECURITY_LAST_EXCEPTION.message}</p>
+  --%>
 </c:if>
 <%-- comment for Space Only
 <div class="formOnly">
@@ -124,8 +132,8 @@
   
   </form>
 </div>
---%>
 <div> <p> Please login from Space UI </p> </div>
+--%>
 <hr />
 
 <jsp:include page="/includes/footer.jsp" flush="false" />

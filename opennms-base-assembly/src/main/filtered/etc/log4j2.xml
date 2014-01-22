@@ -118,7 +118,7 @@
     </logger>
     
     <!-- Allow any message to pass through the root logger -->
-    <root level="TRACE">
+    <root level="WARN">
       <!-- 
         Each category/log can be set to one of TRACE, INFO, DEBUG, WARN, ERROR
 
@@ -132,7 +132,7 @@
         None of the below of the KeyValuePairs are actually necessary but are just to indicate
         some well known prefixes in the log or to override the defaultThreshold for a given prefix.
       -->
-      <DynamicThresholdFilter key="prefix" defaultThreshold="INFO">
+      <DynamicThresholdFilter key="prefix" defaultThreshold="WARN">
         <KeyValuePair key="access-point-monitor" value="WARN" />
         <KeyValuePair key="ackd"                 value="WARN" />
         <KeyValuePair key="actiond"              value="WARN" />
