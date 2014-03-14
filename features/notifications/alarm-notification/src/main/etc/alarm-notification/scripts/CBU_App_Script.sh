@@ -1,6 +1,6 @@
-echo "Script CBUApplication started"
+echo "CBU alarm notification script started " >> start.log
 xml=$1
-echo "Alarm xml being sent is " $xml
-soapXml="<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:alar=\"http://alarms.sample\">   <soapenv:Header/>   <soapenv:Body>      <alar:AlarmXml>         <alar:alarmXml>              		<![CDATA[$xml]]>                  </alar:alarmXml>      </alar:AlarmXml>   </soapenv:Body></soapenv:Envelope>"
+echo "CBU Alarm xml being sent is " $xml >> start.log
+curl -v -u super:juniper123 -X POST -H "Content-type:application/xml" -d "$xml" "https://JMP-CLUSTER/api/juniper/packet-optical/service-alarm-manager/alarm" --insecure
+echo " POD Rest Web Service is Invoked " >> start.log
 
-curl -H "SOAPAction: urn:alarmXml" -H "Content-Type:text/xml" -d "$soapXml" "http://localhost:8080/CBUApplication/services/Alarms"

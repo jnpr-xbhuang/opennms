@@ -9,11 +9,27 @@
 			</errorhandling>
 		</script>
 		<ueis>
-	        <uei name="uei.opennms.org/generic/traps/SNMP_Link_Down" notification_threshold="5">
-	       	<filter devicefamily="JSeries" severity="Minor,Normal"/>
-	       	<filter devicefamily="DevicesWithNoSysoid" severity="Minor,Normal"/>
-	        </uei>	
-	     </ueis>   
+                <uei name="uei.opennms.org/generic/traps/SNMP_Link_Down" notification_threshold="1">
+                </uei>
+                <uei name="uei.opennms.org/generic/traps/SNMP_Link_Up" notification_threshold="1">
+                </uei>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxIfOtnNotificationAdminStatus" notification_threshold="1">
+                </uei>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxIfOtnNotificationOperStatus" notification_threshold="1">
+                </uei>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxOpticsNotificationSet" notification_threshold="1">
+                </uei>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxOpticsNotificationCleared" notification_threshold="1">
+                </uei>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmSet" notification_threshold="1">
+		</uei>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmClear" notification_threshold="1">
+                </uei>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmSet" notification_threshold="1">
+                </uei>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmClear" notification_threshold="1">
+                </uei>
+	     	</ueis>   
 	</notification>
 	<notification name="NANotification" enable="true">
 		<script>
@@ -42,3 +58,4 @@
              </ueis>
         </notification>
 </alarm-northbounder-config>
+
