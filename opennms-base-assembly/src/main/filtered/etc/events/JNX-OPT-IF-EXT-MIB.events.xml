@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<events xmlns="http://xmlns.opennms.org/xsd/eventconf">
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>1</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>1</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmSet</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNOChOTUkAlarmSet</event-label>
+    <descr> Critical Notification of a recently set OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[#4]% ProbableCause=%parm[#5]% ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNOChOTUkAlarmSet trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNOChOTUkAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+	ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Critical</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOtnLosAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOtnLofAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOtnLomAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOtuSsfAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOtuBdiAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOtuTimAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOtuIaeAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOtuBiaeAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOtuTsfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOtuDegAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOtuFecExcessiveErrsAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIf15MinThreshBBETCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIf15MinThreshESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIf15MinThreshSESTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIf15MinThreshUASTCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIf15MinThreshBip8TCA" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIf15MinThUnCorrectedWordsTCA" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIf15MinThreshPreFECBERTCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIf24HourThreshBBETCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIf24HourThreshESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIf24HourThreshSESTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIf24HourThreshUASTCA" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxoptIf24HourThreshBip8TCA" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxoptIf24HourThreshPreFECBERTCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!--  <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmClear"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>1</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>2</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmSet</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNOChOTUkAlarmSet</event-label>
+    <descr> Major Notification of a recently set OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNOChOTUkAlarmSet trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNOChOTUkAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+	ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Major</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOtnLosAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOtnLofAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOtnLomAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOtuSsfAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOtuBdiAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOtuTimAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOtuIaeAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOtuBiaeAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOtuTsfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOtuDegAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOtuFecExcessiveErrsAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIf15MinThreshBBETCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIf15MinThreshESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIf15MinThreshSESTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIf15MinThreshUASTCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIf15MinThreshBip8TCA" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIf15MinThUnCorrectedWordsTCA" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIf15MinThreshPreFECBERTCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIf24HourThreshBBETCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIf24HourThreshESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIf24HourThreshSESTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIf24HourThreshUASTCA" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxoptIf24HourThreshBip8TCA" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxoptIf24HourThreshPreFECBERTCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmClear"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>1</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>3</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmSet</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNOChOTUkAlarmSet</event-label>
+    <descr> Minor Notification of a recently set OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNOChOTUkAlarmSet trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNOChOTUkAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+	ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Minor</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOtnLosAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOtnLofAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOtnLomAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOtuSsfAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOtuBdiAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOtuTimAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOtuIaeAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOtuBiaeAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOtuTsfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOtuDegAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOtuFecExcessiveErrsAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIf15MinThreshBBETCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIf15MinThreshESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIf15MinThreshSESTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIf15MinThreshUASTCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIf15MinThreshBip8TCA" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIf15MinThUnCorrectedWordsTCA" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIf15MinThreshPreFECBERTCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIf24HourThreshBBETCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIf24HourThreshESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIf24HourThreshSESTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIf24HourThreshUASTCA" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxoptIf24HourThreshBip8TCA" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxoptIf24HourThreshPreFECBERTCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmClear"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>1</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>4</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmSet</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNOChOTUkAlarmSet</event-label>
+    <descr> Normal Notification of a recently set OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNOChOTUkAlarmSet trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNOChOTUkAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+	ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Normal</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOtnLosAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOtnLofAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOtnLomAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOtuSsfAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOtuBdiAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOtuTimAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOtuIaeAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOtuBiaeAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOtuTsfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOtuDegAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOtuFecExcessiveErrsAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIf15MinThreshBBETCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIf15MinThreshESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIf15MinThreshSESTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIf15MinThreshUASTCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIf15MinThreshBip8TCA" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIf15MinThUnCorrectedWordsTCA" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIf15MinThreshPreFECBERTCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIf24HourThreshBBETCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIf24HourThreshESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIf24HourThreshSESTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIf24HourThreshUASTCA" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxoptIf24HourThreshBip8TCA" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxoptIf24HourThreshPreFECBERTCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmClear"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>2</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>1</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmClear</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNOChOTUkAlarmClear</event-label>
+    <descr> Critical Notification of a recently clear OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNOChOTUkAlarmClear trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNOChOTUkAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Critical</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOtnLosAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOtnLofAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOtnLomAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOtuSsfAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOtuBdiAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOtuTimAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOtuIaeAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOtuBiaeAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOtuTsfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOtuDegAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOtuFecExcessiveErrsAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIf15MinThreshBBETCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIf15MinThreshESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIf15MinThreshSESTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIf15MinThreshUASTCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIf15MinThreshBip8TCA" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIf15MinThUnCorrectedWordsTCA" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIf15MinThreshPreFECBERTCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIf24HourThreshBBETCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIf24HourThreshESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIf24HourThreshSESTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIf24HourThreshUASTCA" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxoptIf24HourThreshBip8TCA" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxoptIf24HourThreshPreFECBERTCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmSet"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>2</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>2</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmClear</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNOChOTUkAlarmClear</event-label>
+    <descr> Major Notification of a recently clear OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNOChOTUkAlarmClear trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNOChOTUkAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Major</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOtnLosAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOtnLofAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOtnLomAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOtuSsfAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOtuBdiAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOtuTimAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOtuIaeAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOtuBiaeAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOtuTsfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOtuDegAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOtuFecExcessiveErrsAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIf15MinThreshBBETCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIf15MinThreshESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIf15MinThreshSESTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIf15MinThreshUASTCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIf15MinThreshBip8TCA" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIf15MinThUnCorrectedWordsTCA" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIf15MinThreshPreFECBERTCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIf24HourThreshBBETCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIf24HourThreshESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIf24HourThreshSESTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIf24HourThreshUASTCA" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxoptIf24HourThreshBip8TCA" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxoptIf24HourThreshPreFECBERTCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmSet"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>2</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>3</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmClear</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNOChOTUkAlarmClear</event-label>
+    <descr> Minor Notification of a recently clear OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNOChOTUkAlarmClear trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNOChOTUkAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Minor</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOtnLosAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOtnLofAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOtnLomAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOtuSsfAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOtuBdiAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOtuTimAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOtuIaeAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOtuBiaeAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOtuTsfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOtuDegAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOtuFecExcessiveErrsAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIf15MinThreshBBETCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIf15MinThreshESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIf15MinThreshSESTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIf15MinThreshUASTCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIf15MinThreshBip8TCA" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIf15MinThUnCorrectedWordsTCA" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIf15MinThreshPreFECBERTCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIf24HourThreshBBETCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIf24HourThreshESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIf24HourThreshSESTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIf24HourThreshUASTCA" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxoptIf24HourThreshBip8TCA" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxoptIf24HourThreshPreFECBERTCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmSet"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>2</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>4</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmClear</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNOChOTUkAlarmClear</event-label>
+    <descr> Normal Notification of a recently clear OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[i#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNOChOTUkAlarmClear trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNOChOTUkAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Normal</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOtnLosAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOtnLofAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOtnLomAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOtuSsfAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOtuBdiAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOtuTimAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOtuIaeAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOtuBiaeAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOtuTsfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOtuDegAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOtuFecExcessiveErrsAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIf15MinThreshBBETCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIf15MinThreshESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIf15MinThreshSESTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIf15MinThreshUASTCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIf15MinThreshBip8TCA" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIf15MinThUnCorrectedWordsTCA" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIf15MinThreshPreFECBERTCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIf24HourThreshBBETCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIf24HourThreshESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIf24HourThreshSESTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIf24HourThreshUASTCA" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxoptIf24HourThreshBip8TCA" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxoptIf24HourThreshPreFECBERTCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNOChOTUkAlarmSet"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>3</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>1</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmSet</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNODUkTcmAlarmSet</event-label>
+    <descr> Critical Notification of a recently set OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[i#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNODUkTcmAlarmSet trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNODUkTcmAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Critical</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnOdukTcmNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOdukTcmOciAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOdukTcmLckAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOdukTcmBdiAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOdukTcmTimAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOdukTcmDegAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOdukTcmIaeAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOdukTcmLTCAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOdukTcmCSfAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOdukTcmSSfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOdukTcmTSfAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBBETCA" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshESTCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshSESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshUASTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBip8TCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIfOdukTcmAisAlarm" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIfOdukPtmAlarm" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBBETCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshESTCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshSESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshUASTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBip8TCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmClear"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>3</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>2</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmSet</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNODUkTcmAlarmSet</event-label>
+    <descr> Major Notification of a recently set OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[i#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNODUkTcmAlarmSet trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNODUkTcmAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Major</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnOdukTcmNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOdukTcmOciAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOdukTcmLckAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOdukTcmBdiAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOdukTcmTimAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOdukTcmDegAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOdukTcmIaeAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOdukTcmLTCAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOdukTcmCSfAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOdukTcmSSfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOdukTcmTSfAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBBETCA" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshESTCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshSESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshUASTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBip8TCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIfOdukTcmAisAlarm" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIfOdukPtmAlarm" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBBETCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshESTCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshSESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshUASTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBip8TCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmClear"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>3</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>3</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmSet</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNODUkTcmAlarmSet</event-label>
+    <descr> Minor Notification of a recently set OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[i#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNODUkTcmAlarmSet trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNODUkTcmAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Minor</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnOdukTcmNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOdukTcmOciAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOdukTcmLckAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOdukTcmBdiAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOdukTcmTimAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOdukTcmDegAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOdukTcmIaeAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOdukTcmLTCAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOdukTcmCSfAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOdukTcmSSfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOdukTcmTSfAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBBETCA" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshESTCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshSESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshUASTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBip8TCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIfOdukTcmAisAlarm" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIfOdukPtmAlarm" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBBETCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshESTCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshSESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshUASTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBip8TCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmClear"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>3</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>4</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmSet</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNODUkTcmAlarmSet</event-label>
+    <descr> Normal Notification of a recently set OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[i#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNODUkTcmAlarmSet trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNODUkTcmAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Normal</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnOdukTcmNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOdukTcmOciAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOdukTcmLckAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOdukTcmBdiAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOdukTcmTimAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOdukTcmDegAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOdukTcmIaeAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOdukTcmLTCAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOdukTcmCSfAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOdukTcmSSfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOdukTcmTSfAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBBETCA" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshESTCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshSESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshUASTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBip8TCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIfOdukTcmAisAlarm" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIfOdukPtmAlarm" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBBETCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshESTCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshSESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshUASTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBip8TCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmClear"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>4</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>1</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmClear</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNODUkTcmAlarmClear</event-label>
+    <descr>
+ Critical Notification of a recently clear OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[i#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNODUkTcmAlarmClear trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNODUkTcmAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Critical</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnOdukTcmNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOdukTcmOciAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOdukTcmLckAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOdukTcmBdiAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOdukTcmTimAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOdukTcmDegAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOdukTcmIaeAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOdukTcmLTCAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOdukTcmCSfAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOdukTcmSSfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOdukTcmTSfAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBBETCA" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshESTCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshSESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshUASTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBip8TCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIfOdukTcmAisAlarm" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIfOdukPtmAlarm" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBBETCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshESTCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshSESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshUASTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBip8TCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmSet"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>4</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>2</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmClear</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNODUkTcmAlarmClear</event-label>
+    <descr>
+ Major Notification of a recently clear OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNODUkTcmAlarmClear trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNODUkTcmAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Major</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnOdukTcmNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOdukTcmOciAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOdukTcmLckAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOdukTcmBdiAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOdukTcmTimAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOdukTcmDegAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOdukTcmIaeAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOdukTcmLTCAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOdukTcmCSfAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOdukTcmSSfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOdukTcmTSfAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBBETCA" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshESTCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshSESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshUASTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBip8TCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIfOdukTcmAisAlarm" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIfOdukPtmAlarm" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBBETCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshESTCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshSESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshUASTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBip8TCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmSet"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>4</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>3</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmClear</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNODUkTcmAlarmClear</event-label>
+    <descr>
+ Minor Notification of a recently clear OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[#4]% ProbableCause=%parm[#5]%  ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNODUkTcmAlarmClear trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNODUkTcmAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Minor</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnOdukTcmNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOdukTcmOciAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOdukTcmLckAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOdukTcmBdiAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOdukTcmTimAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOdukTcmDegAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOdukTcmIaeAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOdukTcmLTCAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOdukTcmCSfAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOdukTcmSSfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOdukTcmTSfAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBBETCA" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshESTCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshSESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshUASTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBip8TCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIfOdukTcmAisAlarm" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIfOdukPtmAlarm" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBBETCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshESTCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshSESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshUASTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBip8TCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmSet"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.3.73.1.3</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>4</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>6</vbnumber>
+        <vbvalue>4</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmClear</uei>
+    <event-label>JNX-OPT-IF-EXT-MIB defined trap event: jnxoptIfOTNODUkTcmAlarmClear</event-label>
+    <descr>
+ Normal Notification of a recently clear OTN alarm of Layer and Type. Location=%parm[#1]% Direction=%parm[#2]% Layer=%parm[#3]% TCMLevel=%parm[#4]% ProbableCause=%parm[#5]% ifIndex=%parm[name-#5.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxoptIfOTNODUkTcmAlarmClear trap received
+	jnxoptIfOTNAlarmLocation=%parm[#1]%
+	jnxoptIfOTNAlarmDirection=%parm[#2]%
+	jnxoptIfOTNAlarmLayer=%parm[#3]%
+	jnxoptIfOTNAlarmTCMLevel=%parm[#4]%
+	jnxoptIfOTNODUkTcmAlarmType=%parm[#5]%
+	jnxoptIfOTNAlarmSeverity=%parm[#6]%
+        ifIndex=%parm[name-#5.-1]%
+	jnxoptIfOTNAlarmDate=%parm[#7]%&lt;/p&gt;</logmsg>
+    <severity>Normal</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="nearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="farEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#3]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOTUkLayer" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfODUkLayer" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfTCMSubLayer" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="0" varbinddecodedstring="jnxoptIfOtnOdukTcmNoAlarm" />
+      <decode varbindvalue="1" varbinddecodedstring="jnxoptIfOdukTcmOciAlarm" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxoptIfOdukTcmLckAlarm" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxoptIfOdukTcmBdiAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxoptIfOdukTcmTimAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxoptIfOdukTcmDegAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxoptIfOdukTcmIaeAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxoptIfOdukTcmLTCAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxoptIfOdukTcmCSfAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxoptIfOdukTcmSSfAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxoptIfOdukTcmTSfAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBBETCA" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshESTCA" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshSESTCA" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshUASTCA" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxoptIfOdukTcm15MinThreshBip8TCA" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxoptIfOdukTcmAisAlarm" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxoptIfOdukPtmAlarm" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBBETCA" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshESTCA" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshSESTCA" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshUASTCA" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxoptIfOdukTcm24HourThreshBip8TCA" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#6]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[#5]%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%parm[name-#5.-1]%" alarm-type="1" auto-clean="true" clear-key="uei.opennms.org/vendor/Juniper/traps/jnxoptIfOTNODUkTcmAlarmSet"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#5.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+</events>
+

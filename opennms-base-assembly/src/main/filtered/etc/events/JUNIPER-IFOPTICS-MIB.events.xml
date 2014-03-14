@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<events xmlns="http://xmlns.opennms.org/xsd/eventconf">
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.4.22</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>1</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>5</vbnumber>
+        <vbvalue>1</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxOpticsNotificationSet</uei>
+    <event-label>JUNIPER-IFOPTICS-MIB defined trap event: jnxOpticsNotificationSet</event-label>
+    <descr> Critical Notification of a recently set optics alarm. Location=%parm[#1]% Direction=%parm[#2]% ProbableCause=%parm[#4]% ifDescr=%parm[#3]% ifIndex=%parm[name-#3.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxOpticsNotificationSet trap received
+	jnxOpticsNotificationLocation=%parm[#1]%
+	jnxOpticsNotificationDirection=%parm[#2]%
+	ifDescr=%parm[#3]%
+	ifIndex=%parm[name-#3.-1]%
+	jnxOpticsLastNotificationId=%parm[#4]%
+	jnxOpticsNotificationSeverity=%parm[#5]%
+	jnxOpticsNotificationDate=%parm[#6]%&lt;/p&gt;</logmsg>
+    <severity>Critical</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxNearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxFarEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#4]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxOpticsLOS" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxOpticsWavelenthLockErr" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxOpticsPowerHighAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxOpticsPowerLowAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxOpticsBiasCurrentHighAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxOpticsBiasCurrentLowAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxOpticsTemperatureHighAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxOpticsTemperaturelowAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxOpticsTxPLLLockAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxOpticsRxPLLLockAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxOpticsAvgPowerAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxOpticsRxLossAvgPowerAlarm" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxOpticsLossofACPowerAlarm" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxOpticsTxPowerHighThreshAlert" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxOpticsTxPowerLowThreshAlert" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxOpticsRxPowerHighThreshAlert" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxOpticsRxPowerLowThreshAlert" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxOpticsModuleTempHighThreshAlert" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxOpticsModuleTempLowThreshAlert" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxOptics24HourTxPowerHighThreshAlert" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxOptics24HourTxPowerLowThreshAlert" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxOptics24HourRxPowerHighThreshAlert" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxOptics24HourRxPowerLowThreshAlert" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxOptics24HourModuleTempHighThreshAlert" />
+      <decode varbindvalue="25" varbinddecodedstring="jnxOptics24HourModuleTempLowThreshAlert" />
+      <decode varbindvalue="26" varbinddecodedstring="jnxOpticsRxPowerHighAlarm" />
+      <decode varbindvalue="27" varbinddecodedstring="jnxOpticsRxPowerLowAlarm" />
+      <decode varbindvalue="28" varbinddecodedstring="jnxOpticsTxPowerHighWarning" />
+      <decode varbindvalue="29" varbinddecodedstring="jnxOpticsTxPowerLowWarning" />
+      <decode varbindvalue="30" varbinddecodedstring="jnxOpticsRxPowerHighWarning" />
+      <decode varbindvalue="31" varbinddecodedstring="jnxOpticsRxPowerLowWarning" />
+      <decode varbindvalue="32" varbinddecodedstring="jnxOpticsModuleTempHighWarning" />
+      <decode varbindvalue="33" varbinddecodedstring="jnxOpticsModuleTempLowWarning" />
+      <decode varbindvalue="34" varbinddecodedstring="jnxOpticsRxCarrierFreqHigh" />
+      <decode varbindvalue="35" varbinddecodedstring="jnxOpticsRxCarrierFreqLow" />
+      <decode varbindvalue="36" varbinddecodedstring="jnxOpticsChromaticDispHighWarning" />
+      <decode varbindvalue="37" varbinddecodedstring="jnxOpticsChromaticDispLowWarning" />
+      <decode varbindvalue="38" varbinddecodedstring="jnxOpticsQLowWarning" />
+      <decode varbindvalue="39" varbinddecodedstring="jnxOpticsOSNRLowWarning" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#3.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.4.22</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>1</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>5</vbnumber>
+        <vbvalue>2</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxOpticsNotificationSet</uei>
+    <event-label>JUNIPER-IFOPTICS-MIB defined trap event: jnxOpticsNotificationSet</event-label>
+    <descr> Major Notification of a recently set optics alarm. Location=%parm[#1]% Direction=%parm[#2]% ProbableCause=%parm[#4]% ifDescr=%parm[#3]% ifIndex=%parm[name-#3.-1]%  </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxOpticsNotificationSet trap received
+	jnxOpticsNotificationLocation=%parm[#1]%
+	jnxOpticsNotificationDirection=%parm[#2]%
+	ifDescr=%parm[#3]%
+	ifIndex=%parm[name-#3.-1]%
+	jnxOpticsLastNotificationId=%parm[#4]%
+	jnxOpticsNotificationSeverity=%parm[#5]%
+	jnxOpticsNotificationDate=%parm[#6]%&lt;/p&gt;</logmsg>
+    <severity>Major</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxNearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxFarEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#4]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxOpticsLOS" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxOpticsWavelenthLockErr" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxOpticsPowerHighAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxOpticsPowerLowAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxOpticsBiasCurrentHighAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxOpticsBiasCurrentLowAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxOpticsTemperatureHighAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxOpticsTemperaturelowAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxOpticsTxPLLLockAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxOpticsRxPLLLockAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxOpticsAvgPowerAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxOpticsRxLossAvgPowerAlarm" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxOpticsLossofACPowerAlarm" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxOpticsTxPowerHighThreshAlert" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxOpticsTxPowerLowThreshAlert" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxOpticsRxPowerHighThreshAlert" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxOpticsRxPowerLowThreshAlert" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxOpticsModuleTempHighThreshAlert" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxOpticsModuleTempLowThreshAlert" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxOptics24HourTxPowerHighThreshAlert" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxOptics24HourTxPowerLowThreshAlert" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxOptics24HourRxPowerHighThreshAlert" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxOptics24HourRxPowerLowThreshAlert" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxOptics24HourModuleTempHighThreshAlert" />
+      <decode varbindvalue="25" varbinddecodedstring="jnxOptics24HourModuleTempLowThreshAlert" />
+      <decode varbindvalue="26" varbinddecodedstring="jnxOpticsRxPowerHighAlarm" />
+      <decode varbindvalue="27" varbinddecodedstring="jnxOpticsRxPowerLowAlarm" />
+      <decode varbindvalue="28" varbinddecodedstring="jnxOpticsTxPowerHighWarning" />
+      <decode varbindvalue="29" varbinddecodedstring="jnxOpticsTxPowerLowWarning" />
+      <decode varbindvalue="30" varbinddecodedstring="jnxOpticsRxPowerHighWarning" />
+      <decode varbindvalue="31" varbinddecodedstring="jnxOpticsRxPowerLowWarning" />
+      <decode varbindvalue="32" varbinddecodedstring="jnxOpticsModuleTempHighWarning" />
+      <decode varbindvalue="33" varbinddecodedstring="jnxOpticsModuleTempLowWarning" />
+      <decode varbindvalue="34" varbinddecodedstring="jnxOpticsRxCarrierFreqHigh" />
+      <decode varbindvalue="35" varbinddecodedstring="jnxOpticsRxCarrierFreqLow" />
+      <decode varbindvalue="36" varbinddecodedstring="jnxOpticsChromaticDispHighWarning" />
+      <decode varbindvalue="37" varbinddecodedstring="jnxOpticsChromaticDispLowWarning" />
+      <decode varbindvalue="38" varbinddecodedstring="jnxOpticsQLowWarning" />
+      <decode varbindvalue="39" varbinddecodedstring="jnxOpticsOSNRLowWarning" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#3.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%%parm[name-#3.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.4.22</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>1</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>5</vbnumber>
+        <vbvalue>3</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxOpticsNotificationSet</uei>
+    <event-label>JUNIPER-IFOPTICS-MIB defined trap event: jnxOpticsNotificationSet</event-label>
+    <descr> Minor Notification of a recently set optics alarm. Location=%parm[#1]% Direction=%parm[#2]% ProbableCause=%parm[#4]% ifDescr=%parm[#3]% ifIndex=%parm[name-#3.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxOpticsNotificationSet trap received
+	jnxOpticsNotificationLocation=%parm[#1]%
+	jnxOpticsNotificationDirection=%parm[#2]%
+	ifDescr=%parm[#3]%
+	ifIndex=%parm[name-#3.-1]%
+	jnxOpticsLastNotificationId=%parm[#4]%
+	jnxOpticsNotificationSeverity=%parm[#5]%
+	jnxOpticsNotificationDate=%parm[#6]%&lt;/p&gt;</logmsg>
+    <severity>Minor</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxNearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxFarEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#4]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxOpticsLOS" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxOpticsWavelenthLockErr" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxOpticsPowerHighAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxOpticsPowerLowAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxOpticsBiasCurrentHighAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxOpticsBiasCurrentLowAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxOpticsTemperatureHighAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxOpticsTemperaturelowAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxOpticsTxPLLLockAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxOpticsRxPLLLockAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxOpticsAvgPowerAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxOpticsRxLossAvgPowerAlarm" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxOpticsLossofACPowerAlarm" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxOpticsTxPowerHighThreshAlert" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxOpticsTxPowerLowThreshAlert" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxOpticsRxPowerHighThreshAlert" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxOpticsRxPowerLowThreshAlert" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxOpticsModuleTempHighThreshAlert" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxOpticsModuleTempLowThreshAlert" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxOptics24HourTxPowerHighThreshAlert" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxOptics24HourTxPowerLowThreshAlert" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxOptics24HourRxPowerHighThreshAlert" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxOptics24HourRxPowerLowThreshAlert" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxOptics24HourModuleTempHighThreshAlert" />
+      <decode varbindvalue="25" varbinddecodedstring="jnxOptics24HourModuleTempLowThreshAlert" />
+      <decode varbindvalue="26" varbinddecodedstring="jnxOpticsRxPowerHighAlarm" />
+      <decode varbindvalue="27" varbinddecodedstring="jnxOpticsRxPowerLowAlarm" />
+      <decode varbindvalue="28" varbinddecodedstring="jnxOpticsTxPowerHighWarning" />
+      <decode varbindvalue="29" varbinddecodedstring="jnxOpticsTxPowerLowWarning" />
+      <decode varbindvalue="30" varbinddecodedstring="jnxOpticsRxPowerHighWarning" />
+      <decode varbindvalue="31" varbinddecodedstring="jnxOpticsRxPowerLowWarning" />
+      <decode varbindvalue="32" varbinddecodedstring="jnxOpticsModuleTempHighWarning" />
+      <decode varbindvalue="33" varbinddecodedstring="jnxOpticsModuleTempLowWarning" />
+      <decode varbindvalue="34" varbinddecodedstring="jnxOpticsRxCarrierFreqHigh" />
+      <decode varbindvalue="35" varbinddecodedstring="jnxOpticsRxCarrierFreqLow" />
+      <decode varbindvalue="36" varbinddecodedstring="jnxOpticsChromaticDispHighWarning" />
+      <decode varbindvalue="37" varbinddecodedstring="jnxOpticsChromaticDispLowWarning" />
+      <decode varbindvalue="38" varbinddecodedstring="jnxOpticsQLowWarning" />
+      <decode varbindvalue="39" varbinddecodedstring="jnxOpticsOSNRLowWarning" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#3.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%%parm[name-#3.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.4.22</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>1</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>5</vbnumber>
+        <vbvalue>4</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxOpticsNotificationSet</uei>
+    <event-label>JUNIPER-IFOPTICS-MIB defined trap event: jnxOpticsNotificationSet</event-label>
+    <descr> Warning Notification of a recently set optics alarm. Location=%parm[#1]% Direction=%parm[#2]% ProbableCause=%parm[#4]% ifDescr=%parm[#3]% ifIndex=%parm[name-#3.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxOpticsNotificationSet trap received
+	jnxOpticsNotificationLocation=%parm[#1]%
+	jnxOpticsNotificationDirection=%parm[#2]%
+	ifDescr=%parm[#3]%
+	ifIndex=%parm[name-#3.-1]%
+	jnxOpticsLastNotificationId=%parm[#4]%
+	jnxOpticsNotificationSeverity=%parm[#5]%
+	jnxOpticsNotificationDate=%parm[#6]%&lt;/p&gt;</logmsg>
+    <severity>Normal</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxNearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxFarEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#4]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxOpticsLOS" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxOpticsWavelenthLockErr" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxOpticsPowerHighAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxOpticsPowerLowAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxOpticsBiasCurrentHighAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxOpticsBiasCurrentLowAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxOpticsTemperatureHighAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxOpticsTemperaturelowAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxOpticsTxPLLLockAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxOpticsRxPLLLockAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxOpticsAvgPowerAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxOpticsRxLossAvgPowerAlarm" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxOpticsLossofACPowerAlarm" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxOpticsTxPowerHighThreshAlert" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxOpticsTxPowerLowThreshAlert" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxOpticsRxPowerHighThreshAlert" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxOpticsRxPowerLowThreshAlert" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxOpticsModuleTempHighThreshAlert" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxOpticsModuleTempLowThreshAlert" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxOptics24HourTxPowerHighThreshAlert" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxOptics24HourTxPowerLowThreshAlert" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxOptics24HourRxPowerHighThreshAlert" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxOptics24HourRxPowerLowThreshAlert" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxOptics24HourModuleTempHighThreshAlert" />
+      <decode varbindvalue="25" varbinddecodedstring="jnxOptics24HourModuleTempLowThreshAlert" />
+      <decode varbindvalue="26" varbinddecodedstring="jnxOpticsRxPowerHighAlarm" />
+      <decode varbindvalue="27" varbinddecodedstring="jnxOpticsRxPowerLowAlarm" />
+      <decode varbindvalue="28" varbinddecodedstring="jnxOpticsTxPowerHighWarning" />
+      <decode varbindvalue="29" varbinddecodedstring="jnxOpticsTxPowerLowWarning" />
+      <decode varbindvalue="30" varbinddecodedstring="jnxOpticsRxPowerHighWarning" />
+      <decode varbindvalue="31" varbinddecodedstring="jnxOpticsRxPowerLowWarning" />
+      <decode varbindvalue="32" varbinddecodedstring="jnxOpticsModuleTempHighWarning" />
+      <decode varbindvalue="33" varbinddecodedstring="jnxOpticsModuleTempLowWarning" />
+      <decode varbindvalue="34" varbinddecodedstring="jnxOpticsRxCarrierFreqHigh" />
+      <decode varbindvalue="35" varbinddecodedstring="jnxOpticsRxCarrierFreqLow" />
+      <decode varbindvalue="36" varbinddecodedstring="jnxOpticsChromaticDispHighWarning" />
+      <decode varbindvalue="37" varbinddecodedstring="jnxOpticsChromaticDispLowWarning" />
+      <decode varbindvalue="38" varbinddecodedstring="jnxOpticsQLowWarning" />
+      <decode varbindvalue="39" varbinddecodedstring="jnxOpticsOSNRLowWarning" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#3.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%%parm[name-#3.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.4.22</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>2</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>5</vbnumber>
+        <vbvalue>1</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxOpticsNotificationCleared</uei>
+    <event-label>JUNIPER-IFOPTICS-MIB defined trap event: jnxOpticsNotificationCleared</event-label>
+    <descr> Critical Notification of a recently cleared optics alarm. Location=%parm[#1]% Direction=%parm[#2]% ProbableCause=%parm[#4]% ifDescr=%parm[#3]% ifIndex=%parm[name-#3.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxOpticsNotificationCleared trap received
+	jnxOpticsNotificationLocation=%parm[#1]%
+	jnxOpticsNotificationDirection=%parm[#2]%
+	ifDescr=%parm[#3]%
+	ifIndex=%parm[name-#3.-1]%
+	jnxOpticsLastNotificationId=%parm[#4]%
+	jnxOpticsNotificationSeverity=%parm[#5]%
+	jnxOpticsNotificationDate=%parm[#6]%&lt;/p&gt;</logmsg>
+    <severity>Critical</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxNearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxFarEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#4]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxOpticsLOS" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxOpticsWavelenthLockErr" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxOpticsPowerHighAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxOpticsPowerLowAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxOpticsBiasCurrentHighAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxOpticsBiasCurrentLowAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxOpticsTemperatureHighAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxOpticsTemperaturelowAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxOpticsTxPLLLockAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxOpticsRxPLLLockAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxOpticsAvgPowerAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxOpticsRxLossAvgPowerAlarm" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxOpticsLossofACPowerAlarm" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxOpticsTxPowerHighThreshAlert" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxOpticsTxPowerLowThreshAlert" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxOpticsRxPowerHighThreshAlert" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxOpticsRxPowerLowThreshAlert" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxOpticsModuleTempHighThreshAlert" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxOpticsModuleTempLowThreshAlert" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxOptics24HourTxPowerHighThreshAlert" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxOptics24HourTxPowerLowThreshAlert" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxOptics24HourRxPowerHighThreshAlert" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxOptics24HourRxPowerLowThreshAlert" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxOptics24HourModuleTempHighThreshAlert" />
+      <decode varbindvalue="25" varbinddecodedstring="jnxOptics24HourModuleTempLowThreshAlert" />
+      <decode varbindvalue="26" varbinddecodedstring="jnxOpticsRxPowerHighAlarm" />
+      <decode varbindvalue="27" varbinddecodedstring="jnxOpticsRxPowerLowAlarm" />
+      <decode varbindvalue="28" varbinddecodedstring="jnxOpticsTxPowerHighWarning" />
+      <decode varbindvalue="29" varbinddecodedstring="jnxOpticsTxPowerLowWarning" />
+      <decode varbindvalue="30" varbinddecodedstring="jnxOpticsRxPowerHighWarning" />
+      <decode varbindvalue="31" varbinddecodedstring="jnxOpticsRxPowerLowWarning" />
+      <decode varbindvalue="32" varbinddecodedstring="jnxOpticsModuleTempHighWarning" />
+      <decode varbindvalue="33" varbinddecodedstring="jnxOpticsModuleTempLowWarning" />
+      <decode varbindvalue="34" varbinddecodedstring="jnxOpticsRxCarrierFreqHigh" />
+      <decode varbindvalue="35" varbinddecodedstring="jnxOpticsRxCarrierFreqLow" />
+      <decode varbindvalue="36" varbinddecodedstring="jnxOpticsChromaticDispHighWarning" />
+      <decode varbindvalue="37" varbinddecodedstring="jnxOpticsChromaticDispLowWarning" />
+      <decode varbindvalue="38" varbinddecodedstring="jnxOpticsQLowWarning" />
+      <decode varbindvalue="39" varbinddecodedstring="jnxOpticsOSNRLowWarning" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#3.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%%parm[name-#3.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.4.22</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>2</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>5</vbnumber>
+        <vbvalue>2</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxOpticsNotificationCleared</uei>
+    <event-label>JUNIPER-IFOPTICS-MIB defined trap event: jnxOpticsNotificationCleared</event-label>
+    <descr> Major Notification of a recently cleared optics alarm. Location=%parm[#1]% Direction=%parm[#2]% ProbableCause=%parm[#4]% ifDescr=%parm[#3]% ifIndex=%parm[name-#3.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxOpticsNotificationCleared trap received
+	jnxOpticsNotificationLocation=%parm[#1]%
+	jnxOpticsNotificationDirection=%parm[#2]%
+	ifDescr=%parm[#3]%
+	ifIndex=%parm[name-#3.-1]%
+	jnxOpticsLastNotificationId=%parm[#4]%
+	jnxOpticsNotificationSeverity=%parm[#5]%
+	jnxOpticsNotificationDate=%parm[#6]%&lt;/p&gt;</logmsg>
+    <severity>Major</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxNearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxFarEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#4]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxOpticsLOS" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxOpticsWavelenthLockErr" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxOpticsPowerHighAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxOpticsPowerLowAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxOpticsBiasCurrentHighAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxOpticsBiasCurrentLowAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxOpticsTemperatureHighAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxOpticsTemperaturelowAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxOpticsTxPLLLockAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxOpticsRxPLLLockAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxOpticsAvgPowerAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxOpticsRxLossAvgPowerAlarm" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxOpticsLossofACPowerAlarm" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxOpticsTxPowerHighThreshAlert" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxOpticsTxPowerLowThreshAlert" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxOpticsRxPowerHighThreshAlert" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxOpticsRxPowerLowThreshAlert" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxOpticsModuleTempHighThreshAlert" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxOpticsModuleTempLowThreshAlert" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxOptics24HourTxPowerHighThreshAlert" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxOptics24HourTxPowerLowThreshAlert" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxOptics24HourRxPowerHighThreshAlert" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxOptics24HourRxPowerLowThreshAlert" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxOptics24HourModuleTempHighThreshAlert" />
+      <decode varbindvalue="25" varbinddecodedstring="jnxOptics24HourModuleTempLowThreshAlert" />
+      <decode varbindvalue="26" varbinddecodedstring="jnxOpticsRxPowerHighAlarm" />
+      <decode varbindvalue="27" varbinddecodedstring="jnxOpticsRxPowerLowAlarm" />
+      <decode varbindvalue="28" varbinddecodedstring="jnxOpticsTxPowerHighWarning" />
+      <decode varbindvalue="29" varbinddecodedstring="jnxOpticsTxPowerLowWarning" />
+      <decode varbindvalue="30" varbinddecodedstring="jnxOpticsRxPowerHighWarning" />
+      <decode varbindvalue="31" varbinddecodedstring="jnxOpticsRxPowerLowWarning" />
+      <decode varbindvalue="32" varbinddecodedstring="jnxOpticsModuleTempHighWarning" />
+      <decode varbindvalue="33" varbinddecodedstring="jnxOpticsModuleTempLowWarning" />
+      <decode varbindvalue="34" varbinddecodedstring="jnxOpticsRxCarrierFreqHigh" />
+      <decode varbindvalue="35" varbinddecodedstring="jnxOpticsRxCarrierFreqLow" />
+      <decode varbindvalue="36" varbinddecodedstring="jnxOpticsChromaticDispHighWarning" />
+      <decode varbindvalue="37" varbinddecodedstring="jnxOpticsChromaticDispLowWarning" />
+      <decode varbindvalue="38" varbinddecodedstring="jnxOpticsQLowWarning" />
+      <decode varbindvalue="39" varbinddecodedstring="jnxOpticsOSNRLowWarning" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#3.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%%parm[name-#3.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.4.22</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>2</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>5</vbnumber>
+        <vbvalue>3</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxOpticsNotificationCleared</uei>
+    <event-label>JUNIPER-IFOPTICS-MIB defined trap event: jnxOpticsNotificationCleared</event-label>
+    <descr> Minor Notification of a recently cleared optics alarm. Location=%parm[#1]% Direction=%parm[#2]% ProbableCause=%parm[#4]% ifDescr=%parm[#3]% ifIndex=%parm[name-#3.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxOpticsNotificationCleared trap received
+	jnxOpticsNotificationLocation=%parm[#1]%
+	jnxOpticsNotificationDirection=%parm[#2]%
+	ifDescr=%parm[#3]%
+	ifIndex=%parm[name-#3.-1]%
+	jnxOpticsLastNotificationId=%parm[#4]%
+	jnxOpticsNotificationSeverity=%parm[#5]%
+	jnxOpticsNotificationDate=%parm[#6]%&lt;/p&gt;</logmsg>
+    <severity>Minor</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxNearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxFarEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#4]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxOpticsLOS" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxOpticsWavelenthLockErr" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxOpticsPowerHighAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxOpticsPowerLowAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxOpticsBiasCurrentHighAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxOpticsBiasCurrentLowAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxOpticsTemperatureHighAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxOpticsTemperaturelowAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxOpticsTxPLLLockAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxOpticsRxPLLLockAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxOpticsAvgPowerAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxOpticsRxLossAvgPowerAlarm" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxOpticsLossofACPowerAlarm" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxOpticsTxPowerHighThreshAlert" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxOpticsTxPowerLowThreshAlert" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxOpticsRxPowerHighThreshAlert" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxOpticsRxPowerLowThreshAlert" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxOpticsModuleTempHighThreshAlert" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxOpticsModuleTempLowThreshAlert" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxOptics24HourTxPowerHighThreshAlert" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxOptics24HourTxPowerLowThreshAlert" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxOptics24HourRxPowerHighThreshAlert" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxOptics24HourRxPowerLowThreshAlert" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxOptics24HourModuleTempHighThreshAlert" />
+      <decode varbindvalue="25" varbinddecodedstring="jnxOptics24HourModuleTempLowThreshAlert" />
+      <decode varbindvalue="26" varbinddecodedstring="jnxOpticsRxPowerHighAlarm" />
+      <decode varbindvalue="27" varbinddecodedstring="jnxOpticsRxPowerLowAlarm" />
+      <decode varbindvalue="28" varbinddecodedstring="jnxOpticsTxPowerHighWarning" />
+      <decode varbindvalue="29" varbinddecodedstring="jnxOpticsTxPowerLowWarning" />
+      <decode varbindvalue="30" varbinddecodedstring="jnxOpticsRxPowerHighWarning" />
+      <decode varbindvalue="31" varbinddecodedstring="jnxOpticsRxPowerLowWarning" />
+      <decode varbindvalue="32" varbinddecodedstring="jnxOpticsModuleTempHighWarning" />
+      <decode varbindvalue="33" varbinddecodedstring="jnxOpticsModuleTempLowWarning" />
+      <decode varbindvalue="34" varbinddecodedstring="jnxOpticsRxCarrierFreqHigh" />
+      <decode varbindvalue="35" varbinddecodedstring="jnxOpticsRxCarrierFreqLow" />
+      <decode varbindvalue="36" varbinddecodedstring="jnxOpticsChromaticDispHighWarning" />
+      <decode varbindvalue="37" varbinddecodedstring="jnxOpticsChromaticDispLowWarning" />
+      <decode varbindvalue="38" varbinddecodedstring="jnxOpticsQLowWarning" />
+      <decode varbindvalue="39" varbinddecodedstring="jnxOpticsOSNRLowWarning" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#3.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%%parm[name-#3.-1]%" alarm-type="1" auto-clean="true"/> -->
+  </event>
+  <event>
+    <mask>
+      <maskelement>
+        <mename>id</mename>
+        <mevalue>.1.3.6.1.4.1.2636.4.22</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>generic</mename>
+        <mevalue>6</mevalue>
+      </maskelement>
+      <maskelement>
+        <mename>specific</mename>
+        <mevalue>2</mevalue>
+      </maskelement>
+      <varbind>
+        <vbnumber>5</vbnumber>
+        <vbvalue>4</vbvalue>
+      </varbind>
+    </mask>
+    <uei>uei.opennms.org/vendor/Juniper/traps/jnxOpticsNotificationCleared</uei>
+    <event-label>JUNIPER-IFOPTICS-MIB defined trap event: jnxOpticsNotificationCleared</event-label>
+    <descr> Warning Notification of a recently cleared optics alarm. Location=%parm[#1]% Direction=%parm[#2]% ProbableCause=%parm[#4]% ifDescr=%parm[#3]% ifIndex=%parm[name-#3.-1]% </descr>
+    <logmsg dest="logndisplay">&lt;p&gt;
+	jnxOpticsNotificationCleared trap received
+	jnxOpticsNotificationLocation=%parm[#1]%
+	jnxOpticsNotificationDirection=%parm[#2]%
+	ifDescr=%parm[#3]%
+	ifIndex=%parm[name-#3.-1]%
+	jnxOpticsLastNotificationId=%parm[#4]%
+	jnxOpticsNotificationSeverity=%parm[#5]%
+	jnxOpticsNotificationDate=%parm[#6]%&lt;/p&gt;</logmsg>
+    <severity>Normal</severity>
+    <varbindsdecode>
+      <parmid>parm[#1]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxNearEnd" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxFarEnd" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#2]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxTxDir" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxRxDir" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxBiDir" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#4]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxOpticsLOS" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxOpticsWavelenthLockErr" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxOpticsPowerHighAlarm" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxOpticsPowerLowAlarm" />
+      <decode varbindvalue="5" varbinddecodedstring="jnxOpticsBiasCurrentHighAlarm" />
+      <decode varbindvalue="6" varbinddecodedstring="jnxOpticsBiasCurrentLowAlarm" />
+      <decode varbindvalue="7" varbinddecodedstring="jnxOpticsTemperatureHighAlarm" />
+      <decode varbindvalue="8" varbinddecodedstring="jnxOpticsTemperaturelowAlarm" />
+      <decode varbindvalue="9" varbinddecodedstring="jnxOpticsTxPLLLockAlarm" />
+      <decode varbindvalue="10" varbinddecodedstring="jnxOpticsRxPLLLockAlarm" />
+      <decode varbindvalue="11" varbinddecodedstring="jnxOpticsAvgPowerAlarm" />
+      <decode varbindvalue="12" varbinddecodedstring="jnxOpticsRxLossAvgPowerAlarm" />
+      <decode varbindvalue="13" varbinddecodedstring="jnxOpticsLossofACPowerAlarm" />
+      <decode varbindvalue="14" varbinddecodedstring="jnxOpticsTxPowerHighThreshAlert" />
+      <decode varbindvalue="15" varbinddecodedstring="jnxOpticsTxPowerLowThreshAlert" />
+      <decode varbindvalue="16" varbinddecodedstring="jnxOpticsRxPowerHighThreshAlert" />
+      <decode varbindvalue="17" varbinddecodedstring="jnxOpticsRxPowerLowThreshAlert" />
+      <decode varbindvalue="18" varbinddecodedstring="jnxOpticsModuleTempHighThreshAlert" />
+      <decode varbindvalue="19" varbinddecodedstring="jnxOpticsModuleTempLowThreshAlert" />
+      <decode varbindvalue="20" varbinddecodedstring="jnxOptics24HourTxPowerHighThreshAlert" />
+      <decode varbindvalue="21" varbinddecodedstring="jnxOptics24HourTxPowerLowThreshAlert" />
+      <decode varbindvalue="22" varbinddecodedstring="jnxOptics24HourRxPowerHighThreshAlert" />
+      <decode varbindvalue="23" varbinddecodedstring="jnxOptics24HourRxPowerLowThreshAlert" />
+      <decode varbindvalue="24" varbinddecodedstring="jnxOptics24HourModuleTempHighThreshAlert" />
+      <decode varbindvalue="25" varbinddecodedstring="jnxOptics24HourModuleTempLowThreshAlert" />
+      <decode varbindvalue="26" varbinddecodedstring="jnxOpticsRxPowerHighAlarm" />
+      <decode varbindvalue="27" varbinddecodedstring="jnxOpticsRxPowerLowAlarm" />
+      <decode varbindvalue="28" varbinddecodedstring="jnxOpticsTxPowerHighWarning" />
+      <decode varbindvalue="29" varbinddecodedstring="jnxOpticsTxPowerLowWarning" />
+      <decode varbindvalue="30" varbinddecodedstring="jnxOpticsRxPowerHighWarning" />
+      <decode varbindvalue="31" varbinddecodedstring="jnxOpticsRxPowerLowWarning" />
+      <decode varbindvalue="32" varbinddecodedstring="jnxOpticsModuleTempHighWarning" />
+      <decode varbindvalue="33" varbinddecodedstring="jnxOpticsModuleTempLowWarning" />
+      <decode varbindvalue="34" varbinddecodedstring="jnxOpticsRxCarrierFreqHigh" />
+      <decode varbindvalue="35" varbinddecodedstring="jnxOpticsRxCarrierFreqLow" />
+      <decode varbindvalue="36" varbinddecodedstring="jnxOpticsChromaticDispHighWarning" />
+      <decode varbindvalue="37" varbinddecodedstring="jnxOpticsChromaticDispLowWarning" />
+      <decode varbindvalue="38" varbinddecodedstring="jnxOpticsQLowWarning" />
+      <decode varbindvalue="39" varbinddecodedstring="jnxOpticsOSNRLowWarning" />
+    </varbindsdecode>
+    <varbindsdecode>
+      <parmid>parm[#5]</parmid>
+      <decode varbindvalue="1" varbinddecodedstring="jnxCritical" />
+      <decode varbindvalue="2" varbinddecodedstring="jnxMajor" />
+      <decode varbindvalue="3" varbinddecodedstring="jnxMinor" />
+      <decode varbindvalue="4" varbinddecodedstring="jnxInfo" />
+    </varbindsdecode>
+    <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%parm[name-#3.-1]%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" alarm-type="1" auto-clean="true" />
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%" alarm-type="1" auto-clean="true"/> -->
+    <!-- <alarm-data reduction-key="%uei%:%dpname%:%nodeid%%parm[name-#3.-1]%" alarm-type="1" auto-clean="true"/>-->
+  </event>
+</events>
+
