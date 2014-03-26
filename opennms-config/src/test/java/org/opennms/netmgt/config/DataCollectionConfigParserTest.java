@@ -31,12 +31,14 @@ package org.opennms.netmgt.config;
 import java.io.File;
 import java.util.Map;
 
+import java.net.URISyntaxException;
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.opennms.core.test.ConfigurationTestUtils;
 import org.opennms.core.test.MockLogAppender;
 import org.opennms.core.xml.CastorUtils;
 import org.opennms.netmgt.config.datacollection.DatacollectionConfig;
@@ -55,9 +57,9 @@ import org.springframework.core.io.Resource;
 @Ignore // ignore in the SPACE branch
 public class DataCollectionConfigParserTest {
 
-    private static final int resourceTypesCount = 159;
-    private static final int systemDefCount = 150;
-    private static final int groupsCount = 256;
+    private static final int resourceTypesCount = 45;
+    private static final int systemDefCount = 89;
+    private static final int groupsCount = 103;
 
     @Before
     public void setUp() {
@@ -82,8 +84,7 @@ public class DataCollectionConfigParserTest {
         Assert.assertNull(collection.getGroups());
 
         // Execute Parser
-        File configFolder = getDatacollectionDirectory();
-        DataCollectionConfigParser parser = new DataCollectionConfigParser(configFolder.getAbsolutePath());
+        final DataCollectionConfigParser parser = new DataCollectionConfigParser("target");
         parser.parseCollection(collection);
 
         // Validate SNMP Collection
@@ -100,7 +101,7 @@ public class DataCollectionConfigParserTest {
 
         // Validate default datacollection content
         SnmpCollection collection = config.getSnmpCollection(0);
-        Assert.assertEquals(49, collection.getIncludeCollectionCount());
+        Assert.assertEquals(3, collection.getIncludeCollectionCount());
         Assert.assertEquals(0, collection.getResourceTypeCount()); 
         Assert.assertNull(collection.getSystems());
         Assert.assertNull(collection.getGroups());
@@ -110,8 +111,8 @@ public class DataCollectionConfigParserTest {
 
         // Validate SNMP Collection
         Assert.assertEquals(0, collection.getResourceTypeCount()); // Resource Types should live on a special collection
-        Assert.assertEquals(142, collection.getSystems().getSystemDefCount());
-        Assert.assertEquals(167, collection.getGroups().getGroupCount()); // Unused groups will be ignored
+        Assert.assertEquals(2, collection.getSystems().getSystemDefCount());
+        Assert.assertEquals(6, collection.getGroups().getGroupCount()); // Unused groups will be ignored
     }
 
     @Test
@@ -122,7 +123,7 @@ public class DataCollectionConfigParserTest {
 
         // Validate default datacollection content
         SnmpCollection collection = config.getSnmpCollection(0);
-        Assert.assertEquals(12, collection.getIncludeCollectionCount());
+        Assert.assertEquals(13, collection.getIncludeCollectionCount());
         Assert.assertEquals(0, collection.getResourceTypeCount()); 
         Assert.assertEquals(1, collection.getSystems().getSystemDefCount());
         Assert.assertEquals(1, collection.getGroups().getGroupCount());
@@ -133,7 +134,7 @@ public class DataCollectionConfigParserTest {
         // Validate SNMP Collection
         Assert.assertEquals(0, collection.getResourceTypeCount()); // Resource Types should live on a special collection
         Assert.assertEquals(17, collection.getSystems().getSystemDefCount());
-        Assert.assertEquals(64, collection.getGroups().getGroupCount());
+        Assert.assertEquals(65, collection.getGroups().getGroupCount());
     }
 
     @Test
@@ -155,7 +156,7 @@ public class DataCollectionConfigParserTest {
         // Validate SNMP Collection
         Assert.assertEquals(0, collection.getResourceTypeCount()); // Resource Types should live on a special collection
         Assert.assertEquals(71, collection.getSystems().getSystemDefCount());
-        Assert.assertEquals(27, collection.getGroups().getGroupCount());
+        Assert.assertEquals(28, collection.getGroups().getGroupCount());
     }
 
     @Test
@@ -177,7 +178,7 @@ public class DataCollectionConfigParserTest {
         // Validate SNMP Collection
         Assert.assertEquals(0, collection.getResourceTypeCount()); // Resource Types should live on a special collection
         Assert.assertEquals(41, collection.getSystems().getSystemDefCount()); // 48 systemDef to exclude
-        Assert.assertEquals(26, collection.getGroups().getGroupCount()); //  1 group to exclude (used only on Cisco PIX or Cisco AS)
+        Assert.assertEquals(27, collection.getGroups().getGroupCount()); //  1 group to exclude (used only on Cisco PIX or Cisco AS)
     }
 
     @Test
@@ -199,7 +200,7 @@ public class DataCollectionConfigParserTest {
         // Validate SNMP Collection
         Assert.assertEquals(0, collection.getResourceTypeCount()); // Resource Types should live on a special collection
         Assert.assertEquals(2, collection.getSystems().getSystemDefCount());
-        Assert.assertEquals(31, collection.getGroups().getGroupCount());
+        Assert.assertEquals(32, collection.getGroups().getGroupCount());
     }
 
     @Test
@@ -238,15 +239,14 @@ public class DataCollectionConfigParserTest {
         }
     }
 
-    private static File getDatacollectionDirectory() {
-        File configFile = ConfigurationTestUtils.getFileForConfigFile("datacollection-config.xml");
-        File configFolder = new File(configFile.getParentFile(), "datacollection");
-        System.err.println(configFolder.getAbsolutePath());
+    private static File getDatacollectionDirectory() throws URISyntaxException {
+        final File configFolder = new File("target/test-classes/org/opennms/netmgt/config/datacollection-config-parser-test/datacollection");
+        Assert.assertTrue(configFolder.exists());
         Assert.assertTrue(configFolder.isDirectory());
         return configFolder;
     }
 
-    private static void executeParser(SnmpCollection collection) {
+    private static void executeParser(SnmpCollection collection) throws URISyntaxException {
         File configFolder = getDatacollectionDirectory();
         DataCollectionConfigParser parser = new DataCollectionConfigParser(configFolder.getAbsolutePath());
         parser.parseCollection(collection);
