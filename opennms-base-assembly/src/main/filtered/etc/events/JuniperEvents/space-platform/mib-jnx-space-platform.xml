@@ -706,10 +706,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpacePowerSupplyFailure</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpacePowerSupplyFailure</event-label>
         <descr>
-        &lt;p&gt;Power supply on Space appliance failed to work.&lt;/p&gt;
+                &lt;p&gt;One or more power supply issues were detected. Details:&lt;br&gt;%parm[#7]%&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                        A power supply failure trap received. &lt;/p&gt;
+                        A power supply failure trap received.&lt;br&gt; %parm[#7]%&lt;/p&gt;
                 </logmsg>
         <severity>Major</severity>
         <alarm-data auto-clean="true" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%"/>
