@@ -57,5 +57,958 @@
                 </uei>
              </ueis>
         </notification>
+	<!-- ADC Service Traps -->
+
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcRealServerUp" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification> 
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcRealServerDown" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcVirtualServerUp" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>  
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcVirtualServerDown" notification_threshold="5">
+                </uei>          
+             </ueis>    
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>  
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcRealServerServiceDown" notification_threshold="5">
+                </uei>          
+             </ueis>    
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>  
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcProxyPortNotAvail" notification_threshold="5">
+                </uei>          
+             </ueis>    
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>  
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcProxyPortAvail" notification_threshold="5">
+                </uei>          
+             </ueis>    
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcConnectionOverflow" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcBackupRealServerAct" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcBackupRealServerDeact" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcRealServerBackupGroupAct" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcRealServerBkupGroupDeact" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcBackupGroupAct" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcBackupGroupDeact" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcRealServerServiceUp" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcVirtualServerServicesDown" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcCpuHigh" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcCpuNormal" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcPanic" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcVerify" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcAssert" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcShutdown" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcRealServerEnabled" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcRealServerDisabled" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcALLRealServerEnabled" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcALLRealServerDisabled" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcGroupDown" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcGroupDisabled" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcAllGroupsDisabled" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcMultiServicePICDumpAndRestart" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcNewLicense" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcConfiguredPICUp" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcNonConfiguredPICUp" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcPICDisconnected" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcUnlicensedPIC" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcRealConnOvfl" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcConnectionTableCleared" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcMegaProxyClientsConfigSet" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/adcMegaProxyClientsConfigRemoved" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+
+	<!-- NAT Service Traps -->
+
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxNatAddrPoolThresholdStatus" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	
+	<!-- Syslog Traps -->
+	
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxSyslogTrap" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+
+	<!-- Service Pic Traps -->
+	
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxSpSvcSetZoneEntered" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxSpSvcSetZoneExited" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	 <notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxSpSvcSetCpuExceeded" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	 <notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxSpSvcSetCpuOk" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	 <notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxSpSvcSetFlowLimitUtilized" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	
+	<!-- Chassis Traps -->
+
+        <notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxPowerSupplyFailure" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFanFailure" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxOverTemperature" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxRedundancySwitchover" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFruRemoval" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFruInsertion" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFruPowerOff" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFruPowerOn" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFruFailed" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFruOffline" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFruOnline" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFruCheck" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFEBSwitchover" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxHardDiskFailed" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxHardDiskMissing" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxBootFromBackup" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFmLinkErr" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFmCellDropErr" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxExtSrcLockLost" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxPowerSupplyOK" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>	
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFanOK" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxTemperatureOK" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxFruOK" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxExtSrcLockAcquired" notification_threshold="5">
+                </uei>
+             </ueis>
+        </notification>
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxHASwitchOverTrap" notification_threshold="5">
+					<filter severity="Critical"/>
+                </uei>
+             </ueis>
+        </notification> 
+	<notification name="SDGNotification" enable="true">
+                <script timeout_in_seconds="60">
+                        <scriptname>SDG_App_Script.sh</scriptname>
+                        <errorhandling enable="false">
+                                <retry_interval_inseconds>3</retry_interval_inseconds>
+                                <number_of_retries>2</number_of_retries>
+                        </errorhandling>
+                </script>
+                <ueis>
+                <uei name="uei.opennms.org/vendor/Juniper/traps/jnxHASwitchBackTrap" notification_threshold="5">
+					<filter severity="Cleared"/>
+                </uei>
+             </ueis>
+        </notification> 
+
 </alarm-northbounder-config>
 

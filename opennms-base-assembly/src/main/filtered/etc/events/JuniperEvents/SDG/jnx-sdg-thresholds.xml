@@ -1,0 +1,1241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<events xmlns="http://xmlns.opennms.org/xsd/eventconf">	
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcVIPDownThreshold</uei>
+        <event-label>User defined threshold event: adcVIPDownThreshold</event-label>
+        <descr>This notification is generated when one or more virtual servers are down.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcVIPDownThreshold  trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 				
+				Count of VIPs down =%parm[value]% &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcVIPDownThresholdCleared</uei>
+        <event-label>User defined threshold event: adcVIPDownThresholdCleared</event-label>
+        <descr>This notification is generated when all virtual servers are up.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcVIPDownThresholdCleared  trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]%  &lt;/p&gt;</logmsg> 				
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/adcVIPDownThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcRealServerUpThreshold</uei>
+        <event-label>User defined threshold event: realServerUpThreshold</event-label>
+        <descr>This notification is generated when real servers up threshold configuration is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: realServerUpThreshold  trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 
+				Threshold Value =%parm[thresholdValue]%
+				Current Value =%parm[value]% &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcRealServerUpThresholdCleared</uei>
+        <event-label>User defined threshold event: realServerUpThresholdCleared</event-label>
+        <descr>This notification is generated when real servers up threshold configuration is satisfied</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: realServerUpThresholdCleared  trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/adcRealServerUpThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>	
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcConnectionTableCountThreshold</uei>
+        <event-label>User defined threshold event: adcConnectionTableCountThreshold</event-label>
+        <descr>This notification is generated when connection table current sessions threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcConnectionTableCountThreshold  trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 				
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcConnectionTableCountThresholdCleared</uei>
+        <event-label>User defined threshold event: adcConnectionTableCountThresholdCleared</event-label>
+        <descr>This notification is generated when connection table  current sessions threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcConnectionTableCountThresholdCleared  trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 	
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/adcConnectionTableCountThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcControlCPUStatusThreshold</uei>
+        <event-label>User defined threshold event: adcControlCPUStatusThreshold</event-label>
+        <descr>This notification is generated when ADC Control CPU Usage is breached for last 64 seconds.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcControlCPUStatusThreshold  trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 				
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcControlCPUStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: adcControlCPUStatusThresholdCleared</event-label>
+        <descr>This notification is generated when ADC Control CPU usage threshold is satisfied for last 64 seconds.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcControlCPUStatusThresholdCleared  trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 	
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]%  &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/adcControlCPUStatusThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>	
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcDataCoreCPUStatusThreshold</uei>
+        <event-label>User defined threshold event: adcDataCoreCPUStatusThreshold</event-label>
+        <descr>This notification is generated when ADC DataCore CPU usage threshold is breached for last 64 seconds.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcDataCoreCPUStatusThreshold  trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 				
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcDataCoreCPUStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: adcDataCoreCPUStatusThresholdCleared</event-label>
+        <descr>This notification is generated when ADC DataCore CPU usage threshold is satisfied for last 64 seconds.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcDataCoreCPUStatusThresholdCleared trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 	
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]%  &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/adcDataCoreCPUStatusThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcDataCoresExceedingThreshod</uei>
+        <event-label>User defined threshold event: adcDataCoresExceedingThreshod</event-label>
+        <descr>This notification is generated when count of ADC DataCores exceeds threshold count for last 64 seconds.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcDataCoresExceedingThreshod  trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 				
+				Threshold count = %parm[thresholdValue]%
+				Current count = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcDataCoresExceedingThreshodCleared</uei>
+        <event-label>User defined threshold event: adcDataCoresExceedingThreshodCleared</event-label>
+        <descr>This notification is generated when count of ADC DataCore satisfies the threshold count for last 64 seconds.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcDataCoresExceedingThreshodCleared trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 	
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]%  &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/adcDataCoresExceedingThreshod:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>	
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcAllocationFailuresPerNPUThreshold</uei>
+        <event-label>User defined threshold event: adcAllocationFailuresPerNPUThreshold</event-label>
+        <descr>This notification is generated when ADC Allocation Failure per NPU threshold is not satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcAllocationFailuresPerNPUThreshold  trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 								
+				Allocation Failures = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcAllocationFailuresPerNPUThresholdCleared</uei>
+        <event-label>User defined threshold event: adcAllocationFailuresPerNPUThresholdCleared</event-label>
+        <descr>This notification is generated when ADC Allocation Failure per NPU threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcAllocationFailuresPerNPUThresholdCleared trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 	&lt;/p&gt;</logmsg>								
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/adcAllocationFailuresPerNPUThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcAllocationFailuresPerDPThreshold</uei>
+        <event-label>User defined threshold event: adcAllocationFailuresPerDPThreshold</event-label>
+        <descr>This notification is generated when ADC Allocation Failure for DP threshold is not satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcAllocationFailuresPerDPThreshold  trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 
+				DP Number =%parm[dpNumber]% 				
+				Allocation Failures = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%:%parm[dpNumber]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/adcAllocationFailuresPerDPThresholdCleared</uei>
+        <event-label>User defined threshold event: adcAllocationFailuresPerDPThresholdCleared</event-label>
+        <descr>This notification is generated when ADC Allocation Failure for DP threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: adcAllocationFailuresPerDPThresholdCleared trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 
+				DP Number =%parm[dpNumber]%								
+				Allocation Failures = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%:%parm[dpNumber]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/adcAllocationFailuresPerDPThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%:%parm[dpNumber]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/msInterfaceStatusDownThreshold</uei>
+        <event-label>User defined threshold event: msInterfaceStatusDownThreshold</event-label>
+        <descr>This notification is generated when ms interface is down.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: msInterfaceStatusDownThreshold  trap received 
+				Service Instance Name= %parm[serviceName]% 			
+				KPI Name =%parm[kpiName]% 
+				interface Name =%parm[interfaceName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/msInterfaceStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: msInterfaceStatusThresholdCleared</event-label>
+        <descr>This notification is generated when ms interface is up.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: msInterfaceStatusThresholdCleared trap received 
+				Service Instance Name= %parm[serviceName]% 
+				KPI Name =%parm[kpiName]% 
+				interface Name =%parm[interfaceName]%  &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/msInterfaceStatusDownThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%:%parm[interfaceName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/egressInterfaceStatusDownThreshold</uei>
+        <event-label>User defined threshold event: egressInterfaceStatusDownThreshold</event-label>
+        <descr>This notification is generated when Egress interface is down.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: egressInterfaceStatusDownThreshold  trap received 							
+				KPI Name =%parm[kpiName]% 
+				interface Name =%parm[interfaceName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/egressInterfaceStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: egressInterfaceStatusThresholdCleared</event-label>
+        <descr>This notification is generated when Egress interface is up.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: egressInterfaceStatusThresholdCleared trap received 				
+				KPI Name =%parm[kpiName]% 
+				interface Name =%parm[interfaceName]%  &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/egressInterfaceStatusDownThreshold:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/tlbRINextHopIndexStatusThreshold</uei>
+        <event-label>User defined threshold event: tlbRINextHopIndexStatusThreshold</event-label>
+        <descr>This notification is generated when TLB Routing Instance Composite next hop Index is not available.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: tlbRINextHopIndexStatusThreshold trap received 	
+				Service Instance Name= %parm[serviceName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[serviceName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/tlbRINextHopIndexStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: tlbRINextHopIndexStatusThresholdCleared</event-label>
+        <descr>This notification is generated when TLB Routing Instance Composite next hop Index is not available.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: tlbRINextHopIndexStatusThresholdCleared trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[serviceName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/tlbRINextHopIndexStatusThreshold:%nodeid%:%parm[kpiName]%:%parm[serviceName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/tlbRealServerDownThreshold</uei>
+        <event-label>User defined threshold event: realServerDownThreshold</event-label>
+        <descr>This notification is generated when real servers down threshold configuration is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: realServerDownThreshold trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 
+				Threshold Value =%parm[thresholdValue]%
+				Current Value =%parm[value]% &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/tlbRealServerDownThresholdCleared</uei>
+        <event-label>User defined threshold event: realServerDownThresholdCleared</event-label>
+        <descr>This notification is generated when real servers down threshold configuration is satisfied</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: realServerDownThresholdCleared  trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/tlbRealServerDownThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/cpuUtilizationStatusThreshold</uei>
+        <event-label>User defined threshold event: cpuUtilizationStatusThreshold</event-label>
+        <descr>This notification is generated when configured CPU utilization threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: cpuUtilizationStatusThreshold trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 
+				Threshold Value =%parm[thresholdValue]%
+				Current Value =%parm[value]% &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/cpuUtilizationStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: cpuUtilizationStatusThresholdCleared</event-label>
+        <descr>This notification is generated when configured CPU utilization threshold is satisfied</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: cpuUtilizationStatusThresholdCleared  trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/cpuUtilizationStatusThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/packetDropStatusThreshold</uei>
+        <event-label>User defined threshold event: packetDropStatusThreshold</event-label>
+        <descr>This notification is generated when CPU limit, Memory limit and Flow limit packet drops.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: packetDropStatusThreshold  trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 	&lt;/p&gt;</logmsg>							
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/packetDropStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: packetDropStatusThresholdCleared</event-label>
+        <descr>This notification is generated when there is no CPU limit, Memory limit and Flow limit packet drops.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: packetDropStatusThresholdCleared trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 	&lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/packetDropStatusThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/memoryZoneStatusThreshold</uei>
+        <event-label>User defined threshold event: memoryZoneStatusThreshold</event-label>
+        <descr>This notification is generated when memory status is breached</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: memoryZoneStatusThreshold trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 	&lt;/p&gt;</logmsg>							
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/memoryZoneStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: memoryZoneStatusThresholdCleared</event-label>
+        <descr>This notification is generated when memory status is Cleared</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: memoryZoneStatusThresholdCleared trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 	&lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/memoryZoneStatusThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/cgnatPoolUtilStatusThreshold</uei>
+        <event-label>User defined threshold event: cgnatPoolUtilStatusThreshold</event-label>
+        <descr>This notification is generated when ports utilization threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: cgnatPoolUtilStatusThreshold trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 
+				Threshold Value =%parm[thresholdValue]%
+				Current Value =%parm[value]% &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/cgnatPoolUtilStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: cgnatPoolUtilStatusThresholdCleared</event-label>
+        <descr>This notification is generated when when ports utilization  threshold is satisfied</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: cgnatPoolUtilStatusThresholdCleared trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]% &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/cgnatPoolUtilStatusThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/cgnatPortBlocksInUseStatusThreshold</uei>
+        <event-label>User defined threshold event: cgnatPortBlocksInUseStatusThreshold</event-label>
+        <descr>This notification is generated when current port blocks in use equal to effective port blocks.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: cgnatPortBlocksInUseStatusThreshold trap received 
+				Service Instance Name=%parm[serviceName]% 				
+				KPI Name =%parm[kpiName]% 	&lt;/p&gt;</logmsg>							
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/cgnatPortBlocksInUseStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: cgnatPortBlocksInUseStatusThresholdCleared</event-label>
+        <descr>This notification is generated when current port blocks in use not equal to effective port blocks.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: cgnatPortBlocksInUseStatusThresholdCleared trap received 
+				Service Instance Name= %parm[serviceName]% 				
+				KPI Name = %parm[kpiName]% 	&lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/cgnatPortBlocksInUseStatusThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/servicePICStatusDownThreshold</uei>
+        <event-label>User defined threshold event: servicePICStatusDownThreshold</event-label>
+        <descr>This notification is generated when service PIC is down.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: servicePICStatusDownThreshold  trap received 
+				Service Instance Name= %parm[serviceName]% 			
+				KPI Name =%parm[kpiName]% 
+				service PIC Name =%parm[interfaceName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/servicePICStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: servicePICStatusThresholdCleared</event-label>
+        <descr>This notification is generated when service PIC is up.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: servicePICStatusThresholdCleared trap received 
+				Service Instance Name= %parm[serviceName]% 
+				KPI Name =%parm[kpiName]% 
+				service PIC Name =%parm[interfaceName]%  &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[serviceName]%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/servicePICStatusDownThreshold:%nodeid%:%parm[serviceName]%:%parm[kpiName]%:%parm[interfaceName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgStatusThreshold</uei>
+        <event-label>User defined threshold event: sdgStatusThreshold</event-label>
+        <descr>This notification is generated when SDG status is changed.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgStatusThreshold  trap received 				
+				KPI Name = %parm[kpiName]% 
+				status = %parm[sdgStatus]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: sdgStatusThresholdCleared</event-label>
+        <descr>This notification is generated when SDG status is normal.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgStatusThresholdCleared trap received 							
+				KPI Name =%parm[kpiName]% 
+				status = %parm[sdgStatus]%  &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/sdgStatusThreshold:%nodeid%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgMasterBgpASPathStatusThreshold</uei>
+        <event-label>User defined threshold event: sdgMasterBgpASPathStatusThreshold</event-label>
+        <descr>This notification is generated when routing instance BGP advertising AS path is greater than zero </descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgMasterBgpASPathStatusThreshold  trap received 
+				KPI Name = %parm[kpiName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgMasterBgpASPathStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: sdgMasterBgpASPathStatusThresholdCleared</event-label>
+        <descr>This notification is generated when routing instance BGP advertising AS path is zero.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgMasterBgpASPathStatusThresholdCleared trap received 
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/sdgMasterBgpASPathStatusThreshold:%nodeid%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgStandbyBgpASPathStatusThreshold</uei>
+        <event-label>User defined threshold event: sdgStandbyBgpASPathStatusThreshold</event-label>
+        <descr>This notification is generated when routing instance BGP advertising AS path is zero </descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgStandbyBgpASPathStatusThreshold  trap received 
+				KPI Name = %parm[kpiName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgStandbyBgpASPathStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: sdgStandbyBgpASPathStatusThresholdCleared</event-label>
+        <descr>This notification is generated when routing instance BGP advertising AS path is greater than zero.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgStandbyBgpASPathStatusThresholdCleared trap received 
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/sdgStandbyBgpASPathStatusThreshold:%nodeid%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgVRRPStatusThreshold</uei>
+        <event-label>User defined threshold event: sdgVRRPStatusThreshold</event-label>
+        <descr>This notification is generated when all MSP/DNS facing IRB interface should be VRRP master if SDG is master or VRRP standby if SDG is standby. </descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgVRRPStatusThreshold  trap received 
+				KPI Name = %parm[kpiName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgVRRPStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: sdgVRRPStatusThresholdCleared</event-label>
+        <descr>This notification is generated when all MSP/DNS facing IRB interface should be VRRP master if SDG is master or VRRP standby if SDG is standby.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgVRRPStatusThresholdCleared trap received 
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/sdgVRRPStatusThreshold:%nodeid%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgCGNATStatefulSyncRoleStatusThreshold</uei>
+        <event-label>User defined threshold event: sdgCGNATStatefulSyncRoleStatusThreshold</event-label>
+        <descr>This notification is generated when CGNAT stateful sync role status is not proper. </descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgCGNATStatefulSyncRoleStatusThreshold  trap received 
+				Interface Name =%parm[interfaceName]%
+				KPI Name = %parm[kpiName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>  
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgCGNATStatefulSyncRoleStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: sdgCGNATStatefulSyncRoleStatusThresholdCleared</event-label>
+        <descr>This notification is generated when CGNAT stateful sync role status is proper.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgCGNATStatefulSyncRoleStatusThresholdCleared trap received 
+				Interface Name =%parm[interfaceName]%
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/sdgCGNATStatefulSyncRoleStatusThreshold:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgCGNATStatefulSyncConnectionStatusThreshold</uei>
+        <event-label>User defined threshold event: sdgCGNATStatefulSyncConnectionStatusThreshold</event-label>
+        <descr>This notification is generated when CGNAT stateful sync connection status is not proper. </descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgCGNATStatefulSyncConnectionStatusThreshold  trap received 
+				Interface Name =%parm[interfaceName]%
+				KPI Name = %parm[kpiName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgCNATStatefulSyncConnectionStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: sdgCNATStatefulSyncConnectionStatusThresholdCleared</event-label>
+        <descr>This notification is generated when CGNAT stateful sync connection status is proper.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgCNATStatefulSyncConnectionStatusThresholdCleared trap received 
+				Interface Name =%parm[interfaceName]%
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/sdgCGNATStatefulSyncConnectionStatusThreshold:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgCGNATStatefulSyncSyncronizationThreshold</uei>
+        <event-label>User defined threshold event: sdgCGNATStatefulSyncSyncronizationThreshold</event-label>
+        <descr>This notification is generated when CGNAT stateful sync syncronization status is not proper. </descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgCGNATStatefulSyncSyncronizationThreshold  trap received 
+				Interface Name =%parm[interfaceName]%
+				KPI Name = %parm[kpiName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgCNATStatefulSyncSyncronizationThresholdCleared</uei>
+        <event-label>User defined threshold event: sdgCNATStatefulSyncSyncronizationThresholdCleared</event-label>
+        <descr>This notification is generated when CGNAT stateful sync syncronization status is proper.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgCNATStatefulSyncSyncronizationThresholdCleared trap received 
+				Interface Name =%parm[interfaceName]%
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/sdgCGNATStatefulSyncSyncronizationThreshold:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgCGNATRouteStatusThreshold</uei>
+        <event-label>User defined threshold event: sdgCGNATRouteStatusThreshold</event-label>
+        <descr>This notification is generated when CGNAT default route is status is not proper </descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgCGNATRouteStatusThreshold  trap received 
+				KPI Name = %parm[kpiName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgCGNATRouteStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: sdgCGNATRouteStatusThresholdCleared</event-label>
+        <descr>This notification is generated when CGNAT default route status status is proper.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgCGNATRouteStatusThresholdCleared trap received 
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/sdgCGNATRouteStatusThreshold:%nodeid%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgADCVIPRouteStatusThreshold</uei>
+        <event-label>User defined threshold event: sdgADCVIPRouteStatusThreshold</event-label>
+        <descr>This notification is generated when all VIP's are not point to local ADC service pic </descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgADCVIPRouteStatusThreshold  trap received 
+				KPI Name = %parm[kpiName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgADCVIPRouteStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: sdgADCVIPRouteStatusThresholdCleared</event-label>
+        <descr>This notification is generated when all VIP's are point to local ADC service pic</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgADCVIPRouteStatusThresholdCleared trap received 
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/sdgADCVIPRouteStatusThreshold:%nodeid%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgTLBRIDefaultRouteStatusThreshold</uei>
+        <event-label>User defined threshold event: sdgTLBRIDefaultRouteStatusThreshold</event-label>
+        <descr>This notification is generated when TLB routing instance default Route not point to Composite Next hop index </descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgTLBRIDefaultRouteStatusThreshold  trap received 
+				KPI Name = %parm[kpiName]% 	 &lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/sdgTLBRIDefaultRouteStatusThresholdCleared</uei>
+        <event-label>User defined threshold event: sdgTLBRIDefaultRouteStatusThresholdCleared</event-label>
+        <descr>This notification is generated when TLB routing instance default Route point to Composite Next hop index</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: sdgTLBRIDefaultRouteStatusThresholdCleared trap received 
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/sdgTLBRIDefaultRouteStatusThreshold:%nodeid%:%parm[kpiName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/fpcTemperatureThreshold</uei>
+        <event-label>User defined threshold event: fpcTemperatureThreshold</event-label>
+        <descr>This notification is generated when FPC temperature threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: fpcTemperatureThreshold trap received 	
+				FPC Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/fpcTemperatureThresholdCleared</uei>
+        <event-label>User defined threshold event: fpcTemperatureThresholdCleared</event-label>
+        <descr>This notification is generated when FPC temperature threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: fpcTemperatureThresholdCleared trap received 
+				FPC Name = %parm[slotName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/fpcTemperatureThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/reTemperatureThreshold</uei>
+        <event-label>User defined threshold event: reTemperatureThreshold</event-label>
+        <descr>This notification is generated when routing engine temperature threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: reTemperatureThreshold trap received 	
+				RE Name = %parm[slotName]% 			
+				KPI Name = %parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/reTemperatureThresholdCleared</uei>
+        <event-label>User defined threshold event: reTemperatureThresholdCleared</event-label>
+        <descr>This notification is generated when routing engine temperature threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: reTemperatureThresholdCleared trap received 
+				RE Name = %parm[slotName]% 				
+				KPI Name = %parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/reTemperatureThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/controlBoardTemperatureThreshold</uei>
+        <event-label>User defined threshold event: controlBoardTemperatureThreshold</event-label>
+        <descr>This notification is generated when control board temperature threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: controlBoardTemperatureThreshold trap received 	
+				CB Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/controlBoardTemperatureThresholdCleared</uei>
+        <event-label>User defined threshold event: controlBoardTemperatureThresholdCleared</event-label>
+        <descr>This notification is generated when control board temperature threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: controlBoardTemperatureThresholdCleared trap received 
+				CB Name = %parm[slotName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/controlBoardTemperatureThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/fpcCpuUtilizationThreshold</uei>
+        <event-label>User defined threshold event: fpcCpuUtilizationThreshold</event-label>
+        <descr>This notification is generated when FPC CPU utilization threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: fpcCpuUtilizationThreshold trap received 	
+				FPC Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/fpcCpuUtilizationThresholdCleared</uei>
+        <event-label>User defined threshold event: fpcCpuUtilizationThresholdCleared</event-label>
+        <descr>This notification is generated when FPC CPU utilization threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: fpcCpuUtilizationThresholdCleared trap received 
+				FPC Name = %parm[slotName]% 				
+				KPI Name = %parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/fpcCpuUtilizationThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/picCpuUtilizationThreshold</uei>
+        <event-label>User defined threshold event: picCpuUtilizationThreshold</event-label>
+        <descr>This notification is generated when PIC CPU utilization threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: picCpuUtilizationThreshold trap received 	
+				PIC Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/picCpuUtilizationThresholdCleared</uei>
+        <event-label>User defined threshold event: picCpuUtilizationThresholdCleared</event-label>
+        <descr>This notification is generated when PIC CPU utilization threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: picCpuUtilizationThresholdCleared trap received 
+				PIC Name = %parm[slotName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/picCpuUtilizationThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/reCpuUtilizationThreshold</uei>
+        <event-label>User defined threshold event: reCpuUtilizationThreshold</event-label>
+        <descr>This notification is generated when routing engine CPU utilization threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: reCpuUtilizationThreshold trap received 	
+				RE Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/reCpuUtilizationThresholdCleared</uei>
+        <event-label>User defined threshold event: reCpuUtilizationThresholdCleared</event-label>
+        <descr>This notification is generated when routing engine CPU utilization threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: reCpuUtilizationThresholdCleared trap received 
+				RE Name = %parm[slotName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/reCpuUtilizationThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/fpcMemoryUtilizationThreshold</uei>
+        <event-label>User defined threshold event: fpcMemoryUtilizationThreshold</event-label>
+        <descr>This notification is generated when FPC memory utilization threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: fpcMemoryUtilizationThreshold trap received 	
+				FPC Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/fpcMemoryUtilizationThresholdCleared</uei>
+        <event-label>User defined threshold event: fpcMemoryUtilizationThresholdCleared</event-label>
+        <descr>This notification is generated when FPC memory utilization threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: fpcMemoryUtilizationThresholdCleared trap received 
+				FPC Name = %parm[slotName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/fpcMemoryUtilizationThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/picMemoryUtilizationThreshold</uei>
+        <event-label>User defined threshold event: picMemoryUtilizationThreshold</event-label>
+        <descr>This notification is generated when PIC memory utilization threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: picMemoryUtilizationThreshold trap received 	
+				PIC Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/picMemoryUtilizationThresholdCleared</uei>
+        <event-label>User defined threshold event: picMemoryUtilizationThresholdCleared</event-label>
+        <descr>This notification is generated when PIC memory utilization threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: picMemoryUtilizationThresholdCleared trap received 
+				PIC Name = %parm[slotName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/picMemoryUtilizationThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/reMemoryUtilizationThreshold</uei>
+        <event-label>User defined threshold event: reMemoryUtilizationThreshold</event-label>
+        <descr>This notification is generated when routing engine memory utilization threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: reMemoryUtilizationThreshold trap received 	
+				RE Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/reMemoryUtilizationThresholdCleared</uei>
+        <event-label>User defined threshold event: reMemoryUtilizationThresholdCleared</event-label>
+        <descr>This notification is generated when routing engine memory utilization threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: reMemoryUtilizationThresholdCleared  trap received 
+				RE Name = %parm[slotName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/reMemoryUtilizationThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/fpcBufferThreshold</uei>
+        <event-label>User defined threshold event: fpcBufferThreshold</event-label>
+        <descr>This notification is generated when FPC buffer threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: fpcBufferThreshold trap received 	
+				FPC Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/fpcBufferThresholdCleared</uei>
+        <event-label>User defined threshold event: fpcBufferThresholdCleared</event-label>
+        <descr>This notification is generated when FPC buffer threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: fpcBufferThresholdCleared trap received 
+				FPC Name = %parm[slotName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/fpcBufferThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/picBufferThreshold</uei>
+        <event-label>User defined threshold event: picBufferThreshold</event-label>
+        <descr>This notification is generated when PIC buffer threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: picBufferThreshold trap received 	
+				PIC Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/picBufferThresholdCleared</uei>
+        <event-label>User defined threshold event: picBufferThresholdCleared</event-label>
+        <descr>This notification is generated when PIC buffer threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: picBufferThresholdCleared trap received 
+				PIC Name = %parm[slotName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/picBufferThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/reBufferThreshold</uei>
+        <event-label>User defined threshold event: reBufferThreshold</event-label>
+        <descr>This notification is generated when routing engine buffer threshold is breached.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: reBufferThreshold trap received 	
+				RE Name = %parm[slotName]% 			
+				KPI Name =%parm[kpiName]%  &lt;/p&gt;</logmsg>
+        <severity>%parm[severity]%</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/reBufferThresholdCleared</uei>
+        <event-label>User defined threshold event: reBufferThresholdCleared</event-label>
+        <descr>This notification is generated when routing engine buffer threshold is satisfied.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: reBufferThresholdCleared  trap received 
+				RE Name = %parm[slotName]% 				
+				KPI Name =%parm[kpiName]%   &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[slotName]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/reBufferThreshold:%nodeid%:%parm[kpiName]%:%parm[slotName]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/highThresholdExceeded</uei>
+        <event-label>User defined threshold event: highThresholdExceeded</event-label>
+        <descr>This notification is generated when high threshold was exceeded.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: highThresholdExceeded trap received 							
+				KPI Name =%parm[kpiName]% 
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]%	&lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[thresholdValue]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/highThresholdCleared</uei>
+        <event-label>User defined threshold event: highThresholdCleared</event-label>
+        <descr>This notification is generated  high threshold was exceeded but dropped.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: highThresholdCleared trap received 
+				KPI Name =%parm[kpiName]% 
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]%	 &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[thresholdValue]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/highThresholdExceeded:%nodeid%:%parm[kpiName]%:%parm[thresholdValue]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/lowThresholdExceeded</uei>
+        <event-label>User defined threshold event: lowThresholdExceeded</event-label>
+        <descr>This notification is generated when low threshold was exceeded.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: lowThresholdExceeded trap received 							
+				KPI Name =%parm[kpiName]% 
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]%	&lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[thresholdValue]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/lowThresholdCleared</uei>
+        <event-label>User defined threshold event: lowThresholdCleared</event-label>
+        <descr>This notification is generated  low threshold was exceeded but dropped.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: lowThresholdCleared trap received 
+				KPI Name =%parm[kpiName]% 
+				Threshold Value = %parm[thresholdValue]%
+				Current Value = %parm[value]%	 &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[thresholdValue]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/lowThresholdExceeded:%nodeid%:%parm[kpiName]%:%parm[thresholdValue]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+	<event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/statusThresholdDown</uei>
+        <event-label>User defined threshold event: statusThresholdDown</event-label>
+        <descr>This notification is generated when status of interface Down.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: statusThresholdDown trap received 			
+				KPI Name =%parm[kpiName]% 
+				Interface Name =%parm[interfaceName]% 	&lt;/p&gt;</logmsg>
+        <severity>Critical</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[interfaceName]%" alarm-type="1" auto-clean="false">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>    
+    <event>        
+        <uei>uei.opennms.org/vendor/Juniper/threshold/statusThresholdUp</uei>
+        <event-label>User defined threshold event: statusThresholdUp</event-label>
+        <descr>This notification is generated when status of interface previously down has been restored.</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+			User defined threshold event: statusThresholdUp trap received 
+				KPI Name =%parm[kpiName]% 
+				Interface Name =%parm[interfaceName]%	 &lt;/p&gt;</logmsg>
+        <severity>Cleared</severity>
+        <alarm-data reduction-key="%uei%:%nodeid%:%parm[kpiName]%:%parm[thresholdValue]%" alarm-type="2" clear-key="uei.opennms.org/vendor/Juniper/threshold/statusThresholdDown:%nodeid%:%parm[kpiName]%:%parm[thresholdValue]%" auto-clean="true">
+            <update-field field-name="severity" update-on-reduction="true"/>
+            <update-field field-name="descr" update-on-reduction="true"/>
+        </alarm-data>
+    </event>
+</events>

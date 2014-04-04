@@ -1,0 +1,2634 @@
+<!-- Start of auto generated data from MIB: DIAMOND-CHEETAH-TRAP-MIB -->
+<events>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcRealServerDown</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcRealServerDown</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>2</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcRealServerDown trap signifies that the real server has gone
+down and is out of service.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected
+Service Interface Name.
+adcRealServerName is the optional Name given to the
+affected Real Server.
+adcRealServerIpAdddr is the IP address of the affected
+Real Server.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerIpAdddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcRealServerDown trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcRealServerName=%parm[#2]% 
+				adcRealServerIpAdddr=%parm[#3]% 
+				sysName=%parm[#4]% 
+				sysLocation=%parm[#5]% 
+				sysContact=%parm[#6]%&lt;/p&gt;
+			</logmsg>
+		<severity>Critical</severity>
+		<alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcVirtualServerDown</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcVirtualServerDown</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>4</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcVirtualServerDown trap signifies that the virtual server has gone
+down and is out of service.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected
+Service Interface Name.
+adcVirtualServerName is the optional Name given to the
+affected Virtual Server.
+adcVirtualServerIpAddr is the IP address of the affected
+Virtual Server.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcVirtualServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcVirtualServerIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcVirtualServerDown trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcVirtualServerName=%parm[#3]% 
+				adcVirtualServerIpAddr=%parm[#4]% 
+				sysName=%parm[#5]% 
+				sysLocation=%parm[#6]% 
+				sysContact=%parm[#7]%&lt;/p&gt;
+			</logmsg>
+		<severity>Critical</severity>
+		<alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcRealServerServiceDown</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcRealServerServiceDown</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>5</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcRealServerServiceDown trap signifies that the service port
+of the real server is down and out of service.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected
+Service Interface Name.
+adcRealServerName is the optional Name given to the
+affected Real Server.
+adcRealServerIpAdddr is the IP address of the affected
+Real Server.
+adcRealServerServicePort is the Real Server Port.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerIpAdddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerServicePort&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcRealServerServiceDown trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcRealServerName=%parm[#2]% 
+				adcRealServerIpAdddr=%parm[#3]% 
+				adcRealServerServicePort=%parm[#4]% 
+				sysName=%parm[#5]% 
+				sysLocation=%parm[#6]% 
+				sysContact=%parm[#7]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcProxyPortNotAvail</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcProxyPortNotAvail</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcProxyPortNotAvail trap signifies that No
+ports are available, new connections will be discarded.
+adcLoadBalancingInstanceName is the Load
+Balancing Instance Name.
+adcMultiServiceInterface is the Service Interface Name.
+adcProxyIpAddr is the Proxy IP Address.
+adcMultiServiceUnitNo is the unit number of the
+Load Balancing Instance.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcProxyIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceUnitNo&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcProxyPortNotAvail trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcProxyIpAddr=%parm[#3]% 
+				adcMultiServiceUnitNo=%parm[#4]% 
+				sysName=%parm[#5]% 
+				sysLocation=%parm[#6]% 
+				sysContact=%parm[#7]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcConnectionOverflow</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcConnectionOverflow</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>8</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcConnectionOverflow trap signifies that
+Connection table overflow, connections may be discarded.
+adcLoadBalancingInstanceName is the affected Load
+Balancing Instance Name.
+adcMultiServiceInterface is the affected Service Interface Name.
+adcDataPathNo is the Dp Number.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcDataPathNo&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcConnectionOverflow trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcDataPathNo=%parm[#3]% 
+				sysName=%parm[#4]% 
+				sysLocation=%parm[#5]% 
+				sysContact=%parm[#6]%&lt;/p&gt;
+			</logmsg>
+		<severity>Minor</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcBackupRealServerDeact</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcBackupRealServerDeact</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>10</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcBackupRealServerDeact trap signifies that backup real
+server is deactivated because the primary real server has become
+available. One might expect that a adcRealServerUp trap with the
+primary real server specified would preceded this one.
+adcLoadBalancingInstanceName is the affected Load
+Balancing Instance Name.
+adcBackupRealServerName is the optional Name given to the
+Backup Real Server.
+adcBackupRealServerIpAddr is the IP address of the Backup
+Real Server.
+adcRealServerName is the optional Name given to the
+affected Real Server
+adcRealServerIpAdddr is the IP address of the affected
+Real Server.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcBackupRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcBackupRealServerIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerIpAdddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#8]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcBackupRealServerDeact trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcBackupRealServerName=%parm[#2]% 
+				adcBackupRealServerIpAddr=%parm[#3]% 
+				adcRealServerName=%parm[#4]% 
+				adcRealServerIpAdddr=%parm[#5]% 
+				sysName=%parm[#6]% 
+				sysLocation=%parm[#7]% 
+				sysContact=%parm[#8]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcRealServerBkupGroupDeact</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcRealServerBkupGroupDeact</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>12</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcRealServerBkupGroupDeact trap signifies that this backup real
+server is deactivated because the primary real server has become
+available.
+adcLoadBalancingInstanceName is the affected Load
+Balancing Instance Name.
+adcBackupRealServerName is the optional Name given to the
+Backup Real Server.
+adcBackupRealServerIpAddr is the IP address of the Backup
+Real Server.
+adcGroupName is the optional Name given to the
+affected Real Server Group.
+adcMultiServiceInterface is the affected Service Interface Name.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcBackupRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcBackupRealServerIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcGroupName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#8]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcRealServerBkupGroupDeact trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcBackupRealServerName=%parm[#3]% 
+				adcBackupRealServerIpAddr=%parm[#4]% 
+				adcGroupName=%parm[#5]% 
+				sysName=%parm[#6]% 
+				sysLocation=%parm[#7]% 
+				sysContact=%parm[#8]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcCpuHigh</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcCpuHigh</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>17</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcCpuHigh trap signifies that the CPU
+Utilization has exceeded threshold value.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected Service Interface Name.
+adcCPUThreshold is the treshhold value.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcCPUThreshold&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcCpuHigh trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcCPUThreshold=%parm[#3]% 
+				sysName=%parm[#4]% 
+				sysLocation=%parm[#5]% 
+				sysContact=%parm[#6]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcPanic</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcPanic</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>19</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcPanic trap signifies that
+there is a Panic in the SLB.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected Service Interface Name.
+adcFileName is the file name where the Panic
+got raised.
+adcFileLineNo is the line number in the corresponding
+file.
+adcDataPathThreadId is the affected thread Id.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcFileName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcFileLineNo&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcDataPathThreadId&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#8]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcPanic trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcFileName=%parm[#3]% 
+				adcFileLineNo=%parm[#4]% 
+				adcDataPathThreadId=%parm[#5]% 
+				sysName=%parm[#6]% 
+				sysLocation=%parm[#7]% 
+				sysContact=%parm[#8]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcVerify</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcVerify</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>20</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcVerify trap signifies that
+verification is done in the SLB.
+adcLoadBalancingInstanceName is the Load Balancing Instance Name.
+adcMultiServiceInterface is the Service Interface Name.
+adcFileName is the file name in which verification
+is done.
+adcFileLineNo is the line number in the corresponding
+file.
+adcDataPathThreadId is the thread Id.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcFileName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcFileLineNo&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcDataPathThreadId&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#8]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcVerify trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcFileName=%parm[#3]% 
+				adcFileLineNo=%parm[#4]% 
+				adcDataPathThreadId=%parm[#5]% 
+				sysName=%parm[#6]% 
+				sysLocation=%parm[#7]% 
+				sysContact=%parm[#8]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcAssert</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcAssert</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>21</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcAssert trap signifies that
+validation is done in the SLB.
+adcLoadBalancingInstanceName is the Load Balancing Instance Name.
+adcMultiServiceInterface is the Service Interface Name.
+adcFileName is the file name in which the validation
+is done.
+adcFileLineNo is the line number in the corresponding
+file.
+adcDataPathThreadId is the thread Id.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcFileName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcFileLineNo&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcDataPathThreadId&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#8]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcAssert trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcFileName=%parm[#3]% 
+				adcFileLineNo=%parm[#4]% 
+				adcDataPathThreadId=%parm[#5]% 
+				sysName=%parm[#6]% 
+				sysLocation=%parm[#7]% 
+				sysContact=%parm[#8]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcShutdown</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcShutdown</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>22</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcShutdown trap signifies that Real Server
+has no open connections.It is disabled by user's request.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected Service Interface Name.
+adcRealServerName is the optional Name given to the
+affected Real Server.
+adcRealServerIpAdddr is the IP address of the affected
+Real Server.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerIpAdddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcShutdown trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcRealServerName=%parm[#3]% 
+				adcRealServerIpAdddr=%parm[#4]% 
+				sysName=%parm[#5]% 
+				sysLocation=%parm[#6]% 
+				sysContact=%parm[#7]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcRealServerDisabled</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcRealServerDisabled</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>24</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcRealServerDisabled trap signifies that the real server
+has been disabled by user request. New connections are not
+allowed to this sever.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcRealServerName is the optional Name given to the
+affected Real Server.
+adcRealServerIpAdddr is the IP address of the affected
+Real Server.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerIpAdddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcRealServerDisabled trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcRealServerName=%parm[#2]% 
+				adcRealServerIpAdddr=%parm[#3]% 
+				sysName=%parm[#4]% 
+				sysLocation=%parm[#5]% 
+				sysContact=%parm[#6]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcALLRealServerDisabled</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcALLRealServerDisabled</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>26</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcALLRealServerDisabled trap signifies that the all the
+real server has been disabled by user request.
+ adcLoadBalancingInstanceName is the affected
+ Load Balancing Instance Name.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcALLRealServerDisabled trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				sysName=%parm[#2]% 
+				sysLocation=%parm[#3]% 
+				sysContact=%parm[#4]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcGroupDown</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcGroupDown</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>27</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcGroupDown trap signifies that the Server
+group went down because of server-group health-check. 
+New connections are not
+allowed to this sever group.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcGroupName is the optional Name given to the
+affected Real Server Group.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcGroupName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcGroupDown trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcGroupName=%parm[#2]% 
+				sysName=%parm[#3]% 
+				sysLocation=%parm[#4]% 
+				sysContact=%parm[#5]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcGroupDisabled</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcGroupDisabled</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>28</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcGroupDisabled trap signifies that the Server
+group has been disabled by user request. New connections are not
+allowed to this sever group.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcGroupName is the optional Name given to the
+affected Real Server Group.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcGroupName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcGroupDisabled trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcGroupName=%parm[#2]% 
+				sysName=%parm[#3]% 
+				sysLocation=%parm[#4]% 
+				sysContact=%parm[#5]%&lt;/p&gt;
+			</logmsg>
+		<severity>Minor</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcAllGroupsDisabled</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcAllGroupsDisabled</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>29</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcAllGroupsDisabled trap signifies that all the Server
+groups has been disabled by user request. New connections are not
+allowed to this sever groups.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcGroupName is the optional Name given to the
+affected Real Server Group.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcGroupName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcAllGroupsDisabled trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcGroupName=%parm[#2]% 
+				sysName=%parm[#3]% 
+				sysLocation=%parm[#4]% 
+				sysContact=%parm[#5]%&lt;/p&gt;
+			</logmsg>
+		<severity>Critical</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcMultiServicePICDumpAndRestart</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcMultiServicePICDumpAndRestart</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>30</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcMultiServicePICDumpAndRestart trap signifies that the
+Dump-and-restart command was requested from CLI by user.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected Service Interface Name.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcMultiServicePICDumpAndRestart trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				sysName=%parm[#3]% 
+				sysLocation=%parm[#4]% 
+				sysContact=%parm[#5]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcNewLicense</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcNewLicense</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>31</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcNewLicense trap signifies that the
+Server-Load-Balancing license has been activated,
+and is now available for MS-PICs.
+adcMultiServicePICs is the number of PICs for which
+the license got acivated.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServicePICs&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcNewLicense trap received 
+				adcMultiServicePICs=%parm[#1]% 
+				sysName=%parm[#2]% 
+				sysLocation=%parm[#3]% 
+				sysContact=%parm[#4]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcConfiguredPICUp</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcConfiguredPICUp</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>32</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcConfiguredPICUp trap signifies that the
+configured Service-interface is now UP.
+adcLoadBalancingInstanceName is the Load Balancing Instance Name.
+adcMultiServiceInterface is the Service Interface Name.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcConfiguredPICUp trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				sysName=%parm[#3]% 
+				sysLocation=%parm[#4]% 
+				sysContact=%parm[#5]%&lt;/p&gt;
+			</logmsg>
+		<severity>Normal</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcNonConfiguredPICUp</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcNonConfiguredPICUp</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>33</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcNonConfiguredPICUp trap signifies that the
+Service-interface which does not appear in the
+configuration is UP.
+adcMultiServiceInterface is the Service Interface Name.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcNonConfiguredPICUp trap received 
+				adcMultiServiceInterface=%parm[#1]% 
+				sysName=%parm[#2]% 
+				sysLocation=%parm[#3]% 
+				sysContact=%parm[#4]%&lt;/p&gt;
+			</logmsg>
+		<severity>Normal</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcPICDisconnected</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcPICDisconnected</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>34</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcPICDisconnected trap signifies that the
+Service-interface is now DOWN.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected Service Interface Name.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcPICDisconnected trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				sysName=%parm[#3]% 
+				sysLocation=%parm[#4]% 
+				sysContact=%parm[#5]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcUnlicensedPIC</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcUnlicensedPIC</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>35</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcUnlicensedPIC trap signifies that the
+Service-interface connected to adc-mgmt without any license for it.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected Service Interface Name.
+License is only allowed for adcNewLicense PICs&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServicePICs&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcUnlicensedPIC trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcMultiServicePICs=%parm[#3]% 
+				sysName=%parm[#4]% 
+				sysLocation=%parm[#5]% 
+				sysContact=%parm[#6]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcRealConnOvfl</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcRealConnOvfl</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>36</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcRealConnOvfl trap signifies that the
+connection received by this real is more than max connection
+configured for that real.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected Service Interface Name.
+adcRealServerName is the optional Name given to the
+affected Real Server.
+adcRealServerIpAdddr is the IP address of the affected
+Real Server.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerIpAdddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcRealConnOvfl trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcRealServerName=%parm[#3]% 
+				adcRealServerIpAdddr=%parm[#4]% 
+				sysName=%parm[#5]% 
+				sysLocation=%parm[#6]% 
+				sysContact=%parm[#7]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcConnectionTableCleared</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcConnectionTableCleared</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>37</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcConnectionTableCleared trap signifies that the connection table
+is cleared to allow mega proxy support.
+adcLoadBalancingInstanceName is the Load Balancing Instance Name.
+adcMultiServiceInterface is the Service Interface Name.
+adcNpuServicePortRangeStart is the start port range to identify a NPU
+for real server traffic.
+adcNpuServicePortRangeEnd is the end port range to identify a NPU for
+real server traffic.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcNpuServicePortRangeStart&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcNpuServicePortRangeEnd&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcConnectionTableCleared trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcNpuServicePortRangeStart=%parm[#3]% 
+				adcNpuServicePortRangeEnd=%parm[#4]% 
+				sysName=%parm[#5]% 
+				sysLocation=%parm[#6]% 
+				sysContact=%parm[#7]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcMegaProxyClientsConfigSet</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcMegaProxyClientsConfigSet</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>38</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcMegaProxyClientsConfigSet trap signifies that Mega-proxy-clients
+has been set, connection table for all adc-instances are cleared.
+adcMegaProxyConfigSet is string message&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMegaProxyConfigSet&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcMegaProxyClientsConfigSet trap received 
+				adcMegaProxyConfigSet=%parm[#1]% 
+				sysName=%parm[#2]% 
+				sysLocation=%parm[#3]% 
+				sysContact=%parm[#4]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcMegaProxyClientsConfigRemoved</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcMegaProxyClientsConfigRemoved</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>39</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcMegaProxyClientsConfigRemoved trap signifies that 
+Mega-proxy-clients has been removed from configuration, connection 
+table for all adc-instances are cleared.
+adcMegaProxyConfigSet is string message&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMegaProxyConfigRemoved&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcMegaProxyClientsConfigRemoved trap received 
+				adcMegaProxyConfigRemoved=%parm[#1]% 
+				sysName=%parm[#2]% 
+				sysLocation=%parm[#3]% 
+				sysContact=%parm[#4]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcBackupGroupDeact</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcBackupGroupDeact</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>14</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcBackupGroupDeact trap signifies that the backup group is disabled
+while primary group is getting up.
+adcLoadBalancingInstanceName is the affected Load
+Balancing Instance Name.
+adcMultiServiceInterface is the affected Service Interface Name.
+adcGroupName is the optional name given to the
+Backup real server group.
+        adcGroupRealCount is the number of real servers
+        in that group.
+        adcGroupName is the optional Name given to the
+affected Real Server Group.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcBackupGroupName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcGroupRealCount&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcGroupName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#8]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcBackupGroupDeact trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcBackupGroupName=%parm[#3]% 
+				adcGroupRealCount=%parm[#4]% 
+				adcGroupName=%parm[#5]% 
+				sysName=%parm[#6]% 
+				sysLocation=%parm[#7]% 
+				sysContact=%parm[#8]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/adcVirtualServerServicesDown</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcVirtualServerServicesDown</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>16</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A ADcVirtualServerServicesDown trap signifies that the service ports
+of the Virtual server is down and out of service.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcMultiServiceInterface is the affected
+Service Interface Name.
+adcVirtualServerName is the optional Name given to the
+affected Virtual Server.
+adcVirtualServerName is the IP address of the affected
+Virtual Server.
+adcVirtualServiceName is the Virtual Service Type.
+adcVirtualServicePort is the port number that has
+no available servers.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcVirtualServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcVirtualServerIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcVirtualServiceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcVirtualServicePort&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#8]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#9]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcVirtualServerServicesDown trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcVirtualServerName=%parm[#3]% 
+				adcVirtualServerIpAddr=%parm[#4]% 
+				adcVirtualServiceName=%parm[#5]% 
+				adcVirtualServicePort=%parm[#6]% 
+				sysName=%parm[#7]% 
+				sysLocation=%parm[#8]% 
+				sysContact=%parm[#9]%&lt;/p&gt;
+			</logmsg>
+		<severity>Major</severity>
+		<alarm-data auto-clean="false" alarm-type="3" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%:%parm[#9]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/clear/adcRealServerUp</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcRealServerUp</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>1</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcRealServerUp trap signifies that the real server
+(which had gone down )is back up and operational now.
+adcLoadBalancingInstanceName is the Load Balancing Instance Name.
+adcMultiServiceInterface is the Service Interface Name.
+adcRealServerName is the optional Name given to the
+Real Server.
+adcRealServerIpAdddr is the IP address of the Real Server.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerIpAdddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcRealServerUp trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcRealServerName=%parm[#2]% 
+				adcRealServerIpAdddr=%parm[#3]% 
+				sysName=%parm[#4]% 
+				sysLocation=%parm[#5]% 
+				sysContact=%parm[#6]%&lt;/p&gt;
+			</logmsg>
+		<severity>Cleared</severity>
+		<alarm-data auto-clean="true" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" clear-key="uei.opennms.org/vendor/Juniper/traps/adcRealServerDown:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/clear/adcVirtualServerUp</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcVirtualServerUp</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>3</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcVirtualServerUp trap signifies that the virtual server
+(which had gone down )is back up and operational now.
+adcLoadBalancingInstanceName is the Load Balancing Instance Name.
+adcMultiServiceInterface is the Service Interface Name.
+adcVirtualServerName is the optional Name given to the
+Virtual Server.
+adcVirtualServerIpAddr is the IP address of the
+Virtual Server.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcVirtualServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcVirtualServerIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcVirtualServerUp trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcVirtualServerName=%parm[#3]% 
+				adcVirtualServerIpAddr=%parm[#4]% 
+				sysName=%parm[#5]% 
+				sysLocation=%parm[#6]% 
+				sysContact=%parm[#7]%&lt;/p&gt;
+			</logmsg>
+		<severity>Cleared</severity>
+		<alarm-data auto-clean="true" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%" clear-key="uei.opennms.org/vendor/Juniper/traps/adcVirtualServerDown:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/clear/adcProxyPortAvail</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcProxyPortAvail</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>7</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcProxyPortAvail trap signifies that
+Ports are now available for new connections.
+adcLoadBalancingInstanceName is the Load
+Balancing Instance Name.
+adcMultiServiceInterface is the Service Interface Name.
+adcProxyIpAddr is the Proxy IP Address.
+adcMultiServiceUnitNo is the unit number of the
+Load Balancing Instance.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcProxyIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceUnitNo&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcProxyPortAvail trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcProxyIpAddr=%parm[#3]% 
+				adcMultiServiceUnitNo=%parm[#4]% 
+				sysName=%parm[#5]% 
+				sysLocation=%parm[#6]% 
+				sysContact=%parm[#7]%&lt;/p&gt;
+			</logmsg>
+		<severity>Cleared</severity>
+		<alarm-data auto-clean="true" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%" clear-key="uei.opennms.org/vendor/Juniper/traps/adcProxyPortNotAvail:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/clear/adcBackupRealServerAct</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcBackupRealServerAct</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>9</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A ADcBackupRealServerAct trap signifies that this backup real
+server has been activated because the Real server that it backs up
+went down.One might expect that a adcRealServerDown trap
+with the primary real server specified would preceded this one.
+adcLoadBalancingInstanceName is the Load
+Balancing Instance Name.
+adcBackupRealServerName is the optional Name given to the
+Backup Real Server.
+adcBackupRealServerIpAddr is the IP address of the Backup
+Real Server.
+adcRealServerName is the optional Name given to the
+Real Server
+adcRealServerIpAdddr is the IP address of the Real Server.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcBackupRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcBackupRealServerIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerIpAdddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#8]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcBackupRealServerAct trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcBackupRealServerName=%parm[#2]% 
+				adcBackupRealServerIpAddr=%parm[#3]% 
+				adcRealServerName=%parm[#4]% 
+				adcRealServerIpAdddr=%parm[#5]% 
+				sysName=%parm[#6]% 
+				sysLocation=%parm[#7]% 
+				sysContact=%parm[#8]%&lt;/p&gt;
+			</logmsg>
+		<severity>Cleared</severity>
+		<alarm-data auto-clean="true" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" clear-key="uei.opennms.org/vendor/Juniper/traps/adcBackupRealServerDeact:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/clear/adcRealServerBackupGroupAct</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcRealServerBackupGroupAct</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>11</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcRealServerBackupGroupAct trap signifies that this backup real
+server has been activated for real server group because the Real
+        server that it backs up went down.
+adcLoadBalancingInstanceName is the affected Load
+Balancing Instance Name.
+adcBackupRealServerName is the optional Name given to the
+Backup Real Server.
+adcBackupRealServerIpAddr is the IP address of the Backup
+Real Server.
+adcGroupName is the optional Name given to the
+Real Server Group.
+adcMultiServiceInterface is the Service Interface Name.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcBackupRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcBackupRealServerIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcGroupName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#8]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcRealServerBackupGroupAct trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcBackupRealServerName=%parm[#3]% 
+				adcBackupRealServerIpAddr=%parm[#4]% 
+				adcGroupName=%parm[#5]% 
+				sysName=%parm[#6]% 
+				sysLocation=%parm[#7]% 
+				sysContact=%parm[#8]%&lt;/p&gt;
+			</logmsg>
+		<severity>Cleared</severity>
+		<alarm-data auto-clean="true" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" clear-key="uei.opennms.org/vendor/Juniper/traps/adcRealServerBkupGroupDeact:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/clear/adcRealServerServiceUp</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcRealServerServiceUp</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>15</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcRealServerServiceUp trap signifies that the service port of
+the real server is up and operational.
+adcLoadBalancingInstanceName is the Load Balancing Instance Name.
+adcMultiServiceInterface is the Real Server's Service Interface Name.
+adcRealServerName is the optional Name given to the
+affected Real Server.
+adcRealServerIpAdddr is the IP address of the  Real Server.
+adcRealServerServicePort  is the Real Server's port
+marked as UP.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerIpAdddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerServicePort&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcRealServerServiceUp trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcRealServerName=%parm[#2]% 
+				adcRealServerIpAdddr=%parm[#3]% 
+				adcRealServerServicePort=%parm[#4]% 
+				sysName=%parm[#5]% 
+				sysLocation=%parm[#6]% 
+				sysContact=%parm[#7]%&lt;/p&gt;
+			</logmsg>
+		<severity>Cleared</severity>
+		<alarm-data auto-clean="true" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%" clear-key="uei.opennms.org/vendor/Juniper/traps/adcRealServerServiceDown:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/clear/adcCpuNormal</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcCpuNormal</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>18</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcCpuNormal trap signifies that
+the CPU Utilization threshold has been relieved.
+adcLoadBalancingInstanceName is the Load Balancing Instance Name.
+adcMultiServiceInterface is the affected Service Interface Name.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcCpuNormal trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				sysName=%parm[#3]% 
+				sysLocation=%parm[#4]% 
+				sysContact=%parm[#5]%&lt;/p&gt;
+			</logmsg>
+		<severity>Cleared</severity>
+		<alarm-data auto-clean="true" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%" clear-key="uei.opennms.org/vendor/Juniper/traps/adcCpuHigh:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/clear/adcRealServerEnabled</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcRealServerEnabled</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>23</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcRealServerEnabled trap signifies that the real server
+has been enabled by user request. New connections will be 
+allowed to this sever.
+adcLoadBalancingInstanceName is the affected
+Load Balancing Instance Name.
+adcRealServerName is the optional Name given to the
+affected Real Server.
+adcRealServerIpAdddr is the IP address of the affected
+Real Server.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcRealServerIpAdddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcRealServerEnabled trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcRealServerName=%parm[#2]% 
+				adcRealServerIpAdddr=%parm[#3]% 
+				sysName=%parm[#4]% 
+				sysLocation=%parm[#5]% 
+				sysContact=%parm[#6]%&lt;/p&gt;
+			</logmsg>
+		<severity>Cleared</severity>
+		<alarm-data auto-clean="true" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" clear-key="uei.opennms.org/vendor/Juniper/traps/adcRealServerDisabled:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/clear/adcALLRealServerEnabled</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcALLRealServerEnabled</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>25</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcALLRealServerEnabled trap signifies that the all the
+real server has been enabled by user request.
+ adcLoadBalancingInstanceName is the affected
+ Load Balancing Instance Name.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcALLRealServerEnabled trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				sysName=%parm[#2]% 
+				sysLocation=%parm[#3]% 
+				sysContact=%parm[#4]%&lt;/p&gt;
+			</logmsg>
+		<severity>Cleared</severity>
+		<alarm-data auto-clean="true" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%" clear-key="uei.opennms.org/vendor/Juniper/traps/adcALLRealServerDisabled:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+	<event>
+		<uei>uei.opennms.org/vendor/Juniper/traps/clear/adcBackupGroupAct</uei>
+		<event-label>DIAMOND-CHEETAH-TRAP-MIB defined trap event: adcBackupGroupAct</event-label>
+		<mask>
+		<maskelement>
+			<mename>id</mename>
+			<mevalue>.1.3.6.1.4.1.1872.2.5.9</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>generic</mename>
+			<mevalue>6</mevalue>
+		</maskelement>
+		<maskelement>
+			<mename>specific</mename>
+			<mevalue>13</mevalue>
+		</maskelement>
+		</mask>
+		<descr>
+&lt;p&gt;A adcBackupGroupAct trap signifies that the backup group is enabled
+while primary group is going down.
+adcLoadBalancingInstanceName is the Load
+Balancing Instance Name.
+adcMultiServiceInterface is the Service Interface Name.
+adcGroupName is the optional name given to the
+Backup real server group.
+        adcGroupRealCount is the number of real servers
+        in that group.
+        adcGroupName is the optional Name given to the
+Real Server Group.&lt;/p&gt;&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcLoadBalancingInstanceName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcMultiServiceInterface&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcBackupGroupName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcGroupRealCount&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	adcGroupName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#5]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#6]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysLocation&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#7]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	sysContact&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+		%parm[#8]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		</descr>
+			<logmsg dest='logndisplay'>&lt;p&gt;
+			adcBackupGroupAct trap received 
+				adcLoadBalancingInstanceName=%parm[#1]% 
+				adcMultiServiceInterface=%parm[#2]% 
+				adcBackupGroupName=%parm[#3]% 
+				adcGroupRealCount=%parm[#4]% 
+				adcGroupName=%parm[#5]% 
+				sysName=%parm[#6]% 
+				sysLocation=%parm[#7]% 
+				sysContact=%parm[#8]%&lt;/p&gt;
+			</logmsg>
+		<severity>Cleared</severity>
+		<alarm-data auto-clean="true" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" clear-key="uei.opennms.org/vendor/Juniper/traps/adcBackupGroupDeact:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%:%parm[#4]%:%parm[#5]%:%parm[#6]%:%parm[#7]%:%parm[#8]%" >
+			<update-field field-name="severity" update-on-reduction="true"/>
+			<update-field field-name="descr" update-on-reduction="true"/>
+		</alarm-data>
+	</event>
+</events>
+<!-- End of auto generated data from MIB: DIAMOND-CHEETAH-TRAP-MIB -->
+

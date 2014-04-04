@@ -1956,7 +1956,14 @@
 		<alarm-data reduction-key="%parm[reductionKey]%-%parm[alarmid]%" alarm-type="2" />
   </event>
 
-
+  <!-- SDG Trap Definitions start -->
+  <event-file>events/JuniperEvents/SDG/mib-jnx-adc.xml</event-file>
+  <event-file>events/JuniperEvents/SDG/jnx-sdg-thresholds.xml</event-file>
+  <event-file>events/JuniperEvents/SDG/mib-jnx-ha-event.xml</event-file>
+  <event-file>events/JuniperEvents/SDG/sdg-chassis-traps.xml</event-file>
+  <event-file>events/JuniperEvents/SDG/sdg-service-pic-traps.xml</event-file>
+  <event-file>events/JuniperEvents/SDG/sdg-syslog-traps.xml</event-file>
+  <!-- SDG Trap Definitions ends -->
 
   <event-file>events/JUNIPER-IFOTN-MIB.events.xml</event-file>
   <event-file>events/JUNIPER-IFOPTICS-MIB.events.xml</event-file>
