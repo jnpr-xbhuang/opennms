@@ -1,0 +1,2006 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<events xmlns="http://xmlns.opennms.org/xsd/eventconf">
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>1</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultLOSSet</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultLOSSet</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that Loss Of Signal has been detected.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultLOSSet trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>2</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultLOSClear</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultLOSClear</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that Loss Of Signal has been cleared.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultLOSClear trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>3</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultEFDSet</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultEFDSet</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Exceeded frequency deviation.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultEFDSet trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>4</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultEFDClear</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultEFDClear</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Exceeded frequency deviation cleared.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultEFDClear trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>5</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultLOESMCSet</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultLOESMCSet</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Loss of ESMC.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultLOESMCSet trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultLOESMCClear</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultLOESMCClear</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Loss of ESMC.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultLOESMCClear trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>7</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultQLFailSet</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultQLFailSet</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies ESMC/SSM Quality Level failed.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultQLFailSet trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>8</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultQLFailClear</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultQLFailClear</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies ESMC/SSM Quality Level failed.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultQLFailClear trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>9</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultLTISet</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultLTISet</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Loss of timing information.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultLTISet trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>10</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultLTIClear</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultLTIClear</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Loss of timing information.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultLTIClear trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>11</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultAcbcFpgaVerNotCompatible</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultAcbcFpgaVerNotCompatible</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies ACBC FPGA version is not compatible.
+
+             jnxBootCpldFpgaRevMajor indicates the current ACBC FPGA Major revision
+             jnxBootCpldFpgaRevMinor indicates the current ACBC FPGA Minor revision.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxAcbFpgaRevMajor&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxAcbFpgaRevMinor&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultAcbcFpgaVerNotCompatible trap received
+	jnxAcbFpgaRevMajor=%parm[#1]%
+	jnxAcbFpgaRevMinor=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>12</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultBootCpldVerNotCompatible</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultBootCpldVerNotCompatible</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Boot-cpld version is not compatible.
+
+             jnxClksyncVersion indicates the current Boot-cpld version.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxBootCpldFpgaRevMajor&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxBootCpldFpgaRevMinor&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultBootCpldVerNotCompatible trap received
+	jnxBootCpldFpgaRevMajor=%parm[#1]%
+	jnxBootCpldFpgaRevMinor=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>13</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultPriSrcFailed</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultPriSrcFailed</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Primary source failed
+             (Whenever PFM/CFM/SCM error occurs).
+
+             jnxClksyncIfIndex is the Primary source interface index
+             jnxClksyncIntfName is the Primary source interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultPriSrcFailed trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>14</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultSecSrcFailed</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultSecSrcFailed</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Secondary source failed
+             (Whenever PFM/CFM/SCM error occurs).
+
+             jnxClksyncIfIndex is the Secondary source interface index
+             jnxClksyncIntfName is the Secondary source interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultSecSrcFailed trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>15</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultPtpUniNegRateRejectSet</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultPtpUniNegRateRejectSet</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies: 
+             When acting as MASTER - Failing/rejecting clients for signaling messages
+             When acting as SLAVE - Failing or receiving rejection for signaling messages
+
+             jnxClkStreamHandle is the clock stream handle
+             jnxRemoteIpAddr is the clock stream's remote ip-address.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClkStreamHandle&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxRemoteIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultPtpUniNegRateRejectSet trap received
+	jnxClkStreamHandle=%parm[#1]%
+	jnxRemoteIpAddr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>16</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingFaultPtpUniNegRateRejectClear</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingFaultPtpUniNegRateRejectClear</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies: 
+             When acting as MASTER - Failing/rejecting clients for signaling messages
+             When acting as SLAVE - Failing or receiving rejection for signaling messages
+
+             jnxClkStreamHandle is the clock stream handle
+             jnxRemoteIpAddr is the clock stream's remote ip-address.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClkStreamHandle&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxRemoteIpAddr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingFaultPtpUniNegRateRejectClear trap received
+	jnxClkStreamHandle=%parm[#1]%
+	jnxRemoteIpAddr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>1</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventPriSrcRecovered</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPriSrcRecovered</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Primary source recovered.
+
+             jnxClksyncIfIndex is the Primary source interface index
+             jnxClksyncIntfName is the Primary source interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPriSrcRecovered trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>2</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventSecSrcRecovered</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventSecSrcRecovered</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Secondary source recovered.
+
+             jnxClksyncIfIndex is the Secondary source interface index
+             jnxClksyncIntfName is the Secondary source interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventSecSrcRecovered trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>3</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventPriRefChanged</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPriRefChanged</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Primary reference changed
+             (Ifd name change or change from synce to BITS/external interface etc).
+
+             jnxClksyncIfIndex is the Primary reference interface index
+             jnxClksyncIntfName is the Primary reference interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPriRefChanged trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>4</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventSecRefChanged</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventSecRefChanged</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies Secondary reference changed
+             (Ifd name change or change from synce to BITS/external interface etc).
+
+             jnxClksyncIfIndex is the Secondary reference interface index
+             jnxClksyncIntfName is the Secondary reference interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventSecRefChanged trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>5</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventQLChangedRx</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventQLChangedRx</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies RX SSM/ESMC quality level changed.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name
+             jnxClksyncQualityCode is the SSM/ESMC quality level 
+             jnxClksyncQualityCodeStr is the SSM/ESMC quality level in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncQualityCode&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		prc(0)
+		ssu-a(1)
+		ssu-b(2)
+		sec(3)
+		dnu(4)
+		stu(10)
+		prs(11)
+		tnc(13)
+		st2(14)
+		st3e(15)
+		st3(16)
+		smc(17)
+		st4(18)
+		dus(19)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncQualityCodeStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventQLChangedRx trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%
+	jnxClksyncQualityCode=%parm[#3]%
+	jnxClksyncQualityCodeStr=%parm[#4]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+        <varbindsdecode>
+            <parmid>parm[#3]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="prc"/>
+            <decode varbindvalue="1" varbinddecodedstring="ssu-a"/>
+            <decode varbindvalue="2" varbinddecodedstring="ssu-b"/>
+            <decode varbindvalue="3" varbinddecodedstring="sec"/>
+            <decode varbindvalue="4" varbinddecodedstring="dnu"/>
+            <decode varbindvalue="10" varbinddecodedstring="stu"/>
+            <decode varbindvalue="11" varbinddecodedstring="prs"/>
+            <decode varbindvalue="13" varbinddecodedstring="tnc"/>
+            <decode varbindvalue="14" varbinddecodedstring="st2"/>
+            <decode varbindvalue="15" varbinddecodedstring="st3e"/>
+            <decode varbindvalue="16" varbinddecodedstring="st3"/>
+            <decode varbindvalue="17" varbinddecodedstring="smc"/>
+            <decode varbindvalue="18" varbinddecodedstring="st4"/>
+            <decode varbindvalue="19" varbinddecodedstring="dus"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventQLChangedTx</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventQLChangedTx</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies TX SSM/ESMC quality level changed.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name
+             jnxClksyncQualityCode is the SSM/ESMC quality level 
+             jnxClksyncQualityCodeStr is the SSM/ESMC quality level in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncQualityCode&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		prc(0)
+		ssu-a(1)
+		ssu-b(2)
+		sec(3)
+		dnu(4)
+		stu(10)
+		prs(11)
+		tnc(13)
+		st2(14)
+		st3e(15)
+		st3(16)
+		smc(17)
+		st4(18)
+		dus(19)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncQualityCodeStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventQLChangedTx trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%
+	jnxClksyncQualityCode=%parm[#3]%
+	jnxClksyncQualityCodeStr=%parm[#4]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+        <varbindsdecode>
+            <parmid>parm[#3]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="prc"/>
+            <decode varbindvalue="1" varbinddecodedstring="ssu-a"/>
+            <decode varbindvalue="2" varbinddecodedstring="ssu-b"/>
+            <decode varbindvalue="3" varbinddecodedstring="sec"/>
+            <decode varbindvalue="4" varbinddecodedstring="dnu"/>
+            <decode varbindvalue="10" varbinddecodedstring="stu"/>
+            <decode varbindvalue="11" varbinddecodedstring="prs"/>
+            <decode varbindvalue="13" varbinddecodedstring="tnc"/>
+            <decode varbindvalue="14" varbinddecodedstring="st2"/>
+            <decode varbindvalue="15" varbinddecodedstring="st3e"/>
+            <decode varbindvalue="16" varbinddecodedstring="st3"/>
+            <decode varbindvalue="17" varbinddecodedstring="smc"/>
+            <decode varbindvalue="18" varbinddecodedstring="st4"/>
+            <decode varbindvalue="19" varbinddecodedstring="dus"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>7</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventSynceHldovrToLck</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventSynceHldovrToLck</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies SyncE Holdover to Locked EEC state.
+
+             jnxClksyncIfIndex is the SyncE interface index
+             jnxClksyncIntfName is the SyncE interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventSynceHldovrToLck trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>8</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventSynceLckToHldovr</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventSynceLckToHldovr</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies SyncE Locked to Holdover EEC state.
+
+             jnxClksyncIfIndex is the SyncE interface index
+             jnxClksyncIntfName is the SyncE interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventSynceLckToHldovr trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>9</mevalue>
+            </maskelement>
+	    <varbind>
+                <vbnumber>1</vbnumber>
+                <vbvalue>0</vbvalue>
+            </varbind>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventDpllStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventDpllStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that DPLL state change
+             (unknown, lock_acq, locked, holder, freerun).
+
+             jnxClksyncDpllState indicates the Dpll status
+             jnxClksyncDpllStateStr indicates the Dpll status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		unknown(-1)
+		lock-acq(0)
+		locked(1)
+		holder(2)
+		freerun(3)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventDpllStatus trap received
+	jnxClksyncDpllState=%parm[#1]%
+	jnxClksyncDpllStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Critical</severity>
+        <varbindsdecode>
+            <parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="unknown"/>
+            <decode varbindvalue="1" varbinddecodedstring="lock-acq"/>
+            <decode varbindvalue="2" varbinddecodedstring="locked"/>
+            <decode varbindvalue="3" varbinddecodedstring="holdover"/>
+            <decode varbindvalue="4" varbinddecodedstring="freerun"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>9</mevalue>
+            </maskelement>
+	    <varbind>
+                <vbnumber>1</vbnumber>
+                <vbvalue>3</vbvalue>
+            </varbind>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventDpllStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventDpllStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that DPLL state change
+             (unknown, lock_acq, locked, holder, freerun).
+
+             jnxClksyncDpllState indicates the Dpll status
+             jnxClksyncDpllStateStr indicates the Dpll status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		unknown(-1)
+		lock-acq(0)
+		locked(1)
+		holder(2)
+		freerun(3)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventDpllStatus trap received
+	jnxClksyncDpllState=%parm[#1]%
+	jnxClksyncDpllStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Critical</severity>
+        <varbindsdecode>
+            <parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="unknown"/>
+            <decode varbindvalue="1" varbinddecodedstring="lock-acq"/>
+            <decode varbindvalue="2" varbinddecodedstring="locked"/>
+            <decode varbindvalue="3" varbinddecodedstring="holdover"/>
+            <decode varbindvalue="4" varbinddecodedstring="freerun"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>9</mevalue>
+            </maskelement>
+	    <varbind>
+                <vbnumber>1</vbnumber>
+                <vbvalue>4</vbvalue>
+            </varbind>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventDpllStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventDpllStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that DPLL state change
+             (unknown, lock_acq, locked, holder, freerun).
+
+             jnxClksyncDpllState indicates the Dpll status
+             jnxClksyncDpllStateStr indicates the Dpll status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		unknown(-1)
+		lock-acq(0)
+		locked(1)
+		holder(2)
+		freerun(3)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventDpllStatus trap received
+	jnxClksyncDpllState=%parm[#1]%
+	jnxClksyncDpllStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Critical</severity>
+        <varbindsdecode>
+            <parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="unknown"/>
+            <decode varbindvalue="1" varbinddecodedstring="lock-acq"/>
+            <decode varbindvalue="2" varbinddecodedstring="locked"/>
+            <decode varbindvalue="3" varbinddecodedstring="holdover"/>
+            <decode varbindvalue="4" varbinddecodedstring="freerun"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>9</mevalue>
+            </maskelement>
+	    <varbind>
+                <vbnumber>1</vbnumber>
+                <vbvalue>2</vbvalue>
+            </varbind>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/clear/jnxTimingEventDpllStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventDpllStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that DPLL state change
+             (unknown, lock_acq, locked, holder, freerun).
+
+             jnxClksyncDpllState indicates the Dpll status
+             jnxClksyncDpllStateStr indicates the Dpll status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		unknown(-1)
+		lock-acq(0)
+		locked(1)
+		holder(2)
+		freerun(3)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventDpllStatus trap received
+	jnxClksyncDpllState=%parm[#1]%
+	jnxClksyncDpllStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Cleared</severity>
+        <varbindsdecode>
+            <parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="unknown"/>
+            <decode varbindvalue="1" varbinddecodedstring="lock-acq"/>
+            <decode varbindvalue="2" varbinddecodedstring="locked"/>
+            <decode varbindvalue="3" varbinddecodedstring="holdover"/>
+            <decode varbindvalue="4" varbinddecodedstring="freerun"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>10</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventSynceDpllStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventSynceDpllStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that Synce DPLL state change
+             (unknown, lock_acq, locked, holder, freerun).
+
+             jnxClksyncIfIndex is the interface index from which Frequency is derived
+             jnxClksyncIntfName is the interface name from which Frequency is derived
+             jnxClksyncDpllState indicates the Dpll status
+             jnxClksyncDpllStateStr indicates the Dpll status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		unknown(-1)
+		lock-acq(0)
+		locked(1)
+		holder(2)
+		freerun(3)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventSynceDpllStatus trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%
+	jnxClksyncDpllState=%parm[#3]%
+	jnxClksyncDpllStateStr=%parm[#4]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+        <varbindsdecode>
+            <parmid>parm[#3]</parmid>
+            <decode varbindvalue="-1" varbinddecodedstring="unknown"/>
+            <decode varbindvalue="0" varbinddecodedstring="lock-acq"/>
+            <decode varbindvalue="1" varbinddecodedstring="locked"/>
+            <decode varbindvalue="2" varbinddecodedstring="holder"/>
+            <decode varbindvalue="3" varbinddecodedstring="freerun"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>11</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventBitsDpllStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventBitsDpllStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that Synce DPLL state change
+             (unknown, lock_acq, locked, holder, freerun).
+
+             jnxClksyncIfIndex is the interface index from which Frequency is derived
+             jnxClksyncIntfName is the interface name from which Frequency is derived
+             jnxClksyncDpllState indicates the Dpll status
+             jnxClksyncDpllStateStr indicates the Dpll status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		unknown(-1)
+		lock-acq(0)
+		locked(1)
+		holder(2)
+		freerun(3)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncDpllStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#4]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventBitsDpllStatus trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%
+	jnxClksyncDpllState=%parm[#3]%
+	jnxClksyncDpllStateStr=%parm[#4]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+        <varbindsdecode>
+            <parmid>parm[#3]</parmid>
+            <decode varbindvalue="-1" varbinddecodedstring="unknown"/>
+            <decode varbindvalue="0" varbinddecodedstring="lock-acq"/>
+            <decode varbindvalue="1" varbinddecodedstring="locked"/>
+            <decode varbindvalue="2" varbinddecodedstring="holder"/>
+            <decode varbindvalue="3" varbinddecodedstring="freerun"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>12</mevalue>
+            </maskelement>
+            <varbind>
+                <vbnumber>1</vbnumber>
+                <vbvalue>0</vbvalue>
+            </varbind>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventPtpServoStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPtpServoStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that PTP servo state
+             (Init, Acquiring, PhaseAligned, FreeRun, Holdover). 
+
+             jnxPtpServoState indicates the ptp servo status
+             jnxPtpServoStateStr indicates the ptp servo status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		init(0)
+		free-run(1)
+		holdover(2)
+		acquiring(3)
+		freq-locked(4)
+		phase-aligned(5)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPtpServoStatus trap received
+	jnxPtpServoState=%parm[#1]%
+	jnxPtpServoStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Critical</severity>
+        <varbindsdecode>
+            <parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="init"/>
+            <decode varbindvalue="1" varbinddecodedstring="free-run"/>
+            <decode varbindvalue="2" varbinddecodedstring="holdover"/>
+            <decode varbindvalue="3" varbinddecodedstring="acquiring"/>
+            <decode varbindvalue="4" varbinddecodedstring="freq-locked"/>
+            <decode varbindvalue="5" varbinddecodedstring="phase-aligned"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>12</mevalue>
+            </maskelement>
+            <varbind>
+                <vbnumber>1</vbnumber>
+                <vbvalue>1</vbvalue>
+            </varbind>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventPtpServoStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPtpServoStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that PTP servo state
+             (Init, Acquiring, PhaseAligned, FreeRun, Holdover). 
+
+             jnxPtpServoState indicates the ptp servo status
+             jnxPtpServoStateStr indicates the ptp servo status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		init(0)
+		free-run(1)
+		holdover(2)
+		acquiring(3)
+		freq-locked(4)
+		phase-aligned(5)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPtpServoStatus trap received
+	jnxPtpServoState=%parm[#1]%
+	jnxPtpServoStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Critical</severity>
+        <varbindsdecode>
+            <parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="init"/>
+            <decode varbindvalue="1" varbinddecodedstring="free-run"/>
+            <decode varbindvalue="2" varbinddecodedstring="holdover"/>
+            <decode varbindvalue="3" varbinddecodedstring="acquiring"/>
+            <decode varbindvalue="4" varbinddecodedstring="freq-locked"/>
+            <decode varbindvalue="5" varbinddecodedstring="phase-aligned"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>12</mevalue>
+            </maskelement>
+            <varbind>
+                <vbnumber>1</vbnumber>
+                <vbvalue>2</vbvalue>
+            </varbind>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventPtpServoStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPtpServoStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that PTP servo state
+             (Init, Acquiring, PhaseAligned, FreeRun, Holdover). 
+
+             jnxPtpServoState indicates the ptp servo status
+             jnxPtpServoStateStr indicates the ptp servo status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		init(0)
+		free-run(1)
+		holdover(2)
+		acquiring(3)
+		freq-locked(4)
+		phase-aligned(5)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPtpServoStatus trap received
+	jnxPtpServoState=%parm[#1]%
+	jnxPtpServoStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Critical</severity>
+        <varbindsdecode>
+            <parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="init"/>
+            <decode varbindvalue="1" varbinddecodedstring="free-run"/>
+            <decode varbindvalue="2" varbinddecodedstring="holdover"/>
+            <decode varbindvalue="3" varbinddecodedstring="acquiring"/>
+            <decode varbindvalue="4" varbinddecodedstring="freq-locked"/>
+            <decode varbindvalue="5" varbinddecodedstring="phase-aligned"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>12</mevalue>
+            </maskelement>
+            <varbind>
+                <vbnumber>1</vbnumber>
+                <vbvalue>3</vbvalue>
+            </varbind>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventPtpServoStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPtpServoStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that PTP servo state
+             (Init, Acquiring, PhaseAligned, FreeRun, Holdover). 
+
+             jnxPtpServoState indicates the ptp servo status
+	     jnxPtpServoStateStr indicates the ptp servo status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		init(0)
+		free-run(1)
+		holdover(2)
+		acquiring(3)
+		freq-locked(4)
+		phase-aligned(5)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPtpServoStatus trap received
+	jnxPtpServoState=%parm[#1]%
+	jnxPtpServoStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Critical</severity>
+        <varbindsdecode>
+	<parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="init"/>
+            <decode varbindvalue="1" varbinddecodedstring="free-run"/>
+            <decode varbindvalue="2" varbinddecodedstring="holdover"/>
+            <decode varbindvalue="3" varbinddecodedstring="acquiring"/>
+            <decode varbindvalue="4" varbinddecodedstring="freq-locked"/>
+            <decode varbindvalue="5" varbinddecodedstring="phase-aligned"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>12</mevalue>
+            </maskelement>
+            <varbind>
+                <vbnumber>1</vbnumber>
+                <vbvalue>4</vbvalue>
+            </varbind>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/clear/jnxTimingEventPtpServoStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPtpServoStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that PTP servo state
+             (Init, Acquiring, PhaseAligned, FreeRun, Holdover). 
+
+             jnxPtpServoState indicates the ptp servo status
+             jnxPtpServoStateStr indicates the ptp servo status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		init(0)
+		free-run(1)
+		holdover(2)
+		acquiring(3)
+		freq-locked(4)
+		phase-aligned(5)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPtpServoStatus trap received
+	jnxPtpServoState=%parm[#1]%
+	jnxPtpServoStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Cleared</severity>
+        <varbindsdecode>
+            <parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="init"/>
+            <decode varbindvalue="1" varbinddecodedstring="free-run"/>
+            <decode varbindvalue="2" varbinddecodedstring="holdover"/>
+            <decode varbindvalue="3" varbinddecodedstring="acquiring"/>
+            <decode varbindvalue="4" varbinddecodedstring="freq-locked"/>
+            <decode varbindvalue="5" varbinddecodedstring="phase-aligned"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>12</mevalue>
+            </maskelement>
+            <varbind>
+                <vbnumber>1</vbnumber>
+                <vbvalue>5</vbvalue>
+            </varbind>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/clear/jnxTimingEventPtpServoStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPtpServoStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that PTP servo state
+             (Init, Acquiring, PhaseAligned, FreeRun, Holdover). 
+
+             jnxPtpServoState indicates the ptp servo status
+             jnxPtpServoStateStr indicates the ptp servo status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		init(0)
+		free-run(1)
+		holdover(2)
+		acquiring(3)
+		freq-locked(4)
+		phase-aligned(5)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpServoStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPtpServoStatus trap received
+	jnxPtpServoState=%parm[#1]%
+	jnxPtpServoStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Cleared</severity>
+        <varbindsdecode>
+            <parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="init"/>
+            <decode varbindvalue="1" varbinddecodedstring="free-run"/>
+            <decode varbindvalue="2" varbinddecodedstring="holdover"/>
+            <decode varbindvalue="3" varbinddecodedstring="acquiring"/>
+            <decode varbindvalue="4" varbinddecodedstring="freq-locked"/>
+            <decode varbindvalue="5" varbinddecodedstring="phase-aligned"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>13</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventPtpGMClockClassChange</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPtpGMClockClassChange</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies PTP clock class changes.
+
+             jnxPtpGmId indicates the ptp Grand Master clock-id
+             jnxPtpClass indicates the ptp Grand Master clock status.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpGmId&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpClass&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPtpGMClockClassChange trap received
+	jnxPtpGmId=%parm[#1]%
+	jnxPtpClass=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>14</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventPtpGMClockAccuracyChange</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPtpGMClockAccuracyChange</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies PTP clock accuracy changes.
+
+             jnxPtpGmId indicates the ptp Grand Master clock-id
+             jnxPtpAccuracy indicates the ptp Grand Master clock accuracy.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpGmId&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpAccuracy&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPtpGMClockAccuracyChange trap received
+	jnxPtpGmId=%parm[#1]%
+	jnxPtpAccuracy=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>15</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventPtpGMChange</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventPtpGMChange</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies PTP Grand Master changes.
+
+             jnxPtpGmId indicates the ptp Grand Master clock-id.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxPtpGmId&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventPtpGMChange trap received
+	jnxPtpGmId=%parm[#1]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>16</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventHybridStatus</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventHybridStatus</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that Hybrid state
+             (Init, FreqAcq, FreqLckPhaseAcq, FreqPhaseLck). 
+
+             jnxClksyncHybridState indicates the hybrid status
+             jnxClksyncHybridStateStr indicates the hybrid status in string format.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncHybridState&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;
+		init(0)
+		freq-acq(1)
+		freqLck-phaseAcq1(2)
+		freqLck-phaseAcq2(3)
+		freqLck-phaseAcq3(4)
+		freq-phase-lck(5)
+	&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncHybridStateStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventHybridStatus trap received
+	jnxClksyncHybridState=%parm[#1]%
+	jnxClksyncHybridStateStr=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+        <varbindsdecode>
+            <parmid>parm[#1]</parmid>
+            <decode varbindvalue="0" varbinddecodedstring="init"/>
+            <decode varbindvalue="1" varbinddecodedstring="freq-acq"/>
+            <decode varbindvalue="2" varbinddecodedstring="freqLck-phaseAcq1"/>
+            <decode varbindvalue="3" varbinddecodedstring="freqLck-phaseAcq2"/>
+            <decode varbindvalue="4" varbinddecodedstring="freqLck-phaseAcq3"/>
+            <decode varbindvalue="5" varbinddecodedstring="freq-phase-lck"/>
+        </varbindsdecode>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>17</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventSquelchSet</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventSquelchSet</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that interface status changed to squelched.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventSquelchSet trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.1</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>18</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventSquelchClear</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventSquelchClear</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies that interface status changed to active.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventSquelchClear trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+    <event>
+        <mask>
+            <maskelement>
+                <mename>id</mename>
+                <mevalue>.1.3.6.1.4.1.2636.3.75.2</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>generic</mename>
+                <mevalue>6</mevalue>
+            </maskelement>
+            <maskelement>
+                <mename>specific</mename>
+                <mevalue>19</mevalue>
+            </maskelement>
+        </mask>
+        <uei>uei.opennms.org/vendor/Juniper/traps/jnxTimingEventLedColorChange</uei>
+        <event-label>JUNIPER-TIMING-NOTFNS-MIB defined trap event: jnxTimingEventLedColorChange</event-label>
+        <descr>
+&lt;p&gt;A trap which signifies TX SSM/ESMC quality level changed.
+
+             jnxClksyncIfIndex is the interface index
+             jnxClksyncIntfName is the interface name
+             jnxClksyncColorStr is the color of the LED unit.&lt;/p&gt;&lt;table&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIfIndex&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncIntfName&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+	jnxClksyncColorStr&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+	%parm[#3]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	</descr>
+        <logmsg dest="logndisplay">&lt;p&gt;
+	jnxTimingEventLedColorChange trap received
+	jnxClksyncIfIndex=%parm[#1]%
+	jnxClksyncIntfName=%parm[#2]%
+	jnxClksyncColorStr=%parm[#3]%&lt;/p&gt;
+	</logmsg>
+        <severity>Indeterminate</severity>
+    </event>
+</events>
+

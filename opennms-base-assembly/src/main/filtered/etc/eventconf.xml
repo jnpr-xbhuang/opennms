@@ -2120,6 +2120,7 @@
 <event-file>events/JuniperEvents/mib-jnx-sp-nat.xml</event-file>
 <event-file>events/JuniperEvents/mib-jnx-sp.xml</event-file>
 <event-file>events/JuniperEvents/mib-jnx-syslog.xml</event-file>
+<event-file>events/JuniperEvents/mib-jnx-timing.xml</event-file>
 <event-file>events/JuniperEvents/mib-jnx-user-aaa.xml</event-file>
 <event-file>events/JuniperEvents/mib-jnx-virtualchassis.xml</event-file>
 <event-file>events/JuniperEvents/mib-jnx-vpn.xml</event-file>

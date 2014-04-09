@@ -295,6 +295,118 @@ then
           }
 end
 
+rule "TCA PTP component one down"
+          salience 100
+when
+          $e : Event( uei matches ".*jnxTcaTrapMsgFrequencyHoldover" )
+
+then
+          retract( $e );
+          List<NCSComponent> list = correlationService.findComponentsByNodeIdAndAttrParmMaps($e, map("ipAddress", 4));
+          for ( NCSComponent ncs : list ) {
+                  Component c = new Component( ncs );
+                  insert( new ComponentDownEvent( c, $e ) );
+          }
+end
+
+rule "TCA PTP component one up"
+          salience 100
+when
+          $e : Event( uei matches ".*jnxTcaTrapMsgFrequencyHoldoverCleared" )
+
+then
+          retract( $e );
+          List<NCSComponent> list = correlationService.findComponentsByNodeIdAndAttrParmMaps($e, map("ipAddress", 4));
+          for ( NCSComponent ncs : list ) {
+                  Component c = new Component( ncs );
+                  insert( new ComponentUpEvent( c, $e ) );
+          }
+end
+
+rule "TCA PTP component two down"
+          salience 100
+when
+          $e : Event( uei matches ".*jnxTcaTrapMsgFrequencyFreerun" )
+
+then
+          retract( $e );
+          List<NCSComponent> list = correlationService.findComponentsByNodeIdAndAttrParmMaps($e, map("ipAddress", 4));
+          for ( NCSComponent ncs : list ) {
+                  Component c = new Component( ncs );
+                  insert( new ComponentDownEvent( c, $e ) );
+          }
+end
+
+rule "TCA PTP component two up"
+          salience 100
+when
+          $e : Event( uei matches ".*jnxTcaTrapMsgFrequencyFreerunCleared" )
+
+then
+          retract( $e );
+          List<NCSComponent> list = correlationService.findComponentsByNodeIdAndAttrParmMaps($e, map("ipAddress", 4));
+          for ( NCSComponent ncs : list ) {
+                  Component c = new Component( ncs );
+                  insert( new ComponentUpEvent( c, $e ) );
+          }
+end
+
+rule "MX SyncE component down"
+          salience 100
+when
+          $e : Event( uei matches ".*jnxTimingEventDpllStatus" )
+
+then
+          retract( $e );
+          List<NCSComponent> list = correlationService.findComponentsByNodeIdAndAttrParmMaps($e, map("ipAddress", 4));
+          for ( NCSComponent ncs : list ) {
+                  Component c = new Component( ncs );
+                  insert( new ComponentDownEvent( c, $e ) );
+          }
+end
+
+rule "MX SyncE component up"
+          salience 100
+when
+          $e : Event( uei matches ".*jnxTimingEventDpllStatusCleared" )
+
+then
+          retract( $e );
+          List<NCSComponent> list = correlationService.findComponentsByNodeIdAndAttrParmMaps($e, map("ipAddress", 4));
+          for ( NCSComponent ncs : list ) {
+                  Component c = new Component( ncs );
+                  insert( new ComponentUpEvent( c, $e ) );
+          }
+end
+
+rule "MX PTP component down"
+          salience 100
+when
+          $e : Event( uei matches ".*jnxTimingEventPtpServoStatus" )
+
+then
+          retract( $e );
+          List<NCSComponent> list = correlationService.findComponentsByNodeIdAndAttrParmMaps($e, map("ipAddress", 4));
+          for ( NCSComponent ncs : list ) {
+                  Component c = new Component( ncs );
+                  insert( new ComponentDownEvent( c, $e ) );
+          }
+end
+
+rule "MX PTP component up"
+          salience 100
+when
+          $e : Event( uei matches ".*jnxTimingEventPtpServoStatusCleared" )
+
+then
+          retract( $e );
+          List<NCSComponent> list = correlationService.findComponentsByNodeIdAndAttrParmMaps($e, map("ipAddress", 4));
+          for ( NCSComponent ncs : list ) {
+                  Component c = new Component( ncs );
+                  insert( new ComponentUpEvent( c, $e ) );
+          }
+end
+
 function void println(Object msg)
 {
 	System.err.println(new Date() + " : " + msg);
