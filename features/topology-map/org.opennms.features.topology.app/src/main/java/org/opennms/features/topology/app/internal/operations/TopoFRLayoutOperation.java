@@ -1,7 +1,7 @@
 /*******************************************************************************
  * This file is part of OpenNMS(R).
  *
- * Copyright (C) 2006-2012 The OpenNMS Group, Inc.
+ * Copyright (C) 2012 The OpenNMS Group, Inc.
  * OpenNMS(R) is Copyright (C) 1999-2012 The OpenNMS Group, Inc.
  *
  * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
@@ -26,21 +26,25 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.opennms.netmgt.collectd;
+package org.opennms.features.topology.app.internal.operations;
 
-import org.opennms.netmgt.config.collector.CollectionAttribute;
+import org.opennms.features.topology.api.LayoutAlgorithm;
+import org.opennms.features.topology.app.internal.jung.TopoFRLayoutAlgorithm;
 
-/**
- * <p>Abstract AttributeVisitor class.</p>
- *
- * @author ranger
- * @version $Id: $
- */
-public abstract class AttributeVisitor extends AbstractCollectionSetVisitor {
-    
-    /** {@inheritDoc} */
+public class TopoFRLayoutOperation extends LayoutOperation {
+
+    public TopoFRLayoutOperation() {
+        super(new LayoutFactory() {
+
+            private final TopoFRLayoutAlgorithm m_layoutAlgorithm = new TopoFRLayoutAlgorithm();
+
+            @Override
+            public LayoutAlgorithm getLayoutAlgorithm() { return m_layoutAlgorithm; }
+        });
+    }
+
     @Override
-    abstract public void visitAttribute(CollectionAttribute attribute);
-
-
+    public String getId() {
+        return getClass().getSimpleName();
+    }
 }

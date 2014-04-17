@@ -143,13 +143,13 @@ public class EventRestService extends OnmsRestService {
     }
 
     /**
-* Returns all the events which match the filter/query in the query
-* parameters
-*
-* @return Collection of OnmsEvents (ready to be XML-ified)
-* @throws java.text.ParseException
-* if any.
-*/
+     * Returns all the events which match the filter/query in the query
+     * parameters
+     * 
+     * @return Collection of OnmsEventCollection (ready to be XML-ified)
+     * @throws java.text.ParseException
+     *             if any.
+     */
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_ATOM_XML})
     @Transactional
@@ -170,13 +170,13 @@ public class EventRestService extends OnmsRestService {
     }
 
     /**
-* Returns all the events which match the filter/query in the query
-* parameters
-*
-* @return Collection of OnmsEvents (ready to be XML-ified)
-* @throws java.text.ParseException
-* if any.
-*/
+     * Returns all the events which match the filter/query in the query
+     * parameters
+     * 
+     * @return Collection of OnmsEventCollection (ready to be XML-ified)
+     * @throws java.text.ParseException
+     *             if any.
+     */
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_ATOM_XML})
     @Path("between")
