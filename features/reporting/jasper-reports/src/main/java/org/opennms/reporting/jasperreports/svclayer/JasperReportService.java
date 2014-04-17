@@ -218,7 +218,7 @@ public class JasperReportService implements ReportService {
                                 if (defaultValues.containsKey(reportParm.getName()) && (defaultValues.get(reportParm.getName()) != null)) {
                                     stringParm.setValue((String) defaultValues.get(reportParm.getName()));
                                 } else {
-                                    stringParm.setValue(new String());
+                                    stringParm.setValue("");
                                 }
                                 stringParms.add(stringParm);
                                 continue;
@@ -431,7 +431,7 @@ public class JasperReportService implements ReportService {
                     try {
                         if ("jdbc".equalsIgnoreCase(m_globalReportRepository.getEngine(reportId))) {
                             try {
-                                final Connection connection = DataSourceFactory.getDataSource().getConnection();
+                                final Connection connection = DataSourceFactory.getInstance().getConnection();
                                 db.watch(connection);
                                 JasperFillManager.fillReportToFile(jasperReport, outputFileName, reportParms, connection);
                             } finally {
@@ -467,7 +467,7 @@ public class JasperReportService implements ReportService {
 * @return a sub report parameter map as {@link java.util.HashMap<String,Object>} object
 */
     private HashMap<String, Object> buildSubreport(final String mainReportId, final JasperReport mainReport) {
-        String repositoryId = mainReportId.substring(0, mainReportId.indexOf("_"));
+        String repositoryId = mainReportId.substring(0, mainReportId.indexOf('_'));
         HashMap<String, Object> subreportMap = new HashMap<String, Object>();
 
         // Filter parameter for sub reports
@@ -516,7 +516,7 @@ public class JasperReportService implements ReportService {
                     if ("jdbc".equalsIgnoreCase(m_globalReportRepository.getEngine(reportId))) {
                         final DBUtils db = new DBUtils();
                         try {
-                            final Connection connection = DataSourceFactory.getDataSource().getConnection();
+                            final Connection connection = DataSourceFactory.getInstance().getConnection();
                             db.watch(connection);
 
                             final JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, jrReportParms, connection);

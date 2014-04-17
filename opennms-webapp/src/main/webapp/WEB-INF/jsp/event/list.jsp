@@ -91,11 +91,11 @@
             action = AcknowledgeType.UNACKNOWLEDGED.getShortName();
     }
 
-    pageContext.setAttribute("addPositiveFilter", "[+]");
-    pageContext.setAttribute("addNegativeFilter", "[-]");
-    pageContext.setAttribute("addBeforeFilter", "[&gt;]");
-    pageContext.setAttribute("addAfterFilter", "[&lt;]");
-    pageContext.setAttribute("filterFavoriteSelectTagHandler", new FilterFavoriteSelectTagHandler("All Events"));    
+    pageContext.setAttribute("addPositiveFilter", "<i class=\"fa fa-plus-square-o\"></i>");
+    pageContext.setAttribute("addNegativeFilter", "<i class=\"fa fa-minus-square-o\"></i>");
+    pageContext.setAttribute("addBeforeFilter", "<i class=\"fa fa-toggle-right\"></i>");
+    pageContext.setAttribute("addAfterFilter", "<i class=\"fa fa-toggle-left\"></i>");
+    pageContext.setAttribute("filterFavoriteSelectTagHandler", new FilterFavoriteSelectTagHandler("All Events"));
     //Get the purge action status
     String actionStatus = (String) req.getSession().getAttribute("actionStatus");
 
@@ -136,6 +136,9 @@ purgeDataLimit = 100000;
   <jsp:param name="breadcrumb" value="List" />
 </jsp:include>
 <script type="text/javascript" src="<c:url value="/js/jquery/jquery.js"/>"></script>
+
+<link rel="stylesheet" href="css/font-awesome-4.0.3/css/font-awesome.min.css">
+
   <script type="text/javascript">
     function checkAllCheckboxes() {
        if( document.acknowledge_form.event.length ) {

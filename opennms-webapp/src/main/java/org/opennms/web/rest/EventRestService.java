@@ -48,6 +48,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.opennms.core.criteria.Alias.JoinType;
 import org.opennms.core.criteria.CriteriaBuilder;
 import org.opennms.netmgt.dao.api.EventDao;
 import org.opennms.netmgt.model.OnmsEvent;
@@ -156,8 +157,7 @@ public class EventRestService extends OnmsRestService {
         readLock();
 
         try {
-            final CriteriaBuilder builder = new CriteriaBuilder(OnmsEvent.class);
-            applyQueryFilters(m_uriInfo.getQueryParameters(), builder);
+            final CriteriaBuilder builder = getCriteriaBuilder(m_uriInfo.getQueryParameters());
             builder.orderBy("eventTime").asc();
 
             final OnmsEventCollection coll = new OnmsEventCollection(m_eventDao.findMatching(builder.toCriteria()));
@@ -185,7 +185,6 @@ public class EventRestService extends OnmsRestService {
         readLock();
 
         try {
-            final CriteriaBuilder builder = new CriteriaBuilder(OnmsEvent.class);
             final MultivaluedMap<String, String> params = m_uriInfo.getQueryParameters();
 
             final String column;
@@ -218,7 +217,7 @@ public class EventRestService extends OnmsRestService {
                 end = new Date();
             }
 
-            applyQueryFilters(params, builder);
+            final CriteriaBuilder builder = getCriteriaBuilder(params);
             builder.match("all");
             try {
                 builder.between(column, begin, end);
@@ -285,8 +284,7 @@ public class EventRestService extends OnmsRestService {
                 formProperties.remove("ack");
             }
 
-            final CriteriaBuilder builder = new CriteriaBuilder(OnmsEvent.class);
-            applyQueryFilters(formProperties, builder);
+            final CriteriaBuilder builder = getCriteriaBuilder(formProperties);
             builder.orderBy("eventTime").desc();
 
             for (final OnmsEvent event : m_eventDao.findMatching(builder.toCriteria())) {
@@ -494,5 +492,16 @@ public class EventRestService extends OnmsRestService {
 			writeUnlock();
 		}
 	}
+    private CriteriaBuilder getCriteriaBuilder(final MultivaluedMap<String, String> params) {
+        final CriteriaBuilder builder = new CriteriaBuilder(OnmsEvent.class);
+        builder.alias("node", "node", JoinType.LEFT_JOIN);
+        builder.alias("node.snmpInterfaces", "snmpInterface", JoinType.LEFT_JOIN);
+        builder.alias("node.ipInterfaces", "ipInterface", JoinType.LEFT_JOIN);
+        builder.alias("serviceType", "serviceType", JoinType.LEFT_JOIN);
+
+        applyQueryFilters(params, builder);
+        return builder;
+    }
+
 }
 

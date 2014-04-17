@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
-import org.opennms.features.topology.api.topo.AbstractVertexRef;
+import org.opennms.features.topology.api.topo.DefaultVertexRef;
 import org.opennms.features.topology.api.topo.Criteria;
 import org.opennms.features.topology.api.topo.Edge;
 import org.opennms.features.topology.api.topo.EdgeListener;
@@ -64,7 +64,6 @@ public class MergingGraphProvider implements GraphProvider, VertexListener, Edge
 	/**
 	 * This object relays registration events to update the lists of vertex and edge providers.
 	 */
-	private final ProviderManager m_providerManager;
 	private final Map<String, VertexProvider> m_vertexProviders = new HashMap<String, VertexProvider>();
 	private final Map<String, EdgeProvider> m_edgeProviders = new HashMap<String, EdgeProvider>();
 	private final Set<VertexListener> m_vertexListeners = new CopyOnWriteArraySet<VertexListener>();
@@ -72,17 +71,16 @@ public class MergingGraphProvider implements GraphProvider, VertexListener, Edge
 	
 	public MergingGraphProvider(GraphProvider baseGraphProvider, ProviderManager providerManager) {
 		m_baseGraphProvider = baseGraphProvider;
-		m_providerManager = providerManager;
-		
-		for(VertexProvider vertexProvider : m_providerManager.getVertexListeners()) {
+
+		for(VertexProvider vertexProvider : providerManager.getVertexListeners()) {
 			addVertexProvider(vertexProvider);
 		}
 		
-		for(EdgeProvider edgeProvider : m_providerManager.getEdgeListeners()) {
+		for(EdgeProvider edgeProvider : providerManager.getEdgeListeners()) {
 			addEdgeProvider(edgeProvider);
 		}
 		
-		m_providerManager.addProviderListener(this);
+		providerManager.addProviderListener(this);
 	}
 	
 	@Override
@@ -478,16 +476,21 @@ public class MergingGraphProvider implements GraphProvider, VertexListener, Edge
 		}
 	}
 
-	/**
+    @Override
+    public int getVertexTotalCount() {
+        return m_baseGraphProvider.getVertexTotalCount();
+    }
+
+    /**
 	 * @deprecated Use {@link #containsVertexId(VertexRef id)} instead.
 	 */
 	@Override
 	public boolean containsVertexId(String id) {
-		if (containsVertexId(new AbstractVertexRef(getVertexNamespace(), id))) {
+		if (containsVertexId(new DefaultVertexRef(getVertexNamespace(), id))) {
 			return true;
 		}
 		for (VertexProvider provider : m_vertexProviders.values()) {
-			if (containsVertexId(new AbstractVertexRef(provider.getVertexNamespace(), id))) {
+			if (containsVertexId(new DefaultVertexRef(provider.getVertexNamespace(), id))) {
 				return true;
 			}
 		}
@@ -668,7 +671,12 @@ public class MergingGraphProvider implements GraphProvider, VertexListener, Edge
 			// Do nothing
 		}
 
-		@Override
+        @Override
+        public int getVertexTotalCount() {
+            return 0;
+        }
+
+        @Override
 		public boolean setParent(VertexRef child, VertexRef parent) {
 			return false;
 		}

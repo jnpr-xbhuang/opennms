@@ -39,7 +39,7 @@ import java.util.Set;
 import org.opennms.features.topology.api.HasExtraComponents;
 import org.opennms.features.topology.api.VerticesUpdateManager;
 import org.opennms.features.topology.api.VerticesUpdateManager.VerticesUpdateEvent;
-import org.opennms.features.topology.api.topo.AbstractVertexRef;
+import org.opennms.features.topology.api.topo.DefaultVertexRef;
 import org.opennms.features.topology.api.topo.VertexRef;
 import org.opennms.features.topology.plugins.browsers.AlarmTable;
 import org.opennms.features.topology.plugins.browsers.NodeTable;
@@ -143,11 +143,6 @@ public class NodeMapsApplication extends UI {
 
     public void setHeaderHtml(final String headerHtml) {
         m_headerHtml = headerHtml;
-
-        /**
-         * Added some magic to hide search controls and header if displayed inside an iframe
-         */
-        m_headerHtml += "<script type='text/javascript'>if (window.location != window.parent.location) { document.getElementById('header').style.display = 'none'; var style = document.createElement(\"style\"); style.type = 'text/css'; style.innerHTML = '.leaflet-control-container { display: none; }'; document.body.appendChild(style); }</script>";
     }
 
     public void setAlarmTable(final AlarmTable table) {
@@ -360,7 +355,7 @@ public class NodeMapsApplication extends UI {
 
                 final Set<VertexRef> nodeSet = new HashSet<VertexRef>();
                 for (final Integer nodeId : nodeIds) {
-                    nodeSet.add(new AbstractVertexRef("nodes", nodeId.toString(), null));
+                    nodeSet.add(new DefaultVertexRef("nodes", nodeId.toString(), null));
                 }
 
                 listener.verticesUpdated(new VerticesUpdateEvent(nodeSet));

@@ -226,7 +226,6 @@ public class AvailabilityReportService implements ReportService {
 
                     LOG.debug("set availability calculator report category to: {}", calculator.getCategoryName());
 
-                    calculator.setCalendar(new GregorianCalendar());
                     calculator.setPeriodEndDate((Date) reportParms.get("endDate"));
 
                     LOG.debug("set availability calculator end date to: {}", calculator.getPeriodEndDate());
@@ -286,7 +285,6 @@ public class AvailabilityReportService implements ReportService {
                     LOG.debug("set availability calculator report category to: {}", calculator.getCategoryName());
     
     
-                    calculator.setCalendar(new GregorianCalendar());
                     calculator.setPeriodEndDate((Date) reportParms.get("endDate"));
     
                     LOG.debug("set availability calculator end date to: {}", calculator.getPeriodEndDate());

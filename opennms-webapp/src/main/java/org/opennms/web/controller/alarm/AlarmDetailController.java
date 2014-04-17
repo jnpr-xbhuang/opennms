@@ -30,6 +30,7 @@ package org.opennms.web.controller.alarm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -49,6 +50,7 @@ import org.opennms.web.event.SortStyle;
 import org.opennms.web.event.WebEventRepository;
 import org.opennms.web.event.filter.EventCriteria;
 import org.opennms.web.filter.Filter;
+import org.opennms.web.alarm.AlarmIdNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -65,8 +67,6 @@ import org.springframework.web.servlet.view.RedirectView;
  * @author Ronny Trommer <ronny@opennms.org>
  */
 public class AlarmDetailController extends MultiActionController {
-	
-
 
 	/** Constant <code>DEFAULT_MULTIPLE=0</code> */
 	public static final int DEFAULT_MULTIPLE = 0;
@@ -399,7 +399,7 @@ public class AlarmDetailController extends MultiActionController {
 		}
 
 		return mv;
-	}
+    }
 
     public ModelAndView removeStickyMemo(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         int alarmId;

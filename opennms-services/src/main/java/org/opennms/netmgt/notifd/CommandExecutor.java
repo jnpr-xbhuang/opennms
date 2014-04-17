@@ -34,7 +34,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.opennms.core.utils.Argument;
+import org.opennms.netmgt.model.notifd.Argument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -96,7 +96,7 @@ public class CommandExecutor implements ExecutorStrategy {
 
         try {
             // set up the process
-            String commandArray[] = new String[commandList.size()];
+            String[] commandArray = new String[commandList.size()];
             commandArray = commandList.toArray(commandArray);
             if (LOG.isDebugEnabled()) {
                 StringBuffer list = new StringBuffer();

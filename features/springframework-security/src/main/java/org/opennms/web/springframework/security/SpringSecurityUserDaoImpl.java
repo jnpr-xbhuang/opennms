@@ -38,13 +38,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
-import org.exolab.castor.xml.MarshalException;
-import org.exolab.castor.xml.ValidationException;
 import org.opennms.core.utils.BundleLists;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.opennms.netmgt.config.GroupFactory;
 import org.opennms.netmgt.config.GroupManager;
 import org.opennms.netmgt.config.UserFactory;
@@ -52,6 +49,8 @@ import org.opennms.netmgt.config.UserManager;
 import org.opennms.netmgt.config.groups.Role;
 import org.opennms.netmgt.model.OnmsUser;
 import org.opennms.web.api.Authentication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.security.core.GrantedAuthority;
@@ -84,8 +83,6 @@ public class SpringSecurityUserDaoImpl implements SpringSecurityUserDao, Initial
     private Map<String, OnmsUser> m_users = null;
     
     private long m_usersLastModified;
-
-    private long m_userFileSize;
 
     private String m_magicUsersConfigurationFile;
 	
@@ -129,7 +126,6 @@ public class SpringSecurityUserDaoImpl implements SpringSecurityUserDao, Initial
         LOG.debug("Loaded the users.xml file with {} users", users.size());
 
         m_usersLastModified = m_userManager.getLastModified();
-        m_userFileSize = m_userManager.getFileSize();
         m_users = users;
     }
     
@@ -251,8 +247,8 @@ public class SpringSecurityUserDaoImpl implements SpringSecurityUserDao, Initial
             roleAddDefaultMap.put(securityRole, !notInDefaultGroup);
         }
 
-        for (String user : roleMap.keySet()) {
-            roles.put(user, getAuthorityListFromRoleList(roleMap.get(user), roleAddDefaultMap));
+        for (final Entry<String, LinkedList<String>> entry : roleMap.entrySet()) {
+            roles.put(entry.getKey(), getAuthorityListFromRoleList(entry.getValue(), roleAddDefaultMap));
         }
         
         LOG.debug("Loaded the magic-users.properties file with {} magic users, {} roles, and {} user roles", magicUsers.size(), configuredRoles.length, roles.size());

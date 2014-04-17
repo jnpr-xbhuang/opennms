@@ -34,12 +34,12 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.opennms.core.db.DataSourceFactory;
-import org.opennms.core.utils.Argument;
 import org.opennms.netmgt.EventConstants;
 import org.opennms.netmgt.config.DefaultEventConfDao;
 import org.opennms.netmgt.eventd.EventIpcManagerFactory;
 import org.opennms.netmgt.model.events.EventBuilder;
 import org.opennms.netmgt.model.events.EventIpcManager;
+import org.opennms.netmgt.model.notifd.Argument;
 import org.opennms.netmgt.model.notifd.NotificationStrategy;
 import org.opennms.netmgt.xml.eventconf.AlarmData;
 import org.opennms.netmgt.xml.eventconf.Event;
@@ -59,7 +59,6 @@ public class TicketNotificationStrategy implements NotificationStrategy {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TicketNotificationStrategy.class);
 	private EventIpcManager m_eventManager;
-	private List<Argument> m_arguments;
 	private DefaultEventConfDao m_eventConfDao;
 	
 	enum AlarmType {
@@ -123,10 +122,8 @@ public class TicketNotificationStrategy implements NotificationStrategy {
         String eventUEI = null;
         String noticeID = null;
         
-        m_arguments = arguments;
-        
         // Pull the arguments we're interested in from the list.
-        for (Argument arg : m_arguments) {
+        for (Argument arg : arguments) {
 		LOG.debug("arguments: {} = {}", arg.getSwitch(), arg.getValue());
         	
             if ("eventID".equalsIgnoreCase(arg.getSwitch())) {

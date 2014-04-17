@@ -45,8 +45,6 @@ public class NegativeNodeFilter extends NotEqualOrNullFilter<Integer> {
     /** Constant <code>TYPE="nodenot"</code> */
     public static final String TYPE = "nodenot";
 
-    protected int nodeId;
-
     private ServletContext m_servletContext;
 
     /**
@@ -97,6 +95,8 @@ public class NegativeNodeFilter extends NotEqualOrNullFilter<Integer> {
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof NegativeNodeFilter)) return false;
         return (this.toString().equals(obj.toString()));
     }
 }

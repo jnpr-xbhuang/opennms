@@ -38,6 +38,8 @@
 <%@page import="org.opennms.netmgt.config.*"%>
 <%@page import="org.opennms.netmgt.config.users.*"%>
 <%@page import="org.opennms.web.api.Util" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%
 
         final HttpSession userSession = request.getSession(false);
@@ -55,9 +57,8 @@
             user = (User) userSession.getAttribute("user.modifyUser.jsp");
             userid = user.getUserId();
         }
-
-        final String baseHref = Util.calculateUrlBase(request);
-        %>
+%>
+<c:set var="baseHref" value="<%=Util.calculateUrlBase(request)%>"/>
 
 <jsp:include page="/includes/header.jsp" flush="false" >
   <jsp:param name="title" value="Modify User" />
@@ -232,7 +233,6 @@
             } else {
                     Contact[] contact = user.getContact();
                     for (int i = 0; i < contact.length; i++) {
-                            Contact tempContact = contact[i];
                             if (contact[i].getType().equals("email")) {
                                     email = contact[i].getInfo();
                             } else if (contact[i].getType().equals("pagerEmail")) {
@@ -453,11 +453,11 @@
   <b>Duty Schedules</b>
 </p>
                                   <%
-Collection dutySchedules = user.getDutyScheduleCollection();
+Collection<String> dutySchedules = user.getDutyScheduleCollection();
         %>
 				<input type="hidden" name="dutySchedules" value="<%=user.getDutyScheduleCount()%>"/>
           
-          <table width="100%" border="1" cellspacing="0" cellpadding="2" >
+          <table width="100%" border="1">
             <tr bgcolor="#999999">
               <td>&nbsp;</td>
               <td><b>Delete</b></td>
@@ -472,11 +472,10 @@ Collection dutySchedules = user.getDutyScheduleCollection();
               <td><b>End Time</b></td>
             </tr>
                         <%
-int i = 0;
-        Iterator iter = dutySchedules.iterator();
-        while (iter.hasNext()) {
-            DutySchedule tmp = new DutySchedule((String) iter.next());
-            Vector curSched = tmp.getAsVector();
+        int i = 0;
+        for (String dutySchedule : dutySchedules) {
+            DutySchedule tmp = new DutySchedule(dutySchedule);
+            Vector<Object> curSched = tmp.getAsVector();
 
             %>
                         <tr>

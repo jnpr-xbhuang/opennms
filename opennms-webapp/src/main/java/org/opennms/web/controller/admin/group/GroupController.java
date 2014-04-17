@@ -44,7 +44,7 @@ import javax.servlet.http.HttpSession;
 
 import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.ValidationException;
-import org.opennms.core.utils.BeanUtils;
+import org.opennms.core.spring.BeanUtils;
 import org.opennms.core.utils.WebSecurityUtils;
 import org.opennms.netmgt.config.UserManager;
 import org.opennms.netmgt.config.users.DutySchedule;
@@ -282,7 +282,7 @@ public class GroupController extends AbstractController implements InitializingB
         if (!defaultMap.equals(""))
             newGroup.setDefaultMap(defaultMap);
         
-        String users[] = request.getParameterValues("selectedUsers");
+        String[] users = request.getParameterValues("selectedUsers");
         
         List<String> userList = users == null ? Collections.<String>emptyList() : Arrays.asList(users);
         

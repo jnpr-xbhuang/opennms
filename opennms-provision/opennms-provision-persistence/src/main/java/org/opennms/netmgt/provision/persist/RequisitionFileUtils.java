@@ -31,6 +31,7 @@ package org.opennms.netmgt.provision.persist;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -130,7 +131,12 @@ public class RequisitionFileUtils {
         }
 
         if (url != null) {
-            final String sourceFileName = url.getFile();
+            String sourceFileName = null;
+            try {
+                sourceFileName = URLDecoder.decode(url.getFile(), "utf-8");
+            } catch (final java.io.UnsupportedEncodingException e) {
+                LOG.warn("Failed to decode URL {} as a file.", url.getFile(), e);
+            }
             if (sourceFileName != null) {
                 final File sourceFile = new File(sourceFileName);
                 final File sourceDirectory = sourceFile.getParentFile();
@@ -201,7 +207,7 @@ public class RequisitionFileUtils {
     /** return true if the snapshot file is newer than the supplied date **/
     public static boolean isNewer(final File snapshotFile, final Date date) {
         final String name = snapshotFile.getName();
-        final String timestamp = name.substring(name.lastIndexOf(".") + 1);
+        final String timestamp = name.substring(name.lastIndexOf('.') + 1);
         final Date snapshotDate = new Date(Long.valueOf(timestamp));
         final boolean isNewer = snapshotDate.after(date);
         LOG.trace("snapshot date = {}, comparison date = {}, snapshot date {} newer than comparison date", snapshotDate.getTime(), date.getTime(), (isNewer? "is" : "is not"));

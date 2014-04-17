@@ -36,7 +36,9 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
+
 import javax.management.MBeanServerConnection;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXServiceURL;
@@ -109,8 +111,6 @@ public class Starter {
     @Option(name = "-url", usage = "JMX URL Usage: <hostname>:<port> OR service:jmx:<protocol>:<sap> OR service:jmx:remoting-jmx://<hostname>:<port>")
     private String url;
 	
-    private Map<String, String> dictionary = new HashMap<String, String>();
-
     public static void main(String[] args) throws IOException {
         new Starter().doMain(args);
     }
@@ -129,7 +129,7 @@ public class Starter {
                 throw new CmdLineException(parser, "set jmx or graph.");
             }
 
-            dictionary = loadInternalDictionary();
+            Map<String, String> dictionary = loadInternalDictionary();
             if (dictionaryFile != null) {
                 dictionary = loadExternalDictionary(dictionaryFile);
             }
@@ -210,8 +210,10 @@ public class Starter {
             logger.error("Load dictionary entries from internal properties files error: '{}'", ex.getMessage());
         }
         logger.info("Loaded '{}' internal dictionary entries", properties.size());
-        for (Object key : properties.keySet()) {
-            internalDictionary.put(key.toString(), properties.get(key).toString());
+        for (final Entry<?,?> entry : properties.entrySet()) {
+            final Object key = entry.getKey();
+            final Object value = entry.getValue();
+            internalDictionary.put(key.toString(), value == null? null : value.toString());
         }
         logger.info("Dictionary entries loaded: '{}'", internalDictionary.size());
         return internalDictionary;
@@ -230,8 +232,10 @@ public class Starter {
             logger.error("'{}'", ex.getMessage());
         }
         logger.info("Loaded '{}' external dictionary entries from '{}'", properties.size(), dictionaryFile);
-        for (Object key : properties.keySet()) {
-            externalDictionary.put(key.toString(), properties.get(key).toString());
+        for (final Entry<?,?> entry : properties.entrySet()) {
+            final Object key = entry.getKey();
+            final Object value = entry.getValue();
+            externalDictionary.put(key.toString(), value == null? null : value.toString());
         }
         logger.info("Dictionary entries loaded: '{}'", externalDictionary.size());
         return externalDictionary;

@@ -48,10 +48,10 @@ import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.opennms.core.spring.BeanUtils;
 import org.opennms.core.test.MockLogAppender;
 import org.opennms.core.test.OpenNMSJUnit4ClassRunner;
 import org.opennms.core.test.db.annotations.JUnitTemporaryDatabase;
-import org.opennms.core.utils.BeanUtils;
 import org.opennms.core.utils.InetAddressUtils;
 import org.opennms.netmgt.dao.api.DistPollerDao;
 import org.opennms.netmgt.dao.api.LocationMonitorDao;
@@ -88,7 +88,10 @@ import org.springframework.transaction.annotation.Transactional;
         "classpath:/META-INF/opennms/applicationContext-minimal-conf.xml",
         "classpath:/org/opennms/netmgt/poller/remote/applicationContext-configOverride.xml"
 })
-@JUnitConfigurationEnvironment
+@JUnitConfigurationEnvironment(systemProperties={
+    "opennms.pollerBackend.monitorCheckInterval=500",
+    "opennms.pollerBackend.disconnectedTimeout=3000"
+})
 @JUnitTemporaryDatabase
 public class PollerBackEndIntegrationTest implements InitializingBean {
     

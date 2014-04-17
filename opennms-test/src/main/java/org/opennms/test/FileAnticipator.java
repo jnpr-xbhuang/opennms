@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import junit.framework.AssertionFailedError;
 
 import org.apache.commons.io.FileUtils;
@@ -92,10 +92,12 @@ public class FileAnticipator extends Assert {
         }
     }
     
-    /** {@inheritDoc} */
+    /** {@inheritDoc} 
+     * @throws Throwable */
     @Override
-    protected void finalize() {
+    protected void finalize() throws Throwable {
         tearDown();
+        super.finalize();
     }
 
     /**

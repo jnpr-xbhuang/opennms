@@ -30,6 +30,7 @@ package org.opennms.netmgt.mock;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -43,7 +44,7 @@ import org.opennms.netmgt.model.RrdRepository;
 
 public class MockDataCollectionConfig implements DataCollectionConfigDao {
     
-    public static final String initalMibObjects[][] = {
+    public static final String[][] initalMibObjects = {
         {
             "sysLocation", ".1.3.6.1.2.1.1.6", "0", "string"
         },
@@ -231,6 +232,10 @@ public class MockDataCollectionConfig implements DataCollectionConfigDao {
     }
 
     public void reload() {
+    }
+
+    public Date getLastUpdate() {
+        return null;
     }
 
 }

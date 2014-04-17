@@ -7,13 +7,13 @@
 		<relativePath>../../poms/compiled/</relativePath>
 		<groupId>org.opennms.features.topology.build</groupId>
 		<artifactId>compiled-bundle-settings</artifactId>
-		<version>1.13.0-SNAPSHOT</version>
+		<version>1.13.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.opennms.features.topology</groupId>
 	<artifactId>netutils</artifactId>
 	<packaging>${packaging.type}</packaging>
-	<name>OpenNMS Topology NetUtils</name>
+	<name>OpenNMS Features Topology NetUtils</name>
 
 	<properties>
 		<packaging.type>bundle</packaging.type>

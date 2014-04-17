@@ -61,7 +61,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.Jsoup;
 
-import org.opennms.core.utils.BeanUtils;
+import org.opennms.core.spring.BeanUtils;
 import org.opennms.netmgt.collectd.CollectionAgent;
 import org.opennms.netmgt.collectd.PersistAllSelectorStrategy;
 import org.opennms.netmgt.config.DataCollectionConfigFactory;
@@ -248,7 +248,7 @@ public abstract class AbstractXmlCollectionHandler implements XmlCollectionHandl
      */
     protected XmlCollectionResource getCollectionResource(CollectionAgent agent, String instance, String resourceType, Date timestamp) {
         XmlCollectionResource resource = null;
-        if (resourceType.toLowerCase().equals("node")) {
+        if (resourceType.equalsIgnoreCase("node")) {
             resource = new XmlSingleInstanceCollectionResource(agent);
         } else {
             XmlResourceType type = getXmlResourceType(agent, resourceType);

@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -67,9 +68,6 @@ import org.springframework.core.io.Resource;
  *
  * @author <A HREF="mailto:mike@opennms.org">Mike Jamison </A>
  * @author <A HREF="http://www.opennms.org/">OpenNMS </A>
- * @author <A HREF="mailto:mike@opennms.org">Mike Jamison </A>
- * @author <A HREF="http://www.opennms.org/">OpenNMS </A>
- * @version $Id: $
  */
 public final class JMXDataCollectionConfigFactory {
     private static final Logger LOG = LoggerFactory.getLogger(JMXDataCollectionConfigFactory.class);
@@ -88,11 +86,6 @@ public final class JMXDataCollectionConfigFactory {
      * This member is set to true if the configuration file has been loaded.
      */
     private static boolean m_loaded = false;
-
-    /**
-     * Map of group maps indexed by SNMP collection name.
-     */
-    private Map<String, Map<String, Mbean>> m_collectionGroupMap;
 
     /**
      * Map of JmxCollection objects indexed by data collection name
@@ -148,7 +141,10 @@ public final class JMXDataCollectionConfigFactory {
         // faster processing at run-time.
         // 
         m_collectionMap = new HashMap<String, JmxCollection>();
-        m_collectionGroupMap = new HashMap<String, Map<String, Mbean>>();
+
+        // Map of group maps indexed by SNMP collection name.
+        // TODO: This appears to be unused
+        Map<String, Map<String, Mbean>> collectionGroupMap = new HashMap<String, Map<String, Mbean>>();
         
         // BOZO isn't the collection name defined in the jmx-datacollection.xml file and
         // global to all the mbeans?
@@ -168,7 +164,7 @@ public final class JMXDataCollectionConfigFactory {
                 groupMap.put(mbean.getName(), mbean);
             }
 
-            m_collectionGroupMap.put(collection.getName(), groupMap);
+            collectionGroupMap.put(collection.getName(), groupMap);
             m_collectionMap.put(collection.getName(), collection);
         }
     }
@@ -276,12 +272,9 @@ public final class JMXDataCollectionConfigFactory {
         
         Enumeration<Mbean> en = beans.enumerateMbean();
         while (en.hasMoreElements()) {
-            List<Attrib> list = new ArrayList<Attrib>();
             Mbean mbean = en.nextElement();
-            Attrib[] attributes = mbean.getAttrib();
-            for (int i = 0; i < attributes.length; i++) {
-                list.add(attributes[i]);
-            }
+            // Make sure to create a new ArrayList because we add to it below
+            List<Attrib> list = new ArrayList<Attrib>(Arrays.asList(mbean.getAttrib()));
             
             CompAttrib[] compAttributes = mbean.getCompAttrib();
             for (int i = 0; i < compAttributes.length; i++) {

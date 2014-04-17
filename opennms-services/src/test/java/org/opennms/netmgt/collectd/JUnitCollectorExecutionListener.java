@@ -62,19 +62,13 @@ public class JUnitCollectorExecutionListener extends AbstractTestExecutionListen
 
     @Override
     public void beforeTestMethod(TestContext testContext) throws Exception {
+        m_fileAnticipator = new FileAnticipator();
+
         JUnitCollector config = findCollectorAnnotation(testContext);
         if (config == null) {
             return;
         }
 
-        // FIXME: Is there a better way to inject the instance into the test class?
-        if (testContext.getTestInstance() instanceof TestContextAware) {
-            System.err.println("injecting TestContext into TestContextAware test: "
-                            + testContext.getTestInstance().getClass().getSimpleName() + "."
-                            + testContext.getTestMethod().getName());
-            ((TestContextAware) testContext.getTestInstance()).setTestContext(testContext);
-        }
-        
         RrdUtils.setStrategy(new JRobinRrdStrategy());
 
         // make a fake database schema with hibernate
@@ -83,7 +77,6 @@ public class JUnitCollectorExecutionListener extends AbstractTestExecutionListen
         is.close();
 
         // set up temporary directories for RRD files
-        m_fileAnticipator = new FileAnticipator();
         m_snmpRrdDirectory = m_fileAnticipator.tempDir("snmp");
         m_snmpRrdDirectory.mkdirs();
         testContext.setAttribute("fileAnticipator", m_fileAnticipator);

@@ -78,7 +78,7 @@ public class MenuHeaderTest extends OpenNMSSeleniumTestCase {
             waitForText("OpenNMS Dashboards");
 
             clickAndWait("//div[@id='content']//a[@href='vaadin-wallboard']");
-            waitForElement("//span[@class='v-button-caption' and text() = 'Wallboard']");
+            waitForElement("//span[@class='v-button-caption' and text() = 'Ops Board']");
         } else if (selenium.isElementPresent("//a[@href='dashboard.jsp']")) {
             // old style dashboard menu
             clickAndWait("//a[@href='dashboard.jsp']");
@@ -127,7 +127,7 @@ public class MenuHeaderTest extends OpenNMSSeleniumTestCase {
     @Test
     public void testDistributedStatusLink() {
         clickAndWait("link=Distributed Status");
-        assertTrue(selenium.isTextPresent("Distributed Poller Status Summary") || selenium.isTextPresent("No applications have been defined for this system"));
+        assertTrue(selenium.isTextPresent("Distributed Status Summary") || selenium.isTextPresent("No applications have been defined for this system"));
     }
 
     private void goToMapsPage() throws Exception {

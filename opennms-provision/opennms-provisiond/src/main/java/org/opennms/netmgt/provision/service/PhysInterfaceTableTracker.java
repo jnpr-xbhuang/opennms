@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  */
 public class PhysInterfaceTableTracker extends TableTracker {
     private static final Logger LOG = LoggerFactory.getLogger(PhysInterfaceTableTracker.class);
-    
+ 
     /** Constant <code>IF_TABLE_ENTRY</code> */
     public static final SnmpObjId IF_TABLE_ENTRY = SnmpObjId.get(".1.3.6.1.2.1.2.2.1");
     /** Constant <code>IF_INDEX</code> */
@@ -148,7 +148,20 @@ public class PhysInterfaceTableTracker extends TableTracker {
         
         private Long getSpeed() {
             final Long highSpeed = getIfHighSpeed();
-            return (highSpeed != null && highSpeed > 4294) ? (highSpeed*1000000L) : getIfSpeed();
+            final Long ifSpeed = getIfSpeed();
+            if (highSpeed != null && highSpeed > 4294L) {
+                return highSpeed * 1000000L;
+            }
+            if (ifSpeed == null) {
+                if (highSpeed != null && highSpeed > 0) {
+                    LOG.warn("the ifSpeed for ifIndex {} is null, which is a violation of the standard (this seems to be related to a broken SNMP agent). But, the ifHighSpeed is {}, so that value will be used instead.", getIfIndex(), highSpeed);
+                    return highSpeed * 1000000L;
+                } else {
+                    LOG.warn("the ifSpeed for ifIndex {} is null, which is a violation of the standard (this seems to be related to a broken SNMP agent). Returning 0 instead", getIfIndex());
+                    return 0L;
+                }
+            }
+            return ifSpeed;
         }
 
         private Integer getIfOperStatus() {

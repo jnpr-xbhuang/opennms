@@ -35,11 +35,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.opennms.core.spring.BeanUtils;
 import org.opennms.core.test.OpenNMSJUnit4ClassRunner;
 import org.opennms.core.test.db.TemporaryDatabase;
 import org.opennms.core.test.db.TemporaryDatabaseAware;
 import org.opennms.core.test.db.annotations.JUnitTemporaryDatabase;
-import org.opennms.core.utils.BeanUtils;
 import org.opennms.netmgt.dao.DatabasePopulator;
 import org.opennms.test.FileAnticipator;
 import org.opennms.test.JUnitConfigurationEnvironment;
@@ -64,7 +64,10 @@ import org.springframework.transaction.annotation.Transactional;
         "classpath*:/META-INF/opennms/applicationContext-minimal-conf.xml",
         "classpath:/org/opennms/netmgt/poller/remote/applicationContext-configOverride.xml"
 })
-@JUnitConfigurationEnvironment
+@JUnitConfigurationEnvironment(systemProperties={
+    "opennms.pollerBackend.monitorCheckInterval=500",
+    "opennms.pollerBackend.disconnectedTimeout=3000"
+})
 @JUnitTemporaryDatabase
 public class PollerFrontEndIntegrationTest implements InitializingBean, TemporaryDatabaseAware<TemporaryDatabase> {
     private static final Logger LOG = LoggerFactory.getLogger(PollerFrontEndIntegrationTest.class);

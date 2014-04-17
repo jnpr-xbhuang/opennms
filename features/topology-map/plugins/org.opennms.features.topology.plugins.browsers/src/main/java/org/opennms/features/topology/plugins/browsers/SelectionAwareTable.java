@@ -50,7 +50,7 @@ public class SelectionAwareTable extends Table implements VerticesUpdateManager.
 	private final OnmsDaoContainer<?,? extends Serializable> m_container;
 	private final Set<SelectionNotifier> m_selectionNotifiers = new CopyOnWriteArraySet<SelectionNotifier>();
 	private List<String> nonCollapsibleColumns = new ArrayList<String>();
-    private EventProxy eventProxy;
+	private EventProxy eventProxy;
 
 	/**
 	 *  Leave OnmsDaoContainer without generics; the Aries blueprint code cannot match up
@@ -66,7 +66,7 @@ public class SelectionAwareTable extends Table implements VerticesUpdateManager.
 	 * that the {@link SelectionListener} instances are registered with all of the
 	 * {@link ColumnGenerator} classes that also implement {@link SelectionNotifier}.
 	 */
-	public void setColumnGenerators(@SuppressWarnings("unchecked") Map generators) {
+	public void setColumnGenerators(@SuppressWarnings("rawtypes") Map generators) {
 		for (Object key : generators.keySet()) {
 			super.addGeneratedColumn(key, (ColumnGenerator)generators.get(key));
 			// If any of the column generators are {@link SelectionNotifier} instances,
@@ -109,10 +109,9 @@ public class SelectionAwareTable extends Table implements VerticesUpdateManager.
 	    
 	    // set new value
 	    if (nonCollapsibleColumns == null) nonCollapsibleColumns = new ArrayList<String>();
-        this.nonCollapsibleColumns = nonCollapsibleColumns;
         
         // set non collapsible
-        for (Object eachPropertyId : this.nonCollapsibleColumns) {
+        for (Object eachPropertyId : nonCollapsibleColumns) {
             setColumnCollapsible(eachPropertyId,  false);
         }
     }

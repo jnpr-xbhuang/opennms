@@ -91,6 +91,7 @@ public class RequisitionAccessService {
             return m_deployedRepo;
         }
 
+
         public Requisition getActiveRequisition(final boolean createIfMissing) {
             if (m_pending != null) {
                 return m_pending;
@@ -213,7 +214,7 @@ public class RequisitionAccessService {
         }
 
         void updateInterface(final String foreignId, final String ipAddress, final MultivaluedMapImpl params) {
-            String foreignSource = m_foreignSource;
+            final String foreignSource = m_foreignSource;
             LOG.debug("updateInterface: Updating interface {} on node {}/{}", ipAddress, foreignSource, foreignId);
             if (params.isEmpty()) return;
             final Requisition req = getActiveRequisition(false);
@@ -243,7 +244,7 @@ public class RequisitionAccessService {
             getDeployedForeignSourceRepository().delete(req);
         }
 
-        void deleteNode(String foreignId) {
+        void deleteNode(final String foreignId) {
             LOG.debug("deleteNode: Deleting node {} from foreign source {}", foreignId, getForeignSource());
             final Requisition req = getActiveRequisition(false);
             if (req != null) {
@@ -768,7 +769,5 @@ public class RequisitionAccessService {
             }
         });
     }
-
-    
 
 }

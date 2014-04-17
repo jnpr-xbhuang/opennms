@@ -129,6 +129,7 @@
         <collect>
           <includeGroup>juniper-router</includeGroup>
           <includeGroup>mib2-X-interfaces</includeGroup>
+          <includeGroup>mib2-X-interfaces-pkts</includeGroup>
           <includeGroup>ietf-bgp4-peer-stats</includeGroup>
           <includeGroup>ietf-ospf-stats</includeGroup>
         </collect>
@@ -142,6 +143,7 @@
           <includeGroup>juniper-erx-temperature</includeGroup>
           <includeGroup>mib2-X-interfaces</includeGroup>
           <includeGroup>ietf-ospf-stats</includeGroup>
+          <includeGroup>mib2-X-interfaces-pkts</includeGroup>
         </collect>
       </systemDef>
 
@@ -150,6 +152,7 @@
         <collect>
           <includeGroup>juniper-jrouter</includeGroup>
           <includeGroup>mib2-X-interfaces</includeGroup>
+          <includeGroup>mib2-X-interfaces-pkts</includeGroup>
           <includeGroup>ietf-bgp4-peer-stats</includeGroup>
           <includeGroup>ietf-ospf-stats</includeGroup>
         </collect>

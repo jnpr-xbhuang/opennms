@@ -39,6 +39,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.exolab.castor.xml.MarshalException;
 import org.exolab.castor.xml.ValidationException;
@@ -62,7 +63,7 @@ import org.opennms.netmgt.config.notifications.Notification;
 import org.opennms.netmgt.config.users.Contact;
 import org.opennms.netmgt.config.users.User;
 import org.opennms.netmgt.eventd.EventIpcManagerFactory;
-import org.opennms.netmgt.eventd.datablock.EventUtil;
+import org.opennms.netmgt.eventd.EventUtil;
 import org.opennms.netmgt.model.events.EventBuilder;
 import org.opennms.netmgt.model.events.EventIpcManager;
 import org.opennms.netmgt.model.events.EventListener;
@@ -315,7 +316,7 @@ public final class BroadcastEventProcessor implements EventListener {
             final boolean wasAcked = wa;
             final Map<String, String> parmMap = rebuildParameterMap(notifId, resolutionPrefix, skipNumericPrefix);
             
-            NotificationManager.expandMapValues(parmMap, 
+            EventUtil.expandMapValues(parmMap, 
                     getNotificationManager().getEvent(Integer.parseInt(parmMap.get("eventID"))));
             
             String queueID = getNotificationManager().getQueueForNotification(notifId);
@@ -346,9 +347,10 @@ public final class BroadcastEventProcessor implements EventListener {
             };
             getNotificationManager().forEachUserNotification(notifId, ackNotifProcessor);
 
-            for (String userID : userNotifications.keySet()) {
-                List<String> cmdList = userNotifications.get(userID);
-                String[] cmds = cmdList.toArray(new String[cmdList.size()]);
+            for (final Entry<String,List<String>> entry : userNotifications.entrySet()) {
+                final String userID = entry.getKey();
+                final List<String> cmdList = entry.getValue();
+                final String[] cmds = cmdList.toArray(new String[cmdList.size()]);
                 LOG.debug("Sending {} notification to userID = {} for notice ID {}", resolutionPrefix, userID, notifId);
                 sendResolvedNotificationsToUser(queueID, userID, cmds, parmMap);
             }
@@ -381,7 +383,7 @@ public final class BroadcastEventProcessor implements EventListener {
             if (newTask != null) {
                 noticeQueue.putItem(now, newTask);
             }
-        } else if (targetName.indexOf("@") > -1) {
+        } else if (targetName.indexOf('@') > -1) {
             NotificationTask newTask = makeEmailTask(now, params, noticeId, targetName, commands, null, null);
 
             if (newTask != null) {
@@ -633,7 +635,7 @@ public final class BroadcastEventProcessor implements EventListener {
             count = getUserManager().countUsersWithRole(targetName);
         } else if (getUserManager().hasUser(targetName)) {
             count = 1;
-        } else if (targetName.indexOf("@") > -1) {
+        } else if (targetName.indexOf('@') > -1) {
             count = 1;
         }
 
@@ -688,7 +690,7 @@ public final class BroadcastEventProcessor implements EventListener {
         paramMap.put("eventID", String.valueOf(event.getDbid()));
         paramMap.put("eventUEI", event.getUei());
 
-        NotificationManager.expandMapValues(paramMap, event);
+        EventUtil.expandMapValues(paramMap, event);
 
         return Collections.unmodifiableMap(paramMap);
         
@@ -742,7 +744,7 @@ public final class BroadcastEventProcessor implements EventListener {
             } else if (getUserManager().hasUser(targetName)) {
                 NotificationTask[] userTasks = { makeUserTask(startTime, params, noticeId, targetName, targets[i].getCommand(), targetSiblings, autoNotify) };
                 tasks = userTasks;
-            } else if (targetName.indexOf("@") > -1) {
+            } else if (targetName.indexOf('@') > -1) {
             	// Bug 2027 -- get the command name from the Notifd config instead of using default of "email"
             	String[] emailCommands = { getNotifdConfigManager().getConfiguration().getEmailAddressCommand() };
                 NotificationTask[] emailTasks = { makeEmailTask(startTime, params, noticeId, targetName, emailCommands, targetSiblings, autoNotify) };

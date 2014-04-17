@@ -94,10 +94,10 @@
     // optional bookmark
     final OnmsFilterFavorite favorite = (OnmsFilterFavorite) req.getAttribute("favorite");
 
-    pageContext.setAttribute("addPositiveFilter", "[+]");
-    pageContext.setAttribute("addNegativeFilter", "[-]");
-    pageContext.setAttribute("addBeforeFilter", "[&gt;]");
-    pageContext.setAttribute("addAfterFilter", "[&lt;]");
+    pageContext.setAttribute("addPositiveFilter", "<i class=\"fa fa-plus-square-o\"></i>");
+    pageContext.setAttribute("addNegativeFilter", "<i class=\"fa fa-minus-square-o\"></i>");
+    pageContext.setAttribute("addBeforeFilter", "<i class=\"fa fa-toggle-right\"></i>");
+    pageContext.setAttribute("addAfterFilter", "<i class=\"fa fa-toggle-left\"></i>");
     pageContext.setAttribute("filterFavoriteSelectTagHandler", new FilterFavoriteSelectTagHandler("All Alarms"));
     
     //Get the action status for purge and export
@@ -119,8 +119,7 @@
     
     final String baseHref = org.opennms.web.api.Util.calculateUrlBase(request);
 %>
-
-
+<c:set var="baseHref" value="<%=Util.calculateUrlBase(request)%>"/>
 
 <jsp:include page="/includes/header.jsp" flush="false" >
   <jsp:param name="title" value="Alarm List" />
@@ -131,18 +130,21 @@
 </jsp:include>
 
 <script type="text/javascript" src="<c:url value="/js/jquery/jquery.js"/>"></script>
-<script type="text/javascript">
-        function checkAllCheckboxes() {
-         if( document.alarm_action_form.alarm.length ) {
-                         for( i = 0; i < document.alarm_action_form.alarm.length; i++ ) {
-                                document.alarm_action_form.alarm[i].checked = true
-                         }
-         }
-         else {
-                        document.alarm_action_form.alarm.checked = true
+<link rel="stylesheet" href="css/font-awesome-4.0.3/css/font-awesome.min.css">
+
+  <script type="text/javascript">
+    function checkAllCheckboxes() {
+       if( document.alarm_action_form.alarm.length ) {  
+         for( i = 0; i < document.alarm_action_form.alarm.length; i++ ) {
+           document.alarm_action_form.alarm[i].checked = true
          }
         }
-        
+       else {
+         document.alarm_action_form.alarm.checked = true
+       }
+         
+    }
+
         function submitForm(anAction)
         {
                 var isChecked = false
@@ -586,7 +588,11 @@
             <% } %>
           </td>
           <td class="divider">
-            <nobr><span title="Event <%= alarms[i].getLastEvent().getId()%>"><a href="event/detail.htm?id=<%= alarms[i].getLastEvent().getId()%>"><fmt:formatDate value="${alarm.lastEventTime}" type="date" dateStyle="short"/>&nbsp;<fmt:formatDate value="${alarm.lastEventTime}" type="time" pattern="HH:mm:ss"/></a></span></nobr>
+            <nobr>
+              <% if(alarms[i].getLastEvent() != null) { %><span title="Event <%= alarms[i].getLastEvent().getId()%>"><a href="event/detail.htm?id=<%= alarms[i].getLastEvent().getId()%>"><% } %>
+                <fmt:formatDate value="${alarm.lastEventTime}" type="date" dateStyle="short"/>&nbsp;<fmt:formatDate value="${alarm.lastEventTime}" type="time" pattern="HH:mm:ss"/>
+              <% if(alarms[i].getLastEvent() != null) { %></a></span><% } %>
+            </nobr>
             <nobr>
               <a href="<%=this.makeLink(callback, parms, new AfterLastEventTimeFilter(alarms[i].getLastEventTime()), true, favorite)%>" class="filterLink" title="Only show alarms occurring after this one">${addAfterFilter}</a>
               <a href="<%=this.makeLink(callback, parms, new BeforeLastEventTimeFilter(alarms[i].getLastEventTime()), true, favorite)%>" class="filterLink" title="Only show alarms occurring before this one">${addBeforeFilter}</a>

@@ -139,16 +139,6 @@ maintained
     <invoke at="status" pass="0" method="status"/>
     <invoke at="stop" pass="0" method="stop"/>
   </service>
-  <!--
-  <service>
-    <name>OpenNMS:Name=Threshd</name>
-    <class-name>org.opennms.netmgt.threshd.jmx.Threshd</class-name>
-    <invoke at="start" pass="0" method="init"/>
-    <invoke at="start" pass="1" method="start"/>
-    <invoke at="status" pass="0" method="status"/>
-    <invoke at="stop" pass="0" method="stop"/>
-  </service>
-  -->
   <service>
     <name>OpenNMS:Name=Vacuumd</name>
     <class-name>org.opennms.netmgt.vacuumd.jmx.Vacuumd</class-name>
@@ -279,14 +269,6 @@ maintained
     <invoke at="stop" pass="0" method="stop"/>
   </service>
 <!-- Disabled Daemons
-  <service>
-    <name>OpenNMS:Name=Importer</name>
-    <class-name>org.opennms.netmgt.importer.jmx.ImporterService</class-name>
-    <invoke at="start" pass="0" method="init"/>
-    <invoke at="start" pass="1" method="start"/>
-    <invoke at="status" pass="0" method="status"/>
-    <invoke at="stop" pass="0" method="stop"/>
-  </service>
   <service>
     <name>OpenNMS:Name=Tl1d</name>
     <class-name>org.opennms.netmgt.tl1d.jmx.Tl1d</class-name>

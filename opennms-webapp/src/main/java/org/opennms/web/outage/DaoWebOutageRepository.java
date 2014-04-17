@@ -40,7 +40,7 @@ import java.util.Map;
 
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.opennms.core.utils.BeanUtils;
+import org.opennms.core.spring.BeanUtils;
 import org.opennms.netmgt.dao.api.NodeDao;
 import org.opennms.netmgt.dao.api.OutageDao;
 import org.opennms.netmgt.model.OnmsCriteria;
@@ -120,6 +120,9 @@ public class DaoWebOutageRepository implements WebOutageRepository, Initializing
             @Override
             public void visitSortStyle(SortStyle sortStyle) throws RuntimeException {
                 switch (sortStyle) {
+                case FOREIGNSOURCE:
+                    criteria.addOrder(Order.desc("node.foreignSource"));
+                    break;
                 case NODE:
                     criteria.addOrder(Order.desc("node.label"));
                     break;
@@ -137,6 +140,9 @@ public class DaoWebOutageRepository implements WebOutageRepository, Initializing
                     break;
                 case ID:
                     criteria.addOrder(Order.desc("id"));
+                    break;
+                case REVERSE_FOREIGNSOURCE:
+                    criteria.addOrder(Order.asc("node.foreignSource"));
                     break;
                 case REVERSE_NODE:
                     criteria.addOrder(Order.asc("node.label"));

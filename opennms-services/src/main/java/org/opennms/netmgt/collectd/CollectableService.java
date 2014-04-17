@@ -34,10 +34,10 @@ import org.opennms.core.logging.Logging;
 import org.opennms.core.utils.InetAddressUtils;
 import org.opennms.netmgt.EventConstants;
 import org.opennms.netmgt.collectd.Collectd.SchedulingCompletedFlag;
+import org.opennms.netmgt.config.CollectdConfigFactory;
 import org.opennms.netmgt.config.DataCollectionConfigFactory;
 import org.opennms.netmgt.config.collector.CollectionSet;
 import org.opennms.netmgt.config.collector.ServiceParameters;
-import org.opennms.netmgt.dao.api.CollectorConfigDao;
 import org.opennms.netmgt.dao.api.IpInterfaceDao;
 import org.opennms.netmgt.eventd.EventIpcManagerFactory;
 import org.opennms.netmgt.model.OnmsIpInterface;
@@ -205,7 +205,7 @@ final class CollectableService implements ReadyRunnable {
 	 *
 	 * @param collectorConfigDao a {@link org.opennms.netmgt.dao.api.CollectorConfigDao} object.
 	 */
-	public void refreshPackage(CollectorConfigDao collectorConfigDao) {
+	public void refreshPackage(CollectdConfigFactory collectorConfigDao) {
 		m_spec.refresh(collectorConfigDao);
 		if (m_thresholdVisitor != null)
 		    m_thresholdVisitor.reloadScheduledOutages();
@@ -379,13 +379,13 @@ final class CollectableService implements ReadyRunnable {
 		try {
 		    result = m_spec.collect(m_agent);
 		    if (result != null) {
-                        Collectd.instrumentation().beginPersistingServiceData(m_nodeId, getHostAddress(), m_spec.getServiceName());
+                        Collectd.instrumentation().beginPersistingServiceData(m_spec.getPackageName(), m_nodeId, getHostAddress(), m_spec.getServiceName());
                         try {
                             BasePersister persister = createPersister(m_params, m_repository);
                             persister.setIgnorePersist(result.ignorePersist());
                             result.visit(persister);
                         } finally {
-                            Collectd.instrumentation().endPersistingServiceData(m_nodeId, getHostAddress(), m_spec.getServiceName());
+                            Collectd.instrumentation().endPersistingServiceData(m_spec.getPackageName(), m_nodeId, getHostAddress(), m_spec.getServiceName());
                         }
                         
                         /*

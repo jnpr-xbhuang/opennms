@@ -84,7 +84,7 @@ public class DiscoveryConfigFactory {
     private final ReadWriteLock m_globalLock = new ReentrantReadWriteLock();
     private final Lock m_readLock = m_globalLock.readLock();
     private final Lock m_writeLock = m_globalLock.writeLock();
-    
+
     public static final String COMMENT_STR = "#";
     public static final char COMMENT_CHAR = '#';
 
@@ -128,7 +128,7 @@ public class DiscoveryConfigFactory {
     public Lock getReadLock() {
         return m_readLock;
     }
-    
+
     public Lock getWriteLock() {
         return m_writeLock;
     }
@@ -168,7 +168,7 @@ public class DiscoveryConfigFactory {
         } catch (final Exception e) {
             throw new ValidationException("An error occurred while validating the configuration: " + e, e);
         }
-        
+
         m_loaded = true;
     }
 
@@ -222,7 +222,7 @@ public class DiscoveryConfigFactory {
     public synchronized DiscoveryConfiguration getConfiguration() {
         return m_config;
     }
-    
+
     /**
      * <p>saveXml</p>
      *
@@ -231,13 +231,14 @@ public class DiscoveryConfigFactory {
      */
     protected void saveXml(final String xml) throws IOException {
         if (xml != null) {
+            Writer fileWriter = null;
             getWriteLock().lock();
             try {
-                final Writer fileWriter = new OutputStreamWriter(new FileOutputStream(ConfigFileConstants.getFile(ConfigFileConstants.DISCOVERY_CONFIG_FILE_NAME)), "UTF-8");
+                fileWriter = new OutputStreamWriter(new FileOutputStream(ConfigFileConstants.getFile(ConfigFileConstants.DISCOVERY_CONFIG_FILE_NAME)), "UTF-8");
                 fileWriter.write(xml);
                 fileWriter.flush();
-                fileWriter.close();
             } finally {
+                if (fileWriter != null ) IOUtils.closeQuietly(fileWriter);
                 getWriteLock().unlock();
             }
         }
@@ -311,7 +312,7 @@ public class DiscoveryConfigFactory {
             IOUtils.closeQuietly(is);
         }
     }
-    
+
     /**
      * <p>addToSpecificsFromURL</p>
      *
@@ -324,7 +325,7 @@ public class DiscoveryConfigFactory {
      */
     public static boolean addToSpecificsFromURL(final List<IPPollAddress> specifics, final InputStream is, final long timeout, final int retries) throws IOException {
         boolean bRet = true;
-    
+
         try {
             final BufferedReader buffer = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
@@ -338,7 +339,7 @@ public class DiscoveryConfigFactory {
                     // blank line or skip comment
                     continue;
                 }
-                
+
                 // check for comments after IP
                 final int comIndex = ipLine.indexOf(DiscoveryConfigFactory.COMMENT_STR);
                 if (comIndex == -1) {
@@ -372,32 +373,31 @@ public class DiscoveryConfigFactory {
         final List<IPPollAddress> specifics = new LinkedList<IPPollAddress>();
 
         getReadLock().lock();
-        
         try {
             Long defaultTimeout = null;
             Integer defaultRetries = null;
             if (getConfiguration().hasTimeout()) defaultTimeout = getConfiguration().getTimeout();
             if (getConfiguration().hasRetries()) defaultRetries = getConfiguration().getRetries();
-    
+
             for (final IncludeUrl url : getConfiguration().getIncludeUrlCollection()) {
-        
+
                 long timeout = 800L;
                 if (url.hasTimeout()) {
                     timeout = url.getTimeout();
                 } else if (defaultTimeout != null) {
                     timeout = getConfiguration().getTimeout();
                 }
-        
+
                 int retries = 3;
                 if (url.hasRetries()) {
                     retries = url.getRetries();
                 } else if (defaultRetries != null) {
                     retries = defaultRetries;
                 }
-        
+
                 addToSpecificsFromURL(specifics, url.getContent(), timeout, retries);
             }
-        
+
             return specifics;
         } finally {
             getReadLock().unlock();
@@ -413,15 +413,14 @@ public class DiscoveryConfigFactory {
         final List<IPPollRange> includes = new LinkedList<IPPollRange>();
 
         getReadLock().lock();
-        
         try {
             Long defaultTimeout = null;
             Integer defaultRetries = null;
             if (getConfiguration().hasTimeout()) defaultTimeout = getConfiguration().getTimeout();
             if (getConfiguration().hasRetries()) defaultRetries = getConfiguration().getRetries();
-            
+
             for (final IncludeRange ir : getConfiguration().getIncludeRangeCollection()) {
-        
+
                 // Validate IP range; if invalid, then log and discard this range
                 try {
                     InetAddressUtils.toIpAddrBytes(ir.getBegin());
@@ -429,7 +428,7 @@ public class DiscoveryConfigFactory {
                     LOG.warn("Begin address of discovery range is invalid, discarding: {}", ir.getBegin());
                     continue;
                 } 
-                
+
                 try {
                     InetAddressUtils.toIpAddrBytes(ir.getEnd());
                 } catch (Throwable e) {
@@ -443,21 +442,21 @@ public class DiscoveryConfigFactory {
                 } else if (defaultTimeout != null) {
                     timeout = defaultTimeout;
                 }
-        
+
                 int retries = 3;
                 if (ir.hasRetries()) {
                     retries = ir.getRetries();
                 } else if (defaultRetries != null) {
                     retries = defaultRetries;
                 }
-                
+
                 try {
                     includes.add(new IPPollRange(ir.getBegin(), ir.getEnd(), timeout, retries));
                 } catch (final UnknownHostException uhE) {
                     LOG.warn("Failed to convert address range ({}, {})", ir.getBegin(), ir.getEnd(), uhE);
                 }
             }
-        
+
             return includes;
         } finally {
             getReadLock().unlock();
@@ -471,9 +470,8 @@ public class DiscoveryConfigFactory {
      */
     public List<IPPollAddress> getSpecifics() {
         final List<IPPollAddress> specifics = new LinkedList<IPPollAddress>();
-    
+
         getReadLock().lock();
-        
         try {
             Long defaultTimeout = null;
             Integer defaultRetries = null;
@@ -481,23 +479,23 @@ public class DiscoveryConfigFactory {
             if (getConfiguration().hasRetries()) defaultRetries = getConfiguration().getRetries();
 
             for (final Specific s : getConfiguration().getSpecificCollection()) {
-        
+
                 long timeout = 800L;
                 if (s.hasTimeout()) {
                     timeout = s.getTimeout();
                 } else if (defaultTimeout != null) {
                     timeout = defaultTimeout;
                 }
-        
+
                 int retries = 3;
                 if (s.hasRetries()) {
                     retries = s.getRetries();
                 } else if (defaultRetries != null) {
                     retries = defaultRetries;
                 }
-        
+
                 final String address = s.getContent();
-                
+
                 try {
                     specifics.add(new IPPollAddress(InetAddressUtils.addr(address), timeout, retries));
                 } catch (final IllegalArgumentException e) {
@@ -518,12 +516,11 @@ public class DiscoveryConfigFactory {
      */
     public boolean isExcluded(final InetAddress address) {
         getReadLock().lock();
-        
         try {
             final List<ExcludeRange> excludeRange = getConfiguration().getExcludeRangeCollection();
             if (excludeRange != null) {
                 final byte[] laddr = address.getAddress();
-        
+
                 for (final ExcludeRange range : excludeRange) {
                     if (InetAddressUtils.isInetAddressInRange(laddr, range.getBegin(), range.getEnd())) {
                         return true;
@@ -535,56 +532,54 @@ public class DiscoveryConfigFactory {
             getReadLock().unlock();
         }
     }
-    
+
     public String getForeignSource(InetAddress address) {
-    	getReadLock().lock();
-    	
-    	LOG.debug("Looking for matching foreign source specific IP or IP range with address: {}...", address);
-    	
-    	List<Specific> specificCollection = getConfiguration().getSpecificCollection();
-    	for (Specific specific : specificCollection) {
-			String ipAddr = specific.getContent();
-	    	
-			if (ipAddr.equals(InetAddressUtils.str(address))) {
-				
-		    	String foreignSource = specific.getForeignSource();
-				LOG.debug("Matched foreign source {} matching address: {} against specific {}.", foreignSource, address, ipAddr);
-		    	getReadLock().unlock();
-				return foreignSource;
-			}
-		}
-    	
-        final byte[] laddr = address.getAddress();
-        
-    	List<IncludeRange> includeRangeCollection = getConfiguration().getIncludeRangeCollection();
-    	for (IncludeRange range : includeRangeCollection) {
-    		
-            if (InetAddressUtils.isInetAddressInRange(laddr, range.getBegin(), range.getEnd())) {
-            	
-            	String foreignSource = range.getForeignSource();
-				LOG.debug("Found foreign source {} with address {} in the range begin: {} and end: {}.", foreignSource, address, range.getBegin(), range.getEnd());
-		    	getReadLock().unlock();
-    			return foreignSource;
+        getReadLock().lock();
+        try {
+            LOG.debug("Looking for matching foreign source specific IP or IP range with address: {}...", address);
+    
+            List<Specific> specificCollection = getConfiguration().getSpecificCollection();
+            for (Specific specific : specificCollection) {
+                String ipAddr = specific.getContent();
+    
+                if (ipAddr.equals(InetAddressUtils.str(address))) {
+    
+                    String foreignSource = specific.getForeignSource();
+                    LOG.debug("Matched foreign source {} matching address: {} against specific {}.", foreignSource, address, ipAddr);
+                    return foreignSource;
+                }
             }
-		}
-    	
-    	List<IncludeUrl> includeUrlCollection = getConfiguration().getIncludeUrlCollection();
-    	for (IncludeUrl includeUrl : includeUrlCollection) {
-    		String ipAddr = includeUrl.getContent();
-			if (ipAddr.equals(InetAddressUtils.str(address))) {
-				
-		    	String foreignSource = includeUrl.getForeignSource();
-				LOG.debug("Matched foreign source {} matching address: {} in specified URL.", foreignSource, address);
-		    	getReadLock().unlock();
-				return foreignSource;
-			}
-		}
-    	
-    	String foreignSource = getConfiguration().getForeignSource();
-    	getReadLock().unlock();
-		return foreignSource;
+    
+            final byte[] laddr = address.getAddress();
+    
+            List<IncludeRange> includeRangeCollection = getConfiguration().getIncludeRangeCollection();
+            for (IncludeRange range : includeRangeCollection) {
+    
+                if (InetAddressUtils.isInetAddressInRange(laddr, range.getBegin(), range.getEnd())) {
+    
+                    String foreignSource = range.getForeignSource();
+                    LOG.debug("Found foreign source {} with address {} in the range begin: {} and end: {}.", foreignSource, address, range.getBegin(), range.getEnd());
+                    return foreignSource;
+                }
+            }
+    
+            List<IncludeUrl> includeUrlCollection = getConfiguration().getIncludeUrlCollection();
+            for (IncludeUrl includeUrl : includeUrlCollection) {
+                String ipAddr = includeUrl.getContent();
+                if (ipAddr.equals(InetAddressUtils.str(address))) {
+    
+                    String foreignSource = includeUrl.getForeignSource();
+                    LOG.debug("Matched foreign source {} matching address: {} in specified URL.", foreignSource, address);
+                    return foreignSource;
+                }
+            }
+    
+            return getConfiguration().getForeignSource();
+        } finally {
+            getReadLock().unlock();
+        }
     }
-    	
+
 
     /**
      * <p>getIntraPacketDelay</p>
@@ -612,7 +607,7 @@ public class DiscoveryConfigFactory {
             protected boolean matches(final IPPollAddress item) {
                 return !isExcluded(item.getAddress());
             }
-            
+
         };
     }
 
@@ -623,19 +618,18 @@ public class DiscoveryConfigFactory {
      */
     public Iterable<IPPollAddress> getConfiguredAddresses() {
         getReadLock().lock();
-        
         try {
             final List<IPPollAddress> specifics = getSpecifics();
             final List<IPPollRange> ranges = getRanges();
             specifics.addAll(getURLSpecifics());
-        
+
             final List<Iterator<IPPollAddress>> iters = new ArrayList<Iterator<IPPollAddress>>();
             iters.add(specifics.iterator());
-            
+
             for(final IPPollRange range : ranges) {
                 iters.add(getExcludingInterator(range.iterator()));
             }
-        
+
             return new IteratorIterator<IPPollAddress>(iters);
         } finally {
             getReadLock().unlock();

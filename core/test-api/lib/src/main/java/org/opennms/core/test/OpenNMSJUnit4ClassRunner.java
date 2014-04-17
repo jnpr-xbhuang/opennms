@@ -50,6 +50,7 @@ public class OpenNMSJUnit4ClassRunner extends SpringJUnit4ClassRunner {
 	private static final Logger LOG = LoggerFactory.getLogger(OpenNMSJUnit4ClassRunner.class);
 	
     private static final String[] STANDARD_LISTENER_CLASS_NAMES = new String[] {
+        "org.opennms.core.test.TestContextAwareExecutionListener",
         "org.opennms.test.OpenNMSConfigurationExecutionListener",
         "org.opennms.core.test.db.TemporaryDatabaseExecutionListener",
         "org.opennms.core.test.snmp.JUnitSnmpAgentExecutionListener",
@@ -86,8 +87,8 @@ public class OpenNMSJUnit4ClassRunner extends SpringJUnit4ClassRunner {
             try {
                 final TestExecutionListener listener = (TestExecutionListener)Class.forName(className).newInstance();
                 getTestContextManager().registerTestExecutionListeners(listener);
-            } catch (final Throwable t) {
-            	LOG.info("Failed while attempting to load default unit test listener class {}: {}", className, t.getLocalizedMessage());
+            } catch (final Exception e) {
+            	LOG.info("Failed while attempting to load default unit test listener class {}: {}", className, e.getLocalizedMessage());
             }
         }
 

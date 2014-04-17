@@ -34,16 +34,12 @@
 		session="true"
 		import="org.opennms.netmgt.config.PollerConfigFactory,
                 org.opennms.netmgt.config.PollerConfig,
-                org.opennms.netmgt.config.SnmpInterfacePollerConfigFactory,
-                org.opennms.netmgt.config.SnmpInterfacePollerConfig,
                 org.opennms.netmgt.config.poller.Package,
                 java.util.*,
-                org.opennms.core.utils.SIUtils,
+                org.opennms.netmgt.model.OnmsNode,
                 org.opennms.netmgt.model.OnmsResource,
-                org.opennms.web.api.Util,
                 org.opennms.web.api.Authentication,
                 org.opennms.web.element.*,
-                org.opennms.web.event.*,
                 org.opennms.web.svclayer.ResourceService,
                 org.opennms.netmgt.utils.IfLabel,
                 org.springframework.web.context.WebApplicationContext,
@@ -79,6 +75,7 @@
 <%
     Interface intf_db = ElementUtil.getInterfaceByParams(request, getServletContext());
     int nodeId = intf_db.getNodeId();
+    OnmsNode node = NetworkElementFactory.getInstance(getServletContext()).getNode(nodeId);
     String ipAddr = intf_db.getIpAddress();
 	int ifIndex = -1;    
 	if (intf_db.getIfIndex() > 0) {
@@ -196,7 +193,7 @@ function doDelete() {
               ifLabel = IfLabel.getIfLabel(nodeId, ipAddr);
           }
 
-          List<OnmsResource> resources = m_resourceService.findNodeChildResources(nodeId);
+          List<OnmsResource> resources = m_resourceService.findNodeChildResources(node);
           for (OnmsResource resource : resources) {
               if (resource.getName().equals(ipAddr) || resource.getName().equals(ifLabel)) {
                   %>
