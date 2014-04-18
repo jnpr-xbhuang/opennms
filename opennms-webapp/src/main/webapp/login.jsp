@@ -122,7 +122,7 @@
     
     <input name="Login" type="submit" value="Login" />
     <input name="j_usergroups" type="hidden" value=""/>
-    <%-- input name="reset" type="reset" value="Reset" /> --%>
+    <!-- <input name="reset" type="reset" value="Reset" /> -->
 
     <script type="text/javascript">
       if (window.top == window.self && document.getElementById) {
