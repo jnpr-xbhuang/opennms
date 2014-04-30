@@ -1009,6 +1009,205 @@
                 </uei>
              </ueis>
         </notification> 
-
+	<notification name="SDGNotification" enable="true">
+			<script timeout_in_seconds="60">
+					<scriptname>SDG_App_Script.sh</scriptname>
+					<errorhandling enable="false">
+							<retry_interval_inseconds>3</retry_interval_inseconds>
+							<number_of_retries>2</number_of_retries>
+					</errorhandling>
+			</script>
+			<ueis>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcVIPDownThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcVIPDownThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcRealServerUpThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcRealServerUpThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcConnectionTableCountThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcConnectionTableCountThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcControlCPUStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcControlCPUStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcDataCoreCPUStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcDataCoreCPUStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcDataCoresExceedingThreshod" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcDataCoresExceedingThreshodCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcAllocationFailuresPerNPUThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcAllocationFailuresPerNPUThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcAllocationFailuresPerDPThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcAllocationFailuresPerDPThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcMSInterfaceStatusDownThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcMSInterfaceStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcEgressInterfaceStatusDownThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/adcEgressInterfaceStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/tlbRINextHopIndexStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/tlbRINextHopIndexStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/tlbRealServerDownThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/tlbRealServerDownThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/tlbCPUUtilizationStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/tlbCPUUtilizationStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/tlbMSInterfaceStatusDownThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/tlbMSInterfaceStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/tlbEgressInterfaceStatusDownThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/tlbEgressInterfaceStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatCPUUtilizationStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatCPUUtilizationStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatPacketDropStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatPacketDropStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatMemoryZoneStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatMemoryZoneStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatPoolUtilStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatPoolUtilStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatPortBlocksInUseStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatPortBlocksInUseStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatServicePICStatusDownThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatServicePICStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatCPUUtilStatefulSyncThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/cgnatCPUUtilStatefulSyncThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sfwCPUUtilizationStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sfwCPUUtilizationStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sfwPacketDropStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sfwPacketDropStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sfwMemoryZoneStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sfwMemoryZoneStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sfwServicePICStatusDownThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sfwServicePICStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgHAStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgHAStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgMasterBgpASPathStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgMasterBgpASPathStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgStandbyBgpASPathStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgStandbyBgpASPathStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgVRRPStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgVRRPStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgMasterCGNATStatefulSyncStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgMasterCGNATStatefulSyncStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgStandbyCGNATStatefulSyncStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgStandbyCGNATStatefulSyncStatusThresholdCleared" notification_threshold="5">
+			</uei>			
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgCGNATRouteStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgCGNATRouteStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgADCVIPRouteStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgADCVIPRouteStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgTLBRIDefaultRouteStatusThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/sdgTLBRIDefaultRouteStatusThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/fpcTemperatureThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/fpcTemperatureThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/reTemperatureThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/reTemperatureThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/controlBoardTemperatureThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/controlBoardTemperatureThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/fpcCpuUtilizationThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/fpcCpuUtilizationThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/picCpuUtilizationThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/picCpuUtilizationThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/reCpuUtilizationThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/reCpuUtilizationThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/fpcMemoryUtilizationThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/fpcMemoryUtilizationThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/picMemoryUtilizationThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/picMemoryUtilizationThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/reMemoryUtilizationThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/reMemoryUtilizationThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/fpcBufferThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/fpcBufferThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/picBufferThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/picBufferThresholdCleared" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/reBufferThreshold" notification_threshold="5">
+			</uei>
+			<uei name="uei.opennms.org/vendor/Juniper/threshold/reBufferThresholdCleared" notification_threshold="5">
+			</uei>			
+		 </ueis>
+	</notification> 
 </alarm-northbounder-config>
+
 
