@@ -397,12 +397,7 @@ public abstract class AbstractXmlCollectionHandler implements XmlCollectionHandl
             URL url = UrlFactory.getUrl(urlString, request);
             URLConnection c = url.openConnection();
             is = c.getInputStream();
-            is = preProcessHtml(request, is);
-            is = applyXsltTransformation(request, is);
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setIgnoringComments(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(is);
+            final Document doc = getXmlDocument(is, request);
             UrlFactory.disconnect(c);
             return doc;
         } catch (Exception e) {
@@ -413,10 +408,31 @@ public abstract class AbstractXmlCollectionHandler implements XmlCollectionHandl
     }
 
     /**
+     * Gets the XML document.
+     *
+     * @param is the input stream
+     * @param request the request
+     * @return the XML document
+     */
+    protected Document getXmlDocument(InputStream is, Request request) {
+        try {
+            is = preProcessHtml(request, is);
+            is = applyXsltTransformation(request, is);
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setIgnoringComments(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            final Document doc = builder.parse(is);
+            return doc;
+        } catch (Exception e) {
+            throw new XmlCollectorException(e.getMessage(), e);
+	}
+    }
+
+    /**
      * Apply XSLT transformation.
      *
      * @param request the request
-     * @param is the is
+     * @param is the input stream
      * @return the input stream
      * @throws Exception the exception
      */
