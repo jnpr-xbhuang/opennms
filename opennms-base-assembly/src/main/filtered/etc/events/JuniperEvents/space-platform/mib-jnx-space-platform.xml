@@ -337,7 +337,7 @@
         &lt;p&gt;CPU load average threshold upper limit exceeded. %parm[#7]%.&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                      Swap memory usage threshold upper limit exceeded. %parm[#7]%.&lt;/p&gt;
+                      CPU load average threshold upper limit exceeded. %parm[#7]%.&lt;/p&gt;
                 </logmsg>
         <severity>Major</severity>
         <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#6]%"/>
