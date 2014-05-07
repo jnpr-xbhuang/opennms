@@ -31,13 +31,14 @@ package org.opennms.features.topology.api;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.opennms.features.topology.api.topo.EdgeRef;
 import org.opennms.features.topology.api.topo.VertexRef;
 
 public class DefaultSelectionContext implements SelectionContext {
-	private final Set<VertexRef> m_selectedVertices = Collections.synchronizedSet(new HashSet<VertexRef>());
+	private final Set<VertexRef> m_selectedVertices = Collections.synchronizedSet(new LinkedHashSet<VertexRef>());
 	private final Set<EdgeRef> m_selectedEdges = Collections.synchronizedSet(new HashSet<EdgeRef>());
 
 	@Override
