@@ -70,6 +70,7 @@
         <include-collection dataCollectionGroup="VMware4"/>
         <include-collection dataCollectionGroup="VMware5"/>
         <include-collection dataCollectionGroup="VMware-Cim"/>
+        <include-collection dataCollectionGroup="JUNIPER-SRX5000-SPU-MONITORING-MIB"/>
     </snmp-collection>
 
     <!-- We need a dedicated collection with a different RRD setup for EJN equipment because
