@@ -21,6 +21,14 @@
     <event>uei.opennms.org/vendor/Juniper/traps/mplsLspInfoUp</event>
     <event>uei.opennms.org/vendor/Juniper/traps/mplsL3VpnVrfUp</event>
     <event>uei.opennms.org/vendor/Juniper/traps/mplsL3VpnVrfDown</event>
+    <event>uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyHoldover</event>
+    <event>uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyHoldoverCleared</event>
+    <event>uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyFreerun</event>
+    <event>uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyFreerunCleared</event>
+    <event>uei.opennms.org/translator/traps/jnxTimingEventDpllStatus</event>
+    <event>uei.opennms.org/translator/traps/jnxTimingEventDpllStatusCleared</event>
+    <event>uei.opennms.org/translator/traps/jnxTimingEventPtpServoStatus</event>
+    <event>uei.opennms.org/translator/traps/jnxTimingEventPtpServoStatusCleared</event>
     <event>uei.opennms.org/vendor/Juniper/syslog/cfmd_ccm_defect_none</event>
     <event>uei.opennms.org/vendor/Juniper/syslog/cfmd_ccm_defect_rmep</event>
     <event>uei.opennms.org/vendor/Juniper/syslog/cfmd_ccm_defect_cross_connect</event>

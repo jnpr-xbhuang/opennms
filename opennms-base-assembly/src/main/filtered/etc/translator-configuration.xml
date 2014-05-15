@@ -109,7 +109,118 @@
         </mapping>
       </mappings>
     </event-translation-spec>
-  
+      <event-translation-spec uei="uei.opennms.org/vendor/Juniper/traps/jnxTcaTrapMsgFrequencyHoldover" >
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyHoldover" />
+          </assignment>
+          <assignment name="ipAddress" type="parameter">
+            <value type="sql" result="SELECT evt.ipaddr FROM events evt WHERE evt.eventid = ?::integer" >
+              <value type="field" name="dbid" matches=".*" result="${0}" />
+            </value>
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
+    <event-translation-spec uei="uei.opennms.org/vendor/Juniper/traps/clear/jnxTcaTrapMsgFrequencyHoldover" >
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyHoldoverCleared" />
+          </assignment>
+          <assignment name="ipAddress" type="parameter">
+            <value type="sql" result="SELECT evt.ipaddr FROM events evt WHERE evt.eventid = ?::integer" >
+              <value type="field" name="dbid" matches=".*" result="${0}" />
+            </value>
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
+    <event-translation-spec uei="uei.opennms.org/vendor/Juniper/traps/jnxTcaTrapMsgFrequencyFreerun" >
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyFreerun" />
+          </assignment>
+          <assignment name="ipAddress" type="parameter">
+            <value type="sql" result="SELECT evt.ipaddr FROM events evt WHERE evt.eventid = ?::integer" >
+              <value type="field" name="dbid" matches=".*" result="${0}" />
+            </value>
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
+    <event-translation-spec uei="uei.opennms.org/vendor/Juniper/traps/clear/jnxTcaTrapMsgFrequencyFreerun" >
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyFreerunCleared" />
+          </assignment>
+          <assignment name="ipAddress" type="parameter">
+            <value type="sql" result="SELECT evt.ipaddr FROM events evt WHERE evt.eventid = ?::integer" >
+              <value type="field" name="dbid" matches=".*" result="${0}" />
+            </value>
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
+    <event-translation-spec uei="uei.opennms.org/vendor/Juniper/traps/jnxTimingEventDpllStatus" >
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/translator/traps/jnxTimingEventDpllStatus" />
+          </assignment>
+          <assignment name="ipAddress" type="parameter">
+            <value type="sql" result="SELECT evt.ipaddr FROM events evt WHERE evt.eventid = ?::integer" >
+              <value type="field" name="dbid" matches=".*" result="${0}" />
+            </value>
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
+     <event-translation-spec uei="uei.opennms.org/vendor/Juniper/traps/clear/jnxTimingEventDpllStatus" >
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/translator/traps/jnxTimingEventDpllStatusCleared" />
+          </assignment>
+          <assignment name="ipAddress" type="parameter">
+            <value type="sql" result="SELECT evt.ipaddr FROM events evt WHERE evt.eventid = ?::integer" >
+              <value type="field" name="dbid" matches=".*" result="${0}" />
+            </value>
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
+    <event-translation-spec uei="uei.opennms.org/vendor/Juniper/traps/jnxTimingEventPtpServoStatus" >
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/translator/traps/jnxTimingEventPtpServoStatus" />
+          </assignment>
+          <assignment name="ipAddress" type="parameter">
+            <value type="sql" result="SELECT evt.ipaddr FROM events evt WHERE evt.eventid = ?::integer" >
+              <value type="field" name="dbid" matches=".*" result="${0}" />
+            </value>
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
+    <event-translation-spec uei="uei.opennms.org/vendor/Juniper/traps/clear/jnxTimingEventPtpServoStatus" >
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/translator/traps/jnxTimingEventPtpServoStatusCleared" />
+          </assignment>
+          <assignment name="ipAddress" type="parameter">
+            <value type="sql" result="SELECT evt.ipaddr FROM events evt WHERE evt.eventid = ?::integer" >
+              <value type="field" name="dbid" matches=".*" result="${0}" />
+            </value>
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>  
   </translation>
 
 </event-translator-configuration>

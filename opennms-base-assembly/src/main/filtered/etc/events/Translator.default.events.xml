@@ -62,4 +62,208 @@
     <severity>Warning</severity>
     <alarm-data reduction-key="%uei%:%dpname%:%nodeid%:%interface%" alarm-type="3" auto-clean="false" />
   </event>
+  <event>
+    <uei>uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyHoldover</uei>
+    <event-label>OpenNMS defined event: A trap based event was received indicating a frequency change in clock and has been translated to this generic event</event-label>
+    <descr>
+      &lt;p&gt;This notification signifies that the system clock frequency
+goes to holdover state.&lt;/p&gt;&lt;table&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        jnxTcaTrapAttrSource&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        jnxTcaTrapAttrSeverity&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        ipAddress&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[ipAddress]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+    </descr>
+    <logmsg dest='logndisplay'>
+      &lt;p&gt; jnxTcaTrapMsgFrequencyHoldover trap received
+                jnxTcaTrapAttrSource=%parm[#1]%
+                jnxTcaTrapAttrSeverity=%parm[#2]%
+                ipAddress=%parm[ipAddress]%&lt;/p&gt;
+    </logmsg>
+    <severity>Critical</severity>
+    <alarm-data reduction-key="%uei%:%nodeid%" alarm-type="1" />
+  </event>
+  <event>
+    <uei>uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyHoldoverCleared</uei>
+    <event-label>OpenNMS defined event: A trap based event was received indicating a frequency change in clock and has been translated to this generic event</event-label>
+    <descr>
+      &lt;p&gt;This notification signifies that the system clock frequency
+that went to holdover state was cleared.&lt;/p&gt;&lt;table&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        jnxTcaTrapAttrSource&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        jnxTcaTrapAttrSeverity&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        ipAddress&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[ipAddress]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+    </descr>
+    <logmsg dest='logndisplay'>
+      &lt;p&gt; jnxTcaTrapMsgFrequencyHoldover trap received
+                jnxTcaTrapAttrSource=%parm[#1]%
+                jnxTcaTrapAttrSeverity=%parm[#2]%
+                ipAddress=%parm[ipAddress]%&lt;/p&gt;
+    </logmsg>
+    <severity>Cleared</severity>
+    <alarm-data reduction-key="%uei%:%nodeid%" alarm-type="2" clear-key="uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyHoldover:%nodeid%" />
+  </event>
+  <event>
+    <uei>uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyFreerun</uei>
+    <event-label>OpenNMS defined event: A trap based event was received indicating a frequency change in clock and has been translated to this generic event</event-label>
+    <descr>
+      &lt;p&gt;This notification signifies that the system clock frequency
+goes to freerun state.&lt;/p&gt;&lt;table&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        jnxTcaTrapAttrSource&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        jnxTcaTrapAttrSeverity&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        ipAddress&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[ipAddress]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+    </descr>
+    <logmsg dest='logndisplay'>
+      &lt;p&gt; jnxTcaTrapMsgFrequencyFreerun trap received
+                jnxTcaTrapAttrSource=%parm[#1]%
+                jnxTcaTrapAttrSeverity=%parm[#2]%
+                ipAddress=%parm[ipAddress]%&lt;/p&gt;
+    </logmsg>
+    <severity>Critical</severity>
+    <alarm-data reduction-key="%uei%:%nodeid%" alarm-type="1" />
+  </event>
+  <event>
+    <uei>uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyFreerunCleared</uei>
+    <event-label>OpenNMS defined event: A trap based event was received indicating a frequency change in clock and has been translated to this generic event</event-label>
+    <descr>
+      &lt;p&gt;This notification signifies that the system clock frequency
+that went to freerun state was cleared.&lt;/p&gt;&lt;table&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        jnxTcaTrapAttrSource&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[#1]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        jnxTcaTrapAttrSeverity&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[#2]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;b&gt;
+
+        ipAddress&lt;/b&gt;&lt;/td&gt;&lt;td&gt;
+        %parm[ipAddress]%;&lt;/td&gt;&lt;td&gt;&lt;p&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+    </descr>
+    <logmsg dest='logndisplay'>
+      &lt;p&gt; jnxTcaTrapMsgFrequencyFreerun trap received
+                jnxTcaTrapAttrSource=%parm[#1]%
+                jnxTcaTrapAttrSeverity=%parm[#2]%
+                ipAddress=%parm[ipAddress]%&lt;/p&gt;
+    </logmsg>
+    <severity>Cleared</severity>
+    <alarm-data reduction-key="%uei%:%nodeid%" alarm-type="2" clear-key="uei.opennms.org/translator/traps/jnxTcaTrapMsgFrequencyFreerun:%nodeid%" />
+  </event>
+  <event>
+    <uei>uei.opennms.org/translator/traps/jnxTimingEventDpllStatus</uei>
+    <event-label>OpenNMS defined event: A trap based event was received indicating a frequency change in clock and has been translated to this generic event</event-label>
+    <descr>
+     &lt;p&gt; A trap which signifies that DPLL state change
+             (unknown, lock_acq, locked, holder, freerun).
+
+             jnxClksyncDpllState indicates the Dpll status
+             jnxClksyncDpllStateStr indicates the Dpll status in string format.&lt;/p&gt;
+      &lt;p&gt;jnxClksyncDpllState: %parm[#1]% &lt;/p&gt;
+      &lt;p&gt;jnxClksyncDpllStateStr: %parm[#2]% &lt;/p&gt;
+      &lt;p&gt;IpAddress: %parm[ipAddress]% &lt;/p&gt;
+    </descr>
+    <logmsg dest='logndisplay'>
+    &lt;p&gt;
+     jnxTimingEventDpllStatus trap received
+        jnxClksyncDpllState=%parm[#1]%
+        jnxClksyncDpllStateStr=%parm[#2]%
+        ipAddress=%parm[ipAddress]% &lt;/p&gt;
+    </logmsg>
+    <severity>Critical</severity>
+    <alarm-data reduction-key="%uei%:%nodeid%" alarm-type="1" />
+  </event>
+  <event>
+    <uei>uei.opennms.org/translator/traps/jnxTimingEventDpllStatusCleared</uei>
+    <event-label>OpenNMS defined event: A trap based event was received indicating a frequency change in clock and has been translated to this generic event</event-label>
+    <descr>
+    &lt;p&gt; A trap which signifies that DPLL state change
+             (unknown, lock_acq, locked, holder, freerun).
+
+             jnxClksyncDpllState indicates the Dpll status
+             jnxClksyncDpllStateStr indicates the Dpll status in string format.&lt;/p&gt;
+      &lt;p&gt;jnxClksyncDpllState: %parm[#1]% &lt;/p&gt;
+      &lt;p&gt;jnxClksyncDpllStateStr: %parm[#2]% &lt;/p&gt;
+      &lt;p&gt;IpAddress: %parm[ipAddress]% &lt;/p&gt;
+    </descr>
+    <logmsg dest='logndisplay'>
+    &lt;p&gt;
+     jnxTimingEventDpllStatus trap received
+        jnxClksyncDpllState=%parm[#1]%
+        jnxClksyncDpllStateStr=%parm[#2]%
+        ipAddress=%parm[ipAddress]% &lt;/p&gt;
+    </logmsg>
+    <severity>Cleared</severity>
+    <alarm-data reduction-key="%uei%:%nodeid%" alarm-type="2" clear-key="uei.opennms.org/translator/traps/jnxTimingEventDpllStatus:%nodeid%" />
+  </event>
+  <event>
+    <uei>uei.opennms.org/translator/traps/jnxTimingEventPtpServoStatus</uei>
+    <event-label>OpenNMS defined event: A trap based event was received indicating a frequency change in clock and has been translated to this generic event</event-label>
+    <descr>
+     &lt;p&gt; A trap which signifies that PTP servo state
+             (Init, Acquiring, PhaseAligned, FreeRun, Holdover).
+
+             jnxPtpServoState indicates the ptp servo status
+             jnxPtpServoStateStr indicates the ptp servo status in string format.&lt;/p&gt;
+      &lt;p&gt;jnxPtpServoState: %parm[#1]% &lt;/p&gt;
+      &lt;p&gt;jnxPtpServoStateStr: %parm[#2]% &lt;/p&gt;
+      &lt;p&gt;IpAddress: %parm[ipAddress]% &lt;/p&gt;
+    </descr>
+    <logmsg dest='logndisplay'>
+    &lt;p&gt;
+     jnxTimingEventPtpServoStatus trap received
+        jnxPtpServoState=%parm[#1]%
+        jnxPtpServoStateStr=%parm[#2]%
+        ipAddress=%parm[ipAddress]% &lt;/p&gt;
+    </logmsg>
+    <severity>Critical</severity>
+    <alarm-data reduction-key="%uei%:%nodeid%" alarm-type="1" />
+  </event>
+  <event>
+    <uei>uei.opennms.org/translator/traps/jnxTimingEventPtpServoStatusCleared</uei>
+    <event-label>OpenNMS defined event: A trap based event was received indicating a frequency change in clock and has been translated to this generic event</event-label>
+    <descr>
+    &lt;p&gt; A trap which signifies that PTP servo state
+             (Init, Acquiring, PhaseAligned, FreeRun, Holdover).
+
+             jnxPtpServoState indicates the ptp servo status
+             jnxPtpServoStateStr indicates the ptp servo status in string format.&lt;/p&gt;
+      &lt;p&gt;jnxPtpServoState: %parm[#1]% &lt;/p&gt;
+      &lt;p&gt;jnxPtpServoStateStr: %parm[#2]% &lt;/p&gt;
+      &lt;p&gt;IpAddress: %parm[ipAddress]% &lt;/p&gt;
+    </descr>
+    <logmsg dest='logndisplay'>
+    &lt;p&gt;
+     jnxTimingEventPtpServoStatus trap received
+        jnxPtpServoState=%parm[#1]%
+        jnxPtpServoStateStr=%parm[#2]%
+        ipAddress=%parm[ipAddress]% &lt;/p&gt;
+    </logmsg>
+    <severity>Cleared</severity>
+    <alarm-data reduction-key="%uei%:%nodeid%" alarm-type="2" clear-key="uei.opennms.org/translator/traps/jnxTimingEventPtpServoStatus:%nodeid%" />
+  </event>
 </events>
