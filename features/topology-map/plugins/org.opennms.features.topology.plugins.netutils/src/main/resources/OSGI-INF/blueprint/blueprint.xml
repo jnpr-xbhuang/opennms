@@ -14,7 +14,7 @@ http://www.osgi.org/xmlns/blueprint-ext/v1.1.0 https://svn.apache.org/repos/asf/
         	<cm:property name="nodePageURL" value="element/node.jsp?node="/>
         	<cm:property name="resourceGraphListURL" value="graph/index.jsp"/>
         	<cm:property name="resourceGraphNodeURL" value="graph/chooseresource.htm?reports=all&amp;parentResourceId=node"/> 
-            <cm:property name="sshURL" value="../mainui/js/term/term.html?ip="/>
+            <cm:property name="sshURL" value="../mainui/js/term/SshConsoleAdapter.jsp?nodeid="/>
         </cm:default-properties>
     </cm:property-placeholder>
     

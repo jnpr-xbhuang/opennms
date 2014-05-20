@@ -65,7 +65,7 @@ public class SshOperation extends AbstractOperation {
 
             final Node node = new Node(nodeID, address, label);
 
-            final String url = getSshURL() + node.getIPAddress();
+            final String url = getSshURL() + node.getNodeID();
 /**
             if (node.getIPAddress() != null) {
                 url = getSshURL() + node.getIPAddress();
