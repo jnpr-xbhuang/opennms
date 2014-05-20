@@ -179,22 +179,18 @@
         </form>
     </div>    
 
+<%--
     <h3>Node Provisioning</h3>
     <div class="boxWrapper">
         <ul class="plain">  
-<%--
             <li><a href="javascript:addInterfacePost()">Add Interface for Scanning</a></li>
             <li><a href="admin/provisioningGroups.htm">Manage Provisioning Requisitions</a></li>
             <li><a href="admin/asset/index.jsp">Import and Export Asset Information</a></li>
---%>
             <li><a href="admin/categories.htm">Manage Surveillance Categories</a></li>
-<%--
             <li><a href="javascript:deletePost()">Delete Nodes</a></li>
---%>
         </ul>
     </div>
 
-<%--
     <h3>Distributed Monitoring</h3>
     <div class="boxWrapper">
         <ul class="plain">  
@@ -285,11 +281,11 @@
             database applications. Details for using the Import and Export
             functionalities can be found through this link as well.
         </p>
---%>
+
         <p><b>Manage Surveillance Categories</b>: Manage surveillance categories (also known
             as node categories) and edit the list of nodes belonging to each category.
         </p>
-<%--
+
         <p><b>Delete Nodes</b>: Permanently delete nodes from the database.
         </p>
         <!--

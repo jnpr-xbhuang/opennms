@@ -149,6 +149,7 @@
         <KeyValuePair key="instrumentation"      value="WARN" />
         <KeyValuePair key="jetty-server"         value="WARN" />
         <KeyValuePair key="linkd"                value="WARN" />
+        <KeyValuePair key="enlinkd"              value="WARN" />
         <KeyValuePair key="manager"              value="WARN" />
         <KeyValuePair key="map"                  value="WARN" />
         <KeyValuePair key="model-importer"       value="WARN" />

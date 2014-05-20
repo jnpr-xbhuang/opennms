@@ -40,9 +40,11 @@
 
 <h3 class="o-box">
   Surveillance Category Memberships
+<%--
   <c:if test="${isAdmin == 'true'}">
     (<a href="<c:url value="admin/categories.htm?edit&amp;node=${param.node}"/>">Edit</a>)
   </c:if>
+--%>
 </h3>
 
 <table class="o-box">
