@@ -70,7 +70,7 @@ public class SshOperation extends AbstractOperation {
             final String url = getSshURL() + node.getNodeID();
             
             final String fullUrl = getFullUrl(url);
-            final String openstr = "window.open('" + fullUrl + "','SSH To " + label + "','width=500, height=600, resizable=yes, scrollbars=yes, toolbar=no, location=no, directories=no, status=no, menubar=no' )";
+            final String openstr = "var win=window.open('" + fullUrl + "','SSH To " + label + "','width=800, height=600, resizable=yes, scrollbars=yes, toolbar=no, location=no, directories=no, status=no, menubar=no' ); parent.popupwindows.push(win);  ";
             UI mainWindow = operationContext.getMainWindow();
 	    mainWindow.getPage().getJavaScript().execute(openstr);
 
