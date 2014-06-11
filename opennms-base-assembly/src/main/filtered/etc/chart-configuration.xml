@@ -41,13 +41,13 @@
 	  <tns:jdbc-data-set db-name="opennms" sql="select eventseverity, count(*) as count from events where eventseverity &gt; 4 group by eventseverity order by count desc" />
       <tns:rgb>
         <tns:red>
-          <tns:rgb-color>255</tns:rgb-color>
+          <tns:rgb-color>249</tns:rgb-color>
         </tns:red>
         <tns:green>
-          <tns:rgb-color>255</tns:rgb-color>
+          <tns:rgb-color>174</tns:rgb-color>
         </tns:green>
         <tns:blue>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>25</tns:rgb-color>
         </tns:blue>
       </tns:rgb>
     </tns:series-def>
@@ -55,13 +55,13 @@
 	  <tns:jdbc-data-set db-name="opennms" sql="select severity, count(*) as count from alarms where severity &gt; 4 group by severity order by count desc" />
       <tns:rgb>
         <tns:red>
-          <tns:rgb-color>255</tns:rgb-color>
+          <tns:rgb-color>236</tns:rgb-color>
         </tns:red>
         <tns:green>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>33</tns:rgb-color>
         </tns:green>
         <tns:blue>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>38</tns:rgb-color>
         </tns:blue>
       </tns:rgb>
     </tns:series-def>
@@ -108,13 +108,13 @@
 	  <tns:jdbc-data-set db-name="opennms" sql="select service.servicename, count(*) as Count from outages, service where outages.serviceid=service.serviceid and ifregainedservice is NULL and iflostservice > now() - interval '7 days' group by service.servicename order by Count desc;" />
       <tns:rgb>
         <tns:red>
-          <tns:rgb-color>255</tns:rgb-color>
+          <tns:rgb-color>236</tns:rgb-color>
         </tns:red>
         <tns:green>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>33</tns:rgb-color>
         </tns:green>
         <tns:blue>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>38</tns:rgb-color>
         </tns:blue>
       </tns:rgb>
     </tns:series-def>
@@ -122,13 +122,13 @@
 	  <tns:jdbc-data-set db-name="opennms" sql="select service.servicename, count(*) as Count from outages, service where outages.serviceid=service.serviceid and ifregainedservice is NOT NULL and iflostservice > now() - interval '7 days' group by service.servicename order by Count desc;" />
       <tns:rgb>
         <tns:red>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>57</tns:rgb-color>
         </tns:red>
         <tns:green>
-          <tns:rgb-color>255</tns:rgb-color>
+          <tns:rgb-color>181</tns:rgb-color>
         </tns:green>
         <tns:blue>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>74</tns:rgb-color>
         </tns:blue>
       </tns:rgb>
     </tns:series-def>
@@ -170,13 +170,13 @@
 	  <tns:jdbc-data-set db-name="opennms" sql="select 'Nodes', count(*) from node" />
       <tns:rgb>
         <tns:red>
-          <tns:rgb-color>255</tns:rgb-color>
+          <tns:rgb-color>236</tns:rgb-color>
         </tns:red>
         <tns:green>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>33</tns:rgb-color>
         </tns:green>
         <tns:blue>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>38</tns:rgb-color>
         </tns:blue>
       </tns:rgb>
     </tns:series-def>
@@ -184,13 +184,13 @@
 	  <tns:jdbc-data-set db-name="opennms" sql="select 'Interfaces', count(*) from ipinterface" />
       <tns:rgb>
         <tns:red>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>57</tns:rgb-color>
         </tns:red>
         <tns:green>
-          <tns:rgb-color>255</tns:rgb-color>
+          <tns:rgb-color>181</tns:rgb-color>
         </tns:green>
         <tns:blue>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>74</tns:rgb-color>
         </tns:blue>
       </tns:rgb>
     </tns:series-def>
@@ -198,13 +198,13 @@
 	  <tns:jdbc-data-set db-name="opennms" sql="select 'Services', count(*) from ifservices" />
       <tns:rgb>
         <tns:red>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>84</tns:rgb-color>
         </tns:red>
         <tns:green>
-          <tns:rgb-color>0</tns:rgb-color>
+          <tns:rgb-color>126</tns:rgb-color>
         </tns:green>
         <tns:blue>
-          <tns:rgb-color>255</tns:rgb-color>
+          <tns:rgb-color>182</tns:rgb-color>
         </tns:blue>
       </tns:rgb>
     </tns:series-def>
