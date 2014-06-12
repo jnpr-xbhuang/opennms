@@ -36,7 +36,9 @@ import org.opennms.features.topology.api.OperationContext;
 import org.opennms.features.topology.api.OperationContext.DisplayLocation;
 import org.opennms.features.topology.api.topo.VertexRef;
 import org.opennms.features.topology.netutils.internal.Node;
-import org.opennms.features.topology.netutils.internal.SshWindow;
+
+import com.vaadin.ui.JavaScript;
+import com.vaadin.ui.UI;
 
 public class SshOperation extends AbstractOperation {
     private String m_sshURL;
@@ -66,14 +68,12 @@ public class SshOperation extends AbstractOperation {
             final Node node = new Node(nodeID, address, label);
 
             final String url = getSshURL() + node.getNodeID();
-/**
-            if (node.getIPAddress() != null) {
-                url = getSshURL() + node.getIPAddress();
-            } 
             
-**/
-            final URL fullUrl = new URL(getFullUrl(url));
-            operationContext.getMainWindow().addWindow(new SshWindow(node, fullUrl));
+            final String fullUrl = getFullUrl(url);
+            final String openstr = "var win=window.open('" + fullUrl + "','SSH To " + label + "','width=800, height=600, resizable=yes, scrollbars=yes, toolbar=no, location=no, directories=no, status=no, menubar=no' ); parent.popupwindows.push(win);  ";
+            UI mainWindow = operationContext.getMainWindow();
+	    mainWindow.getPage().getJavaScript().execute(openstr);
+
             return null;
         } catch (final Exception e) {
             if (e instanceof RuntimeException) {
@@ -87,10 +87,19 @@ public class SshOperation extends AbstractOperation {
     @Override
     public boolean display(final List<VertexRef> targets, final OperationContext operationContext) {
         if (operationContext.getDisplayLocation() == DisplayLocation.MENUBAR) {
-            return true;
+//            return true;
+            if (getLabelValue(operationContext, targets.get(0)) != null && (! (getLabelValue(operationContext, targets.get(0)).startsWith("space-") && getLabelValue(operationContext, targets.get(0)).length() == 18)) ) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        else if(targets != null && targets.size() > 0 && targets.get(0) != null) {
-            return true;
+        else if(targets != null && targets.size() == 1 && targets.get(0) != null) {
+	    if (getLabelValue(operationContext, targets.get(0)) != null && (! (getLabelValue(operationContext, targets.get(0)).startsWith("space-") && getLabelValue(operationContext, targets.get(0)).length() == 18)) ) {
+        	return true;
+	    } else {
+		return false;
+            }
         }else {
             return false;
         }
@@ -109,21 +118,5 @@ public class SshOperation extends AbstractOperation {
     public void setSshURL(final String sshURL) {
         m_sshURL = sshURL;
     }
-/**
-    public String getNodePageURL() {
-        return m_nodePageURL;
-    }
 
-    public void setNodePageURL(final String nodePageURL) {
-        m_nodePageURL = nodePageURL;
-    }
-
-    public String getNodeListURL() {
-        return m_nodeListURL;
-    }
-
-    public void setNodeListURL(final String nodeListURL) {
-        m_nodeListURL = nodeListURL;
-    }
-**/
 }

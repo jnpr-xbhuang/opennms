@@ -28,6 +28,7 @@
 
 package org.opennms.netmgt.dao.hibernate;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -73,10 +74,32 @@ public class LldpLinkDaoHibernate extends AbstractDaoHibernate<LldpLink, Integer
 
 	@Override
 	public void deleteByNodeIdOlderThen(Integer nodeId, Date now) {
-		for (LldpLink link: find("from LldpLink lldpLink where lldpLink.node.id = ? and lldpLinkLastPollTime < ?",nodeId,now)) {
+		for (LldpLink link: find("from LldpLink lldpLink where lldpLink.node.id = ? and lldpLink.lldpLinkLastPollTime < ?",nodeId,now)) {
 			delete(link);
 		}
 	}
+
+    public List<LldpLink> findLinksForIds(List<Integer> linkIds) {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("FROM LldpLink lldplink ");
+        if(linkIds.size() == 1){
+            sql.append("where lldplink.id = " + linkIds.get(0) + " ");
+        } else{
+            sql.append("where lldplink.id in (");
+            int counter = 0;
+            for (Integer id : linkIds) {
+                sql.append(id);
+                if(counter < linkIds.size() - 1 ) {
+                    sql.append(",");
+                }
+                counter++;
+            }
+            sql.append(")");
+        }
+
+        return find(sql.toString());
+    }
     
     
 }

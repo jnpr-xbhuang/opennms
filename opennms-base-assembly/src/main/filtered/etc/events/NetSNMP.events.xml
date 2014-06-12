@@ -33,6 +33,153 @@
 </event>
 
 <event>
+        <mask>
+                <maskelement>
+                        <mename>id</mename>
+                        <mevalue>.1.3.6.1.4.1.8072.4</mevalue>
+                </maskelement>
+                <maskelement>
+                        <mename>generic</mename>
+                        <mevalue>6</mevalue>
+                </maskelement>
+                <maskelement>
+                        <mename>specific</mename>
+                        <mevalue>1010</mevalue>
+                </maskelement>
+                <varbind>
+                        <vbnumber>2</vbnumber>
+                        <vbvalue>1</vbvalue>
+                </varbind>
+        </mask>
+        <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceHardDiskLogicalDriveDetected</uei>
+        <event-label>SPACE-PLATFORM customized trap event: jnxSpaceHardDiskLogicalDriveDetected</event-label>
+        <descr>
+        &lt;p&gt;Hard disk logical drive detected: %parm[all]% &lt;/p&gt;
+        </descr>
+                <logmsg dest='logndisplay'>&lt;p&gt;
+                        Hard disk logcal drive detected trap received: %parm[all]% &lt;/p&gt;
+                </logmsg>
+        <severity>Normal</severity>
+        <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%"/>
+</event>
+
+<event>
+        <mask>
+                <maskelement>
+                        <mename>id</mename>
+                        <mevalue>.1.3.6.1.4.1.8072.4</mevalue>
+                </maskelement>
+                <maskelement>
+                        <mename>generic</mename>
+                        <mevalue>6</mevalue>
+                </maskelement>
+                <maskelement>
+                        <mename>specific</mename>
+                        <mevalue>1010</mevalue>
+                </maskelement>
+                <varbind>
+                        <vbnumber>2</vbnumber>
+                        <vbvalue>2</vbvalue>
+                </varbind>
+        </mask>
+        <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceHardDiskPhysicalDriveAdded</uei>
+        <event-label>SPACE-PLATFORM customized trap event: jnxSpaceHardDiskPhysicalDriveAdded</event-label>
+        <descr>
+        &lt;p&gt;Hard disk physical drive Added: %parm[all]% &lt;/p&gt;
+        </descr>
+                <logmsg dest='logndisplay'>&lt;p&gt;
+                        Hard disk physical drive added trap received: %parm[all]% &lt;/p&gt;
+                </logmsg>
+        <severity>Normal</severity>
+        <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%"/>
+</event>
+
+<event>
+        <mask>
+                <maskelement>
+                        <mename>id</mename>
+                        <mevalue>.1.3.6.1.4.1.8072.4</mevalue>
+                </maskelement>
+                <maskelement>
+                        <mename>generic</mename>
+                        <mevalue>6</mevalue>
+                </maskelement>
+                <maskelement>
+                        <mename>specific</mename>
+                        <mevalue>1010</mevalue>
+                </maskelement>
+                <varbind>
+                        <vbnumber>2</vbnumber>
+                        <vbvalue>3</vbvalue>
+                </varbind>
+        </mask>
+        <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceHardDiskPhysicalDriveRemoved</uei>
+        <event-label>SPACE-PLATFORM customized trap event: jnxSpaceHardDiskPhysicalDriveRemoved</event-label>
+        <descr>
+        &lt;p&gt;Hard disk physical drive removed: %parm[all]% &lt;/p&gt;
+        </descr>
+                <logmsg dest='logndisplay'>&lt;p&gt;
+                        Hard disk physical drive removed trap received: %parm[all]% &lt;/p&gt;
+                </logmsg>
+        <severity>Major</severity>
+        <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%"/>
+</event>
+
+<event>
+        <mask>
+                <maskelement>
+                        <mename>id</mename>
+                        <mevalue>.1.3.6.1.4.1.8072.4</mevalue>
+                </maskelement>
+                <maskelement>
+                        <mename>generic</mename>
+                        <mevalue>6</mevalue>
+                </maskelement>
+                <maskelement>
+                        <mename>specific</mename>
+                        <mevalue>1030</mevalue>
+                </maskelement>
+        </mask>
+        <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceHardDiskLogicalDeviceRebuilding</uei>
+        <event-label>SPACE-PLATFORM customized trap event: jnxSpaceHardDiskLogicalDeviceRebuilding</event-label>
+        <descr>
+        &lt;p&gt;Hard disk logical device rebuilding: %parm[all]% &lt;/p&gt;
+        </descr>
+                <logmsg dest='logndisplay'>&lt;p&gt;
+                        Hard disk logical device rebuilding trap received: %parm[all]% &lt;/p&gt;
+                </logmsg>
+        <severity>Normal</severity>
+        <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%"/>
+</event>
+
+<event>
+        <mask>
+                <maskelement>
+                        <mename>id</mename>
+                        <mevalue>.1.3.6.1.4.1.8072.4</mevalue>
+                </maskelement>
+                <maskelement>
+                        <mename>generic</mename>
+                        <mevalue>6</mevalue>
+                </maskelement>
+                <maskelement>
+                        <mename>specific</mename>
+                        <mevalue>1032</mevalue>
+                </maskelement>
+        </mask>
+        <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceHardDiskLogicalDeviceDegraded</uei>
+        <event-label>SPACE-PLATFORM customized trap event: jnxSpaceHardDiskLogicalDeviceDegraded</event-label>
+        <descr>
+        &lt;p&gt;Hard disk logical device Degraded: %parm[all]% &lt;/p&gt;
+        </descr>
+                <logmsg dest='logndisplay'>&lt;p&gt;
+                        Hard disk logical device Degraded trap received: %parm[all]% &lt;/p&gt;
+                </logmsg>
+        <severity>Major</severity>
+        <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#1]%:%parm[#2]%:%parm[#3]%"/>
+</event>
+
+<event>
 	<mask>
 		<maskelement>
 			<mename>id</mename>

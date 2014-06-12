@@ -19,7 +19,6 @@ import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
-import org.opennms.netmgt.model.OnmsStpNode.StpProtocolSpecification;
 
 @Entity
 @Table(name="bridgeElement")
@@ -225,8 +224,8 @@ public class BridgeElement {
 	}
 
     @Transient
-    public StpProtocolSpecification getStpProtocolSpecificationType() {
-    	return StpProtocolSpecification.get(m_stpProtocolSpecification);
+    public BridgeDot1dStpProtocolSpecification getStpProtocolSpecificationType() {
+    	return BridgeDot1dStpProtocolSpecification.get(m_stpProtocolSpecification);
     }
 
 	public void setStpProtocolSpecification(Integer stpProtocolSpecification) {
@@ -323,8 +322,7 @@ public class BridgeElement {
 		//nodeid and vlan are unique primary key
 		if (element == null)
 			return;
-		if (element.getVlan().intValue() != m_vlan.intValue())
-			return;
+		
 		setBaseBridgeAddress(element.getBaseBridgeAddress());
 		setBaseNumPorts(element.getBaseNumPorts());
 		setBaseType(element.getBaseType());
