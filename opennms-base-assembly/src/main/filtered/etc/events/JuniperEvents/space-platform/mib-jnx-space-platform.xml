@@ -210,10 +210,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceDiskUsageRising</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceDiskUsageRising</event-label>
         <descr>
-        &lt;p&gt;Disk usage threshold upper limit exceeded.%parm[#7]%.&lt;/p&gt;
+        &lt;p&gt;Disk usage threshold upper limit exceeded. Path:%parm[#6]%, used(percent):%parm[#7]%.&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                       Disk usage threshold upper limit exceeded.%parm[#7]%.&lt;/p&gt;
+                       Disk usage threshold upper limit exceeded. Path:%parm[#6]%, used(percent):%parm[#7]%.&lt;/p&gt;
                 </logmsg>
         <severity>Major</severity>
         <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#6]%"/>
@@ -241,10 +241,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceDiskUsageRisingCleared</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceDiskUsageRisingcleared</event-label>
         <descr>
-        &lt;p&gt;Disk usage is normal, used(percent):%parm[#7]%.&lt;/p&gt;
+        &lt;p&gt;Disk usage is normal. Path:%parm[#6]%, used(percent):%parm[#7]%.&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                       Disk usage is normal, used(percent):%parm[#7]%.&lt;/p&gt;
+                       Disk usage is normal. Path:%parm[#6]%, used(percent):%parm[#7]%.&lt;/p&gt;
                 </logmsg>
         <severity>Normal</severity>
         <alarm-data auto-clean="true" clear-key="uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceDiskUsageRising:%dpname%:%nodeid%:%parm[#6]%" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#6]%"/>
