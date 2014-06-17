@@ -117,10 +117,10 @@
                             top.Jx.shell.sessionController.resetIdleNotifyTabs();
                      }
 
-#    document.onmousemove = function(e) {
-#                        if (top.Jx.shell.sessionController.resetIdleNotifyTabs != null)
-#                            top.Jx.shell.sessionController.resetIdleNotifyTabs();
-#                     }
+//    document.onmousemove = function(e) {
+//                        if (top.Jx.shell.sessionController.resetIdleNotifyTabs != null)
+//                            top.Jx.shell.sessionController.resetIdleNotifyTabs();
+//                     }
   }
 </script>
 

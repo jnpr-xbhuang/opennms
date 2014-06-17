@@ -147,16 +147,18 @@
 		var versionElements = new Array(document.getElementById("v1v2"), document.getElementById("v3"));
 		var selectedElement = null;
 		//  determine selected element
-		if (document.getElementById("version").value == "v1" || document.getElementById("version").value == "v2c")
+                var e = document.getElementById("version");
+                var v = e.options[e.selectedIndex].value;
+                if (v == "v1" || v == "v2c")
 			selectedElement = document.getElementById("v1v2");
-		if (document.getElementById("version").value == "v3")
+                if (v == "v3")
 			selectedElement = document.getElementById("v3");
 
 		// hide all not selected elements and show selected Element
 		for ( var elementIndex in versionElements) {
 			var element = versionElements[elementIndex];
 			if (element == selectedElement) { // show
-				element.style.visibility = null;
+				element.style.visibility = '';
 				element.style.display = "block";
 			} else { // hide
 				element.style.visibility = "hidden";
