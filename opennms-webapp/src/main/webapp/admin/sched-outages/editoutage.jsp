@@ -686,7 +686,7 @@ Could not find an outage to edit because no outage name parameter was specified 
 
 <style type="text/css">
 TD {
-	font-size: 0.8em;
+	font-size: 12px;
 }
 
 UL
@@ -696,7 +696,7 @@ UL
 
 P
 {
-	font-size: 0.8em;
+	font-size: 12px;
 	margin: 0px;
 }
 

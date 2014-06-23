@@ -102,7 +102,7 @@
         <input type="hidden" name="sourcePage" value="<%=NotificationWizardServlet.SOURCE_PAGE_VALIDATE_PATH_OUTAGE%>"/>
         <% if (showNodes != null && showNodes.equals("on")) { %>
           <table width="50%" border="1">
-            <tr bgcolor="#999999">
+            <tr bgcolor="#536F85">
               <td>
                 <b>Node ID</b>
               </td>

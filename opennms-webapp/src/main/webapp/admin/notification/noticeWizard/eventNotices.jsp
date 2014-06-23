@@ -123,7 +123,7 @@
       <td valign="top">
         <h4>Event Notifications</h4>
         <table width="100%" border="1">
-          <tr bgcolor="#999999">
+          <tr bgcolor="#536F85">
             <td colspan="3">
               <b>Actions</b>
             </td>

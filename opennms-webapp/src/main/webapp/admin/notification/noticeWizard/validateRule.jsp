@@ -106,7 +106,7 @@
         <input type="hidden" name="userAction" value=""/>
         <input type="hidden" name="sourcePage" value="<%=NotificationWizardServlet.SOURCE_PAGE_VALIDATE%>"/>
         <table width="25%" border="1">
-          <tr bgcolor="#999999">
+          <tr bgcolor="#536F85">
             <td width="50%">
               <b>Interfaces</b>
             </td>
