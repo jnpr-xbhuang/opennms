@@ -94,9 +94,9 @@
 
 <table width="100%" border="1" bordercolor="black">
 	         <tr>
-    		    		<td bgcolor="#999999"><b>Name</b></td>
+    		    		<td bgcolor="#536F85"><b>Name</b></td>
 				<td><c:out value="${role.name}"/></td>
-    		    		<td bgcolor="#999999"><b>Currently On Call</b></td>
+    		    		<td bgcolor="#536F85"><b>Currently On Call</b></td>
 				<td>
 					<c:forEach var="scheduledUser" items="${role.currentUsers}">
 						<c:out value="${scheduledUser}"/>
@@ -104,13 +104,13 @@
 				</td>
           	</tr>
 	         <tr>
-    		    		<td bgcolor="#999999"><b>Supervisor</b></td>
+    		    		<td bgcolor="#536F85"><b>Supervisor</b></td>
 				<td><c:out value="${role.defaultUser}"/></td>
-    		    		<td bgcolor="#999999"><b>Membership Group</b></td>
+    		    		<td bgcolor="#536F85"><b>Membership Group</b></td>
 				<td><c:out value="${role.membershipGroup}"/></td>
           	</tr>
           	<tr>
-    		    		<td bgcolor="#999999"><b>Description</b></td>
+    		    		<td bgcolor="#536F85"><b>Description</b></td>
 				<td colspan="3"><c:out value="${role.description}"/></td>
           	</tr>
 		</table>
@@ -140,7 +140,7 @@
 			</caption>
 				<tr>
 				<c:forEach var="day" items="${calendar.weeks[0].days}">
-				<th bgcolor="#999999">
+				<th bgcolor="#536F85">
 					<b><c:out value="${day.dayOfWeek}"/></b>
 				</th>
 				</c:forEach>
