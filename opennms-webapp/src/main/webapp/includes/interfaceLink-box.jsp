@@ -81,7 +81,7 @@
 				
 		<% for( LinkInterface linkInterface: factory.getDataLinksOnInterface(nodeId, ifIndex)) { %>
 		    <tr>
-			<td class="standard" style="font-size:70%" width="35%">
+			<td class="standard" style="font-size:12px" width="35%">
 		       	<a href="element/linkednode.jsp?node=<%=linkInterface.getLinkedNodeId()%>"><%=factory.getNodeLabel(linkInterface.getLinkedNodeId())%></a>
 		       	&nbsp;
 		       	<%	if (linkInterface.hasLinkedInterface()) { %>

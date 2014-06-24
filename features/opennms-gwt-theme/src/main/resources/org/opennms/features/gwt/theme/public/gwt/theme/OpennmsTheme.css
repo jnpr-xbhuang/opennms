@@ -1059,7 +1059,7 @@ td.datePickerMonth {
   text-align: center;
   vertical-align: center;
   white-space: nowrap;
-  font-size: 70%;
+  font-size: 12px;
   font-weight: bold;
 }
 .datePickerPreviousButton,
@@ -1104,7 +1104,7 @@ td.datePickerMonth {
 	
 }
 .gwt-TabLayoutPanel .gwt-TabLayoutPanelTabs {
-	font-size: 70%;
+	font-size: 12px;
 }
 .gwt-TabLayoutPanel .gwt-TabLayoutPanelContent {
   border-color: #bcbcbc;
