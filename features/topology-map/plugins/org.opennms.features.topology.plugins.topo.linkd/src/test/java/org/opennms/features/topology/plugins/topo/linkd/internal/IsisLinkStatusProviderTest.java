@@ -34,22 +34,19 @@ import org.junit.Test;
 import org.opennms.features.topology.api.topo.*;
 import org.opennms.netmgt.EventConstants;
 import org.opennms.netmgt.dao.api.AlarmDao;
-import org.opennms.netmgt.dao.api.LldpLinkDao;
-import org.opennms.netmgt.model.LldpElement;
-import org.opennms.netmgt.model.LldpLink;
-import org.opennms.netmgt.model.OnmsAlarm;
-import org.opennms.netmgt.model.OnmsNode;
+import org.opennms.netmgt.dao.api.IsIsLinkDao;
+import org.opennms.netmgt.model.*;
 import org.opennms.netmgt.model.topology.EdgeAlarmStatusSummary;
 
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
-public class LldpLinkStatusProviderTest {
+public class IsisLinkStatusProviderTest {
 
     private AlarmDao m_alarmDao;
-    private LldpLinkDao m_lldpLinkDao;
-    private LldpLinkStatusProvider m_statusProvider;
+    private IsIsLinkDao m_isIsLinkDao;
+    private IsIsLinkStatusProvider m_statusProvider;
     private EdgeProvider m_edgeProvider;
     private OnmsNode m_node1;
     private OnmsNode m_node2;
@@ -58,18 +55,31 @@ public class LldpLinkStatusProviderTest {
     public void setUp() {
         m_node1 = new OnmsNode();
         m_node1.setId(1);
-        m_node1.setLldpElement(new LldpElement(m_node1, "node1ChassisId", "node1SysName", LldpElement.LldpChassisIdSubType.LLDP_CHASSISID_SUBTYPE_LOCAL));
+
+        IsIsElement element1 = new IsIsElement();
+        element1.setId(1);
+        element1.setNode(m_node1);
+        element1.setIsisSysID("000110088500");
+
+        m_node1.setIsisElement(element1);
 
         m_node2 = new OnmsNode();
         m_node2.setId(2);
-        m_node2.setLldpElement(new LldpElement(m_node2, "node2ChassisId", "node2SysName", LldpElement.LldpChassisIdSubType.LLDP_CHASSISID_SUBTYPE_LOCAL));
+
+        IsIsElement element2 = new IsIsElement();
+        element2.setId(2);
+        element2.setNode(m_node2);
+        element2.setIsisSysID("000110255062");
+
+        m_node2.setIsisElement(element2);
+
 
         m_alarmDao = EasyMock.createMock(AlarmDao.class);
-        m_lldpLinkDao = EasyMock.createMock(LldpLinkDao.class);
+        m_isIsLinkDao = EasyMock.createMock(IsIsLinkDao.class);
 
-        m_statusProvider = new LldpLinkStatusProvider();
+        m_statusProvider = new IsIsLinkStatusProvider();
         m_statusProvider.setAlarmDao(m_alarmDao);
-        m_statusProvider.setLldpLinkDao(m_lldpLinkDao);
+        m_statusProvider.setIsisLinkDao(m_isIsLinkDao);
 
         m_edgeProvider = EasyMock.createMock(EdgeProvider.class);
 
@@ -77,14 +87,12 @@ public class LldpLinkStatusProviderTest {
 
     @Test
     public void testGetLldpLinkStatus() {
-        List<Integer> linkIds = new ArrayList<Integer>();
-        linkIds.add(1);
-        linkIds.add(2);
+
         EasyMock.expect(
                 m_alarmDao.findMatching(EasyMock.anyObject(org.opennms.core.criteria.Criteria.class))).andReturn(createAlarm());
-        EasyMock.expect(m_lldpLinkDao.findLinksForIds(linkIds)).andReturn(createLldpLinks());
+        EasyMock.expect(m_isIsLinkDao.findMatching(EasyMock.<org.opennms.core.criteria.Criteria>anyObject())).andReturn(createIsIsLinks());
 
-        EasyMock.replay(m_alarmDao, m_lldpLinkDao);
+        EasyMock.replay(m_alarmDao, m_isIsLinkDao);
 
         List<EdgeRef> edges = createEdges();
         Map<EdgeRef, Status> statusMap = m_statusProvider.getStatusForEdges(m_edgeProvider, edges, new Criteria[0]);
@@ -98,14 +106,11 @@ public class LldpLinkStatusProviderTest {
 
     @Test
     public void testGetLldpLinkStatusDown(){
-        List<Integer> linkIds = new ArrayList<Integer>();
-        linkIds.add(1);
-        linkIds.add(2);
         EasyMock.expect(
                 m_alarmDao.findMatching(EasyMock.anyObject(org.opennms.core.criteria.Criteria.class))).andReturn(createDownAlarm());
-        EasyMock.expect(m_lldpLinkDao.findLinksForIds(linkIds)).andReturn(createLldpLinks());
+        EasyMock.expect(m_isIsLinkDao.findMatching(EasyMock.<org.opennms.core.criteria.Criteria>anyObject())).andReturn(createIsIsLinks());
 
-        EasyMock.replay(m_alarmDao, m_lldpLinkDao);
+        EasyMock.replay(m_alarmDao, m_isIsLinkDao);
 
         List<EdgeRef> edges = createEdges();
         Map<EdgeRef, Status> statusMap = m_statusProvider.getStatusForEdges(m_edgeProvider, edges, new Criteria[0]);
@@ -130,23 +135,19 @@ public class LldpLinkStatusProviderTest {
 
         Vertex sourceVertex = new AbstractVertex("nodes", "1", "source");
         Vertex targetVertex = new AbstractVertex("nodes", "2", "target");
-        EdgeRef edge = new AbstractEdge(EnhancedLinkdTopologyProvider.LLDP_EDGE_NAMESPACE, "1|2", sourceVertex, targetVertex);
+        EdgeRef edge = new AbstractEdge(EnhancedLinkdTopologyProvider.ISIS_EDGE_NAMESPACE, "1|2", sourceVertex, targetVertex);
         return Arrays.asList(edge);
     }
 
 
-    private List<LldpLink> createLldpLinks() {
-        List<LldpLink> links = new ArrayList<LldpLink>();
+    private List<IsIsLink> createIsIsLinks() {
+        List<IsIsLink> links = new ArrayList<IsIsLink>();
 
-        LldpLink link = new LldpLink(m_node1, 12, 1, "node1PortId", "node1PortDescr", LldpLink.LldpPortIdSubType.LLDP_PORTID_SUBTYPE_LOCAL,
-                "node2ChassisId", "node2SysName", LldpElement.LldpChassisIdSubType.LLDP_CHASSISID_SUBTYPE_LOCAL, "node2PortId",
-                LldpLink.LldpPortIdSubType.LLDP_PORTID_SUBTYPE_LOCAL, "node2PortDescr");
+        IsIsLink link = createIsIsLink(m_node1, 599, 599, 1, 1, "001f12accbf1", "000110255062");
         link.setId(1);
         links.add(link);
 
-        LldpLink link2 = new LldpLink(m_node2, 21, 2, "node2PortId", "node2PortDescr", LldpLink.LldpPortIdSubType.LLDP_PORTID_SUBTYPE_LOCAL,
-                "node1ChassisId", "node1SysName", LldpElement.LldpChassisIdSubType.LLDP_CHASSISID_SUBTYPE_LOCAL, "node1PortId",
-                LldpLink.LldpPortIdSubType.LLDP_PORTID_SUBTYPE_LOCAL, "node1PortDescr");
+        IsIsLink link2 = createIsIsLink(m_node2, 578, 578, 1, 1, "0021590e47c1", "000110088500");
         link2.setId(2);
         links.add(link2);
 
@@ -162,11 +163,23 @@ public class LldpLinkStatusProviderTest {
 
         OnmsAlarm alarm1 = new OnmsAlarm();
         alarm1.setNode(m_node1);
-        alarm1.setIfIndex(1);
+        alarm1.setIfIndex(599);
         alarm1.setUei("uei.opennms.org/internal/topology/linkDown");
         alarms.add(alarm1);
 
         return alarms;
     }
 
+    private IsIsLink createIsIsLink(OnmsNode node, int isisCircIndex, int isisCircIfindex, int isisAdjIndex, int isisCircAdmin, String isisIsAdjNeighsnpaadress, String isisisAdjNeighSysid) {
+        final IsIsLink isisLink = new IsIsLink();
+        isisLink.setNode(node);
+        isisLink.setIsisCircIndex(isisCircIndex);
+        isisLink.setIsisCircIfIndex(isisCircIfindex);
+        isisLink.setIsisISAdjIndex(isisAdjIndex);
+        isisLink.setIsisCircAdminState(IsIsElement.IsisAdminState.get(isisCircAdmin));
+        isisLink.setIsisISAdjNeighSNPAAddress(isisIsAdjNeighsnpaadress);
+        isisLink.setIsisISAdjNeighSysID(isisisAdjNeighSysid);
+        return isisLink;
+
+    }
 }
