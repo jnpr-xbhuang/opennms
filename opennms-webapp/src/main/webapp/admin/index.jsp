@@ -140,14 +140,14 @@
     <div class="boxWrapper">
         <ul class="plain">  
 <%--
-            <li><a onclick="admin/discovery/modifyDiscoveryConfig" href="#op0">Configure Discovery</a></li>
+            <li><a href="admin/discovery/modifyDiscoveryConfig">Configure Discovery</a></li>
 --%>
-            <li><a onclick="javascript:snmpConfigPost()" href="#op1">Configure SNMP Community Names by IP</a></li>
-            <li><a onclick="javascript:snmpManagePost()" href="#op2">Configure SNMP Data Collection per Interface</a></li>
+            <li><a href="javascript:snmpConfigPost()">Configure SNMP Community Names by IP</a></li>
+            <li><a href="javascript:snmpManagePost()">Configure SNMP Data Collection per Interface</a></li>
             <!-- Removed this - see bug 586
-            <li><a onclick="admin/pollerConfig/index.jsp" href="#op3">Configure Pollers</a></li>
+            <li><a href="admin/pollerConfig/index.jsp">Configure Pollers</a></li>
             -->        
-            <li><a onclick="javascript:submitPost()" href="#op4">Manage and Unmanage Interfaces and Services</a></li>
+            <li><a href="javascript:submitPost()">Manage and Unmanage Interfaces and Services</a></li>
             <li><a href="admin/thresholds/index.htm">Manage Thresholds</a></li>
             <!-- Secret function 
                     <a href="admin/eventconf/list.jsp">Configure Events</a> 
@@ -183,11 +183,11 @@
     <h3>Node Provisioning</h3>
     <div class="boxWrapper">
         <ul class="plain">  
-            <li><a onclick="javascript:addInterfacePost()" href="#np1">Add Interface for Scanning</a></li>
+            <li><a href="javascript:addInterfacePost()">Add Interface for Scanning</a></li>
             <li><a href="admin/provisioningGroups.htm">Manage Provisioning Requisitions</a></li>
             <li><a href="admin/asset/index.jsp">Import and Export Asset Information</a></li>
             <li><a href="admin/categories.htm">Manage Surveillance Categories</a></li>
-            <li><a onclick="javascript:deletePost()" href="#np2">Delete Nodes</a></li>
+            <li><a href="javascript:deletePost()">Delete Nodes</a></li>
         </ul>
     </div>
 
