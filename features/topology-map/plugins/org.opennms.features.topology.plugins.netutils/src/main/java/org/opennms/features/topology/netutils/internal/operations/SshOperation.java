@@ -86,24 +86,36 @@ public class SshOperation extends AbstractOperation {
 
     @Override
     public boolean display(final List<VertexRef> targets, final OperationContext operationContext) {
-        if (operationContext.getDisplayLocation() == DisplayLocation.MENUBAR) {
-//            return true;
-            if (getLabelValue(operationContext, targets.get(0)) != null && (! (getLabelValue(operationContext, targets.get(0)).startsWith("space-") && getLabelValue(operationContext, targets.get(0)).length() == 18)) ) {
-                return true;
-            } else {
-                return false;
+        if (targets == null || targets.size() < 2) {
+            for (final VertexRef target : targets) {
+                final Integer nodeId = getNodeIdValue(operationContext, target);
+                final String nodeLabel = getLabelValue(operationContext, target);
+                if (nodeId != null && nodeId > 0) {
+                    if (nodeLabel.startsWith("space-") && nodeLabel.length() > 17) {
+                        return false;
+                    }
+                    return true;
+                }
             }
         }
-        else if(targets != null && targets.size() == 1 && targets.get(0) != null) {
-	    if (getLabelValue(operationContext, targets.get(0)) != null && (! (getLabelValue(operationContext, targets.get(0)).startsWith("space-") && getLabelValue(operationContext, targets.get(0)).length() == 18)) ) {
-        	return true;
-	    } else {
-		return false;
+        return false;
+    }    
+	
+    @Override
+    public boolean enabled(final List<VertexRef> targets, final OperationContext operationContext) {
+        if (targets == null || targets.size() < 2) {
+            for (final VertexRef target : targets) {
+                final Integer nodeValue = getNodeIdValue(operationContext, target);
+		final String nodeLabel = getLabelValue(operationContext, target);
+                if (nodeValue != null && nodeValue > 0) {
+		    if (nodeLabel.startsWith("space-") && nodeLabel.length() > 17) { 
+			return false;
+		    }
+                    return true;
+                }
             }
-        }else {
-            return false;
         }
-
+        return false;
     }
 
     @Override
