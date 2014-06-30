@@ -72,11 +72,20 @@ public class IsIsLinkStatusProvider extends AbstractLinkStatusProvider {
 
         List<OnmsAlarm> alarms = getLinkDownAlarms();
         for (OnmsAlarm alarm : alarms) {
-            String key = alarm.getNodeId() + ":" + alarm.getIfIndex();
-            if (summaryMap.containsKey(key)) {
-                EdgeAlarmStatusSummary summary = summaryMap.get(key);
-                summary.setEventUEI(alarm.getUei());
-            }
+	    if (alarm.getIfIndex() != null) {
+                String key = alarm.getNodeId() + ":" + alarm.getIfIndex();
+                if (summaryMap.containsKey(key)) {
+                    EdgeAlarmStatusSummary summary = summaryMap.get(key);
+                    summary.setEventUEI(alarm.getUei());
+                }
+            } else {
+               for (String key : summaryMap.keySet()){
+                   if (key.indexOf(alarm.getNodeId() + ":") > -1) {
+                       EdgeAlarmStatusSummary summary = summaryMap.get(key);
+                       summary.setEventUEI(alarm.getUei());
+                   }
+               }
+	    }
         }
         return new ArrayList<EdgeAlarmStatusSummary>(summaryMap.values());
     }

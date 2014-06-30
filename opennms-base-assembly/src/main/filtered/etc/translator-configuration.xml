@@ -68,6 +68,47 @@
         </mapping>
       </mappings>
     </event-translation-spec>
+
+    <event-translation-spec uei="uei.opennms.org/nodes/dataCollectionFailed">
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/internal/topology/linkDown" />
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
+   
+    <event-translation-spec uei="uei.opennms.org/nodes/dataCollectionSucceeded">
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/internal/topology/linkUp" />
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
+
+
+    <event-translation-spec uei="uei.opennms.org/nodes/nodeDown">
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/internal/topology/linkDown" />
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
+   
+    <event-translation-spec uei="uei.opennms.org/nodes/nodeUp">
+      <mappings>
+        <mapping>
+          <assignment name="uei" type="field" >
+            <value type="constant" result="uei.opennms.org/internal/topology/linkUp" />
+          </assignment>
+        </mapping>
+      </mappings>
+    </event-translation-spec>
     
     <!-- This translation is predifined for integration with Hyperic-HQ server and the OpenNMS integrations found in
          the $OPENNMS_HOME/contrib/hyperic-integration directory -->
