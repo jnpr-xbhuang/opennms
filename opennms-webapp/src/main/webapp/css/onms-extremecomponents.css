@@ -36,10 +36,10 @@
 */
 
 .eXtremeTable .titleRow td {
-	background-image: url(../images/headingbg.png);
+/*	background-image: url(../images/headingbg.png); */
 	background-repeat: repeat-x;
 	background-position: center center;
-	background-color: #366903;
+	background-color: #536F85;
 	color: #FFF;
 	border:1px solid #999;
 	border-bottom: 0;
@@ -73,7 +73,7 @@
 .eXtremeTable .tableHeader {
 	border:1px solid #999;
 	padding: 4px 5px;
-	background-color: #444;
+	background-color: #536F85;
 	font-weight: bold;
 	text-align: left;
 	color: #FFF;
@@ -83,7 +83,7 @@
 .eXtremeTable .tableHeaderSort {
 	border:1px solid #999;
 	padding: 4px 5px;
-	background-color: #444;
+	background-color: #536F85;
 	font-weight: bold;
 	text-align: left;
 	color: #FFF;
