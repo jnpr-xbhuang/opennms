@@ -53,6 +53,9 @@
     //window.top.location = '../mainui/unsecured/logout?appName=CMP';
 
     var user = window.localStorage.getItem('opennmsuser').toLowerCase();
+    if (user.lastIndexOf('\\') > -1) {
+        user = user.substr(user.lastIndexOf('\\') + 1);
+    }
     var password = window.localStorage.getItem('opennmspw');
     var groups = window.localStorage.getItem('opennmsdomainname');
 
