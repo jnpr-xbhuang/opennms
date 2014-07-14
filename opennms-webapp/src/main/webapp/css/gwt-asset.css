@@ -123,7 +123,7 @@ input.dateBox {
 	color: #f90;
 	font-weight: bold;
 }
-/**
+
 table.FieldSet-changed input {
 	background-color: #b4c598;
 }
@@ -135,7 +135,7 @@ table.FieldSet-changed select {
 .FieldSet-changed .textArea {
 	background-color: #b4c598;
 }
-**/
+
 .FieldSet-error input.textArea {
 	background-color: #d94242;
 }
