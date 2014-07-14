@@ -20,10 +20,16 @@
         <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.1.1.9" instance="jnxJsSPUMonitoringObjectsEntry" alias="jnxJsSPUMonMaxCPSes" type="integer"/>
         <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.1.1.10" instance="jnxJsSPUMonitoringObjectsEntry" alias="jnxJsSPUMonNodeInde" type="integer"/>
         <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.1.1.11" instance="jnxJsSPUMonitoringObjectsEntry" alias="jnxJsSPUMonNodeDesc" type="octetstring"/>
+        <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.1.1.12" instance="jnxJsSPUMonitoringObjectsEntry" alias="jnJsSPMonFloSesIPv4" type="integer"/>
+        <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.1.1.13" instance="jnxJsSPUMonitoringObjectsEntry" alias="jnJsSPMonFloSesIPv6" type="integer"/>
+        <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.1.1.14" instance="jnxJsSPUMonitoringObjectsEntry" alias="jnJsSPUMonCPSesIPv4" type="integer"/>
+        <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.1.1.15" instance="jnxJsSPUMonitoringObjectsEntry" alias="jnJsSPUMonCPSesIPv6" type="integer"/>
     </group>
     <group name="jnxJsSPUMonitoringMIB" ifType="ignore">
         <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.2" instance="0" alias="jnJsSPUMonCurTotSes" type="integer"/>
         <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.3" instance="0" alias="jnJsSPUMonMaxTotSes" type="integer"/>
+        <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.5" instance="0" alias="jnJsSPMonTotSesIPv4" type="integer"/>
+        <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.6" instance="0" alias="jnJsSPMonTotSesIPv6" type="integer"/>
     </group>
     <group name="jnxSPUClusterObjectsTable" ifType="all">
         <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.4.1.1" instance="jnxSPUClusterObjectsEntry" alias="jnxJsCluMonNodeInde" type="integer"/>
@@ -31,6 +37,10 @@
         <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.4.1.3" instance="jnxSPUClusterObjectsEntry" alias="jnxJsNodCurTotaSess" type="integer"/>
         <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.4.1.4" instance="jnxSPUClusterObjectsEntry" alias="jnxJsNodMaxTotaSess" type="integer"/>
         <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.4.1.5" instance="jnxSPUClusterObjectsEntry" alias="jnJsNodSesCrePerSec" type="counter64"/>
+        <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.4.1.6" instance="jnxSPUClusterObjectsEntry" alias="jnJsNoSeCrPeSecIPv4" type="counter64"/>
+        <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.4.1.7" instance="jnxSPUClusterObjectsEntry" alias="jnJsNoSeCrPeSecIPv6" type="counter64"/>
+        <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.4.1.8" instance="jnxSPUClusterObjectsEntry" alias="jnJsNoCurTotSesIPv4" type="integer"/>
+        <mibObj oid=".1.3.6.1.4.1.2636.3.39.1.12.1.4.1.9" instance="jnxSPUClusterObjectsEntry" alias="jnJsNoCurTotSesIPv6" type="integer"/>
     </group>
     <systemDef name="SRX5800">
         <sysoidMask>.1.3.6.1.4.1.2636.1.1.1.2.26</sysoidMask>
@@ -57,7 +67,7 @@
         </collect>
     </systemDef>
     <systemDef name="SRX3400">
-        <sysoidMask>.1.3.6.1.4.1.2636.1.1.1.2.25</sysoidMask>
+        <sysoidMask>.1.3.6.1.4.1.2636.1.1.1.2.35</sysoidMask>
         <collect>
             <includeGroup>jnxJsSPUMonitoringObjectsTable</includeGroup>
             <includeGroup>jnxJsSPUMonitoringMIB</includeGroup>
