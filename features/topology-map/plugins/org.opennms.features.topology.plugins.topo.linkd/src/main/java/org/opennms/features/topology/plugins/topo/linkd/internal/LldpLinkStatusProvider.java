@@ -28,6 +28,8 @@
 
 package org.opennms.features.topology.plugins.topo.linkd.internal;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import org.opennms.features.topology.api.topo.*;
 import org.opennms.netmgt.dao.api.LldpLinkDao;
 import org.opennms.netmgt.model.*;
@@ -63,7 +65,7 @@ public class LldpLinkStatusProvider extends AbstractLinkStatusProvider {
     protected List<EdgeAlarmStatusSummary> getEdgeAlarmSummaries(List<Integer> linkIds) {
         List<LldpLink> links = m_lldpLinkDao.findLinksForIds(linkIds);
 
-        Map<String, EdgeAlarmStatusSummary> summaryMap = new HashMap<String, EdgeAlarmStatusSummary>();
+        Multimap<String, EdgeAlarmStatusSummary> summaryMap = HashMultimap.create();
         for (LldpLink sourceLink : links) {
 
             OnmsNode sourceNode = sourceLink.getNode();
@@ -97,14 +99,18 @@ public class LldpLinkStatusProvider extends AbstractLinkStatusProvider {
             if (alarm.getIfIndex() != null) {
                 String key = alarm.getNodeId() + ":" + alarm.getIfIndex();
                 if (summaryMap.containsKey(key)) {
-                    EdgeAlarmStatusSummary summary = summaryMap.get(key);
-                    summary.setEventUEI(alarm.getUei());
+                    Collection<EdgeAlarmStatusSummary> summaries = summaryMap.get(key);
+                    for (EdgeAlarmStatusSummary summary : summaries) {
+                        summary.setEventUEI(alarm.getUei());
+                    }
                 }
             } else {
                for (String key : summaryMap.keySet()){
                    if (key.indexOf(alarm.getNodeId() + ":") > -1) {
-                       EdgeAlarmStatusSummary summary = summaryMap.get(key);
-                       summary.setEventUEI(alarm.getUei());
+                       Collection<EdgeAlarmStatusSummary> summaries = summaryMap.get(key);
+                       for (EdgeAlarmStatusSummary summary : summaries) {
+                           summary.setEventUEI(alarm.getUei());
+                       }
                    }
                }
              }

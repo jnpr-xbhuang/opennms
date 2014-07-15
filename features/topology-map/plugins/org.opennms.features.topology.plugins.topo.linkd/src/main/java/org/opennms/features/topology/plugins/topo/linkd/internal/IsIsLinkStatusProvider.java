@@ -28,6 +28,8 @@
 
 package org.opennms.features.topology.plugins.topo.linkd.internal;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import org.opennms.core.criteria.Criteria;
 import org.opennms.core.criteria.restrictions.InRestriction;
 import org.opennms.features.topology.api.topo.EdgeRef;
@@ -56,7 +58,7 @@ public class IsIsLinkStatusProvider extends AbstractLinkStatusProvider {
         criteria.addRestriction(new InRestriction("id", linkIds));
 
         List<IsIsLink> links = getIsisLinkDao().findMatching(criteria);
-        Map<String, EdgeAlarmStatusSummary> summaryMap = new HashMap<String, EdgeAlarmStatusSummary>();
+        Multimap<String, EdgeAlarmStatusSummary> summaryMap = HashMultimap.create();
         for (IsIsLink sourceLink : links) {
             OnmsNode sourceNode = sourceLink.getNode();
             IsIsElement sourceElement = sourceNode.getIsisElement();
@@ -75,14 +77,18 @@ public class IsIsLinkStatusProvider extends AbstractLinkStatusProvider {
 	    if (alarm.getIfIndex() != null) {
                 String key = alarm.getNodeId() + ":" + alarm.getIfIndex();
                 if (summaryMap.containsKey(key)) {
-                    EdgeAlarmStatusSummary summary = summaryMap.get(key);
-                    summary.setEventUEI(alarm.getUei());
+                    Collection<EdgeAlarmStatusSummary> summaries = summaryMap.get(key);
+                    for (EdgeAlarmStatusSummary summary : summaries) {
+                        summary.setEventUEI(alarm.getUei());
+                    }
                 }
             } else {
                for (String key : summaryMap.keySet()){
                    if (key.indexOf(alarm.getNodeId() + ":") > -1) {
-                       EdgeAlarmStatusSummary summary = summaryMap.get(key);
-                       summary.setEventUEI(alarm.getUei());
+                       Collection<EdgeAlarmStatusSummary> summaries = summaryMap.get(key);
+                       for (EdgeAlarmStatusSummary summary : summaries) {
+                           summary.setEventUEI(alarm.getUei());
+                       }
                    }
                }
 	    }
