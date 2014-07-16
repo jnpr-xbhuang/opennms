@@ -23,10 +23,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPUTempRising</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceCPUTempRising</event-label>
         <descr>
-        &lt;p&gt;CPU temperature too high(mC):%parm[#5]%.&lt;/p&gt;
+        &lt;p&gt;CPU temperature too high: %parm[#5]%&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                       CPU temperature too high(mC):%parm[#5]%.&lt;/p&gt;
+                       CPU temperature too high: %parm[#5]%&lt;/p&gt;
                 </logmsg>
         <severity>Major</severity>
         <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%"/>
@@ -54,10 +54,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPUTempCleared</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceCPUTempCleared</event-label>
         <descr>
-        &lt;p&gt;CPU temperature is normal(mC):%parm[#5]%.&lt;/p&gt;
+        &lt;p&gt;CPU temperature is normal: %parm[#5]%mC&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                      CPU temperature is normal(mC):%parm[#5]%.&lt;/p&gt;
+                      CPU temperature is normal: %parm[#5]%mC&lt;/p&gt;
                 </logmsg>
         <severity>Normal</severity>
         <alarm-data auto-clean="true" clear-key="uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPUTempRising:%dpname%:%nodeid%" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%"/>
@@ -85,10 +85,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPUFanRising</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceCPUFanRising</event-label>
         <descr>
-        &lt;p&gt;CPU fan too slow (rpm):%parm[#5]%.&lt;/p&gt;
+        &lt;p&gt;CPU fan too slow: %parm[#5]%&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                       CPU fan too slow (rpm):%parm[#5]%.&lt;/p&gt;
+                       CPU fan too slow: %parm[#5]%&lt;/p&gt;
                 </logmsg>
         <severity>Major</severity>
         <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%"/>
@@ -116,10 +116,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPUFanCleared</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceCPUFanCleared</event-label>
         <descr>
-        &lt;p&gt;CPU fan is normal(rpm):%parm[#5]%.&lt;/p&gt;
+        &lt;p&gt;CPU fan is normal: %parm[#5]%rpm&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                      CPU fan is normal(rpm):%parm[#5]%.&lt;/p&gt;
+                      CPU fan is normal: %parm[#5]%rpm&lt;/p&gt;
                 </logmsg>
         <severity>Normal</severity>
         <alarm-data auto-clean="true" clear-key="uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPUFanRising:%dpname%:%nodeid%" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%"/>
@@ -147,10 +147,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPUVlotRising</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceCPUVlotRising</event-label>
         <descr>
-        &lt;p&gt;CPU voltage too low (mV):%parm[#5]%.&lt;/p&gt;
+        &lt;p&gt;CPU voltage too low: %parm[#5]%&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                      CPU voltage too low (mV):%parm[#5]%.&lt;/p&gt;
+                      CPU voltage too low: %parm[#5]%&lt;/p&gt;
                 </logmsg>
         <severity>Major</severity>
         <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%"/>
@@ -178,10 +178,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPUVoltCleared</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceCPUVoltCleared</event-label>
         <descr>
-        &lt;p&gt;CPU voltage is normal(mV):%parm[#5]%.&lt;/p&gt;
+        &lt;p&gt;CPU voltage is normal: %parm[#5]%mV.&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                      CPU voltage is normal(mV):%parm[#5]%.&lt;/p&gt;
+                      CPU voltage is normal: %parm[#5]%mV.&lt;/p&gt;
                 </logmsg>
         <severity>Normal</severity>
         <alarm-data auto-clean="true" clear-key="uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPUVlotRising:%dpname%:%nodeid%" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%"/>
@@ -210,10 +210,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceDiskUsageRising</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceDiskUsageRising</event-label>
         <descr>
-        &lt;p&gt;Disk usage threshold upper limit exceeded. Path:%parm[#6]%, used(percent):%parm[#7]%.&lt;/p&gt;
+        &lt;p&gt;Disk usage threshold upper limit exceeded. %parm[#7]%&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                       Disk usage threshold upper limit exceeded. Path:%parm[#6]%, used(percent):%parm[#7]%.&lt;/p&gt;
+                       Disk usage threshold upper limit exceeded. %parm[#7]%&lt;/p&gt;
                 </logmsg>
         <severity>Major</severity>
         <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#6]%"/>
@@ -241,10 +241,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceDiskUsageRisingCleared</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceDiskUsageRisingcleared</event-label>
         <descr>
-        &lt;p&gt;Disk usage is normal. Path:%parm[#6]%, used(percent):%parm[#7]%.&lt;/p&gt;
+        &lt;p&gt;Disk usage is normal. Path: %parm[#6]%, used: %parm[#7]%%&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                       Disk usage is normal. Path:%parm[#6]%, used(percent):%parm[#7]%.&lt;/p&gt;
+                       Disk usage is normal. Path: %parm[#6]%, used: %parm[#7]%%&lt;/p&gt;
                 </logmsg>
         <severity>Normal</severity>
         <alarm-data auto-clean="true" clear-key="uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceDiskUsageRising:%dpname%:%nodeid%:%parm[#6]%" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#6]%"/>
@@ -272,10 +272,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceSwapUsageRising</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceSwapUsageRising</event-label>
         <descr>
-        &lt;p&gt;Swap memory usage threshold upper limit exceeded. %parm[#7]%.&lt;/p&gt;
+        &lt;p&gt;Swap memory usage threshold upper limit exceeded. %parm[#7]%&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                      Swap memory usage threshold upper limit exceeded. %parm[#7]%.&lt;/p&gt;
+                      Swap memory usage threshold upper limit exceeded. %parm[#7]%&lt;/p&gt;
                 </logmsg>
         <severity>Major</severity>
         <alarm-data auto-clean="false" alarm-type="1" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#6]%"/>
@@ -303,10 +303,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceSwapUsageRisingCleared</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceSwapUsageRisingCleared</event-label>
         <descr>
-        &lt;p&gt;Swap memory usage is normal, available swap space(kb):%parm[#6]%.&lt;/p&gt;
+        &lt;p&gt;Swap memory usage is normal, available swap space: %parm[#6]% KB&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                       Swap memory is normal, available swap space(kb):%parm[#6]%.&lt;/p&gt;
+                       Swap memory usage is normal, available swap space: %parm[#6]% KB&lt;/p&gt;
                 </logmsg>
         <severity>Normal</severity>
         <alarm-data auto-clean="true" clear-key="uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceSwapUsageRising:%dpname%:%nodeid%:%parm[#6]%" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#6]%"/>
@@ -365,10 +365,10 @@
         <uei>uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPULARisingCleared</uei>
         <event-label>SPACE-PLATFORM customized trap event: jnxSpaceCPULARisingCleared</event-label>
         <descr>
-        &lt;p&gt;CPU load average is normal, %parm[#6]%:%parm[#7]%.&lt;/p&gt;
+        &lt;p&gt;CPU load average is normal, %parm[#6]%: %parm[#7]%&lt;/p&gt;
         </descr>
                 <logmsg dest='logndisplay'>&lt;p&gt;
-                      CPU load average is normal, %parm[#6]%:%parm[#7]%.&lt;/p&gt;
+                      CPU load average is normal, %parm[#6]%: %parm[#7]%&lt;/p&gt;
                 </logmsg>
         <severity>Normal</severity>
         <alarm-data auto-clean="true" clear-key="uei.opennms.org/traps/SPACE-PLATFORM-MIB/jnxSpaceCPULARising:%dpname%:%nodeid%:%parm[#6]%" alarm-type="2" reduction-key="%uei%:%dpname%:%nodeid%:%parm[#6]%"/>
