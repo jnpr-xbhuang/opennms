@@ -63,7 +63,7 @@ public class EnhancedLinkd extends AbstractServiceDaemon {
     /**
      * The log4j category used to log messages.
      */
-    private static final String LOG_PREFIX = "linkd";
+    private static final String LOG_PREFIX = "enlinkd";
 
     /**
      * Rescan scheduler thread
