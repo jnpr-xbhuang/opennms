@@ -60,11 +60,11 @@ public class SearchPopup extends PopupPanel implements SearchPopupDisplay {
         super(true);
         
         Label label = new Label("Search for Node:");
-        label.getElement().getStyle().setFontSize(70, Unit.PCT);
+//        label.getElement().getStyle().setFontSize(70, Unit.PCT);
         label.getElement().getStyle().setPaddingTop(4, Unit.PX);
         label.getElement().getStyle().setPaddingLeft(5, Unit.PX);
         m_tf = new TextBox();
-        m_tf.setSize("99%", "15px");
+        m_tf.setSize("95%", "18px");
         m_okBtn = new Button("OK");
         m_okBtn.setSize("100%", "100%");
         m_okBtn.addClickHandler(new ClickHandler() {
