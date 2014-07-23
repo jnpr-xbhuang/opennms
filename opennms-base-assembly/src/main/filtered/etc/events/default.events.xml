@@ -136,7 +136,7 @@
             &lt;/blockquote&gt;
             &lt;p&gt;
         </descr>
-        <logmsg dest='suppress'>
+        <logmsg dest='logndisplay'>
             Received unformatted enterprise event (enterprise:%id% generic:%generic% specific:%specific%). %parm[##]% args: %parm[all]%
         </logmsg>
         <severity>Normal</severity>
