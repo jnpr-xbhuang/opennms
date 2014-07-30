@@ -124,18 +124,18 @@
         <h4>Event Notifications</h4>
         <table width="100%" border="1">
           <tr bgcolor="#536F85">
-            <td colspan="3">
+            <th colspan="3">
               <b>Actions</b>
-            </td>
-            <td>
+            </th>
+            <th>
               <b>Notification</b>
-            </td>
-            <td>
+            </th>
+            <th>
               <b>Event</b>
-            </td>
-            <td>
+            </th>
+            <th>
               <b>UEI</b>
-            </td>
+            </th>
           </tr>
           <% Map<String, Notification> noticeMap = new TreeMap<String, Notification>(m_notificationFactory.getNotifications());
              for(String key : noticeMap.keySet()) {
