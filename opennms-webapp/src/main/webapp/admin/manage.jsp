@@ -183,10 +183,10 @@
 	<div id="contentleft">
           <table class="standardfirst">
             <tr>
-              <td class="standardheader" width="5%">Status</td>
-              <td class="standardheader" width="10%">Node Label</td>
-              <td class="standardheader" width="5%">Interface</td>
-              <td class="standardheader" width="5%">Service</td>
+              <th class="standardheader" width="5%">Status</th>
+              <th class="standardheader" width="10%">Node Label</th>
+              <th class="standardheader" width="5%">Interface</th>
+              <th class="standardheader" width="5%">Service</th>
             </tr>
             
             <%=buildManageTableRows(nodes, 0, midNodeIndex)%>
@@ -200,10 +200,10 @@
 	<div id="contentright">
           <table class="standardfirst">
             <tr>
-              <td class="standardheader" width="5%">Status</td>
-              <td class="standardheader" width="10%">Node Label</td>
-              <td class="standardheader" width="5%">Interface</td>
-              <td class="standardheader" width="5%">Service</td>
+              <th class="standardheader" width="5%">Status</th>
+              <th class="standardheader" width="10%">Node Label</th>
+              <th class="standardheader" width="5%">Interface</th>
+              <th class="standardheader" width="5%">Service</th>
             </tr>
             
             <%=buildManageTableRows(nodes, midNodeIndex, nodes.size())%>

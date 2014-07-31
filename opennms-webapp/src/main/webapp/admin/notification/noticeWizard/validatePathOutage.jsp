@@ -103,12 +103,12 @@
         <% if (showNodes != null && showNodes.equals("on")) { %>
           <table width="50%" border="1">
             <tr bgcolor="#536F85">
-              <td>
+              <th>
                 <b>Node ID</b>
-              </td>
-              <td>
+              </th>
+              <th>
                 <b>Node Label</b>
-              </td>
+              </th>
             </tr>
             <%=buildNodeTable(newRule)%>
           </table>

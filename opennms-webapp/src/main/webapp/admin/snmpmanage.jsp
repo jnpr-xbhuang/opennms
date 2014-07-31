@@ -109,8 +109,8 @@
 	<div id="contentleft">
           <table class="standardfirst">
             <tr>
-              <td class="standardheader" width="5%" align="center">Node ID</td>
-              <td class="standardheader" width="10%" align="center">Node Label</td>
+              <th class="standardheader" width="5%" align="center">Node ID</th>
+              <th class="standardheader" width="10%" align="center">Node Label</th>
             </tr>
             <%=buildTableRows(nodes, 0, midNodeIndex)%>
             
@@ -123,8 +123,8 @@
 	<div id="contentright">
           <table class="standardfirst">
             <tr>
-              <td class="standardheader" width="5%" align="center">Node ID</td>
-              <td class="standardheader" width="10%" align="center">Node Label</td>
+              <th class="standardheader" width="5%" align="center">Node ID</th>
+              <th class="standardheader" width="10%" align="center">Node Label</th>
             </tr>
             
             <%=buildTableRows(nodes, midNodeIndex, nodes.size())%>

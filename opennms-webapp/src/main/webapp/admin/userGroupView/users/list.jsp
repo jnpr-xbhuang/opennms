@@ -134,15 +134,15 @@
 <%--
           <td width="5%"><b>Delete</b></td>
 --%>
-          <td width="5%"><b>Modify</b></td>
+          <th width="5%"><b>Modify</b></th>
 <%--
           <td width="5%"><b>Rename</b></td>
 --%>
-          <td width="5%"><b>User ID</b></td>
-          <td width="15%"><b>Full Name</b></td>
-          <td width="15%"><b>Email</b></td>
-          <td width="15%"><b>Pager Email</b></td>
-          <td width="15%"><b>XMPP Address</b></td>
+          <th width="5%"><b>User ID</b></th>
+          <th width="15%"><b>Full Name</b></th>
+          <th width="15%"><b>Email</b></th>
+          <th width="15%"><b>Pager Email</b></th>
+          <th width="15%"><b>XMPP Address</b></th>
           <!--
           <td width="10%"><b>Num Service</b></td>
           <td width="10%"><b>Num PIN</b></td>
