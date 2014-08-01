@@ -93,11 +93,11 @@
 <table width="100%" border="1" bordercolor="black">
 
          <tr bgcolor="#536F85">
-          <td><b>Name</b></td>
-          <td><b>Supervisor</b></td>
-          <td><b>Currently On Call</b></td>
-          <td><b>Membership Group</b></td>
-          <td><b>Description</b></td>
+          <th><b>Name</b></th>
+          <th><b>Supervisor</b></th>
+          <th><b>Currently On Call</b></th>
+          <th><b>Membership Group</b></th>
+          <th><b>Description</b></th>
 			<c:forEach var="role" items="${roleManager.roles}">
 				<c:set var="viewUrl" value="javascript:doView('${role.name}')" />
 				
