@@ -621,6 +621,7 @@ img.info {
          margin-bottom: 5px;
          font-size: 90%;
          float: right;
+         background-color: #536F85;
         }
         
         .pagination span.page-sep {
@@ -638,18 +639,18 @@ img.info {
         .pagination span strong {
          font-weight: normal;
          color: #FFF;
-         background-color: #366903;
+         background-color: #536F85;
         }
         
         .pagination span a, .pagination span a:link, .pagination span a:visited, .pagination span a:active {
          font-weight: normal;
          text-decoration: none;
-         color: #366903;
+         color: #536F85;
          line-height: 1.5em;
         }
         
         .pagination span a:hover {
-         background-color: #366903;
+         background-color: #536F85;
          color: #FFF;
          text-decoration: none;
         }
